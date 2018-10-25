@@ -44,6 +44,8 @@ class TipoDocumentoTableSeeder extends Seeder
 
 
         TipoDocumento::create(['nome' => 'Resolução', 'descricao' => 'Ato assinado por Secretários de Estado e / ou titulares de Órgãos diretamente subordinados ao Governador do Estado, visando a instruir normas a serem observadas no âmbito da respectiva área de atuação.']);
+
+        TipoDocumento::create(['nome' => 'Nota Técnica', 'descricao' => '.']);
         
 
 

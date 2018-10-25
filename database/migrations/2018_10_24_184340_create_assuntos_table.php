@@ -17,7 +17,7 @@ class CreateAssuntosTable extends Migration
             $table->increments('id');
 
             $table->string('nome', 100);
-            $table->string('descricao', 255);
+            $table->string('descricao', 255)->nullable();
             $table->timestamps();
         });
     }

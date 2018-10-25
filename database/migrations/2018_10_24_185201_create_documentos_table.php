@@ -21,7 +21,7 @@ class CreateDocumentosTable extends Migration
             $table->string('numero', 20);
             $table->mediumText('ementa');
             $table->string('arquivo', 200);
-            $table->string('url', 200);
+            $table->string('url', 200)->nullable();
             $table->date('data_publicacao');
             $table->timestamp('data_envio');
 
