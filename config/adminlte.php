@@ -116,7 +116,7 @@ return [
         ],
         [
             'text'        => 'Últimas',
-            'url'         => 'admin/ultimas',
+            'url'         => 'admin/documentos',
             'icon'        => 'list-alt',
             'label'       => 4,
             'label_color' => 'success',
@@ -124,18 +124,13 @@ return [
         'Geral',
         [
             'text' => 'Tipos de Documentos',
-            'url'  => 'admin/tipodocs',
+            'url'  => 'admin/tiposdocumento',
             'icon' => 'th-large',
         ],
         [
             'text' => 'Assuntos',
             'url'  => 'admin/assuntos',
             'icon' => 'th-list',
-        ],
-        [
-            'text' => 'Palavras Chave',
-            'url'  => 'admin/tags',
-            'icon' => 'th',
         ],
         'Usuário',
         [
@@ -145,25 +140,20 @@ return [
         ],
         'Orgãos',
         [
-            'text' => 'MEC',
-            'url'  => 'admin/mec',
-            'icon' => 'globe',
-        ],
-        [
             'text'    => 'Orgãos por esfera',
             'icon'    => 'share',
             'submenu' => [
                 [
                     'text' => 'Federal',
-                    'url'  => '#',
+                    'url'  => 'admin/unidades',
                 ],
                 [
                     'text'    => 'Estadual',
-                    'url'     => '#'
+                    'url'     => 'admin/unidades'
                 ],
                 [
                     'text' => 'Municipal',
-                    'url'  => '#',
+                    'url'  => 'admin/unidades',
                 ],
             ],
         ],
@@ -171,24 +161,7 @@ return [
             'text' => 'Convites',
             'url'  => 'admin/convites',
             'icon' => 'envelope',
-        ],
-        'Notificações',
-        [
-            'text'       => 'Importante',
-            'url'  => 'admin/notificacoes/alertas',
-            'icon'    => 'comment',
-            'icon_color' => 'red'
-        ],
-        [
-            'text'       => 'Avisos',
-            'icon'    => 'comment',
-            'icon_color' => 'yellow',
-        ],
-        [
-            'text'       => 'Informações',
-            'icon'    => 'comment',
-            'icon_color' => 'aqua',
-        ],
+        ]
     ],
 
     /*
