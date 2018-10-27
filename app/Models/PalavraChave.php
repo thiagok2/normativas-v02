@@ -13,6 +13,6 @@ class PalavraChave extends Model
 
     public function documento()
     {
-        return $this->belongsTo('App\Documento');
+        return $this->belongsTo(Documento::class);
     }
 }

@@ -11,6 +11,6 @@ class TipoDocumento extends Model
     ];
 
     public function documentos(){
-        return $this->hasMany('App\Documento');
+        return $this->hasMany(Documento::class);
     }
 }

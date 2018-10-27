@@ -12,11 +12,11 @@ class Estado extends Model
     ];
 
     public function municipios(){
-        return $this->hasMany('App\Municipio');
+        return $this->hasMany(Municipio::class);
     }
 
     public function convite()
     {
-        return $this->hasOne('App\Convite');
+        return $this->hasOne(Convite::class);
     }
 }

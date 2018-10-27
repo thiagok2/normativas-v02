@@ -11,10 +11,10 @@ class Municipio extends Model{
     ];
 
     public function estado(){
-        return $this->belongsTo('App\Estado');
+        return $this->belongsTo(Estado::class);
     }
 
     public function convite(){
-        return $this->hasOne('App\Convite');
+        return $this->hasOne(Convite::class);
     }
 }

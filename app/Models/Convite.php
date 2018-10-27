@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\User;
+
 class Convite extends Model
 {
 
@@ -13,16 +15,16 @@ class Convite extends Model
 
     public function estado()
     {
-        return $this->belongsTo('App\Estado');
+        return $this->belongsTo(Estado::class);
     }
 
     public function municipio()
     {
-        return $this->belongsTo('App\Municipio');
+        return $this->belongsTo(Municipio::class);
     }
 
     public function user(){
-        return $this->hasOne('App\User');
+        return $this->hasOne(User::class);
     }
 
 
