@@ -111,12 +111,12 @@ return [
         'Atos Normativos',
         [
             'text'        => 'Publicar',
-            'url'         => 'admin/publicar',
+            'url'         => 'documentos/publicar',
             'icon'        => 'upload'
         ],
         [
             'text'        => 'Últimas',
-            'url'         => 'admin/documentos',
+            'url'         => 'documentos',
             'icon'        => 'list-alt',
             'label'       => 4,
             'label_color' => 'success',

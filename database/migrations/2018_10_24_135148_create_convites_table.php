@@ -17,11 +17,11 @@ class CreateConvitesTable extends Migration
             $table->increments('id');
 
             $table->string('token',100);
-            $table->string('contato',50);
-            $table->string('telefone',20);
+            $table->string('contato',50)->nullable();
+            $table->string('telefone',20)->nullable();
             $table->string('email',50);
-            $table->string('destinatario',100)->nullable();;
-            $table->string('mensagem',200)->nullable()->nullable();;
+            $table->string('destinatario',100)->nullable();
+            $table->string('mensagem',200)->nullable()->nullable();
             $table->boolean('confirmado')->default(false);
             $table->dateTime('data_confirmacao')->nullable();
 

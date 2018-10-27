@@ -43,7 +43,7 @@
         <!-- small box -->
         <div class="small-box bg-yellow">
         <div class="inner">
-            <h3>2</h3>
+            <h3>57</h3>
 
             <p>Colaboradores</p>
         </div>
@@ -451,6 +451,7 @@
         </div>
     </div>
 </div> <!-- end row-->
+
 
 
 @stop

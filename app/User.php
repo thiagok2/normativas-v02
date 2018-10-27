@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\Documento;
+use App\Models\Unidade;
 
 class User extends Authenticatable
 {
@@ -29,6 +31,10 @@ class User extends Authenticatable
     ];
 
     public function documentos(){
-        return $this->hasMany('App\Documento');
+        return $this->hasMany(Documento::class);
+    }
+
+    public function unidade() {
+		return $this->hasOne(Unidade::class );
     }
 }

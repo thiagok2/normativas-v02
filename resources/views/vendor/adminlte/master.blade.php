@@ -37,6 +37,8 @@
 
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+    <link rel="stylesheet" href="{{ asset('vendor/tagsinput/bootstrap-tagsinput.css') }}">
 </head>
 <body class="hold-transition @yield('body_class')">
 
@@ -46,12 +48,15 @@
 <script src="{{ asset('vendor/adminlte/vendor/jquery/dist/jquery.slimscroll.min.js') }}"></script>
 <script src="{{ asset('vendor/adminlte/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 
-<script src="{{ asset('vendor/tagcanvas/jquery.tagcanvas.min.js') }}"></script>
+
 
 <script src="{{ asset('vendor/charts/morris.min.js') }}"></script>
 <script src="{{ asset('vendor/charts/raphael.min.js') }}"></script>
 
-<script src="{{ asset('js/app-home.js') }}"></script>
+
+
+
+
 
 @if(config('adminlte.plugins.select2'))
     <!-- Select2 -->
@@ -69,6 +74,9 @@
 @endif
 
 @yield('adminlte_js')
+<script src="{{ asset('vendor/tagcanvas/jquery.tagcanvas.min.js') }}"></script>
+<script src="{{ asset('vendor/tagsinput/bootstrap-tagsinput.min.js') }}"></script>
+<script src="{{ asset('js/app-home.js') }}"></script>
 
 </body>
 </html>

@@ -24,7 +24,12 @@ Route::get('/admin/convites', 'Admin\\ConviteController@index')->name('convites'
 Route::get('/admin/unidades', 'Admin\\UnidadeController@index')->name('unidades');
 Route::get('/admin/tiposdocumento', 'Admin\\TipoDocumentoController@index')->name('tiposdocumento');
 Route::get('/admin/assuntos', 'Admin\\AssuntoController@index')->name('Assuntos');
-Route::get('/admin/documentos', 'Admin\\DocumentoController@index')->name('documentos');
+Route::get('/documentos', 'Admin\\DocumentoController@index')->name('documentos');
+
+Route::get('/documentos/publicar', 'Admin\\DocumentoController@create')->name('publicar');
+Route::post('/documentos/publicar', 'Admin\\DocumentoController@store')->name('enviar');
+
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 
