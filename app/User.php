@@ -37,4 +37,8 @@ class User extends Authenticatable
     public function unidade() {
 		return $this->hasOne(Unidade::class );
     }
+
+    public function firstName(){
+        return explode(" ",$this->name)[0];
+    }
 }

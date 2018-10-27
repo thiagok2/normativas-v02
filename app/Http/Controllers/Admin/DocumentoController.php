@@ -8,11 +8,15 @@ use App\Models\TipoDocumento;
 use App\Models\Assunto;
 use App\Models\Documento;
 use App\Models\PalavraChave;
+use Illuminate\Support\Facades\DB;
 
 class DocumentoController extends Controller
 {
     public function index(){
-        return view('admin.documento.index');
+
+        $documentos = Documento::with('tipoDocumento','user')->simplePaginate(1);
+
+        return view('admin.documento.index', compact('documentos'));
     }
 
     public function create(){
