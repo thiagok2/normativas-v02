@@ -74,4 +74,10 @@ class DocumentoController extends Controller
 
         return redirect()->route('documentos');
     }
+
+    public function show($id){
+        $documento = Documento::with(['unidade','tipoDocumento','assunto','palavrasChaves'])->find($id);
+
+        return view('admin.documento.show',compact('documento'));
+    }
 }

@@ -7,17 +7,17 @@
 @stop
 
 @section('content')
-    <ol class="breadcrumb">
-        <li><a href="../home">Painel</a></li>
-        <li> <a href="#" class="active"><a href="#">Documentos</a></li>
-    </ol>
 
     <div class="row">
         <div class="col-sm-12 mb-2">
             <a href="{{route('publicar')}}" class="btn btn-primary btn-lg">Publicar Novo</a>
         </div>
     </div>
-
+    <br/>
+    <ol class="breadcrumb">
+        <li><a href="../home">Painel</a></li>
+        <li> <a href="#" class="active"><a href="#">Documentos</a></li>
+    </ol>
 
     <div class="row">
         <div class="col-sm-12">

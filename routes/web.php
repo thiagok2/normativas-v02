@@ -29,6 +29,8 @@ Route::get('/documentos', 'Admin\\DocumentoController@index')->name('documentos'
 Route::get('/documentos/publicar', 'Admin\\DocumentoController@create')->name('publicar');
 Route::post('/documentos/publicar', 'Admin\\DocumentoController@store')->name('enviar');
 
+Route::get('/documento/{id}', 'Admin\\DocumentoController@show')->name('documento');
+
 
 
 Route::get('/home', 'HomeController@index')->name('home');
