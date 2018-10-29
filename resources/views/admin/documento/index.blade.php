@@ -18,6 +18,8 @@
         <li><a href="../home">Painel</a></li>
         <li> <a href="#" class="active"><a href="#">Documentos</a></li>
     </ol>
+    
+    @include('admin.includes.alerts')
 
     <div class="row">
         <div class="col-sm-12">

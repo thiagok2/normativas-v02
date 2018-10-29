@@ -30,6 +30,7 @@ Route::get('/documentos/publicar', 'Admin\\DocumentoController@create')->name('p
 Route::post('/documentos/publicar', 'Admin\\DocumentoController@store')->name('enviar');
 
 Route::get('/documento/{id}', 'Admin\\DocumentoController@show')->name('documento');
+Route::delete('/documentos/{id}', 'Admin\\DocumentoController@destroy')->name('delete');
 
 
 

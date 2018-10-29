@@ -10,6 +10,7 @@ use App\Models\Documento;
 use App\Models\PalavraChave;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\Admin\DocumentoResquest;
+use Illuminate\Support\Facades\Storage;
 
 class DocumentoController extends Controller
 {
@@ -94,4 +95,21 @@ class DocumentoController extends Controller
 
         return view('admin.documento.show',compact('documento'));
     }
+
+    public function destroy($id)
+    {
+        $documento = Documento::with('palavrasChaves')->find($id);
+
+        $documento->palavrasChaves()->delete();
+        $documento->delete();
+
+        Storage::delete("uploads/$documento->arquivo");
+
+
+        return redirect()->route('documentos')
+            ->with('success', 'Documento removido com sucesso.');
+
+
+    }
+
 }

@@ -143,7 +143,11 @@
                     </div>
 
                     <div class="col-sm-6">
-                        <a class="btn btn-danger btn-lg pull-right" href="{{ url("documentos/excluir/{$documento->id}") }}">Excluir</a>
+                        <form method="post" action="{{route('delete',['id' => $documento->id])}}">
+                            {{ method_field('DELETE') }}
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <button type="submit" class="btn btn-danger btn-lg pull-right" >Excluir</button>
+                        </form>
                     </div>
                 </div>
             </div>
