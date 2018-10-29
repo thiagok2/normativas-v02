@@ -15,6 +15,9 @@
 
 
     <div class="container">
+    
+    @include('admin.includes.alerts')
+    
     <form name="form" id="form" action="{{route('enviar')}}" method="post" enctype="multipart/form-data">
         {!! csrf_field() !!}
         <div class="row">

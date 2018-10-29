@@ -59,6 +59,9 @@
                                         <a href="{{ url("storage/uploads/{$doc->arquivo}") }}">
                                             BAIXAR<i class="fa fa-arrow-alt-circle-down"></i>
                                         </a>
+                                        <a href="{{ url("documento/{$doc->id}") }}">
+                                            VER<i class="fa fa-arrow-alt-circle-down"></i>
+                                        </a>
                                     </td>
                                 </tr>
                                 @endforeach

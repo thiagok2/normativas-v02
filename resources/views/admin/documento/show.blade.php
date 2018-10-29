@@ -11,6 +11,8 @@
     <div class="row">
         <div class="col-sm-12 mb-2">
             <a href="{{route('publicar')}}" class="btn btn-primary btn-lg">Publicar Novo</a>
+
+            <a href="{{route('documentos')}}" class="btn btn-primary btn-lg">Últimos Documentos</a>
         </div>
     </div>
     <br/>
@@ -20,7 +22,7 @@
         <li> <a href="#" class="active"><a href="#">Detalhes</a></li>
     </ol>
     <div class="container">
-       
+        @include('admin.includes.alerts')
         <div class="row">
             <div class="col-sm-8">
                 <div class="row">
@@ -141,7 +143,7 @@
                     </div>
 
                     <div class="col-sm-6">
-                        <a class="btn btn-danger btn-lg pull-right" href="">Excluir</a>
+                        <a class="btn btn-danger btn-lg pull-right" href="{{ url("documentos/excluir/{$documento->id}") }}">Excluir</a>
                     </div>
                 </div>
             </div>
