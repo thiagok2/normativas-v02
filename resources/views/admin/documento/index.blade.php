@@ -30,7 +30,7 @@
                     <table class="table table-condensed table-hover">
                         <thead>
                             <tr>
-                                <th style="width: 2%">#</th>
+                                <th style="width: 1%">#</th>
                                 <th style="width: 2%">Ano</th>
                                 <th style="width: 8%">Número</th>
                                 <th style="width: 6%">Tipo</th>
@@ -38,7 +38,8 @@
                                 <th style="width: 6%">Publicação</th>
                                 <th style="width: 6%">Envio</th>
                                 <th style="width: 45%">Ementa</th>
-                                <th style="width: 5%">Por</th>
+                                <th style="width: 4%">Por</th>
+                                <th style="width: 2%"></th>
                             </tr>
                         <thead>  
                         <tbody>
@@ -54,6 +55,11 @@
                                     <td>{{date('d-m-Y', strtotime($doc->data_envio))}}</td>
                                     <td>{{$doc->ementa}}</td>
                                     <td>{{$doc->user->firstName()}}</td>
+                                    <td>
+                                        <a href="{{ url("storage/uploads/{$doc->arquivo}") }}">
+                                            BAIXAR<i class="fa fa-arrow-alt-circle-down"></i>
+                                        </a>
+                                    </td>
                                 </tr>
                                 @endforeach
 

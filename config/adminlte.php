@@ -145,15 +145,15 @@ return [
             'submenu' => [
                 [
                     'text' => 'Federal',
-                    'url'  => 'admin/unidades',
+                    'url'  => 'admin/unidades?esfera=Federal',
                 ],
                 [
                     'text'    => 'Estadual',
-                    'url'     => 'admin/unidades'
+                    'url'     => 'admin/unidades?esfera=Estadual'
                 ],
                 [
                     'text' => 'Municipal',
-                    'url'  => 'admin/unidades',
+                    'url'  => 'admin/unidades?esfera=Municipal',
                 ],
             ],
         ],

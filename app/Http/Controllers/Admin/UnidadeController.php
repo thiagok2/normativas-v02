@@ -10,12 +10,29 @@ use App\Models\Unidade;
 
 class UnidadeController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
 
+        $esfera = $request->query('esfera');
+        $estado = $request->query('estado');
+        $nome = $request->query('nome');
+
+        $clausulas = [];
+        if($esfera){
+            $clausulas[] = ['esfera', '=', $esfera];  
+        }
+        // if($estado){
+        //     $clausulas[] = ['estado_id', '=', $estado];
+        // }
+
+        if($nome){
+            $clausulas[] = ['nome', 'like', '%'.$nome.'%'];
+        }
+
+        $unidades = Unidade::orWhere($clausulas)->get();; 
         $estados = Estado::all();
 
-        $unidades = Unidade::all();
+       
         
-        return view('admin.unidade.index', compact('estados','unidades'));
+        return view('admin.unidade.index', compact('estados','unidades','esfera','estado','nome'));
     }
 }

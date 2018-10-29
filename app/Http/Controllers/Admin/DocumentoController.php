@@ -14,7 +14,7 @@ class DocumentoController extends Controller
 {
     public function index(){
 
-        $documentos = Documento::with('tipoDocumento','user')->simplePaginate(1);
+        $documentos = Documento::with('tipoDocumento','user')->simplePaginate(20);
 
         return view('admin.documento.index', compact('documentos'));
     }
@@ -38,18 +38,39 @@ class DocumentoController extends Controller
         $documento->unidade()->associate(auth()->user()->unidade);
         $documento->user()->associate(auth()->user()->id);
 
-        $documento->save();
+        if ($request->hasFile('arquivo') && $request->file('arquivo')->isValid()) {
 
-        $tags = explode(",", $data["palavras_chave"]);
-        if(is_array($tags) && count($tags)>0){
-            foreach ($tags as $t) {
-                $palavra = new PalavraChave();
-                $palavra->tag = $t;
+            DB::beginTransaction();
 
-                $palavra->documento()->associate($documento);
-                $documento->palavrasChaves()->save($palavra);
+            $tituloArquivo = str_replace(" ","",strtolower(preg_replace("/&([a-z])[a-z]+;/i", "$1", htmlentities(trim($documento->numero)))));
+            $tituloArquivo = $tituloArquivo."_".uniqid(date('HisYmd'));
+
+            $extensao = $request->arquivo->extension();
+
+            $arquivoNome = "{$tituloArquivo}.{$extensao}";
+
+            $upload = $request->arquivo->storeAs('uploads', $arquivoNome);
+
+            $documento->arquivo = $arquivoNome;
+
+            $documento->save();
+
+            $tags = explode(",", $data["palavras_chave"]);
+            if(is_array($tags) && count($tags)>0){
+                foreach ($tags as $t) {
+                    $palavra = new PalavraChave();
+                    $palavra->tag = $t;
+
+                    $palavra->documento()->associate($documento);
+                    $documento->palavrasChaves()->save($palavra);
+                }
             }
+
+            DB::commit();
+
         }
+
+        
 
         return redirect()->route('documentos');
     }

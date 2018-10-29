@@ -19,23 +19,26 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Filtrar</div>
                     <div class="panel-body">
-                        <form class="form-inline">
+                    <form class="form-inline" method="GET" action="{{route('unidades')}}">
                             {!! csrf_field() !!}
-                            <input type="text" class="form-control" placeholder="Nome da unidade" aria-describedby="basic-addon1">
+                    <input type="text" id="nome" name="nome" class="form-control" value="{{$nome}}"
+                                placeholder="Nome da unidade" aria-describedby="basic-addon1">
                             
-                            <select class="form-control">
-                                <option>Esfera</option>
-                                <option>Federal</option>
-                                <option>Estadual</option>
-                                <option>Municipal</option>    
+                            <select class="form-control" name="esfera" id="esfera">
+                                <option value="0">Todas as Esferas</option>
+                                <option value="Federal"     @if($esfera=="Federal") selected @endif>Federal</option>
+                                <option value="Estadual"    @if($esfera=="Estadual") selected @endif>Estadual</option>
+                                <option value="Municipal"   @if($esfera=="Municipal") selected @endif>Municipal</option>    
                             </select>
 
-                            <select class="form-control">
-                                <option>Estado</option>
+                            <select class="form-control" name="estado" id="estado">
+                                <option>Todos os Estados</option>
                                 @foreach ($estados as $estado)
                                     <option value="{{$estado->id}}">{{$estado->nome}}</option>
                                 @endforeach
                             </select>
+
+                            <button type="submit" class="btn btn-primary">Pesquisar</button>
                             
                         </form>
                     </div>
