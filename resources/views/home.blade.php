@@ -13,7 +13,7 @@
         <!-- small box -->
         <div class="small-box bg-aqua">
         <div class="inner">
-            <h3>101</h3>
+            <h3>{{$documentosCount}}</h3>
 
             <p>Documentos</p>
         </div>
@@ -28,7 +28,7 @@
         <!-- small box -->
         <div class="small-box bg-green">
         <div class="inner">
-            <h3>532</h3>
+            <h3>{{$tagCount}}</h3>
 
             <p>Palavras Chaves</p>
         </div>
@@ -43,7 +43,7 @@
         <!-- small box -->
         <div class="small-box bg-yellow">
         <div class="inner">
-            <h3>57</h3>
+            <h3>{{$usersCount}}</h3>
 
             <p>Colaboradores</p>
         </div>
@@ -75,67 +75,48 @@
     <div class="col-lg-9 col-xs-12">
         <div class="box box-danger">
             <div class="box-header">
-                <h3 class="box-title">Documentos mais acessados</h3>
+                <h3 class="box-title">Documentos recentes</h3>
             </div>
                 <!-- /.box-header -->
             <div class="box-body no-padding">
                 <table class="table table-condensed table-hover">
                     <tbody>
                         <tr>
-                            <th style="width: 10px">#</th>
-                            <th style="width: 50%">Título</th>
+                            <th style="width: 2%">#</th>
+                            <th style="width: 10%">Número</th>
+                            <th style="width: 35%">Título</th>
                             <th>Palavras-chave</th>
                             <th>Fonte</th>
-                            <th style="width: 40px">Tipo</th>
+                            <th>Tipo</th>
+                            <th>#</th>
                         </tr>
-                        <tr>
-                            <td>1.</td>
-                            <td>Resolução n.° 11.336, DE 05 DE ABRIL DE 2018.</td>
-                            <td>
-                                <span class="badge bg-secondary">Reforma</span>
-                            </td>
-                            <td>
-                                Ministério da Educação - MEC
-                            </td>
-                            <td><span class="badge bg-red">Resolução</span></td>
-                        </tr>
-                        <tr>
-                            <td>2.</td>
-                            <td>Normativa CFE N.°10.659, DE 10 DE JUNHO DE 2015.</td>
-                            <td>
-                                <span class="badge bg-secondary">Educação Inclusiva</span>
-                            </td>
-                            <td>
-                                CFE
-                            </td>
-                            <td><span class="badge bg-yellow">Instrução Normativa</span></td>
-                        </tr>
-                        <tr>
-                            <td>3.</td>
-                            <td>Nota Técnica de 24 de maio de 1996.</td>
-                            <td>
-                                <span class="badge bg-secondary">EAD</span>
-                            </td>
-                            <td>
-                                CEE - Distrito Federal
-                            </td>
-                            <td>
-                                <span class="badge bg-light-blue">Nota Técnica</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>4.</td>
-                            <td>Parecer Orientativo sobre a organização curricular do ensino fundamental nas escolas especiais do
-                                    Sistema Estadual de Ensino de Mato Grosso do Sul</td>
-                            <td>
-                                <span class="badge bg-secondary">Língua Estrangeira</span>
-                                <span class="badge bg-secondary">Inglês</span>
-                            </td>
-                            <td>
-                                CEE - Matogrosso do Sul
-                            </td>
-                            <td><span class="badge bg-green">Parecer</span></td>
-                        </tr>
+                        @foreach ($documentos as $doc)
+                            <tr>
+                                <td>{{$loop->index+1}}</td>
+                                <td>{{$doc->numero}}</td>
+                                <td>{{$doc->titulo}}</td>
+                                <td>
+                                    @foreach ($doc->palavrasChaves as $p)
+                                        <span class="badge bg-secondary">{{$p->tag}}</span>
+                                    @endforeach
+                                </td>
+                                <td>
+                                    {{$doc->unidade->nome}}
+                                </td>
+                                <td>
+                                    <span class="badge bg-info">
+                                        {{$doc->tipoDocumento->nome}}
+                                    </span>
+                                </td>
+                                <td>
+                                    <a href="{{ url("storage/uploads/{$doc->arquivo}") }}">
+                                        BAIXAR<i class="fa fa-arrow-alt-circle-down"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                        
+                        
                     </tbody>
                 </table>
             </div>
@@ -219,176 +200,10 @@
             <div class="box-body no-padding">
                 <div id="myCanvasContainer">
                     <canvas width="400px" height="250px" id="myCanvas">
-                        <p>Anything in here will be replaced on browsers that support the canvas element</p>
                         <ul>
-                            <li><a href="/ead" target="_blank" data-weight="7">EAD</a></li>
-                            <li><a href="/fish" data-weight="20">Educação Inclusiva</a></li>
-                            <li><a href="/chips" data-weight="10">Reforma</a></li>
-                            <li><a href="/salt" data-weight="14">Ensino Religioso</a></li>
-                            <li><a href="/vinegar" data-weight="15">Inglês</a></li>
-                            <li><a href="/vinegar" data-weight="10" >Espanhol</a></li>
-                            <li><a href="/ead" target="_blank" data-weight="7">EJA</a></li>
-                            <li><a href="/fish" data-weight="10">Ed. Jovens e Adultos</a></li>
-                            <li><a href="/chips" data-weight="15">Gênero</a></li>
-                            <li><a href="/salt" data-weight="8">Política</a></li>
-                            <li><a href="/vinegar" data-weight="10">Letramento</a></li>
-                            <li><a href="/vinegar" data-weight="10">Alfabetização</a></li>
-                            <li><a href="/fish" data-weight="7">Ensino Médio</a></li>
-                            <li><a href="/chips" data-weight="5">Ensino Superior</a></li>
-                            <li><a href="/salt" data-weight="3">Educação Infantil</a></li>
-                            <li><a href="/vinegar" data-weight="10">Letramento</a></li>
-                            <li><a href="/vinegar" data-weight="10">Alfabetização</a></li>
-                            <li><a href="/fish" data-weight="4">História</a></li>
-                            <li><a href="/chips" data-weight="8">Geografia</a></li>
-                            <li><a href="/salt" data-weight="4">Filosofia</a></li>
-                            <li><a href="/vinegar" data-weight="3">Sociologia</a></li>
-                            <li><a href="/vinegar" data-weight="10">Biologia</a></li>
-                            <li><a href="/chips" data-weight="5">Geografia</a></li>
-                            <li><a href="/salt" data-weight="4">Química</a></li>
-                            <li><a href="/vinegar" data-weight="8">Física</a></li>
-                            <li><a href="/vinegar" data-weight="8">Matemática</a></li>
-                            <li><a href="/vinegar" data-weight="9">Português</a></li>
-                            <li><a href="/vinegar" data-weight="4">Redação</a></li>
-                            <li><a href="/ead" target="_blank" data-weight="7">EAD</a></li>
-                            <li><a href="/fish" data-weight="20">Educação Inclusiva</a></li>
-                            <li><a href="/chips" data-weight="10">Reforma</a></li>
-                            <li><a href="/salt" data-weight="14">Ensino Religioso</a></li>
-                            <li><a href="/vinegar" data-weight="15">Inglês</a></li>
-                            <li><a href="/vinegar" data-weight="10" >Espanhol</a></li>
-                            <li><a href="/ead" target="_blank" data-weight="7">EJA</a></li>
-                            <li><a href="/fish" data-weight="10">Jovens e Adultos</a></li>
-                            <li><a href="/chips" data-weight="15">Gênero</a></li>
-                            <li><a href="/salt" data-weight="8">Política</a></li>
-                            <li><a href="/vinegar" data-weight="10">Letramento</a></li>
-                            <li><a href="/vinegar" data-weight="10">Alfabetização</a></li>
-                            <li><a href="/fish" data-weight="7">Ensino Médio</a></li>
-                            <li><a href="/chips" data-weight="5">Ensino Superior</a></li>
-                            <li><a href="/salt" data-weight="3">Educação Infantil</a></li>
-                            <li><a href="/vinegar" data-weight="10">Letramento</a></li>
-                            <li><a href="/vinegar" data-weight="10">Alfabetização</a></li>
-                            <li><a href="/fish" data-weight="4">História</a></li>
-                            <li><a href="/chips" data-weight="8">Geografia</a></li>
-                            <li><a href="/salt" data-weight="4">Filosofia</a></li>
-                            <li><a href="/vinegar" data-weight="3">Sociologia</a></li>
-                            <li><a href="/vinegar" data-weight="10">Biologia</a></li>
-                            <li><a href="/chips" data-weight="5">Geografia</a></li>
-                            <li><a href="/salt" data-weight="4">Química</a></li>
-                            <li><a href="/vinegar" data-weight="8">Física</a></li>
-                            <li><a href="/vinegar" data-weight="8">Matemática</a></li>
-                            <li><a href="/vinegar" data-weight="9">Português</a></li>
-                            <li><a href="/vinegar" data-weight="4">Redação</a></li>
-                            <li><a href="/ead" target="_blank" data-weight="7">EAD</a></li>
-                            <li><a href="/fish" data-weight="20">Educação Inclusiva</a></li>
-                            <li><a href="/chips" data-weight="10">Reforma</a></li>
-                            <li><a href="/salt" data-weight="14">Ensino Religioso</a></li>
-                            <li><a href="/vinegar" data-weight="15">Inglês</a></li>
-                            <li><a href="/vinegar" data-weight="10" >Espanhol</a></li>
-                            <li><a href="/ead" target="_blank" data-weight="7">EJA</a></li>
-                            <li><a href="/fish" data-weight="10">Jovens e Adultos</a></li>
-                            <li><a href="/chips" data-weight="15">Gênero</a></li>
-                            <li><a href="/salt" data-weight="8">Política</a></li>
-                            <li><a href="/vinegar" data-weight="10">Letramento</a></li>
-                            <li><a href="/vinegar" data-weight="10">Alfabetização</a></li>
-                            <li><a href="/fish" data-weight="7">Ensino Médio</a></li>
-                            <li><a href="/chips" data-weight="5">Ensino Superior</a></li>
-                            <li><a href="/salt" data-weight="3">Educação Infantil</a></li>
-                            <li><a href="/vinegar" data-weight="10">Letramento</a></li>
-                            <li><a href="/vinegar" data-weight="10">Alfabetização</a></li>
-                            <li><a href="/fish" data-weight="4">História</a></li>
-                            <li><a href="/chips" data-weight="8">Geografia</a></li>
-                            <li><a href="/salt" data-weight="4">Filosofia</a></li>
-                            <li><a href="/vinegar" data-weight="3">Sociologia</a></li>
-                            <li><a href="/vinegar" data-weight="10">Biologia</a></li>
-                            <li><a href="/chips" data-weight="5">Geografia</a></li>
-                            <li><a href="/salt" data-weight="4">Química</a></li>
-                            <li><a href="/vinegar" data-weight="8">Física</a></li>
-                            <li><a href="/vinegar" data-weight="8">Matemática</a></li>
-                            <li><a href="/vinegar" data-weight="9">Português</a></li>
-                            <li><a href="/vinegar" data-weight="4">Redação</a></li>
-                            <li><a href="/ead" target="_blank" data-weight="7">EAD</a></li>
-                            <li><a href="/fish" data-weight="20">Educação Inclusiva</a></li>
-                            <li><a href="/chips" data-weight="10">Reforma</a></li>
-                            <li><a href="/salt" data-weight="14">Ensino Religioso</a></li>
-                            <li><a href="/vinegar" data-weight="15">Inglês</a></li>
-                            <li><a href="/vinegar" data-weight="10" >Espanhol</a></li>
-                            <li><a href="/ead" target="_blank" data-weight="7">EJA</a></li>
-                            <li><a href="/fish" data-weight="10">Jovens e Adultos</a></li>
-                            <li><a href="/chips" data-weight="15">Gênero</a></li>
-                            <li><a href="/salt" data-weight="8">Política</a></li>
-                            <li><a href="/vinegar" data-weight="10">Letramento</a></li>
-                            <li><a href="/vinegar" data-weight="10">Alfabetização</a></li>
-                            <li><a href="/fish" data-weight="7">Ensino Médio</a></li>
-                            <li><a href="/chips" data-weight="5">Ensino Superior</a></li>
-                            <li><a href="/salt" data-weight="3">Educação Infantil</a></li>
-                            <li><a href="/vinegar" data-weight="10">Letramento</a></li>
-                            <li><a href="/vinegar" data-weight="10">Alfabetização</a></li>
-                            <li><a href="/fish" data-weight="4">História</a></li>
-                            <li><a href="/chips" data-weight="8">Geografia</a></li>
-                            <li><a href="/salt" data-weight="4">Filosofia</a></li>
-                            <li><a href="/vinegar" data-weight="3">Sociologia</a></li>
-                            <li><a href="/vinegar" data-weight="10">Biologia</a></li>
-                            <li><a href="/chips" data-weight="5">Geografia</a></li>
-                            <li><a href="/salt" data-weight="4">Química</a></li>
-                            <li><a href="/vinegar" data-weight="8">Física</a></li>
-                            <li><a href="/vinegar" data-weight="8">Matemática</a></li>
-                            <li><a href="/vinegar" data-weight="9">Português</a></li>
-                            <li><a href="/vinegar" data-weight="4">Redação</a></li>
-                            <li><a href="/ead" target="_blank" data-weight="7">EAD</a></li>
-                            <li><a href="/fish" data-weight="20">Educação Inclusiva</a></li>
-                            <li><a href="/chips" data-weight="10">Reforma</a></li>
-                            <li><a href="/salt" data-weight="14">Ensino Religioso</a></li>
-                            <li><a href="/vinegar" data-weight="15">Inglês</a></li>
-                            <li><a href="/vinegar" data-weight="10" >Espanhol</a></li>
-                            <li><a href="/ead" target="_blank" data-weight="7">EJA</a></li>
-                            <li><a href="/fish" data-weight="10">Jovens e Adultos</a></li>
-                            <li><a href="/chips" data-weight="15">Gênero</a></li>
-                            <li><a href="/salt" data-weight="8">Política</a></li>
-                            <li><a href="/vinegar" data-weight="10">Letramento</a></li>
-                            <li><a href="/vinegar" data-weight="10">Alfabetização</a></li>
-                            <li><a href="/fish" data-weight="7">Ensino Médio</a></li>
-                            <li><a href="/chips" data-weight="5">Ensino Superior</a></li>
-                            <li><a href="/salt" data-weight="3">Educação Infantil</a></li>
-                            <li><a href="/vinegar" data-weight="10">Letramento</a></li>
-                            <li><a href="/vinegar" data-weight="10">Alfabetização</a></li>
-                            <li><a href="/fish" data-weight="4">História</a></li>
-                            <li><a href="/chips" data-weight="8">Geografia</a></li>
-                            <li><a href="/salt" data-weight="4">Filosofia</a></li>
-                            <li><a href="/vinegar" data-weight="3">Sociologia</a></li>
-                            <li><a href="/vinegar" data-weight="10">Biologia</a></li>
-                            <li><a href="/chips" data-weight="5">Geografia</a></li>
-                            <li><a href="/salt" data-weight="4">Química</a></li>
-                            <li><a href="/vinegar" data-weight="8">Física</a></li>
-                            <li><a href="/vinegar" data-weight="8">Matemática</a></li>
-                            <li><a href="/vinegar" data-weight="9">Português</a></li>
-                            <li><a href="/vinegar" data-weight="4">Redação</a></li>
-                            <li><a href="/ead" target="_blank" data-weight="7">EAD</a></li>
-                            <li><a href="/fish" data-weight="20">Educação Inclusiva</a></li>
-                            <li><a href="/chips" data-weight="10">Reforma</a></li>
-                            <li><a href="/salt" data-weight="14">Ensino Religioso</a></li>
-                            <li><a href="/eee" data-weight="15">Inglês</a></li>
-                            <li><a href="/vinegar" data-weight="10" >Espanhol</a></li>
-                            <li><a href="/ead" target="_blank" data-weight="7">EJA</a></li>
-                            <li><a href="/fish" data-weight="10">Jovens e Adultos</a></li>
-                            <li><a href="/chips" data-weight="15">Gênero</a></li>
-                            <li><a href="/salt" data-weight="8">Política2</a></li>
-                            <li><a href="/vinegar" data-weight="10">Letramento2</a></li>
-                            <li><a href="/vinegar" data-weight="10">Alfabetização</a></li>
-                            <li><a href="/fish" data-weight="7">Ensino Médio</a></li>
-                            <li><a href="/chips" data-weight="5">Ensino Superior</a></li>
-                            <li><a href="/salt" data-weight="3">Educação Infantil</a></li>
-                            <li><a href="/vinegar" data-weight="10">Letramento</a></li>
-                            <li><a href="/vinegar" data-weight="10">Alfabetização</a></li>
-                            <li><a href="/fish" data-weight="4">História</a></li>
-                            <li><a href="/chips" data-weight="8">Geografia</a></li>
-                            <li><a href="/salt" data-weight="4">Filosofia</a></li>
-                            <li><a href="/vinegar" data-weight="3">Sociologia</a></li>
-                            <li><a href="/vinegar" data-weight="10">Biologia</a></li>
-                            <li><a href="/chips" data-weight="5">Geografia</a></li>
-                            <li><a href="/salt" data-weight="4">Química</a></li>
-                            <li><a href="/vinegar" data-weight="8">Física</a></li>
-                            <li><a href="/vinegar" data-weight="8">Matemática</a></li>
-                            <li><a href="/vinegar" data-weight="9">Português</a></li>
-                            <li><a href="/vinegar" data-weight="4">Redação</a></li>
+                            @foreach ($tags as $t)
+                                <li><a href="https://normativas-dev.herokuapp.com/?query={{$t->tag}}" target="_blank" data-weight="{{$t->tag_count}}">{{$t->tag}}</a></li>
+                            @endforeach
                         </ul>
                     </canvas>
                 </div>
@@ -403,31 +218,16 @@
     <div class="col-lg-4">
         <div class="box box-danger">
             <div class="box-header">
-                <h3 class="box-title">Palavras chaves pesquisadas</h3>
+                <h3 class="box-title">Termos mais pesquisadas</h3>
             </div>
 
             <div class="box-body no-padding">
                 <div id="myCanvasContainer2">
                     <canvas width="400px" height="250px" id="myCanvas2">
                         <ul>
-                            <li><a href="/ea2d2 target="_blank" data-weight="7">EAD1</a></li>
-                            <li><a href="/fi12sh" data-weight="20">Educação Inclusiva1</a></li>
-                            <li><a href="/ch2ips" data-weight="10">Reforma1</a></li>
-                            <li><a href="/sw2qalt" data-weight="14">Ensino Religioso1</a></li>
-                            <li><a href="/vin1egar" data-weight="15">Inglês1</a></li>
-                            <li><a href="/viqwnegar" data-weight="10" >Espanhol1</a></li>
-                            <li><a href="/ea2d" target="_blank" data-weight="7">EJA1</a></li>
-                            <li><a href="/f123ish" data-weight="10">Ed. Jovens e Adultos1</a></li>
-                            <li><a href="/ch3ips" data-weight="15">Gênero2</a></li>
-                            <li><a href="/sealt" data-weight="8">Política1</a></li>
-                            <li><a href="/vi3qnegar" data-weight="10">Letramento1</a></li>
-                            <li><a href="/vinegar" data-weight="10">Alfabetização1</a></li>
-                            <li><a href="/f3iasdsh" data-weight="7">Ensino Médio1</a></li>
-                            <li><a href="/chieps" data-weight="5">Ensino Superior1</a></li>
-                            <li><a href="/sa13lt" data-weight="3">Educação Infantil1</a></li>
-                            <li><a href="/viqwnegar" data-weight="10">Letramento1</a></li>
-                            <li><a href="/vin2egar" data-weight="10">Alfabetização1</a></li>
-
+                            @foreach ($termosPesquisados as $t)
+                                <li><a href="https://normativas-dev.herokuapp.com/?query={{$t->tag}}" target="_blank" data-weight="{{$t->tag_count}}">{{$t->tag}}</a></li>
+                            @endforeach
                         </ul>
                     </canvas>
                 </div>
