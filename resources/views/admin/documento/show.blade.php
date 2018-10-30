@@ -138,6 +138,12 @@
                 </div><!--end row -->
 
                 <div class="row">
+                    <div class="col-sm-12">
+                    {{$elasticObject}}
+                    </div>
+                </div>
+
+                <div class="row">
                     <div class="col-sm-6">
                         <a class="btn btn-primary btn-lg" href="{{ url("storage/uploads/{$documento->arquivo}") }}">Download</a>
                     </div>

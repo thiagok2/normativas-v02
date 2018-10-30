@@ -58,7 +58,7 @@
         <!-- small box -->
         <div class="small-box bg-red">
         <div class="inner">
-            <h3>1982</h3>
+            <h3>?</h3>
 
             <p>Consultas realizadas</p>
         </div>
@@ -191,7 +191,7 @@
 </div>
 
 <div class="row">
-    <div class="col-lg-4">
+    <div class="col-lg-6">
         <div class="box box-success">
             <div class="box-header">
                 <h3 class="box-title">Palavras chaves mais referências nos documentos</h3>
@@ -215,7 +215,7 @@
     </div> <!-- end col-6 -->
 
 
-    <div class="col-lg-4">
+    <div class="col-lg-6">
         <div class="box box-danger">
             <div class="box-header">
                 <h3 class="box-title">Termos mais pesquisadas</h3>
@@ -238,6 +238,7 @@
         </div> <!-- end box -->
     </div> <!-- end col-4 -->
 
+    <!--
     <div class="col-lg-4">
         <div class="box box-info">
             <div class="box-header">
@@ -250,6 +251,7 @@
 
         </div>
     </div>
+    -->
 </div> <!-- end row-->
 
 

@@ -13,16 +13,14 @@ class Documento extends Model
         'assunto_id','unidade_id','arquivo'    ];
 
 
-    public $rules = [
-        'numero' => 'required'
-    ];
-
-    public $messages = array(
-        'numero.required' => 'Número é obrigatório',
-        'ano.integer' => 'Ano necessita ser um inteiro',
-        'titulo.required' => 'Título é obrigatório',
-        'ementa.required' => 'Ementa é obrigatória',
-    );
+    public function toElasticObject(){
+        $object = [
+            "ato" => [
+                "ano" => 10
+            ]
+        ];
+        return collect($object);
+    }
 
     public function palavrasChaves(){
         return $this->hasMany(PalavraChave::class);

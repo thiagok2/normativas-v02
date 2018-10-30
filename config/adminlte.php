@@ -71,7 +71,7 @@ return [
     |
     */
 
-    'collapse_sidebar' => true,
+    'collapse_sidebar' => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -108,6 +108,12 @@ return [
     */
 
     'menu' => [
+        [
+            'text'        => 'Home',
+            'url'         => '/home',
+            'icon'        => 'home'
+        ]
+        ,
         'Atos Normativos',
         [
             'text'        => 'Publicar',
@@ -115,7 +121,7 @@ return [
             'icon'        => 'upload'
         ],
         [
-            'text'        => 'Últimas',
+            'text'        => 'Últimos Documentos',
             'url'         => 'documentos',
             'icon'        => 'list-alt',
             'label'       => 4,
@@ -131,12 +137,6 @@ return [
             'text' => 'Assuntos',
             'url'  => 'admin/assuntos',
             'icon' => 'th-list',
-        ],
-        'Usuário',
-        [
-            'text' => 'Perfil',
-            'url'  => 'admin/settings',
-            'icon' => 'lock',
         ],
         'Orgãos',
         [
@@ -156,11 +156,6 @@ return [
                     'url'  => 'admin/unidades?esfera=Municipal',
                 ],
             ],
-        ],
-        [
-            'text' => 'Convites',
-            'url'  => 'admin/convites',
-            'icon' => 'envelope',
         ]
     ],
 

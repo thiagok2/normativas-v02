@@ -39,7 +39,6 @@
                                 <th style="width: 20%">Título</th>
                                 <th style="width: 6%">Publicação</th>
                                 <th style="width: 6%">Envio</th>
-                                <th style="width: 45%">Ementa</th>
                                 <th style="width: 4%">Por</th>
                                 <th style="width: 2%"></th>
                             </tr>
@@ -55,7 +54,6 @@
                                     <td>{{$doc->titulo}}</td>
                                     <td>{{date('d-m-Y', strtotime($doc->data_publicacao))}}</td>
                                     <td>{{date('d-m-Y', strtotime($doc->data_envio))}}</td>
-                                    <td>{{$doc->ementa}}</td>
                                     <td>{{$doc->user->firstName()}}</td>
                                     <td>
                                         <a href="{{ url("storage/uploads/{$doc->arquivo}") }}">

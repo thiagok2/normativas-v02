@@ -28,8 +28,14 @@ class HomeController extends Controller
     public function index()
     {
 
-        $documentos = Documento::with('unidade','tipoDocumento','palavrasChaves')->orderBy('data_envio', 'desc')->take(5)->get();
-        $documentosCount = Documento::count();
+        $unidade = auth()->user()->unidade;
+
+
+        $documentos = Documento::with('unidade','tipoDocumento','palavrasChaves')
+                            ->where('unidade_id',$unidade->id)
+                            ->orderBy('data_envio', 'desc')->take(5)->get();
+                            
+        $documentosCount = Documento::where('unidade_id',$unidade->id)->count();
 
 
         $usersCount = User::count();
