@@ -4,8 +4,6 @@ $(function () {
 
     var elementsExists = document.getElementById('myCanvasContainer') && document.getElementById('myCanvasContainer2');
 
-   
-
     if (elementsExists) {
       TagCanvas.textColour = '#363636';
       TagCanvas.outlineColour = '#ff9999';
@@ -31,6 +29,7 @@ $(function () {
 
     // Donut Chart
 
+    /*
     var chartExist = document.getElementById("uf-chart");
     if (chartExist) {
       var donut = new Morris.Donut({
@@ -54,7 +53,7 @@ $(function () {
         hideHover: 'auto'
       });
     }
-
+    */
 
   } catch (e) {
     // something went wrong, hide the canvas container
