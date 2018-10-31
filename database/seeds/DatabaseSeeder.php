@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
         $this->call(MunicipioTableSeeder::class);
         $this->call(TipoDocumentoTableSeeder::class);
         $this->call(AssuntoTableSeeder::class);
+        $this->call(UnidadeDefaultTableSeeder::class);
         
     }
 }
