@@ -123,9 +123,7 @@ return [
         [
             'text'        => 'Últimos Documentos',
             'url'         => 'documentos',
-            'icon'        => 'list-alt',
-            'label'       => 4,
-            'label_color' => 'success',
+            'icon'        => 'list-alt'
         ],
         'Geral',
         [
