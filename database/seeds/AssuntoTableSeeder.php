@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Assunto;
+use App\Models\Assunto;
 use Illuminate\Support\Facades\DB;
 
 class AssuntoTableSeeder extends Seeder

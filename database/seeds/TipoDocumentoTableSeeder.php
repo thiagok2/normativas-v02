@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use App\TipoDocumento;
+use App\Models\TipoDocumento;
 
 class TipoDocumentoTableSeeder extends Seeder
 {

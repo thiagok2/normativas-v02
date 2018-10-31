@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\DB;
 
 class CreateDocumentosTable extends Migration
 {
@@ -23,7 +24,7 @@ class CreateDocumentosTable extends Migration
             $table->string('arquivo', 200);
             $table->string('url', 200)->nullable();
             $table->date('data_publicacao');
-            $table->timestamp('data_envio');
+            $table->timestamp('data_envio')->useCurrent();
 
             $table->integer('acessos')->default(0);
 

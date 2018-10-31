@@ -38,7 +38,9 @@ class DocumentoController extends Controller
          
             $documento = new Documento();
             $documento->fill($data);
-    
+
+            $documento->data_envio = new \DateTime();
+
             $documento->unidade()->associate(auth()->user()->unidade);
             $documento->user()->associate(auth()->user()->id);
     
