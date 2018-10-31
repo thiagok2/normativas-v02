@@ -30,13 +30,18 @@ class HomeController extends Controller
 
         $unidade = auth()->user()->unidade;
 
-
-        $documentos = Documento::with('unidade','tipoDocumento','palavrasChaves')
-                            ->where('unidade_id',$unidade->id)
-                            ->orderBy('data_envio', 'desc')->take(5)->get();
-                            
-        $documentosCount = Documento::where('unidade_id',$unidade->id)->count();
-
+        if($unidade){
+            $documentos = Documento::with('unidade','tipoDocumento','palavrasChaves')
+                                ->where('unidade_id',$unidade->id)
+                                ->orderBy('data_envio', 'desc')->take(5)->get();
+                                
+            $documentosCount = Documento::where('unidade_id',$unidade->id)->count();
+        }else{
+            $documentos = Documento::with('unidade','tipoDocumento','palavrasChaves')
+                                ->orderBy('data_envio', 'desc')->take(5)->get();
+                                
+            $documentosCount = Documento::count();
+        }
 
         $usersCount = User::count();
 
