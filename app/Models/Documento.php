@@ -16,7 +16,15 @@ class Documento extends Model
     public function toElasticObject(){
         $object = [
             "ato" => [
-                "ano" => 10
+                "ano" => $this->ano,
+                "titulo" => $this->titulo,
+                "ementa" => $this->ementa,
+                "url"   =>  $this->url,
+                "data_publicacao"   =>  $this->data_publicacao,
+                "arquivo"   =>  $this->arquivo,
+                "fonte"   =>  [
+                    "nome"  => $this->unidade->nome
+                ]
             ]
         ];
         return collect($object);
