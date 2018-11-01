@@ -75,7 +75,7 @@ class DocumentoController extends Controller
     
                 $extensao = $request->arquivo->extension();
                 $arquivoNome = "{$tituloArquivo}.{$extensao}";
-                $upload = $request->arquivo->storeAs('uploads', $arquivoNome);
+                //$upload = $request->arquivo->storeAs('uploads', $arquivoNome);
                 $documento->arquivo = $arquivoNome;
                 $documento->save();
     
@@ -91,6 +91,9 @@ class DocumentoController extends Controller
                 }
 
                 $bodyDocumentElastic = $documento->toElasticObject();
+                $arquivoData = file_get_contents($request["arquivo"]);
+                $bodyDocumentElastic["data"] = base64_encode($arquivoData);
+
                 $params = [
                     'index' => 'normativas',
                     'type'  => '_doc',
@@ -102,11 +105,8 @@ class DocumentoController extends Controller
 
                 $resultElastic = $this->client->index($params);
 
-                //dd($resultElastic);
-
                 DB::commit();
 
-                //dd($resultElastic);
 
                 return redirect()->route('documento', ['id' => $documento->id])
                     ->with('success', 'Documento enviado com sucesso.');
@@ -116,10 +116,6 @@ class DocumentoController extends Controller
 			    ->back()
 			    ->with('error', "Insira um anexo de extensão PDF.");
             }
-
-
-    
-            
 
         }catch(\Exception $e){
 

@@ -21,8 +21,8 @@ class Documento extends Model
         }
 
 
-        $arquivoData = file_get_contents(url("storage/uploads/".$this->arquivo));
-        $base64 = base64_encode($arquivoData);
+        // $arquivoData = file_get_contents(url("storage/uploads/".$this->arquivo));
+        // $base64 = base64_encode($arquivoData);
 
         $object = [
             "ato" => [
@@ -42,8 +42,7 @@ class Documento extends Model
                     "esfera" => $this->unidade->esfera,
                     "url" => ''
                 ]
-                ],
-                "data" => $base64
+            ]
         ];
 
 
