@@ -12,8 +12,30 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests\Admin\DocumentoResquest;
 use Illuminate\Support\Facades\Storage;
 
+use Elasticsearch\Client;
+use Elasticsearch\ClientBuilder;
+
 class DocumentoController extends Controller
 {
+
+    /**
+     * @var \Elasticsearch\Client
+     */
+    private $client;
+
+    /**
+     * @param Client $client
+    */
+    public function __construct()
+    {
+        $hosts = [
+            'https://elastic:43YSKv29RNRURDa6XqR3H90n@ba1e2a5961a84002bde6223cdd16d822.sa-east-1.aws.found.io:9243'
+        
+        ];
+        $this->client = ClientBuilder::create()->setHosts($hosts)->build();
+    }
+
+
     public function index(){
 
         $documentos = Documento::with('tipoDocumento','user')->simplePaginate(20);
@@ -49,7 +71,7 @@ class DocumentoController extends Controller
                 DB::beginTransaction();
     
                 $tituloArquivo = str_replace(" ","",strtolower(preg_replace("/&([a-z])[a-z]+;/i", "$1", htmlentities(trim($documento->numero)))));
-                $tituloArquivo = $tituloArquivo."_".uniqid(date('HisYmd'));
+                $tituloArquivo = $tituloArquivo."_".uniqid(date('HYmd'));
     
                 $extensao = $request->arquivo->extension();
                 $arquivoNome = "{$tituloArquivo}.{$extensao}";
@@ -67,7 +89,24 @@ class DocumentoController extends Controller
                         $documento->palavrasChaves()->save($palavra);
                     }
                 }
+
+                $bodyDocumentElastic = $documento->toElasticObject();
+                $params = [
+                    'index' => 'normativas',
+                    'type'  => '_doc',
+                    'id'    => $documento->numero,
+                    'pipeline' => 'attachment', 
+                    'body'  => $bodyDocumentElastic
+                    
+                ];
+
+                $resultElastic = $this->client->index($params);
+
+                //dd($resultElastic);
+
                 DB::commit();
+
+                //dd($resultElastic);
 
                 return redirect()->route('documento', ['id' => $documento->id])
                     ->with('success', 'Documento enviado com sucesso.');
@@ -107,6 +146,15 @@ class DocumentoController extends Controller
         $documento->delete();
 
         Storage::delete("uploads/$documento->arquivo");
+
+        $params = [
+            'index' => 'normativas',
+            'type'  => '_doc',
+            'id'    => $documento->numero,
+        ];
+        
+        // Delete doc at /my_index/my_type/my_id
+        $response = $this->client->delete($params);
 
 
         return redirect()->route('documentos')

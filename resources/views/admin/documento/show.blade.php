@@ -137,11 +137,13 @@
                     </div>
                 </div><!--end row -->
 
-                
-
                 <div class="row">
                     <div class="col-sm-6">
+                        <!--
                         <a class="btn btn-primary btn-lg" href="{{ url("storage/uploads/{$documento->arquivo}") }}">Download</a>
+                        -->
+
+                        <a class="btn btn-primary btn-lg" target="_blank" href="https://normativas-dev.herokuapp.com/normativa/pdf/{{$documento->numero}}">Download</a>
                     </div>
 
                     <div class="col-sm-6">

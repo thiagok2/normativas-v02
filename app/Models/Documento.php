@@ -14,6 +14,16 @@ class Documento extends Model
 
 
     public function toElasticObject(){
+
+        $tags = [];
+        foreach($this->palavrasChaves as $tag){
+            $tags[] = $tag->tag;
+        }
+
+
+        $arquivoData = file_get_contents(url("storage/uploads/".$this->arquivo));
+        $base64 = base64_encode($arquivoData);
+
         $object = [
             "ato" => [
                 "ano" => $this->ano,
@@ -21,12 +31,22 @@ class Documento extends Model
                 "ementa" => $this->ementa,
                 "url"   =>  $this->url,
                 "data_publicacao"   =>  $this->data_publicacao,
+                "tipo_doc" => $this->tipoDocumento->nome,
                 "arquivo"   =>  $this->arquivo,
+                "tags"  =>  $tags,
                 "fonte"   =>  [
-                    "nome"  => $this->unidade->nome
+                    "orgao"  => $this->unidade->nome,
+                    "sigla" => $this->unidade->sigla,
+                    "uf" => '',
+                    "uf_sigla" => '',
+                    "esfera" => $this->unidade->esfera,
+                    "url" => ''
                 ]
-            ]
+                ],
+                "data" => $base64
         ];
+
+
         return collect($object);
     }
 
