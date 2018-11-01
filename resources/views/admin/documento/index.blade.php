@@ -56,12 +56,17 @@
                                     <td>{{date('d-m-Y', strtotime($doc->data_envio))}}</td>
                                     <td>{{$doc->user->firstName()}}</td>
                                     <td>
-                                        <a href="{{ url("storage/uploads/{$doc->arquivo}") }}">
-                                            BAIXAR<i class="fa fa-arrow-alt-circle-down"></i>
+                                        <a href="{{ url("storage/uploads/{$doc->arquivo}") }}" target="_blank">
+                                            <i class="fa fa-arrow-circle-down"></i>
                                         </a>
                                         <a href="{{ url("documento/{$doc->id}") }}">
-                                            VER<i class="fa fa-arrow-alt-circle-down"></i>
+                                            <i class="fa fa-arrow-circle-right"></i>
                                         </a>
+                                        <a href="#">
+                                            <i class="fa fa-cloud-upload"></i>
+                                        </a>
+
+                                       
                                     </td>
                                 </tr>
                                 @endforeach

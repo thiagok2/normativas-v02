@@ -113,7 +113,7 @@
                                 </td>
                                 <td>
                                     <a href="{{ url("storage/uploads/{$doc->arquivo}") }}">
-                                        BAIXAR<i class="fa fa-arrow-alt-circle-down"></i>
+                                        <i class="fa fa-arrow-circle-down"></i>
                                     </a>
                                 </td>
                             </tr>
