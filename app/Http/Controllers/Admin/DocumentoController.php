@@ -75,7 +75,7 @@ class DocumentoController extends Controller
     
                 $extensao = $request->arquivo->extension();
                 $arquivoNome = "{$tituloArquivo}.{$extensao}";
-                $upload = $request->arquivo->storeAs('uploads', $arquivoNome);
+                //$upload = $request->arquivo->storeAs('uploads', $arquivoNome);
                 $documento->arquivo = $arquivoNome;
                 $documento->save();
     
