@@ -137,11 +137,7 @@
                     </div>
                 </div><!--end row -->
 
-                <div class="row">
-                    <div class="col-sm-12">
-                    {{$elasticObject}}
-                    </div>
-                </div>
+                
 
                 <div class="row">
                     <div class="col-sm-6">
