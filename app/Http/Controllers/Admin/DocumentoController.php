@@ -134,8 +134,8 @@ class DocumentoController extends Controller
     public function show($id){
         $documento = Documento::with(['unidade','tipoDocumento','assunto','palavrasChaves'])->find($id);
 
-        $elasticObject = $documento->toElasticObject();
-        return view('admin.documento.show',compact('documento','elasticObject'));
+        //$elasticObject = $documento->toElasticObject();
+        return view('admin.documento.show',compact('documento'));
     }
 
     public function destroy($id)
