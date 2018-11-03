@@ -76,6 +76,8 @@ class DocumentoController extends Controller
                 $extensao = $request->arquivo->extension();
                 $arquivoNome = "{$tituloArquivo}.{$extensao}";
                 //$upload = $request->arquivo->storeAs('uploads', $arquivoNome);
+
+                $documento->numero = str_replace(" ","",strtolower(preg_replace("/&([a-z])[a-z]+;/i", "$1", htmlentities(trim($documento->numero)))));
                 $documento->arquivo = $arquivoNome;
                 $documento->save();
     

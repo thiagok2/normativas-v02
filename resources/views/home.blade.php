@@ -112,8 +112,9 @@
                                     </span>
                                 </td>
                                 <td>
-                                    <a  href="https://normativas-dev.herokuapp.com/normativa/pdf/{{$doc->numero}}">
+                                    <a  target="_blank"  href="https://normativas-dev.herokuapp.com/normativa/pdf/{{$doc->numero}}">
                                         <i class="fa fa-arrow-circle-down"></i>
+                                       
                                     </a>
                                 </td>
                             </tr>
