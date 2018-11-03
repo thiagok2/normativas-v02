@@ -114,7 +114,7 @@
                             <label for="palavras_chave">Palavras chave</label>
                             <small class=".text-muted">(Insira os termos relevantes abordados no documento)</small>
                             <input type="text"  required data-role="tagsinput" id="palavras_chave" name="palavras_chave"/>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -149,16 +149,7 @@
             
             </div> <!-- end div-col-container -->
         </div><!-- end row-col_container-->
-        <button type="submit" class="btn btn-primary btn-lg" value="Enviar" 
-            onclick="this.form.submit();">Enviar</button>
-
-        
-
-       
-
-        
-
-        
+        <button type="submit" class="btn btn-primary btn-lg" value="Enviar" onclick="this.form.submit();">Enviar</button>
 
     </form>
     </div> <!--end container-->
