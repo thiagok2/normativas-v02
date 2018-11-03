@@ -112,7 +112,7 @@
                                     </span>
                                 </td>
                                 <td>
-                                    <a href="{{ url("storage/uploads/{$doc->arquivo}") }}">
+                                    <a  href="https://normativas-dev.herokuapp.com/normativa/pdf/{{$doc->numero}}">
                                         <i class="fa fa-arrow-circle-down"></i>
                                     </a>
                                 </td>
