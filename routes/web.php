@@ -18,6 +18,7 @@ Route::get('/', function () {
 });
 
 
+Route::get('/test', 'Admin\\DocumentoController@test')->name('test');
 
 
 Auth::routes();

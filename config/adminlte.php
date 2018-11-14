@@ -71,7 +71,7 @@ return [
     |
     */
 
-    'collapse_sidebar' => false,
+    'collapse_sidebar' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -125,36 +125,41 @@ return [
             'url'         => 'documentos',
             'icon'        => 'list-alt'
         ],
-        'Geral',
         [
-            'text' => 'Tipos de Documentos',
-            'url'  => 'admin/tiposdocumento',
-            'icon' => 'th-large',
-        ],
-        [
-            'text' => 'Assuntos',
-            'url'  => 'admin/assuntos',
-            'icon' => 'th-list',
-        ],
-        'Orgãos',
-        [
-            'text'    => 'Orgãos por esfera',
+            'text'    => 'Glossário',
             'icon'    => 'share',
             'submenu' => [
                 [
-                    'text' => 'Federal',
-                    'url'  => 'admin/unidades?esfera=Federal',
+                    'text' => 'Tipos de Documentos',
+                    'url'  => 'admin/tiposdocumento',
+                    'icon' => 'th-large',
                 ],
                 [
-                    'text'    => 'Estadual',
-                    'url'     => 'admin/unidades?esfera=Estadual'
+                    'text' => 'Assuntos',
+                    'url'  => 'admin/assuntos',
+                    'icon' => 'th-list',
                 ],
-                [
-                    'text' => 'Municipal',
-                    'url'  => 'admin/unidades?esfera=Municipal',
-                ],
-            ],
+            ]
         ]
+        // 'Orgãos',
+        // [
+        //     'text'    => 'Orgãos por esfera',
+        //     'icon'    => 'share',
+        //     'submenu' => [
+        //         [
+        //             'text' => 'Federal',
+        //             'url'  => 'admin/unidades?esfera=Federal',
+        //         ],
+        //         [
+        //             'text'    => 'Estadual',
+        //             'url'     => 'admin/unidades?esfera=Estadual'
+        //         ],
+        //         [
+        //             'text' => 'Municipal',
+        //             'url'  => 'admin/unidades?esfera=Municipal',
+        //         ],
+        //     ],
+        // ]
     ],
 
     /*

@@ -11,12 +11,14 @@ class Unidade extends Model
         'nome', 'tipo', 'esfera','sigla','url','email','contato','telefone'
     ];
 
+    public $timestamps = true;
+
     public function responsavel(){
-        return $this->hasOne(User::class,'responsavel_id');
+        return $this->belongsTo(User::class,'responsavel_id');
     }
 
     public function user(){
-        return $this->hasOne(User::class,'user_id');
+        return $this->belongsTo(User::class,'user_id');
     }
 
     public function documentos(){

@@ -9,22 +9,48 @@
 @section('content')
     
 <div class="row">
+
     <div class="col-lg-3 col-xs-6">
         <!-- small box -->
-        <div class="small-box bg-aqua">
-        <div class="inner">
-            <h3>{{$documentosCount}}</h3>
+        <a href="{{route('publicar')}}">
+            <div class="small-box bg-red">
+                <div class="inner">
+                
+                    <h3>Novo</h3>
 
-            <p>Documentos</p>
-        </div>
-        <div class="icon">
-            <i class="ion ion-document-text"></i>
-        </div>
-            <a href="{{route('publicar')}}" class="small-box-footer">
-                Publicar novo Documento
-                <i class="fa fa-arrow-circle-up"></i>
-            </a>
-        </div>
+                    <p>Publique um novo documento</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-document-text"></i>
+                </div>
+                <div class="small-box-footer">
+                    Enviar arquivo
+                    <i class="fa fa-arrow-circle-up"></i>
+                </div>
+            </div>
+        </a>
+    </div>
+    <!-- ./col -->
+
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <a href="{{route('documentos')}}">
+            <div class="small-box bg-aqua">
+                <div class="inner">
+                    <h3>{{$documentosCount}}</h3>
+
+                    <p>Documentos</p>
+                </div>
+                <div class="icon">
+                    
+                    <i class="ion ion-search"></i>
+                </div>
+                <div class="small-box-footer">
+                    Documentos do seu conselho
+                    <i class="fa fa-arrow-circle-right"></i>
+                </div>
+            </div>
+        </a>
     </div>
     <!-- ./col -->
     <div class="col-lg-3 col-xs-6">
@@ -45,37 +71,22 @@
     <div class="col-lg-3 col-xs-6">
         <!-- small box -->
         <div class="small-box bg-yellow">
-        <div class="inner">
-            <h3>{{$usersCount}}</h3>
+            <div class="inner">
+                <h3>{{$usersCount}}</h3>
 
-            <p>Colaboradores</p>
-        </div>
-        <div class="icon">
-            <i class="ion ion-person-add"></i>
-        </div>
-        <a href="#" class="small-box-footer"><i class="fa fa-arrow-circle-right"></i></a>
-        </div>
-    </div>
-    <!-- ./col -->
-    <div class="col-lg-3 col-xs-6">
-        <!-- small box -->
-        <div class="small-box bg-red">
-        <div class="inner">
-            <h3>?</h3>
-
-            <p>Consultas realizadas</p>
-        </div>
-        <div class="icon">
-            <i class="ion ion-search"></i>
-        </div>
-        <a href="#" class="small-box-footer"><i class="fa fa-arrow-circle-right"></i></a>
+                <p>Colaboradores</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-person-add"></i>
+            </div>
+            <a href="#" class="small-box-footer"><i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
     <!-- ./col -->
 </div>
 
 <div class="row">
-    <div class="col-lg-9 col-xs-12">
+    <div class="col-lg-12">
         <div class="box box-danger">
             <div class="box-header">
                 <h3 class="box-title">Documentos recentes</h3>
@@ -112,9 +123,11 @@
                                     </span>
                                 </td>
                                 <td>
-                                    <a  target="_blank"  href="https://normativas-dev.herokuapp.com/normativa/pdf/{{$doc->numero}}">
+                                    <a  target="_blank"  href="https://normativas-dev.herokuapp.com/normativa/pdf/{{$doc->arquivo}}">
                                         <i class="fa fa-arrow-circle-down"></i>
-                                       
+                                    </a>
+                                    <a href="{{ url("documento/{$doc->id}") }}">
+                                        <i class="fa fa-arrow-circle-right"></i>
                                     </a>
                                 </td>
                             </tr>
@@ -125,71 +138,6 @@
                 </table>
             </div>
                 <!-- /.box-body -->
-        </div>
-    </div>
-    <div class="col-lg-3 col-xs-12">
-        <div class="box box-success">
-            <div class="box-header">
-                <h3 class="box-title">Termos mais pesquisados</h3>
-            </div>
-
-            <div class="box-body no-padding">
-                <table class="table table-condensed table-hover">
-                    <tbody>
-                        <tr>
-                            <th style="width: 5%">#</th>
-                            <th style="width: 70%">Termos</th>
-                            <th style="width: 25%"></th>
-                        </tr>
-                        <tr>
-                            <td>1.</td>
-                            <td>Reforma</td>
-                            <td>
-                                <div class="progress progress-xs">
-                                    <div class="progress-bar progress-bar-success" style="width: 35%"></div>
-                                </div>        
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2.</td>
-                            <td>Educação a distância</td>
-                            <td>
-                                <div class="progress progress-xs">
-                                    <div class="progress-bar progress-bar-success" style="width: 20%"></div>
-                                </div>
-                            </td>
-                        </tr>
-                        </tr>
-                        <tr>
-                            <td>3.</td>
-                            <td>Educação a Inclusiva</td>
-                            <td>
-                                <div class="progress progress-xs">
-                                    <div class="progress-bar progress-bar-success" style="width: 15%"></div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>4.</td>
-                            <td>Ensino Religioso</td>
-                            <td>
-                                <div class="progress progress-xs">
-                                    <div class="progress-bar progress-bar-success" style="width: 8%"></div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>5.</td>
-                            <td>Progressão</td>
-                            <td>
-                                <div class="progress progress-xs">
-                                    <div class="progress-bar progress-bar-success" style="width: 6%"></div>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
         </div>
     </div>
 </div>

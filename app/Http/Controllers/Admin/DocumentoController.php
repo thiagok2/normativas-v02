@@ -70,22 +70,22 @@ class DocumentoController extends Controller
     
                 DB::beginTransaction();
     
-                $tituloArquivo = str_replace(" ","",strtolower(preg_replace("/&([a-z])[a-z]+;/i", "$1", htmlentities(trim($documento->numero)))));
-                $tituloArquivo = $tituloArquivo."_".uniqid(date('HYmd'));
-    
-                $extensao = $request->arquivo->extension();
-                $arquivoNome = "{$tituloArquivo}.{$extensao}";
+                //$extensao = $request->arquivo->extension();
+                //$arquivoNome = "{$tituloArquivo}.{$extensao}";
                 //$upload = $request->arquivo->storeAs('uploads', $arquivoNome);
 
-                $documento->numero = str_replace(" ","",strtolower(preg_replace("/&([a-z])[a-z]+;/i", "$1", htmlentities(trim($documento->numero)))));
-                $documento->arquivo = $arquivoNome;
+                /**url amigável para arquivo */
+                $urlArquivo = $documento->urlizer($documento->unidade->sigla."_".$documento->numero);
+
+                $urlArquivo = $urlArquivo."_".uniqid();
+                $documento->arquivo = $urlArquivo;
                 $documento->save();
     
                 $tags = explode(",", $data["palavras_chave"]);
                 if(is_array($tags) && count($tags)>0){
                     foreach ($tags as $t) {
                         $palavra = new PalavraChave();
-                        $palavra->tag = $t;
+                        $palavra->tag = substr($t,0,100);
     
                         $palavra->documento()->associate($documento);
                         $documento->palavrasChaves()->save($palavra);
@@ -99,7 +99,7 @@ class DocumentoController extends Controller
                 $params = [
                     'index' => 'normativas',
                     'type'  => '_doc',
-                    'id'    => $documento->numero,
+                    'id'    => $documento->arquivo,
                     'pipeline' => 'attachment', 
                     'body'  => $bodyDocumentElastic
                     
@@ -159,6 +159,10 @@ class DocumentoController extends Controller
             ->with('success', 'Documento removido com sucesso.');
 
 
+    }
+
+    public function test(){
+        echo "_".uniqid();
     }
 
 }

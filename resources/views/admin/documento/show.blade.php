@@ -123,15 +123,14 @@
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label for="url">URL</label>
-                            <div class='input-group date'>
+                            <div class='input-group'>
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-globe">
                                     </span>
                                 </span>
-                                <a class="form-control" id="url" name="url" 
-                                    href="{{$documento->url}}">
-                                    {{$documento->url}}
-                                </a>
+                                <input class="form-control" id="url" name="url" readonly
+                                    value="{{$documento->url}}"/>
+                                    
                             </div>
                         </div>
                     </div>
@@ -139,7 +138,7 @@
 
                 <div class="row">
                     <div class="col-sm-6">
-                        <a class="btn btn-primary btn-lg" target="_blank" href="https://normativas-dev.herokuapp.com/normativa/pdf/{{$documento->numero}}">Download</a>
+                        <a class="btn btn-primary btn-lg" target="_blank" href="https://normativas-dev.herokuapp.com/normativa/pdf/{{$documento->arquivo}}">Download</a>
                     </div>
 
                     <div class="col-sm-6">

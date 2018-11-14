@@ -27,34 +27,6 @@ $(function () {
 
 
 
-    // Donut Chart
-
-    /*
-    var chartExist = document.getElementById("uf-chart");
-    if (chartExist) {
-      var donut = new Morris.Donut({
-        element: 'uf-chart',
-        resize: true,
-        colors: ['#3c8dbc', '#f56954', '#00a65a'],
-        data: [
-          { label: 'CEE-MG', value: 12 },
-          { label: 'CEE-DF', value: 30 },
-          { label: 'MEC', value: 20 },
-          { label: 'CEE-AL', value: 12 },
-          { label: 'CEE-PE', value: 24 },
-          { label: 'CME-SP', value: 14 },
-          { label: 'CEE-SC', value: 6 },
-          { label: 'CEE-RS', value: 3 },
-          { label: 'CEM-SE', value: 8 },
-          { label: 'CEE-BA', value: 12 },
-          { label: 'CEE-CE', value: 4 },
-
-        ],
-        hideHover: 'auto'
-      });
-    }
-    */
-
   } catch (e) {
     // something went wrong, hide the canvas container
     //document.getElementById('myCanvasContainer').style.display = 'none';
@@ -65,10 +37,10 @@ $(function () {
 $(document).ready(function() {
   $("#palavras_chave").tagsinput({
     trimValue: true,
-    confirmKeys: [9,188]
+    confirmKeys: [9,188,13]
   });
-$("#palavras_chave").closest('form').find('input').on('keydown',function (e) {
-
+$(".bootstrap-tagsinput > input").on('keydown',function (e) {
+ 
   if (e.which == 9 || e.which == 13)
     {
       $("#palavras_chave").tagsinput('add',$(this).val());

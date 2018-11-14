@@ -10,7 +10,7 @@ class Documento extends Model
 
     protected $fillable = [
         'ano', 'titulo','numero','ementa','url','data_publicacao','tipo_documento_id',
-        'assunto_id','unidade_id','arquivo'    ];
+        'assunto_id','unidade_id'   ];
 
 
     public function toElasticObject(){
@@ -19,10 +19,6 @@ class Documento extends Model
         foreach($this->palavrasChaves as $tag){
             $tags[] = $tag->tag;
         }
-
-
-        // $arquivoData = file_get_contents(url("storage/uploads/".$this->arquivo));
-        // $base64 = base64_encode($arquivoData);
 
         $object = [
             "ato" => [
@@ -71,5 +67,25 @@ class Documento extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    function urlizer($str) {
+
+        $str = strtolower($str);
+        $str = preg_replace('/[áàãâä]/ui', 'a', $str);
+        $str = preg_replace('/[éèêë]/ui', 'e', $str);
+        $str = preg_replace('/[íìîï]/ui', 'i', $str);
+        $str = preg_replace('/[óòõôö]/ui', 'o', $str);
+        $str = preg_replace('/[úùûü]/ui', 'u', $str);
+        $str = preg_replace('/[ç]/ui', 'c', $str);
+        $str = preg_replace('/[^a-z0-9]/i', '-', $str);
+        $str = preg_replace("/[^a-z0-9_\s-]/", "", $str);
+        $str = preg_replace('/_+/', '-', $str);
+        $str = preg_replace("/[\s-]+/", " ", $str);
+        $str = str_replace('.','-',$str);
+        $str = str_replace(' ','-',$str);
+        $str = str_replace('/','_',$str);
+        $str = trim($str,"-");
+        return strtolower($str);
     }
 }
