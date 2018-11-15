@@ -86,7 +86,7 @@ class UnidadeConselhosEstaduaisSeeder extends Seeder
             'nome' => 'CONSELHO ESTADUAL DE EDUCAÇÃO DA BAHIA', 
             'tipo' => 'Conselho', 
             'esfera' => 'Estadual',
-            'email' => 'conselho.bahia@educacao.ba.gov.br
+            'email' => 'conselho.bahia@educacao.ba.gov.br;
                             tercontreiras@hotmail.com;tercialopes@uol.com.br;welingtonaraujo@uol.com.br;
                             vanusa.pitanga@educacao.ba.gov.br',
             //'url' => 'http://www.cee.al.gov.br',
@@ -108,10 +108,8 @@ class UnidadeConselhosEstaduaisSeeder extends Seeder
             'nome' => 'CONSELHO ESTADUAL DE EDUCAÇÃO DO CEARÁ', 
             'tipo' => 'Conselho', 
             'esfera' => 'Estadual',
-            'email' => 'conselho.bahia@educacao.ba.gov.br;
-                            tercontreiras@hotmail.com;tercialopes@uol.com.br;welingtonaraujo@uol.com.br;
-                            vanusa.pitanga@educacao.ba.gov.br',
-            //'url' => 'http://www.cee.al.gov.br',
+            'email' => 'anamnogueira@gmail.com/ana.nogueira@cee.ce.gov.br/jose.linhares@cee.ce.gov.br',
+            'url' => 'http://www.cee.ce.gov.br',
             'sigla' => 'CEE-CE',
             'contato' => 'PRESIDENTE: JOSÉ LINHARES PONTE',
             'contato2' => 'SECRETÁRIA EXECUTIVA: ANA MARIA NOGUEIRA MOREIRA',

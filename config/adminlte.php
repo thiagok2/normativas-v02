@@ -93,7 +93,7 @@ return [
 
     'login_url' => 'login',
 
-    /*'register_url' => 'register',*/
+    'register_url' => 'register',
 
     /*
     |--------------------------------------------------------------------------
@@ -140,26 +140,26 @@ return [
                     'icon' => 'th-list',
                 ],
             ]
+            ],
+        'Orgãos',
+        [
+            'text'    => 'Orgãos por esfera',
+            'icon'    => 'share',
+            'submenu' => [
+                [
+                    'text' => 'Federal',
+                    'url'  => 'admin/unidades?esfera=Federal',
+                ],
+                [
+                    'text'    => 'Estadual',
+                    'url'     => 'admin/unidades?esfera=Estadual'
+                ],
+                [
+                    'text' => 'Municipal',
+                    'url'  => 'admin/unidades?esfera=Municipal',
+                ],
+            ],
         ]
-        // 'Orgãos',
-        // [
-        //     'text'    => 'Orgãos por esfera',
-        //     'icon'    => 'share',
-        //     'submenu' => [
-        //         [
-        //             'text' => 'Federal',
-        //             'url'  => 'admin/unidades?esfera=Federal',
-        //         ],
-        //         [
-        //             'text'    => 'Estadual',
-        //             'url'     => 'admin/unidades?esfera=Estadual'
-        //         ],
-        //         [
-        //             'text' => 'Municipal',
-        //             'url'  => 'admin/unidades?esfera=Municipal',
-        //         ],
-        //     ],
-        // ]
     ],
 
     /*
