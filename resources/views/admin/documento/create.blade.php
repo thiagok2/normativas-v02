@@ -25,9 +25,9 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="form-group">
-                            <label for="ano">Orgão</label>
+                            <label for="unidade">Orgão</label>
                         <input type="text" class="form-control" readonly 
-                            value="{{ $unidade->nome }} - {{ $unidade->sigla }}">
+                            value="{{ $unidade->nome }} - {{ $unidade->sigla }}" id="unidade">
                         
                         </div>
                     </div>
@@ -126,7 +126,7 @@
                         <div class="form-group">
                             <label for="url">URL</label>
                             <small class=".text-muted">(Endereço online - opcional)</small>
-                            <div class='input-group date'>
+                            <div class='input-group'>
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-globe">
                                     </span>

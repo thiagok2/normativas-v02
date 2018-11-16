@@ -24,7 +24,12 @@ Route::get('/test', 'Admin\\DocumentoController@test')->name('test');
 Auth::routes();
 
 Route::get('/admin/convites', 'Admin\\ConviteController@index')->name('convites');
+
 Route::get('/admin/unidades', 'Admin\\UnidadeController@index')->name('unidades');
+Route::post('/admin/unidades', 'Admin\\UnidadeController@store')->name('unidade-store');
+
+Route::get('/admin/unidades/{id}/edit', 'Admin\\UnidadeController@edit')->name('unidade-edit');
+
 Route::get('/admin/tiposdocumento', 'Admin\\TipoDocumentoController@index')->name('tiposdocumento');
 Route::get('/admin/assuntos', 'Admin\\AssuntoController@index')->name('Assuntos');
 Route::get('/documentos', 'Admin\\DocumentoController@index')->name('documentos');

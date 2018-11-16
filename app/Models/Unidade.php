@@ -8,7 +8,7 @@ use App\User;
 class Unidade extends Model
 {
     protected $fillable = [
-        'nome', 'tipo', 'esfera','sigla','url','email','contato','telefone'
+        'nome', 'tipo', 'esfera','sigla','url','email','contato','telefone','endereco','contato2'
     ];
 
     public $timestamps = true;
