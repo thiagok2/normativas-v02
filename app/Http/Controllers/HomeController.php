@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Documento;
+use App\Models\Unidade;
 use App\User;
 use Illuminate\Support\Facades\DB;
 use App\Models\PalavraChave;
@@ -28,7 +29,12 @@ class HomeController extends Controller
     public function index()
     {
 
-        $unidade = auth()->user()->unidade;
+        $unidade = Unidade::find(auth()->user()->unidade_id);
+
+        //$unidade = auth()->user()->unidade()->get();
+        //echo "xxxxxxxxxxxxxxxxx".$unidade;
+
+
 
         if($unidade){
             $documentos = Documento::with('unidade','tipoDocumento','palavrasChaves')
@@ -43,7 +49,7 @@ class HomeController extends Controller
             $documentosCount = Documento::count();
         }
 
-        $usersCount = User::count();
+        $usersCount = User::where('unidade_id', $unidade->id)->count();
 
 
         $tags = DB::table('palavra_chaves')

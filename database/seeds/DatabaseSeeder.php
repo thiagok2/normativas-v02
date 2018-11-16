@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
         $this->call(AssuntoTableSeeder::class);
         $this->call(UnidadeDefaultTableSeeder::class);
         $this->call(UnidadeConselhosEstaduaisSeeder::class);
+        $this->call(UserConselhosEstaduaisSeeder::class);
+        $this->call(UserUnidadeConselhoFederalSeeder::class);
         
     }
 }

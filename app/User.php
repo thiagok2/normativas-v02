@@ -37,7 +37,7 @@ class User extends Authenticatable
     }
 
     public function unidade() {
-		return $this->hasOne(Unidade::class );
+		return $this->belongsTo(Unidade::class,'unidade_id');
     }
 
     public function firstName(){
