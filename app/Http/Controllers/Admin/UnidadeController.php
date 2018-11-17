@@ -14,28 +14,34 @@ class UnidadeController extends Controller
 {
     public function index(Request $request){
 
-        $esfera = $request->query('esfera');
-        $estado = $request->query('estado');
-        $nome = $request->query('nome');
+        $user = auth()->user();
 
-        $clausulas = [];
-        if($esfera){
-            $clausulas[] = ['esfera', '=', $esfera];  
-        }
-        // if($estado){
-        //     $clausulas[] = ['estado_id', '=', $estado];
-        // }
+        if($user->isAdmin()){
+            $esfera = $request->query('esfera');
+            $estado = $request->query('estado');
+            $nome = $request->query('nome');
 
-        if($nome){
-            $clausulas[] = ['LOWER(nome)', 'like', '%'.strtolower($nome).'%'];
-        }
+            $clausulas = [];
+            if($esfera){
+                $clausulas[] = ['esfera', '=', $esfera];  
+            }
 
-        $unidades = Unidade::orWhere($clausulas)->get();; 
-        $estados = Estado::all();
+            if($nome){
+                $clausulas[] = ['nome', 'like', '%'.strtoupper($nome).'%'];
+            }
 
-       
+            $unidades = Unidade::orWhere($clausulas)->get();; 
+            $estados = Estado::all();
+
+            return view('admin.unidade.index', compact('estados','unidades','esfera','estado','nome'));
+
+        }else{
+            $unidade = auth()->user()->unidade;
+            $users = User::where("unidade_id", $unidade->id)->get();
+
+            return view('admin.unidade.edit', compact('unidade','users'));
+        } 
         
-        return view('admin.unidade.index', compact('estados','unidades','esfera','estado','nome'));
     }
 
     public function show($id){
@@ -53,9 +59,11 @@ class UnidadeController extends Controller
     }
 
 
-    public function store(Request $request, Unidade $unidade){
-
+    public function store(Request $request, Unidade $unidade)
+    {
         DB::beginTransaction();
+
+        $primeiroAcesso = is_null($unidade->confirmado_em);
 
         $unidade = Unidade::find($request->id);
         $data = $request->all();
@@ -74,8 +82,15 @@ class UnidadeController extends Controller
 
         DB::commit();
 
-        return redirect()->route('unidade-edit', ['id' => $unidade->id])
-            ->with('success', 'Unidade atualizada com sucesso.');
+
+        if(auth()->user()->confirmado){
+            return redirect()->route('unidade-edit', ['id' => $unidade->id])
+                ->with('success', 'Unidade atualizada com sucesso.');
+
+        }else{
+            return redirect()->route('usuario-edit', ['id' => auth()->user()->id])
+                ->with('success', 'Confirme seus dados e altere a senha.');
+        }
 
     }
 }

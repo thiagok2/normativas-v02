@@ -7,13 +7,15 @@
 @stop
 
 @section('content')
-    
-<div class="row">
 
-    <div class="col-lg-3 col-xs-6">
+<div class="container-fluid">
+<div class="row">
+    @include('admin.includes.alerts')
+
+    <div class="col-lg-4">
         <!-- small box -->
         <a href="{{route('publicar')}}">
-            <div class="small-box bg-red">
+            <div class="small-box bg-green">
                 <div class="inner">
                 
                     <h3>Novo</h3>
@@ -24,7 +26,7 @@
                     <i class="ion ion-document-text"></i>
                 </div>
                 <div class="small-box-footer">
-                    Enviar arquivo
+                    Enviar um novo documento
                     <i class="fa fa-arrow-circle-up"></i>
                 </div>
             </div>
@@ -32,55 +34,46 @@
     </div>
     <!-- ./col -->
 
-    <div class="col-lg-3 col-xs-6">
+    <div class="col-lg-4">
         <!-- small box -->
         <a href="{{route('documentos')}}">
             <div class="small-box bg-aqua">
                 <div class="inner">
                     <h3>{{$documentosCount}}</h3>
 
-                    <p>Documentos</p>
+                    <p>Documentos enviados</p>
                 </div>
                 <div class="icon">
                     
                     <i class="ion ion-search"></i>
                 </div>
                 <div class="small-box-footer">
-                    Documentos do seu conselho
+                    Veja os documentos do seu conselho
                     <i class="fa fa-arrow-circle-right"></i>
                 </div>
             </div>
         </a>
     </div>
     <!-- ./col -->
-    <div class="col-lg-3 col-xs-6">
-        <!-- small box -->
-        <div class="small-box bg-green">
-        <div class="inner">
-            <h3>{{$tagCount}}</h3>
-
-            <p>Palavras Chaves</p>
-        </div>
-        <div class="icon">
-            <i class="ion ion-grid"></i>
-        </div>
-        <a href="#" class="small-box-footer"><i class="fa fa-arrow-circle-right"></i></a>
-        </div>
-    </div>
     <!-- ./col -->
-    <div class="col-lg-3 col-xs-6">
+    <div class="col-lg-4">
         <!-- small box -->
-        <div class="small-box bg-yellow">
-            <div class="inner">
-                <h3>{{$usersCount}}</h3>
+        <a href="{{route('usuarios')}}">
+            <div class="small-box bg-yellow">
+                <div class="inner">
+                    <h3>{{$usersCount}}</h3>
 
-                <p>Colaboradores</p>
+                    <p>Colaboradores na sua unidade</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-person-add"></i>
+                </div>
+                <div class="small-box-footer">
+                    Acesse a lista de Colaboradores 
+                    <i class="fa fa-arrow-circle-right"></i>
+                </div>
             </div>
-            <div class="icon">
-                <i class="ion ion-person-add"></i>
-            </div>
-            <a href="#" class="small-box-footer"><i class="fa fa-arrow-circle-right"></i></a>
-        </div>
+        </a>
     </div>
     <!-- ./col -->
 </div>
@@ -189,22 +182,8 @@
             </div>
         </div> <!-- end box -->
     </div> <!-- end col-4 -->
-
-    <!--
-    <div class="col-lg-4">
-        <div class="box box-info">
-            <div class="box-header">
-                <h3 class="box-title">Normativas - Conselhos estaduais</h3>
-            </div>
-
-            <div class="box-body">
-                <div id="uf-chart" style="height: 300px;"></div>
-            </div>
-
-        </div>
-    </div>
-    -->
 </div> <!-- end row-->
+</div>
 
 
 

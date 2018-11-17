@@ -39,7 +39,8 @@ class UserUnidadeConselhoFederalSeeder extends Seeder
             'name' => $nome,
             'email' => $email,
             'password' => $senha,
-            'unidade_id' => $unidade->id
+            'unidade_id' => $unidade->id,
+            'tipo' => 'gestor'
         ]);
 
         $unidade->responsavel()->associate($user);

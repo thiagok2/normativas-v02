@@ -26,15 +26,15 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
 
         $unidade = Unidade::find(auth()->user()->unidade_id);
 
-        //$unidade = auth()->user()->unidade()->get();
-        //echo "xxxxxxxxxxxxxxxxx".$unidade;
-
-
+        if(!auth()->user()->confirmado || !$unidade->confirmado){
+            return redirect()->route('unidade-edit', ['id' => $unidade->id])
+                    ->with('error', 'Confirme os dados da sua unidade.');
+        }
 
         if($unidade){
             $documentos = Documento::with('unidade','tipoDocumento','palavrasChaves')
@@ -65,6 +65,6 @@ class HomeController extends Controller
                      ->get();
 
 
-        return view('home',compact('documentos','documentosCount','usersCount','tagCount','tags','termosPesquisados'));
+        return view('home',compact('documentos','documentosCount','usersCount','tagCount','tags','termosPesquisados','errors'));
     }
 }

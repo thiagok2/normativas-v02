@@ -20,6 +20,8 @@ class DatabaseSeeder extends Seeder
         $this->call(UnidadeConselhosEstaduaisSeeder::class);
         $this->call(UserConselhosEstaduaisSeeder::class);
         $this->call(UserUnidadeConselhoFederalSeeder::class);
+
+        
         
     }
 }

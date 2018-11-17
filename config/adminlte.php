@@ -127,7 +127,7 @@ return [
         ],
         [
             'text'    => 'Glossário',
-            'icon'    => 'share',
+            'icon'    => 'bars',
             'submenu' => [
                 [
                     'text' => 'Tipos de Documentos',
@@ -141,25 +141,16 @@ return [
                 ],
             ]
             ],
-        'Orgãos',
-        [
-            'text'    => 'Orgãos por esfera',
-            'icon'    => 'share',
-            'submenu' => [
-                [
-                    'text' => 'Federal',
-                    'url'  => 'admin/unidades?esfera=Federal',
-                ],
-                [
-                    'text'    => 'Estadual',
-                    'url'     => 'admin/unidades?esfera=Estadual'
-                ],
-                [
-                    'text' => 'Municipal',
-                    'url'  => 'admin/unidades?esfera=Municipal',
-                ],
+            [
+                'text'    => 'Unidade',
+                'icon'    => 'university',
+                'url'     => 'admin/unidades' 
             ],
-        ]
+            [
+                'text'    => 'Perfil',
+                'icon'    => 'users',
+                'url'     => 'admin/usuarios' 
+            ]
     ],
 
     /*

@@ -136,34 +136,26 @@
             <div class="panel-body">
                 <a href="/admin/unidades/adicionar/colaborador" class="btn btn-primary btn-lg" value="Fechar">Adicionar Colaborador</a>
             </div>
+            <div class="container">
+                <div class="row">
+                    @forelse ($users as $user)
+                        <div class="col-lg-3">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">{{ $user->name }}</div>
+                                <div class="panel-body">
+                                    {{ $user->email }}
+                                    {{ $user->tipo }}
+                                    {{ $user->created_at }}
+                                    {{ $user->confirmado }}
 
-            <div class="row">
-                <div class="col-lg-12">
-                    <table class="table table-striped table-hover table-condensed">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Nome</th>
-                                <th>Email</th>
-                                <th>Criado</th>
-                                <th>Confirmado</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @forelse ($users as $user)
-                            <td>{{ $loop->index + 1 }}</td>
-                            <td>{{ $user->name }}</td>
-                            <td>{{ $user->email }}</td>
-                            <td>{{ $user->created_at }}</td>
-                            <td>{{ $user->confirmado }}</td>
-                            @empty
-                            <tr>
-                                <td colspan="5">Sem usuários</td>
-                            </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
+                                </div>
+                            </div>   
+                        </div>
+                    @empty
+                        <h2>Sem usuários</h2>
+                    @endforelse                    
                 </div>
+            </div>
         </div>
 
 

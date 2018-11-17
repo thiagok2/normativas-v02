@@ -18,10 +18,20 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','created_at','updated_at',
+        'name', 'email', 'password','tipo','created_at','updated_at', 'cpf'
     ];
 
     public $timestamps = true;
+
+
+    public function isAdmin(){
+        return $this->tipo == 'admin';
+    }
+
+    public function isGestor(){
+        return $this->tipo == 'gestor';
+    }
+
 
     /**
      * The attributes that should be hidden for arrays.

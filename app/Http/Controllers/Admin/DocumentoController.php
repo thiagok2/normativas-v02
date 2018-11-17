@@ -37,8 +37,11 @@ class DocumentoController extends Controller
 
 
     public function index(){
+        $unidade = auth()->user()->unidade;
 
-        $documentos = Documento::with('tipoDocumento','user')->simplePaginate(20);
+        $documentos = Documento::with('tipoDocumento','user')
+            ->where('unidade_id',$unidade->id)
+            ->simplePaginate(20);
 
         return view('admin.documento.index', compact('documentos'));
     }

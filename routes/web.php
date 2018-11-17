@@ -41,6 +41,9 @@ Route::get('/documento/{id}', 'Admin\\DocumentoController@show')->name('document
 Route::delete('/documentos/{id}', 'Admin\\DocumentoController@destroy')->name('delete');
 
 
+Route::get('/admin/usuarios/{id}/editar', 'Admin\\UsuarioController@edit')->name('usuario-edit');
+Route::get('/admin/usuarios', 'Admin\\UsuarioController@index')->name('usuarios');
+Route::post('admin/usuarios', 'Admin\\UsuarioController@store')->name('usuario-store');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
