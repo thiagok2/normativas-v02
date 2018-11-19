@@ -143,8 +143,8 @@
             </div>
 
             <div class="box-body no-padding">
-                <div id="myCanvasContainer">
-                    <canvas width="600px" height="250px" id="myCanvas">
+                <div id="myCanvasContainer" class="text-center" style="position:relative;height:300px;">
+                    <canvas style="width:80%; height:80%;"  id="myCanvas">
                         <ul>
                             @foreach ($tags as $t)
                                 <li><a href="https://normativas-dev.herokuapp.com/?query={{$t->tag}}" target="_blank" data-weight="{{$t->tag_count}}">{{$t->tag}}</a></li>
