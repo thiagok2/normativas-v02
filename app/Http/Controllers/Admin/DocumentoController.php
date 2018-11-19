@@ -146,7 +146,7 @@ class DocumentoController extends Controller
         $documento->palavrasChaves()->delete();
         $documento->delete();
 
-        Storage::delete("uploads/$documento->arquivo");
+        //Storage::delete("uploads/$documento->arquivo");
 
         $params = [
             'index' => 'normativas',

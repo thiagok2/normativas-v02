@@ -13,6 +13,23 @@ class Unidade extends Model
 
     public $timestamps = true;
 
+    public $rules = [
+        'nome' => 'required|string|max:255',
+        'tipo' => 'required|string|max:20',
+        'esfera' => 'required|string|max:20',
+        'sigla' => 'required|string|max:10',
+        'url' => 'nullable|url',
+        'email' => 'required',
+        'telefone' => 'required|string|max:100'
+    ];
+
+    public $messages = [
+        'required' => 'O campo :attribute é obrigatório',
+        'nome.max' => 'O campo :attribute deve ter no máximo 255 caracteres',
+        'sigla.max' => 'O campo :attribute deve ter no máximo 10 caracteres',
+        'telefone.max' => 'O campo :attribute deve ter no máximo 100 caracteres',
+    ];
+
     public function responsavel(){
         return $this->belongsTo(User::class,'responsavel_id');
     }

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 
+use Illuminate\Support\Facades\Validator;
+
 use App\Models\Estado;
 use App\User;
 use App\Models\Unidade;
@@ -27,7 +29,7 @@ class UnidadeController extends Controller
             }
 
             if($nome){
-                $clausulas[] = ['nome', 'like', '%'.strtoupper($nome).'%'];
+                $clausulas[] = ['nome', 'ilike', '%'.strtoupper($nome).'%'];
             }
 
             $unidades = Unidade::orWhere($clausulas)->get();; 
@@ -61,36 +63,50 @@ class UnidadeController extends Controller
 
     public function store(Request $request, Unidade $unidade)
     {
-        DB::beginTransaction();
+        try{
 
-        $primeiroAcesso = is_null($unidade->confirmado_em);
+            $validator = Validator::make($request->all(), $unidade->rules, $unidade->messages);
+             
+            if ($validator->fails()) {
+                 return redirect()->back()->withErrors($validator)->withInput();
+            }
 
-        $unidade = Unidade::find($request->id);
-        $data = $request->all();
+            DB::beginTransaction();
 
-        $unidade->fill($data);
-        $unidade->user()->associate(auth()->user());
-        $unidade->responsavel()->associate(auth()->user());
-        if(!$unidade->confirmado){
-            $unidade->confirmado = true;
-            $unidade->confirmado_em = date("Y-m-d H:i:s");
+            $primeiroAcesso = is_null($unidade->confirmado_em);
+    
+            $unidade = Unidade::find($request->id);
+            $data = $request->all();
+    
+            $unidade->fill($data);
+            $unidade->user()->associate(auth()->user());
+            $unidade->responsavel()->associate(auth()->user());
+            if(!$unidade->confirmado){
+                $unidade->confirmado = true;
+                $unidade->confirmado_em = date("Y-m-d H:i:s");
+    
+            }
+    
+            $unidade->save();
+            DB::commit();
+    
+    
+            if(auth()->user()->confirmado){
+                return redirect()->route('unidade-edit', ['id' => $unidade->id])
+                    ->with('success', 'Unidade atualizada com sucesso.');
+    
+            }else{
+                return redirect()->route('usuario-edit', ['id' => auth()->user()->id])
+                    ->with('success', 'Confirme seus dados e altere a senha.');
+            }
 
+        }catch(\Exception $e){
+
+            DB::rollBack();
+            
+            return redirect()->back()->withInput()->with('error', 'Confirme os dados obrigatórios.');;
         }
-
-        $unidade->save();
-
-
-        DB::commit();
-
-
-        if(auth()->user()->confirmado){
-            return redirect()->route('unidade-edit', ['id' => $unidade->id])
-                ->with('success', 'Unidade atualizada com sucesso.');
-
-        }else{
-            return redirect()->route('usuario-edit', ['id' => auth()->user()->id])
-                ->with('success', 'Confirme seus dados e altere a senha.');
-        }
+       
 
     }
 }

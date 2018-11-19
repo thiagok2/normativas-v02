@@ -150,7 +150,7 @@
             
             </div> <!-- end div-col-container -->
         </div><!-- end row-col_container-->
-        <button type="submit" class="btn btn-primary btn-lg" value="Enviar" onclick="this.form.submit();">Enviar</button>
+        <button type="submit" class="btn btn-primary btn-lg" value="Enviar">Enviar</button>
 
     </form>
     </div> <!--end container ALL 4332-->

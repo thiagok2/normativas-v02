@@ -26,15 +26,17 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="nome">Nome</label>
-                                <input type="text" class="form-control" value="{{ $unidade->nome }}" name="nome">
+                                <label for="nome">Nome*</label>
+                                <input type="text" class="form-control" value="{{ $unidade->nome }}" name="nome"
+                                    required maxlength="255" minlength="10">
                             </div>
                         </div>
         
                         <div class="col-sm-2">
                             <div class="form-group">
-                                <label for="sigla">Sigla</label>
-                                <input type="text" class="form-control" value="{{ $unidade->sigla }}" name="sigla">
+                                <label for="sigla">Sigla*</label>
+                                <input type="text" class="form-control" value="{{ $unidade->sigla }}" name="sigla"
+                                    required minlength="3" maxlength="10">
                             </div>
                         </div>
                     </div>
@@ -42,17 +44,17 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="form-group">
-                                <label for="tipo">Tipo</label>
+                                <label for="tipo">Tipo*</label>
                                 <select class="form-control" required id="tipo" name="tipo">
-                                    <option {{($unidade->tipo == 'Conselho' ? 'selected="selected"':'')}}>Conselho</option>
-                                    <option {{($unidade->tipo == 'Outros' ? 'selected="selected"':'')}}>Outros</option>
+                                    <option value="Conselho" {{($unidade->tipo == 'Conselho' ? 'selected="selected"':'')}}>Conselho</option>
+                                    <option value="Outros" {{($unidade->tipo == 'Outros' ? 'selected="selected"':'')}}>Outros</option>
                                 </select>
                             </div>
                         </div>
         
                         <div class="col-sm-4">
                             <div class="form-group">
-                                <label for="esfera">Esfera</label>
+                                <label for="esfera">Esfera*</label>
                                 <select class="form-control" required id="esfera" name="esfera">
                                     <option {{($unidade->esfera == 'Municipal' ? 'selected="selected"':'')}}>Municipal</option>
                                     <option {{($unidade->esfera == 'Estadual' ? 'selected="selected"':'')}}>Estadual</option>
@@ -66,15 +68,18 @@
                         <div class="col-sm-8">
                             <div class="form-group">
                                 <label for="telefone">Telefone</label>
-                                <input type="text" class="form-control" value="{{ $unidade->telefone }}" name="telefone">
+                                <small class=".text-muted">* (DDD) 0000-0000</b></small>
+                                <input type="text" class="form-control" value="{{ $unidade->telefone }}" name="telefone"
+                                    required maxlength="100" minlength="12">
                             </div>
                         </div>
         
                         <div class="col-sm-8">
                             <div class="form-group">
-                                <label for="email">Email</label>
+                                <label for="email">Email*</label>
                                 <small class=".text-muted">(Separar emails com <b>;(ponto e virgula))</b></small>
-                                <input type="text" class="form-control" value="{{ $unidade->email }}" name="email">
+                                <input type="text" class="form-control" value="{{ $unidade->email }}" name="email"
+                                    required maxlength="255">
                             </div>
                         </div>
                     </div>
@@ -89,7 +94,8 @@
                                         <span class="glyphicon glyphicon-globe">
                                         </span>
                                     </span>
-                                    <input type='url' class="form-control" id="url" name="url" value="{{ $unidade->url }}" maxlength="255"/>
+                                    <input type='url' class="form-control" id="url" name="url" value="{{ $unidade->url }}" 
+                                        maxlength="255"/>
                                 </div>
                             </div>
                         </div>
@@ -143,10 +149,13 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">{{ $user->name }}</div>
                                 <div class="panel-body">
-                                    {{ $user->email }}
+                                    Email: {{ $user->email }}
+                                    <br/>
                                     {{ $user->tipo }}
-                                    {{ $user->created_at }}
-                                    {{ $user->confirmado }}
+                                    <br/>
+                                    Criação: {{ $user->created_at }}
+                                    <br/>
+                                    Confirmação: {{ $user->confirmado_em }}
 
                                 </div>
                             </div>   

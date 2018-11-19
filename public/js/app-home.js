@@ -2,7 +2,7 @@
 $(function () {
   try {
 
-    var elementsExists = document.getElementById('myCanvasContainer') && document.getElementById('myCanvasContainer2');
+    var elementsExists = document.getElementById('myCanvasContainer');
 
     if (elementsExists) {
       TagCanvas.textColour = '#363636';
@@ -13,15 +13,14 @@ $(function () {
       TagCanvas.zoom = 1.1;
       TagCanvas.Start('myCanvas');
 
-      TagCanvas.textColour = '#8B2500';
-      TagCanvas.outlineColour = '#ffdd99';
-      TagCanvas.weight = true;
-      TagCanvas.weightFrom = 'data-weight';
-      TagCanvas.wheelZoom = false;
-      TagCanvas.zoom = 1.1;
-      TagCanvas.Start('myCanvas2');
+      // TagCanvas.textColour = '#8B2500';
+      // TagCanvas.outlineColour = '#ffdd99';
+      // TagCanvas.weight = true;
+      // TagCanvas.weightFrom = 'data-weight';
+      // TagCanvas.wheelZoom = false;
+      // TagCanvas.zoom = 1.1;
+      // TagCanvas.Start('myCanvas2');
     }
-
 
 
 

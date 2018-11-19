@@ -17,7 +17,7 @@
     <div class="row">
         <div class="col-lg-8">
             <div class="panel panel-default">
-                <div class="panel-heading">Atualizar cadastro</div>
+                <div class="panel-heading">Atualizar cadastro de usuário</div>
                 <div class="panel-body">
                     <form name="form" id="form" method="post" action="{{route('usuario-store')}}">
                         {!! csrf_field() !!}
@@ -26,8 +26,9 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="nome">Nome</label>
-                                    <input type="text" class="form-control" value="{{ $user->name }}" name="name">
+                                    <label for="nome">Nome*</label>
+                                    <input type="text" class="form-control" value="{{ $user->name }}" name="name"
+                                        required maxlength="255" minlength="10">
                                 </div>
                             </div>
                         </div>
@@ -55,21 +56,23 @@
                         <div class="row">
                             <div class="col-sm-8">
                                 <div class="form-group">
-                                    <label for="email">Email</label>
+                                    <label for="email">Email*</label>
                                     <small class=".text-muted"></small>
                                     <div class='input-group'>
                                         <span class="input-group-addon">
                                             <span class="fa fa-envelope-o">
                                             </span>
                                         </span>
-                                        <input type='email' class="form-control" id="email" name="email" value="{{ $user->email }}" maxlength="255"/>
+                                        <input type='email' class="form-control" id="email" name="email" value="{{ $user->email }}" maxlength="255"
+                                            required/>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
-                                    <label for="cpf">CPF</label>
-                                    <input type="text" class="form-control" value="{{ $user->cpf}}" name="cpf">
+                                    <label for="cpf">CPF*</label>
+                                    <input type="text" class="form-control" value="{{ $user->cpf}}" name="cpf" 
+                                        required/>
                                 </div>
                             </div>
                         </div>
@@ -77,14 +80,15 @@
                         <div class="row">
                             <div class="col-sm-8">
                                 <div class="form-group">
-                                    <label for="email2">Confirmar email</label>
+                                    <label for="email_confirmation">Confirmar email*</label>
                                     <small class=".text-muted"></small>
                                     <div class='input-group'>
                                         <span class="input-group-addon">
                                             <span class="fa fa-envelope-o">
                                             </span>
                                         </span>
-                                        <input type='email' class="form-control" id="email2" name="email2" maxlength="255"/>
+                                        <input type='email' class="form-control" id="email_confirmation" name="email_confirmation" maxlength="255"
+                                            required/>
                                     </div>
                                 </div>
                             </div>
@@ -93,17 +97,17 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="password">Senha</label>
+                                    <label for="password">Senha*</label>
                                     <small class=".text-muted"></small>
-                                    <input type="password" class="form-control" name="password">
+                                    <input type="password" class="form-control" name="password" id="password" required minlength="6" maxlength="12">
                                 </div>
                             </div>
                         </div>    
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="password2">Confirmar senha</label>
-                                    <input type="password" class="form-control" name="password2">
+                                    <label for="password_confirmation">Confirmar senha*</label>
+                                    <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" required minlength="6" maxlength="12">
                                 </div>
                             </div>
                         </div>

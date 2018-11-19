@@ -13,14 +13,25 @@
 </ol>
 @include('admin.includes.alerts')
 <div class="container">
-    @if (auth()->user()->isAdmin() || auth()->user()->isGestor())
-        <div class="row">
-            <div class="col-lg-8">
+    <div class="row">
+        @if (auth()->user()->isAdmin() || auth()->user()->isGestor())
+            
+            <div class="col-lg-2">
                 <a href="/" class="btn btn-primary btn-lg">Novo colaborador</a>
                 <p>
             </div>
-        </div>
-    @endif
+        
+        @endif
+        @if (auth()->user()->isAdmin())
+            
+            <div class="col-lg-2">
+                <a href="{{route('usuario-search')}}" class="btn btn-primary btn-lg">Pesquisar</a>
+                    <p>
+            </div>
+            
+        @endif
+    </div>
+
     
     <div class="row">
         <div class="col-lg-8">

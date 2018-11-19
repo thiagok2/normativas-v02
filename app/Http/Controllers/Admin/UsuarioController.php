@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Documento;
 
+use Illuminate\Support\Facades\Validator;
+
 class UsuarioController extends Controller
 {
 
@@ -33,33 +35,71 @@ class UsuarioController extends Controller
         return view('admin.usuario.edit', compact('user'));
     }
 
+    public function search(Request $request){
+        $usuarios = User::with('unidade')->simplePaginate(20);
+
+        $q = $request->q;
+
+        if($q){
+            $usuarios = User::with('unidade')
+                ->orWhere('name','ilike', '%'.$q.'%')
+                ->orWhere('email','ilike', '%'.$q.'%')
+            ->simplePaginate(20);
+        }else{
+            $q = '';
+            $usuarios = User::with('unidade')->simplePaginate(20);
+        }
+        
+        return view('admin.usuario.search', compact('usuarios','q'));
+    }
+
 
     public function store(Request $request, User $user){
-        DB::beginTransaction();
+        
+        try{
 
-        $user = User::find($request->id);
+            $validator = Validator::make($request->all(), [
+                'name' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|confirmed',
+                'password' => 'required|string|min:6|confirmed',
+            ]);
 
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
 
-        $primeiroAcesso = is_null($user->confirmado_em);
+            DB::beginTransaction();
 
+            $user = User::find($request->id);
+            $primeiroAcesso = is_null($user->confirmado_em);
+    
+    
+            $data = $request->all();
+            $user->fill($data);
+            $user->password =  Hash::make($data['password']);
+    
+            if(!$user->confirmado){
+                $user->confirmado = true;
+                $user->confirmado_em = date("Y-m-d H:i:s");
+            }
+    
+            $user->save();
+            DB::commit();
+    
+            if($primeiroAcesso){
+                return redirect()->route('home')
+                    ->with(['success'=> 'Cadastro concluído com sucesso. Agora você já pode enviar os documentos do seu conselho.']);
+            }else{
+                return redirect()->route('home');
+            }
+        }catch(\Exception $e){
+            DB::rollBack();
 
-        $data = $request->all();
-
-        $user->fill($data);
-        $user->password =  Hash::make($data['password']);
-
-        if(!$user->confirmado){
-            $user->confirmado = true;
-            $user->confirmado_em = date("Y-m-d H:i:s");
+            return redirect()
+			    ->back()
+			    ->with('error', $e->getMessage());
         }
-
-        $user->save();
-        DB::commit();
-
-        if($primeiroAcesso){
-            return redirect()->route('home')
-                ->with(['success'=> 'Cadastro concluído com sucesso.']);
-        }
+        
        
     }
 }

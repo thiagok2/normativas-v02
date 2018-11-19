@@ -136,7 +136,7 @@
 </div>
 
 <div class="row">
-    <div class="col-lg-6">
+    <div class="col-lg-12 ">
         <div class="box box-success">
             <div class="box-header">
                 <h3 class="box-title">Palavras chaves mais referências nos documentos</h3>
@@ -144,7 +144,7 @@
 
             <div class="box-body no-padding">
                 <div id="myCanvasContainer">
-                    <canvas width="400px" height="250px" id="myCanvas">
+                    <canvas width="600px" height="250px" id="myCanvas">
                         <ul>
                             @foreach ($tags as $t)
                                 <li><a href="https://normativas-dev.herokuapp.com/?query={{$t->tag}}" target="_blank" data-weight="{{$t->tag_count}}">{{$t->tag}}</a></li>
@@ -157,31 +157,7 @@
                 
             </div>
         </div> <!-- end box -->
-    </div> <!-- end col-6 -->
-
-
-    <div class="col-lg-6">
-        <div class="box box-danger">
-            <div class="box-header">
-                <h3 class="box-title">Termos mais pesquisadas</h3>
-            </div>
-
-            <div class="box-body no-padding">
-                <div id="myCanvasContainer2">
-                    <canvas width="400px" height="250px" id="myCanvas2">
-                        <ul>
-                            @foreach ($termosPesquisados as $t)
-                                <li><a href="https://normativas-dev.herokuapp.com/?query={{$t->tag}}" target="_blank" data-weight="{{$t->tag_count}}">{{$t->tag}}</a></li>
-                            @endforeach
-                        </ul>
-                    </canvas>
-                </div>
-            </div>
-            <div class="box-footer">
-                
-            </div>
-        </div> <!-- end box -->
-    </div> <!-- end col-4 -->
+    </div> <!-- end col-12 -->
 </div> <!-- end row-->
 </div>
 
