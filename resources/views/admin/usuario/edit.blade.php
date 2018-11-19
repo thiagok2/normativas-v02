@@ -71,8 +71,8 @@
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="cpf">CPF*</label>
-                                    <input type="text" class="form-control" value="{{ $user->cpf}}" name="cpf" 
-                                        required/>
+                                    <input type="text" class="form-control cpf" value="{{ $user->cpf}}" name="cpf"
+                                        required maxlength="15" min="12"/>
                                 </div>
                             </div>
                         </div>
