@@ -45,7 +45,7 @@
                         <thead>  
                         <tbody>
                             
-                                @foreach ($documentos as $doc)
+                                @forelse ($documentos as $doc)
                                 <tr>
                                     <td>{{$loop->index + 1}}</td>
                                     <td>{{$doc->ano}}</td>
@@ -69,7 +69,13 @@
                                        
                                     </td>
                                 </tr>
-                                @endforeach
+                                @empty
+                                    <tr>
+                                        <td colspan="9">
+                                            <span class="no-results">Sem documentos enviados</span>
+                                        </td>
+                                    </tr>
+                                @endforelse
 
                         </tbody>
                     </table>

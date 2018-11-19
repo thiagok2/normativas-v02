@@ -128,7 +128,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Documentos enviados</div>
                 <div class="panel-body">
-                    <table class="table table-condensed table-hover">
+                    <table class="table table-striped table-hover">
                         <thead>
                             <tr>
                                 <th style="width: 1%">#</th>
@@ -145,7 +145,7 @@
                         <thead>  
                         <tbody>
                             
-                                @foreach ($documentos as $doc)
+                                @forelse ($documentos as $doc)
                                 <tr>
                                     <td>{{$loop->index + 1}}</td>
                                     <td>{{$doc->ano}}</td>
@@ -169,7 +169,13 @@
                                         </a>
                                     </td>
                                 </tr>
-                                @endforeach
+                                @empty
+                                    <tr>
+                                        <td colspan="10">
+                                            <span class="no-results">Sem documentos enviados</span>
+                                        </td>
+                                    </tr>
+                                @endforelse
 
                         </tbody>
                     </table>
