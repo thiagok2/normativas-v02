@@ -64,17 +64,17 @@
                 </div><!-- end row -->
 
                 <div class="row">
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="tipo_documento">Tipo Documento*</label>
-                            <select class="form-control" required id="tipo_documento_id" name="tipo_documento_id">
-                                <option>Selecione</option>
-                                @foreach ($tiposDocumento as $tipo)
-                                    <option value="{{$tipo->id}}">{{$tipo->nome}}</option>
-                                @endforeach
-                            </select>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="tipo_documento">Tipo Documento*</label>
+                                <select class="form-control" required id="tipo_documento_id" name="tipo_documento_id">
+                                    <option>Selecione</option>
+                                    @foreach ($tiposDocumento as $tipo)
+                                        <option value="{{$tipo->id}}">{{$tipo->nome}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
-                    </div>
         
                     <div class="col-sm-4">
                         <div class="form-group">

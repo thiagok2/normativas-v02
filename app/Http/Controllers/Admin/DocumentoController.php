@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
 use App\Http\Controllers\Controller;
 use App\Models\TipoDocumento;
 use App\Models\Assunto;
 use App\Models\Documento;
 use App\Models\PalavraChave;
 use Illuminate\Support\Facades\DB;
-use App\Http\Requests\Admin\DocumentoResquest;
 use Illuminate\Support\Facades\Storage;
 
 use Elasticsearch\Client;
@@ -51,14 +52,22 @@ class DocumentoController extends Controller
         $unidade = auth()->user()->unidade;
 
         $tiposDocumento = TipoDocumento::all();
+
         $assuntos = Assunto::all();  
 
         return view('admin.documento.create', compact('unidade','tiposDocumento',  'assuntos'));
     }
 
-    public function store(DocumentoResquest $request, Documento $documento){
+    public function store(Request $request, Documento $documento){
 
         try{
+
+            $validator = Validator::make($request->all(), $documento->rules, $documento->messages);
+             
+            if ($validator->fails()) {
+                 return redirect()->back()->withErrors($validator)->withInput();
+            }
+
             $data= $request->all();
          
             $documento = new Documento();
@@ -151,7 +160,7 @@ class DocumentoController extends Controller
         $params = [
             'index' => 'normativas',
             'type'  => '_doc',
-            'id'    => $documento->numero,
+            'id'    => $documento->arquivo,
         ];
         
         // Delete doc at /my_index/my_type/my_id
