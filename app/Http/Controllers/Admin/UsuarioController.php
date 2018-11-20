@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\Documento;
 
 use Illuminate\Support\Facades\Validator;
+use App\Models\Convite;
 
 class UsuarioController extends Controller
 {
@@ -88,7 +89,7 @@ class UsuarioController extends Controller
     
             if($primeiroAcesso){
                 return redirect()->route('home')
-                    ->with(['success'=> 'Cadastro concluído com sucesso. Agora você já pode enviar os documentos do seu conselho.']);
+                    ->with(['success'=> 'Cadastro concluído com sucesso. Agora você já pode enviar novos documentos do seu conselho.']);
             }else{
                 return redirect()->route('home');
             }
@@ -101,5 +102,58 @@ class UsuarioController extends Controller
         }
         
        
+    }
+
+    public function convidar(Request $request){
+        return view('admin.usuario.create');
+    } 
+
+    public function create(Request $request, User $user){
+
+
+        try{
+
+            $validator = Validator::make($request->all(), [
+                'name' => 'required|string|max:255',
+                'tipo' => 'required|string|max:20',
+                'email' => 'required|string|email|unique:users|max:255'
+            ]);
+
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
+            
+            DB::beginTransaction();
+
+            $user = new User();
+            $data = $request->all();
+            $user->fill($data);
+
+
+            $passwordRandom = bin2hex(openssl_random_pseudo_bytes(4));
+            $user->password = Hash::make($passwordRandom);
+            $user->unidade()->associate(auth()->user()->unidade);
+
+            $convite = new Convite();
+
+            $convite->enviarNovoUsuario($user, $passwordRandom);
+            $user->save();
+            DB::commit();
+
+
+
+            return redirect()->route('home')
+                        ->with(['success'=> "Convite enviado para $user->name($user->email)"]);
+
+        }catch(\Exception $e){
+            DB::rollBack();
+
+            return redirect()
+			    ->back()
+			    ->with('error', $e->getMessage());
+        }
+
+
+
     }
 }

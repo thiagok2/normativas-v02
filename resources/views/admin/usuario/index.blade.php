@@ -17,7 +17,7 @@
         @if (auth()->user()->isAdmin() || auth()->user()->isGestor())
             
             <div class="col-lg-2">
-                <a href="/" class="btn btn-primary btn-lg">Novo colaborador</a>
+            <a href="{{route('usuario-convidar')}}" class="btn btn-primary btn-lg">Novo colaborador</a>
                 <p>
             </div>
         

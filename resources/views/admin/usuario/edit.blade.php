@@ -97,7 +97,7 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="password">Senha*</label>
+                                    <label for="password">Nova senha*</label>
                                     <small class=".text-muted"></small>
                                     <input type="password" class="form-control" name="password" id="password" required minlength="6" maxlength="12">
                                 </div>
@@ -106,7 +106,7 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="password_confirmation">Confirmar senha*</label>
+                                    <label for="password_confirmation">Confirmar nova senha*</label>
                                     <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" required minlength="6" maxlength="12">
                                 </div>
                             </div>
