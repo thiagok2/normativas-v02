@@ -29,9 +29,8 @@ class DocumentoController extends Controller
     */
     public function __construct()
     {
-        $hosts = [
-            'https://elastic:43YSKv29RNRURDa6XqR3H90n@ba1e2a5961a84002bde6223cdd16d822.sa-east-1.aws.found.io:9243'
-        
+        $hosts = [        
+            env('ELASTIC_URL')
         ];
         $this->client = ClientBuilder::create()->setHosts($hosts)->build();
     }
@@ -42,7 +41,7 @@ class DocumentoController extends Controller
 
         $documentos = Documento::with('tipoDocumento','user')
             ->where('unidade_id',$unidade->id)
-            ->simplePaginate(20);
+            ->simplePaginate(10);
 
         return view('admin.documento.index', compact('documentos'));
     }
@@ -53,7 +52,9 @@ class DocumentoController extends Controller
 
         $tiposDocumento = TipoDocumento::all();
 
-        $assuntos = Assunto::all();  
+        $assuntos = Assunto::all(); 
+
+        //$message = "Acesse: ".env('ELASTIC_URL');
 
         return view('admin.documento.create', compact('unidade','tiposDocumento',  'assuntos'));
     }

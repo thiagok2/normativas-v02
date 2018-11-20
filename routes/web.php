@@ -43,7 +43,10 @@ Route::delete('/documentos/{id}', 'Admin\\DocumentoController@destroy')->name('d
 
 Route::get('/admin/usuarios/{id}/editar', 'Admin\\UsuarioController@edit')->name('usuario-edit');
 Route::get('/admin/usuarios', 'Admin\\UsuarioController@index')->name('usuarios');
+Route::get('/admin/usuarios/convidar', 'Admin\\UsuarioController@convidar')->name('usuario-convidar');
+
 Route::post('admin/usuarios', 'Admin\\UsuarioController@store')->name('usuario-store');
+Route::post('admin/usuarios/create', 'Admin\\UsuarioController@create')->name('usuario-create');
 Route::get('admin/usuarios/pesquisar', 'Admin\\UsuarioController@search')->name('usuario-search');
 Route::post('admin/usuarios/pesquisar', 'Admin\\UsuarioController@search')->name('usuario-search');
 

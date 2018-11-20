@@ -29,8 +29,7 @@ class ElasticsearchServiceProvider extends ServiceProvider
 
 
             $hosts = [
-                'https://elastic:43YSKv29RNRURDa6XqR3H90n@ba1e2a5961a84002bde6223cdd16d822.sa-east-1.aws.found.io:9243'
-            
+                env('ELASTIC_URL')
             ];
 
             return ClientBuilder::create()->setHosts($hosts)->build();

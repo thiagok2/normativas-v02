@@ -31,9 +31,15 @@ class HomeController extends Controller
 
         $unidade = Unidade::find(auth()->user()->unidade_id);
 
-        if(!auth()->user()->confirmado || !$unidade->confirmado){
+        
+        if(!$unidade->confirmado){
             return redirect()->route('unidade-edit', ['id' => $unidade->id])
                     ->with('error', 'Confirme os dados da sua unidade.');
+        }
+
+        if(!auth()->user()->confirmado){
+            return redirect()->route('usuario-edit', ['id' => auth()->user()->id])
+                ->with('success', 'Confirme seus dados e cadastre uma nova senha.');
         }
 
         if($unidade){
