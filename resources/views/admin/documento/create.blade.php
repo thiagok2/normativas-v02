@@ -9,7 +9,7 @@
 @section('content')
 
     <ol class="breadcrumb">
-        <li><a href="../home">Painel</a></li>
+        <li><a href="/">Painel</a></li>
         <li> <a href="#" ><a href="#">Documentos</a></li>
         <li> <a href="#" class="active"><a href="#">Publicar</a></li>
     </ol>

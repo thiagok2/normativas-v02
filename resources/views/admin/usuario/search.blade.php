@@ -54,7 +54,11 @@
                                     <td>{{$u->email}}</td>
                                     <td>{{$u->unidade->nome}}</td>
                                     <td>{{$u->confirmado_em}}</td>
-                                    <td></td>
+                                    <td>
+                                        @if (auth()->user()->id != $u->id && (auth()->user()->isGestor() || auth()->user()->isAdmin()))
+                                            <a href="{{route('usuario-reconvidar',$u->id)}}" class="btn btn-primary ">Enviar convite</a>    
+                                        @endif
+                                    </td>
                                 </tr>
                                 @empty
 

@@ -8,7 +8,7 @@
 
 @section('content')
     <ol class="breadcrumb">
-        <li><a href="../home">Painel</a></li>
+        <li><a href="/">Painel</a></li>
         <li> <a href="#" class="active"><a href="#">Assuntos</a></li>
     </ol>
     <div class="page-header">

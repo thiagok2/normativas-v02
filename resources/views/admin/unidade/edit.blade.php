@@ -18,6 +18,12 @@
         <div class="panel panel-default">
             <div class="panel-heading">Atualizar Unidade</div>
             <div class="panel-body">
+
+            @if (auth()->user()->isGestor() || auth()->user()->isAdmin())
+                <p>
+                <a href="{{route('usuario-convidar')}}"  class="btn btn-primary btn-lg" value="Fechar">Adicionar Colaborador</a>
+                </p>
+            @endif
             <form name="form" id="form" method="post" action="{{route('unidade-store')}}">
                     {!! csrf_field() !!}
                     <input type="hidden" value="{{ $unidade->id }}" name="id">
@@ -140,29 +146,34 @@
         <div class="panel panel-default">
             <div class="panel-heading">Colaboradores</div>
             <div class="panel-body">
-                <a href="/admin/unidades/adicionar/colaborador" class="btn btn-primary btn-lg" value="Fechar">Adicionar Colaborador</a>
-            </div>
-            <div class="container">
-                <div class="row">
-                    @forelse ($users as $user)
-                        <div class="col-lg-3">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">{{ $user->name }}</div>
-                                <div class="panel-body">
-                                    Email: {{ $user->email }}
-                                    <br/>
-                                    {{ $user->tipo }}
-                                    <br/>
-                                    Criação: {{ $user->created_at }}
-                                    <br/>
-                                    Confirmação: {{ $user->confirmado_em }}
+                @if (auth()->user()->isGestor() || auth()->user()->isAdmin())
+                    <p>
+                    <a href="{{route('usuario-convidar')}}"  class="btn btn-primary btn-lg" value="Fechar">Adicionar Colaborador</a>
+                    </p>
+                @endif
+                
+                <div class="container">
+                    <div class="row">
+                        @forelse ($users as $user)
+                            <div class="col-lg-3">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">{{ $user->name }}</div>
+                                    <div class="panel-body">
+                                        Email: {{ $user->email }}
+                                        <br/>
+                                        {{ $user->tipo }}
+                                        <br/>
+                                        Criação: {{ $user->created_at }}
+                                        <br/>
+                                        Confirmação: {{ $user->confirmado_em }}
 
-                                </div>
-                            </div>   
-                        </div>
-                    @empty
-                        <h2>Sem usuários</h2>
-                    @endforelse                    
+                                    </div>
+                                </div>   
+                            </div>
+                        @empty
+                            <h2>Sem usuários</h2>
+                        @endforelse                    
+                    </div>
                 </div>
             </div>
         </div>
