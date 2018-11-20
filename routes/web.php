@@ -13,41 +13,46 @@ use Illuminate\Support\Facades\Redirect;
 |
 */
 
+
 Route::get('/', function () {
     return redirect('login');
+});
+
+Route::prefix('admin')->middleware('auth')->namespace('Admin')->group(function(){
+    Route::get('convites', 'ConviteController@index')->name('convites');
+
+    Route::get('unidades', 'UnidadeController@index')->name('unidades');
+    Route::post('unidades', 'UnidadeController@store')->name('unidade-store');
+    
+    Route::get('unidades/{id}/edit', 'UnidadeController@edit')->name('unidade-edit');
+    
+    Route::get('tiposdocumento', 'TipoDocumentoController@index')->name('tiposdocumento');
+    Route::get('assuntos', 'AssuntoController@index')->name('Assuntos');
+    Route::get('documentos', 'DocumentoController@index')->name('documentos');
+    
+    Route::get('documentos/publicar', 'DocumentoController@create')->name('publicar');
+    Route::post('documentos/publicar', 'DocumentoController@store')->name('enviar');
+    
+    Route::get('documento/{id}', 'DocumentoController@show')->name('documento');
+    Route::delete('documentos/{id}', 'DocumentoController@destroy')->name('delete');
+    
+    
+    Route::get('usuarios/{id}/editar', 'UsuarioController@edit')->name('usuario-edit');
+    Route::get('usuarios', 'UsuarioController@index')->name('usuarios');
+    Route::get('usuarios/convidar', 'UsuarioController@convidar')->name('usuario-convidar');
+    Route::get('usuarios/reenviar-convite/{id}', 'UsuarioController@reenviarConvite')->name('usuario-reconvidar');
+    
+    Route::post('usuarios', 'UsuarioController@store')->name('usuario-store');
+    Route::post('usuarios/create', 'UsuarioController@create')->name('usuario-create');
+    Route::get('usuarios/pesquisar', 'UsuarioController@search')->name('usuario-search');
+    Route::post('usuarios/pesquisar', 'UsuarioController@search')->name('usuario-search');
+    Route::get('usuarios/delete/{id}', 'UsuarioController@destroy')->name('usuario-delete');
 });
 
 
 Auth::routes();
 
-Route::get('/admin/convites', 'Admin\\ConviteController@index')->name('convites');
 
-Route::get('/admin/unidades', 'Admin\\UnidadeController@index')->name('unidades');
-Route::post('/admin/unidades', 'Admin\\UnidadeController@store')->name('unidade-store');
-
-Route::get('/admin/unidades/{id}/edit', 'Admin\\UnidadeController@edit')->name('unidade-edit');
-
-Route::get('/admin/tiposdocumento', 'Admin\\TipoDocumentoController@index')->name('tiposdocumento');
-Route::get('/admin/assuntos', 'Admin\\AssuntoController@index')->name('Assuntos');
-Route::get('/admin/documentos', 'Admin\\DocumentoController@index')->name('documentos');
-
-Route::get('/admin/documentos/publicar', 'Admin\\DocumentoController@create')->name('publicar');
-Route::post('/admin/documentos/publicar', 'Admin\\DocumentoController@store')->name('enviar');
-
-Route::get('/admin/documento/{id}', 'Admin\\DocumentoController@show')->name('documento');
-Route::delete('/admin/documentos/{id}', 'Admin\\DocumentoController@destroy')->name('delete');
-
-
-Route::get('/admin/usuarios/{id}/editar', 'Admin\\UsuarioController@edit')->name('usuario-edit');
-Route::get('/admin/usuarios', 'Admin\\UsuarioController@index')->name('usuarios');
-Route::get('/admin/usuarios/convidar', 'Admin\\UsuarioController@convidar')->name('usuario-convidar');
-Route::get('/admin/usuarios/reenviar-convite/{id}', 'Admin\\UsuarioController@reenviarConvite')->name('usuario-reconvidar');
-
-Route::post('/admin/usuarios', 'Admin\\UsuarioController@store')->name('usuario-store');
-Route::post('/admin/usuarios/create', 'Admin\\UsuarioController@create')->name('usuario-create');
-Route::get('/admin/usuarios/pesquisar', 'Admin\\UsuarioController@search')->name('usuario-search');
-Route::post('/admin/usuarios/pesquisar', 'Admin\\UsuarioController@search')->name('usuario-search');
-Route::get('/admin/usuarios/delete/{id}', 'Admin\\UsuarioController@destroy')->name('usuario-delete');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
