@@ -112,10 +112,18 @@
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-primary btn-lg" value="Atualizar">Atualizar</button>
-                        @if ($user->confirmado)
-                            <a href="/" class="btn btn-danger btn-lg" value="Fechar">Fechar</a>
-                        @endif
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <button type="submit" class="btn btn-primary btn-lg" value="Atualizar">Atualizar</button>
+                                @if ($user->confirmado)
+                                    <a href="/" class="btn btn-danger btn-lg" value="Fechar">Fechar</a>
+                                @endif
+                            </div>
+                        
+                        </div>
+
+                       
+
                        
 
                     </form>

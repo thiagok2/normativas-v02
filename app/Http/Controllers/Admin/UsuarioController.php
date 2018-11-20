@@ -141,9 +141,8 @@ class UsuarioController extends Controller
             DB::commit();
 
 
-
             return redirect()->route('home')
-                        ->with(['success'=> "Convite enviado para $user->name($user->email)"]);
+                        ->with(['success'=> "Convite enviado para $user->name($user->email)."]);
 
         }catch(\Exception $e){
             DB::rollBack();
@@ -153,7 +152,53 @@ class UsuarioController extends Controller
 			    ->with('error', $e->getMessage());
         }
 
+    }
+
+    public function reenviarConvite(Request $request, $id){
+
+        try{
+            DB::beginTransaction();
+
+            $user = User::with('unidade')->find($id);
+
+            $passwordRandom = bin2hex(openssl_random_pseudo_bytes(4));
+            $user->password = Hash::make($passwordRandom);
+
+            $convite = new Convite();
+
+            $convite->enviarNovoUsuario($user, $passwordRandom);
+            $user->save();
+
+            return redirect()->route('usuarios')
+                ->with(['success'=> "Novo convite enviado para $user->name($user->email)."]);
+
+            DB::commit();
+        }catch(\Exception $e){
+            DB::rollBack();
+
+            return redirect()
+			    ->back()
+			    ->with('error', $e->getMessage());
+        }
+        
+    }
+
+    public function destroy($id){
+        $user = User::find($id);
+
+        if(!$user->confirmado){
+            $user->delete();
+        
+            return redirect()->route('usuarios')
+                        ->with(['success'=> "Usuário removido com sucesso"]);
+        }else{
+            return redirect()
+                ->back()
+                ->with('error', 'O usuário já confirmou seu cadastro. Não pode ser removido.');
+        }
 
 
+
+        
     }
 }

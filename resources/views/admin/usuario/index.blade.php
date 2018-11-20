@@ -91,12 +91,21 @@
 
                     <div class="row">
                         <div class="col-sm-12">
-                            @if (auth()->user()->id == $user->id)
-                            <a href="{{route('usuario-edit',$user->id)}}" class="btn btn-primary btn-lg pull-left">Editar</a>    
-                            @endif
-                            
-                            
-                            <a href="/" class="btn btn-primary btn-lg pull-right" value="Fechar">Fechar</a>
+                            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                                @if (auth()->user()->id == $user->id)
+                                    <a href="{{route('usuario-edit',$user->id)}}" class="btn btn-primary btn-lg ">Editar</a>    
+                                @endif
+                                @if (auth()->user()->id != $user->id && (auth()->user()->isGestor() || auth()->user()->isAdmin()))
+                                    <a href="{{route('usuario-reconvidar',$user->id)}}" class="btn btn-primary btn-lg ">Enviar novo convite</a>    
+                                @endif
+
+                                @if (auth()->user()->id != $user->id  && !$user->confirmado &&
+                                        (auth()->user()->isGestor() || auth()->user()->isAdmin()))
+                                    <a href="{{route('usuario-delete',$user->id)}}" class="btn btn-primary btn-lg ">Excluir</a>    
+                                @endif
+                                
+                                <a href="/" class="btn btn-primary btn-lg" value="Fechar">Fechar</a>
+                            </div>
                         </div>
                     </div>
                 </div><!-- end panel-body-->
@@ -115,6 +124,13 @@
                                     {{$u->email}}
                                     <span class="badge pull-right">{{$u->tipo}}</span>
                                 </p>
+                                
+                                @if (!$u->confirmado)
+                                    <p>
+                                        <span class="badge pull-left">Não confirmado</span>
+                                    </p>
+                                @endif
+                                
                             </a>
                         @endforeach
                     </div>
