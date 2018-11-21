@@ -11,6 +11,7 @@ use App\Models\Documento;
 
 use Illuminate\Support\Facades\Validator;
 use App\Models\Convite;
+use App\Models\Unidade;
 
 class UsuarioController extends Controller
 {
@@ -105,7 +106,17 @@ class UsuarioController extends Controller
     }
 
     public function convidar(Request $request){
-        return view('admin.usuario.create');
+
+        if(auth()->user()->isGestor())
+            $unidadeId = auth()->user()->unidade_id;
+        else if(auth()->user()->isAdmin()){
+            $unidadeId = $request->query('unidade_id');
+        }
+
+        $unidade = Unidade::find($unidadeId);
+
+
+        return view('admin.usuario.create', compact('unidade'));
     } 
 
     public function create(Request $request, User $user){
@@ -132,7 +143,14 @@ class UsuarioController extends Controller
 
             $passwordRandom = bin2hex(openssl_random_pseudo_bytes(4));
             $user->password = Hash::make($passwordRandom);
-            $user->unidade()->associate(auth()->user()->unidade);
+
+            if(auth()->user()->isGestor()){
+                $user->unidade()->associate(auth()->user()->unidade);
+            }else if(auth()->user()->isAdmin()){
+                $user->unidade_id = $request->unidadeId;
+            }
+
+            
 
             $convite = new Convite();
 

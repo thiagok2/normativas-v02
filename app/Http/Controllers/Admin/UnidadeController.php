@@ -79,8 +79,10 @@ class UnidadeController extends Controller
             $data = $request->all();
     
             $unidade->fill($data);
-            $unidade->user()->associate(auth()->user());
+            
+            
             $unidade->responsavel()->associate(auth()->user());
+            
             if(!$unidade->confirmado){
                 $unidade->confirmado = true;
                 $unidade->confirmado_em = date("Y-m-d H:i:s");

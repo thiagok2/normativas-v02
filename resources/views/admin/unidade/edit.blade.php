@@ -19,12 +19,18 @@
             <div class="panel-heading">Atualizar Unidade</div>
             <div class="panel-body">
 
-            @if (auth()->user()->isGestor() || auth()->user()->isAdmin())
-                <p>
-                <a href="{{route('usuario-convidar')}}"  class="btn btn-primary btn-lg" value="Fechar">Adicionar Colaborador</a>
-                </p>
-            @endif
-            <form name="form" id="form" method="post" action="{{route('unidade-store')}}">
+                @if ( auth()->user()->isAdmin())
+                    <p>
+                        <a href="{{route('usuario-convidar',['unidade_id'=>$unidade->id])}}"  class="btn btn-primary btn-lg" value="Fechar">Adicionar Colaborador</a>
+                    </p>
+                @endif
+
+                @if (auth()->user()->isGestor())
+                    <p>
+                        <a href="{{route('usuario-convidar')}}"  class="btn btn-primary btn-lg" value="Fechar">Adicionar Colaborador</a>
+                    </p>
+                @endif
+                <form name="form" id="form" method="post" action="{{route('unidade-store')}}">
                     {!! csrf_field() !!}
                     <input type="hidden" value="{{ $unidade->id }}" name="id">
                     <input type="hidden" value="{{ $unidade->estado_id }}" name="estado_id">
@@ -146,9 +152,15 @@
         <div class="panel panel-default">
             <div class="panel-heading">Colaboradores</div>
             <div class="panel-body">
-                @if (auth()->user()->isGestor() || auth()->user()->isAdmin())
+                @if ( auth()->user()->isAdmin())
                     <p>
-                    <a href="{{route('usuario-convidar')}}"  class="btn btn-primary btn-lg" value="Fechar">Adicionar Colaborador</a>
+                        <a href="{{route('usuario-convidar',['unidade_id'=>$unidade->id])}}"  class="btn btn-primary btn-lg" value="Fechar">Adicionar Colaborador</a>
+                    </p>
+                @endif
+
+                @if (auth()->user()->isGestor())
+                    <p>
+                        <a href="{{route('usuario-convidar')}}"  class="btn btn-primary btn-lg" value="Fechar">Adicionar Colaborador</a>
                     </p>
                 @endif
                 

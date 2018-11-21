@@ -21,6 +21,18 @@
                 <div class="panel-body">
                     <form name="form" id="form" method="post" action="{{route('usuario-create')}}">
                         {!! csrf_field() !!}
+
+                        <input type="hidden" name="unidadeId" id="unidadeId" value="{{$unidade->id}}"/>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="unidade">Unidade</label>
+                                    <input type="text" class="form-control" name="unidade"
+                                            readonly value="{{$unidade->nome}}">
+                                </div>
+                            </div>
+                        </div>
                        
                         <div class="row">
                             <div class="col-sm-12">
