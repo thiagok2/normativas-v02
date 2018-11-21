@@ -42,20 +42,26 @@ class HomeController extends Controller
                 ->with('success', 'Confirme seus dados e cadastre uma nova senha.');
         }
 
-        if($unidade){
+        if(auth()->user()->isAdmin()){
+
             $documentos = Documento::with('unidade','tipoDocumento','palavrasChaves')
-                                ->where('unidade_id',$unidade->id)
-                                ->orderBy('data_envio', 'desc')->take(15)->get();
-                                
-            $documentosCount = Documento::where('unidade_id',$unidade->id)->count();
+                ->orderBy('data_envio', 'desc')->take(10)->get();
+            
+            $documentosCount = Documento::count();  
+            
+            $usersCount = User::count();
+            
         }else{
             $documentos = Documento::with('unidade','tipoDocumento','palavrasChaves')
-                                ->orderBy('data_envio', 'desc')->take(15)->get();
-                                
-            $documentosCount = Documento::count();
+                ->where('unidade_id',$unidade->id)
+                ->orderBy('data_envio', 'desc')->take(10)->get();
+            
+            $documentosCount = Documento::where('unidade_id',$unidade->id)->count();
+
+            $usersCount = User::where('unidade_id', $unidade->id)->count();
         }
 
-        $usersCount = User::where('unidade_id', $unidade->id)->count();
+       
 
 
         $tags = DB::table('palavra_chaves')
@@ -65,12 +71,8 @@ class HomeController extends Controller
 
         $tagCount = DB::table('palavra_chaves')->distinct('tag')->count('tag');
 
-        $termosPesquisados = DB::table('palavra_chaves')
-                     ->select(DB::raw('count(*) as tag_count, tag'))
-                     ->groupBy('tag')->limit(50)
-                     ->get();
 
 
-        return view('home',compact('documentos','documentosCount','usersCount','tagCount','tags','termosPesquisados','errors'));
+        return view('home',compact('documentos','documentosCount','usersCount','tagCount','tags'));
     }
 }
