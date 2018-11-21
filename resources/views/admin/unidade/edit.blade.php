@@ -25,7 +25,7 @@
                     </p>
                 @endif
 
-                @if (auth()->user()->isGestor())
+                @if (auth()->user()->isGestor() && $unidade->confirmado)
                     <p>
                         <a href="{{route('usuario-convidar')}}"  class="btn btn-primary btn-lg" value="Fechar">Adicionar Colaborador</a>
                     </p>
@@ -158,7 +158,7 @@
                     </p>
                 @endif
 
-                @if (auth()->user()->isGestor())
+                @if (auth()->user()->isGestor() && $unidade->confirmado)
                     <p>
                         <a href="{{route('usuario-convidar')}}"  class="btn btn-primary btn-lg" value="Fechar">Adicionar Colaborador</a>
                     </p>
