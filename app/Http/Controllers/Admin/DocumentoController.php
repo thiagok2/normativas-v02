@@ -31,7 +31,7 @@ class DocumentoController extends Controller
     {
 
         $hosts = [        
-            "'".getenv('ELASTIC_URL')."'"
+            getenv('ELASTIC_URL')
         ];
         $this->client = ClientBuilder::create()->setHosts($hosts)->build();
     }
