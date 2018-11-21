@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Models\Unidade;
+use App\User;
 
 class UnidadeDefaultTableSeeder extends Seeder
 {
@@ -13,7 +14,7 @@ class UnidadeDefaultTableSeeder extends Seeder
     public function run()
     {
         DB::table('unidades')->delete();
-        Unidade::create([
+        $unidadeAdmin = Unidade::create([
             'nome' => 'Conselho Normativas', 
             'tipo' => 'Conselho', 
             'esfera' => 'Estadual',
@@ -25,6 +26,10 @@ class UnidadeDefaultTableSeeder extends Seeder
             'responsavel_id' => '1',
             'user_id' => '1',
         ]);
+
+        DB::table('users')
+            ->where('tipo', 'admin')
+            ->update(array('unidade_id' => $unidadeAdmin->id));  
        
     }
 }

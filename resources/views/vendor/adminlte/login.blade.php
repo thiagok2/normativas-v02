@@ -55,6 +55,7 @@
                     <!-- /.col -->
                 </div>
             </form>
+            
             <div class="auth-links">
                 <a href="{{ url(config('adminlte.password_reset_url', 'password/reset')) }}"
                    class="text-center"

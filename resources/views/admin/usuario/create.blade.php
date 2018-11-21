@@ -37,6 +37,9 @@
                                 <div class="form-group">
                                     <label for="tipo">Tipo</label>
                                     <select class="form-control" id="tipo" name="tipo">
+                                        @if (auth()->user()->isAdmin())
+                                            <option value="admin">Administrador</option>
+                                        @endif
                                         <option value="gestor">Gestor</option>
                                         <option value="colaborador">Colaborador</option>
                                     </select>
