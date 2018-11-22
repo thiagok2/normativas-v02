@@ -14,11 +14,24 @@ use Illuminate\Support\Facades\Redirect;
 */
 
 
-Route::get('/', function () {
-    return redirect('login');
-});
+Route::get('/', 'IndexController@index');
 
-//Route::get('home', 'Admin\\HomeController@index');
+//Route::get('home', 'IndexController@index');
+
+Route::match('get', '/normativa/pdf/{normativaId}', [
+    'uses' => 'IndexController@pdfNormativa',
+    'as' => 'pdfNormativa',
+]);
+
+Route::match('get', '/normativa/view/{normativaId}', [
+    'uses' => 'IndexController@viewNormativa',
+    'as' => 'viewNormativa',
+]);
+
+Route::match('get', '/filter', [
+    'uses' => 'IndexController@filter',
+    'as' => 'filterNormativa',
+]);
 
 
 Route::prefix('admin')->middleware('auth')->namespace('Admin')->group(function(){
