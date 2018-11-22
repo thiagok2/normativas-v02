@@ -22,7 +22,7 @@
             <nav class="navbar navbar-static-top">
                 <div class="container">
                     <div class="navbar-header">
-                        <a href="{{ url(config('adminlte.dashboard_url', 'home')) }}" class="navbar-brand">
+                        <a href="{{ url(config('adminlte.dashboard_url', 'admin/home')) }}" class="navbar-brand">
                             {!! config('adminlte.logo', '<b>Admin</b>LTE') !!}
                         </a>
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">

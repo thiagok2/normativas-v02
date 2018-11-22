@@ -8,7 +8,7 @@
 
 @section('content')
 <ol class="breadcrumb">
-    <li><a href="/">Painel</a></li>
+    <li><a href="{{route('home')}}">Painel</a></li>
     <li> <a href="{{route('usuarios')}}" class="active">Usuário</a></li>
 </ol>
 @include('admin.includes.alerts')
@@ -104,7 +104,7 @@
                                     <a href="{{route('usuario-delete',$user->id)}}" class="btn btn-primary btn-lg ">Excluir</a>    
                                 @endif
                                 
-                                <a href="/" class="btn btn-primary btn-lg" value="Fechar">Fechar</a>
+                                <a href="{{route('home')}}" class="btn btn-primary btn-lg" value="Fechar">Fechar</a>
                             </div>
                         </div>
                     </div>

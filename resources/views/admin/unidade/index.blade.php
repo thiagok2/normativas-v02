@@ -9,7 +9,7 @@
 @section('content')
 
     <ol class="breadcrumb">
-        <li><a href="/">Painel</a></li>
+        <li><a href="{{route('home')}}">Painel</a></li>
         <li> <a href="#" class="active"><a href="#">Unidades</a></li>
     </ol>
 

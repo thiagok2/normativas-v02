@@ -17,7 +17,7 @@
     </div>
     <br/>
     <ol class="breadcrumb">
-        <li><a href="/">Painel</a></li>
+        <li><a href="{{route('home')}}">Painel</a></li>
         <li> <a href="{{route('documentos')}}" ><a href="#">Documentos</a></li>
         <li> <a href="#" class="active"><a href="#">Detalhes</a></li>
     </ol>

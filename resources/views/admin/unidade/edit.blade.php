@@ -8,7 +8,7 @@
 
 @section('content')
     <ol class="breadcrumb">
-        <li><a href="/">Painel</a></li>
+        <li><a href="{{route('home')}}">Painel</a></li>
         <li> <a href="#" ><a href="#">Unidade</a></li>
     </ol>
 
@@ -143,7 +143,7 @@
                     </div><!--end row -->
         
                     <button type="submit" class="btn btn-primary btn-lg" value="Atualizar">Atualizar</button>
-                    <a href="/" class="btn btn-danger btn-lg" value="Fechar">Fechar</a>
+                    <a href="{{route('home')}}" class="btn btn-danger btn-lg" value="Fechar">Fechar</a>
                 </form>
             </div><!--end panel-body-->
         </div><!--end panel-->

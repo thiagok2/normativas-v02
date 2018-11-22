@@ -8,7 +8,7 @@
 
 @section('content')
 <ol class="breadcrumb">
-    <li><a href="/">Painel</a></li>
+    <li><a href="{{route('home')}}">Painel</a></li>
     <li> <a href="{{route('usuarios')}}">Usuário</a></li>
     <li> <a href="#">Criar usuário</a></li>
 </ol>

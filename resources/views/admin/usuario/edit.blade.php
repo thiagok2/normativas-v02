@@ -8,7 +8,7 @@
 
 @section('content')
 <ol class="breadcrumb">
-    <li><a href="/">Painel</a></li>
+    <li><a href="{{route('home')}}">Painel</a></li>
     <li> <a href="{{route('unidades')}}">Unidade</a></li>
     <li> <a href="#">Usuário</a></li>
 </ol>
@@ -116,7 +116,7 @@
                             <div class="col-sm-12">
                                 <button type="submit" class="btn btn-primary btn-lg" value="Atualizar">Atualizar</button>
                                 @if ($user->confirmado)
-                                    <a href="/" class="btn btn-danger btn-lg" value="Fechar">Fechar</a>
+                                <a href="{{route('home')}}" class="btn btn-danger btn-lg" value="Fechar">Fechar</a>
                                 @endif
                             </div>
                         

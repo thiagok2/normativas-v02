@@ -18,7 +18,13 @@ Route::get('/', function () {
     return redirect('login');
 });
 
+//Route::get('home', 'Admin\\HomeController@index');
+
+
 Route::prefix('admin')->middleware('auth')->namespace('Admin')->group(function(){
+
+    Route::get('home', 'HomeController@index')->name('home');
+
     Route::get('convites', 'ConviteController@index')->name('convites');
 
     Route::get('unidades', 'UnidadeController@index')->name('unidades');
@@ -54,7 +60,6 @@ Auth::routes();
 
 
 
-Route::get('/home', 'HomeController@index')->name('home');
 
 
 
