@@ -121,11 +121,16 @@ class DocumentoController extends Controller
 
                 $resultElastic = $this->client->index($params);
 
-                DB::commit();
+                if($resultElastic['result'] == 'created'){
+                    DB::commit();
 
+                    return redirect()->route('documento', ['id' => $documento->id])
+                        ->with('success', 'Documento enviado com sucesso.');
+                }else{
+                    throw new Exception((string)$resultElastic);
+                }
 
-                return redirect()->route('documento', ['id' => $documento->id])
-                    ->with('success', 'Documento enviado com sucesso.');
+               
     
             }else{
                 return redirect()
