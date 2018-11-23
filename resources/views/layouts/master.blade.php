@@ -13,6 +13,7 @@
         <link href="/css/theme.min.css" media="all" rel="stylesheet" type="text/css"/>
 
         <link href="/css/app.css" media="all" rel="stylesheet" type="text/css"/>
+        <link href="/css/app-search.css" media="all" rel="stylesheet" type="text/css"/>
 
         
         <script src="/js/jquery-1.12.0.min.js"></script>

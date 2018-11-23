@@ -116,10 +116,10 @@
                                     </span>
                                 </td>
                                 <td>
-                                    <a  target="_blank"  href="https://normativas-dev.herokuapp.com/normativa/pdf/{{$doc->arquivo}}">
+                                    <a  target="_blank"  href="{{route('pdfNormativa',$doc->arquivo)}}">
                                         <i class="fa fa-arrow-circle-down"></i>
                                     </a>
-                                    <a href="{{ url("documento/{$doc->id}") }}">
+                                    <a href="{{ route("documento",$doc->id) }}">
                                         <i class="fa fa-arrow-circle-right"></i>
                                     </a>
                                 </td>
@@ -147,7 +147,7 @@
                     <canvas style="width:80%; height:80%;"  id="myCanvas">
                         <ul>
                             @foreach ($tags as $t)
-                                <li><a href="https://normativas-dev.herokuapp.com/?query={{$t->tag}}" target="_blank" data-weight="{{$t->tag_count}}">{{$t->tag}}</a></li>
+                                <li><a href=/?query={{$t->tag}}" target="_blank" data-weight="{{$t->tag_count}}">{{$t->tag}}</a></li>
                             @endforeach
                         </ul>
                     </canvas>

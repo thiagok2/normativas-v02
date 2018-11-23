@@ -138,7 +138,7 @@
 
                 <div class="row">
                     <div class="col-sm-6">
-                        <a class="btn btn-primary btn-lg" target="_blank" href="https://normativas-dev.herokuapp.com/normativa/pdf/{{$documento->arquivo}}">Download</a>
+                        <a class="btn btn-primary btn-lg" target="_blank" href="{{route('pdfNormativa',$documento->arquivo)}}">Download</a>
                     </div>
 
                     <div class="col-sm-6">

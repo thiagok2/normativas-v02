@@ -36,7 +36,7 @@
             <div class="col-lg-8 offset-lg-2">
                 <form action="/" method="GET" class="">
                     <div class="input-group">
-                        <input type="text" name="query" class="form-control" placeholder="Digite os termos da consulta" value="{{ $query or '' }}" />
+                        <input type="text" name="query" class="form-control" placeholder="Digite os termos da consulta" value="{{ $query }}" />
                     </div>
                     <div class="row">
                         <div class="col text-center mt-3 mb-3">
@@ -102,8 +102,16 @@
                             <!--Score máximo ({{ $max_score }}).-->
                         </p>
                         <div class="mt-2">
+                            @if ((($esfera && $esfera!="all") || $ano || $fonte)) 
+                                <a href="?query={{ $query }}" 
+                                    class="btn btn-outline-secondary btn-pill btn-sm mb-2">
+                                    Limpar Filtros
+                                    <span class="badge badge-pill badge-info"></span>
+                                </a>
+                            @endif
+                            
                             @foreach ($aggregations['aggregations']['ano']['buckets'] as $bucket)
-                                <a href="?query={{ $query }}&ano={{ urlencode($bucket['key']) }}&esfera={{ $esfera or '' }}&fonte={{ $fonte or '' }}" 
+                                <a href="?query={{ $query }}&ano={{ urlencode($bucket['key']) }}&esfera={{ $esfera  }}&fonte={{ $fonte  }}" 
                                     class="btn btn-outline-secondary btn-pill btn-sm mb-2">
                                     {{ ucfirst($bucket['key']) }} 
                                     <span class="badge badge-pill badge-info">{{ $bucket['doc_count'] }}</span>
@@ -111,7 +119,7 @@
                             @endforeach
                         
                             @foreach ($aggregations['aggregations']['esfera']['buckets'] as $bucket)
-                                <a href="?query={{ $query }}&esfera={{ urlencode($bucket['key']) }}&ano={{ $ano or '' }}&fonte={{ $fonte or '' }}" 
+                                <a href="?query={{ $query }}&esfera={{ urlencode($bucket['key']) }}&ano={{ $ano }}&fonte={{ $fonte  }}" 
                                 class="btn btn-outline-secondary btn-pill btn-sm mb-2">
                                     {{ ucfirst($bucket['key']) }} 
                                     <span class="badge badge-pill badge-info">{{ $bucket['doc_count'] }}</span>
@@ -119,7 +127,7 @@
                             @endforeach
                         
                             @foreach ($aggregations['aggregations']['fonte']['buckets'] as $bucket)
-                                <a href="?query={{ $query }}&fonte={{ urlencode($bucket['key']) }}&ano={{ $ano or '' }}&esfera={{ $esfera or '' }}" 
+                                <a href="?query={{ $query }}&fonte={{ urlencode($bucket['key']) }}&ano={{ $ano  }}&esfera={{ $esfera }}" 
                                 class="btn btn-outline-secondary btn-pill btn-sm mb-2">
                                     {{ ucfirst($bucket['key']) }} 
                                     <span class="badge badge-pill badge-info">{{ $bucket['doc_count'] }}</span>
@@ -208,14 +216,14 @@
                         <ul class="pagination justify-content-end">
                             @if ($page > 1)
                             <li class="page-item">
-                                <a href="?query={{ urlencode($query) }}&page={{ ($page - 1) }}&esfera={{ $esfera or '' }}&fonte={{ $fonte or '' }}&ano={{$ano or '' }}"
+                                <a href="?query={{ urlencode($query) }}&page={{ ($page - 1) }}&esfera={{ $esfera }}&fonte={{ $fonte }}&ano={{$ano}}"
                                     class="page-link" tabindex="-1">Anterior</a>
                             </li>
                             @endif
 
                             @if ($page < $total_pages)
                                 <li class="page-item">
-                                <a href="?query={{ urlencode($query) }}&page={{ ($page + 1) }}&esfera={{ $esfera or '' }}&fonte={{ $fonte or '' }}&ano={{$ano or '' }}"
+                                <a href="?query={{ urlencode($query) }}&page={{ ($page + 1) }}&esfera={{ $esfera }}&fonte={{ $fonte }}&ano={{$ano}}"
                                     class="page-link">Próximo</a>
                                 </li>
                             @endif
