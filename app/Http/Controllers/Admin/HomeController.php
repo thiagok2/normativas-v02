@@ -76,4 +76,18 @@ class HomeController extends Controller
 
         return view('home',compact('documentos','documentosCount','usersCount','tagCount','tags'));
     }
+
+    public function getenv(){
+        $APP_DEBUG = getenv('APP_DEBUG');
+        $APP_ENV = getenv('APP_ENV');
+        $APP_URL = getenv('APP_URL');
+        $ELASTIC_URL = getenv('ELASTIC_URL');
+        $MAIL_USERNAME = getenv('MAIL_USERNAME');
+        $MAIL_PASSWORD = getenv('MAIL_PASSWORD');
+        $DATABASE_URL = getenv('DATABASE_URL');
+        
+
+
+        return view('admin.env', compact('APP_DEBUG','APP_ENV','APP_URL','ELASTIC_URL','MAIL_USERNAME','MAIL_PASSWORD','DATABASE_URL'));
+    }
 }

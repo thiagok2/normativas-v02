@@ -12,6 +12,15 @@
 <div class="row">
     @include('admin.includes.alerts')
 
+    @if (auth()->user()->isAdmin())
+        <div class="alert bg-light-blue alert-dismissible fade in">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <p>
+                <a href="{{route('getenv')}}">Acesse as variáveis de ambiente do sistema.</a>
+            </p>
+        </div>
+    @endif
+
     <div class="col-lg-4">
         <!-- small box -->
         <a href="{{route('publicar')}}">

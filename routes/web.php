@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Redirect;
 
 Route::get('/', 'IndexController@index');
 
+Route::get('/login', 'LoginController@login');
+
 //Route::get('home', 'IndexController@index');
 
 Route::match('get', '/normativa/pdf/{normativaId}', [
@@ -35,6 +37,8 @@ Route::match('get', '/filter', [
 
 
 Route::prefix('admin')->middleware('auth')->namespace('Admin')->group(function(){
+
+    Route::get('getenv', 'HomeController@getenv')->name('getenv');
 
     Route::get('home', 'HomeController@index')->name('home');
 
