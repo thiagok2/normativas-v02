@@ -202,19 +202,30 @@ class UsuarioController extends Controller
     }
 
     public function destroy($id){
-        $user = User::find($id);
 
-        if(!$user->confirmado){
-            $user->delete();
-        
-            return redirect()->route('usuarios')
-                        ->with(['success'=> "Usuário removido com sucesso"]);
-        }else{
+        try{
+            DB::beginTransaction();
+            $user = User::find($id);
+
+            if(!$user->confirmado){
+                $user->delete();
+                DB::commit();
+                return redirect()->route('usuarios')
+                            ->with(['success'=> "Usuário removido com sucesso"]);
+            }else{
+                return redirect()
+                    ->back()
+                    ->with('error', 'O usuário já confirmou seu cadastro. Não pode ser removido.');
+            }
+          
+        }catch(\Exception $e){
+            DB::rollBack();
+
             return redirect()
-                ->back()
-                ->with('error', 'O usuário já confirmou seu cadastro. Não pode ser removido.');
+			    ->back()
+			    ->with('error', $e->getMessage());
         }
-
+       
 
 
         
