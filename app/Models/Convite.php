@@ -30,7 +30,7 @@ class Convite extends Model
 
     public function enviarNovoUsuario($userNovo,$passwordGerado){
         $to_name = $userNovo->name;
-        echo getenv('APP_ENV');
+        //echo getenv('APP_ENV');
         if(getenv('APP_ENV') == 'local'){
             $to_email = getenv('MAIL_USERNAME');
         }else {
@@ -45,7 +45,7 @@ class Convite extends Model
     
         Mail::send('emails.acesso', $data, function($message) use ($to_name, $to_email) {
             $message->to($to_email, $to_name)
-                ->subject('Acesso a plataforma Normativas'.getenv('APP_ENV'));
+                ->subject('Acesso a plataforma Normativas');
                 $message->from('normativas@nees.com.br','Normativas - NEES');
         });
     }

@@ -71,9 +71,6 @@
                                             <a href="{{route("unidade-edit",$unidade->id)}}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
-                                            <a href="#">
-                                                <i class="fa fa-envelope"></i>
-                                            </a>
                                         </td>
                                     </tr>
                                 @empty
