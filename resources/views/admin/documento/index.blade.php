@@ -57,17 +57,12 @@
                                     <td>{{date('d-m-Y', strtotime($doc->data_envio))}}</td>
                                     <td>{{$doc->user->firstName()}}</td>
                                     <td>
-                                        <a href="{{ url("storage/uploads/{$doc->arquivo}") }}" target="_blank">
+                                        <a href="{{ route("pdfNormativa",$doc->arquivo) }}" target="_blank">
                                             <i class="fa fa-arrow-circle-down"></i>
                                         </a>
-                                        <a href="{{ url("documento/{$doc->id}") }}">
+                                        <a href="{{ route("documento",$doc->id) }}">
                                             <i class="fa fa-arrow-circle-right"></i>
                                         </a>
-                                        <a href="#">
-                                            <i class="fa fa-cloud-upload"></i>
-                                        </a>
-
-                                       
                                     </td>
                                 </tr>
                                 @empty

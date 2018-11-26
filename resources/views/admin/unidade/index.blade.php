@@ -68,7 +68,7 @@
                                         <td>{{ $unidade->tipo }}</td>
                                         <td>{{ $unidade->esfera }}</td>
                                         <td>
-                                            <a href="{{url("admin/unidades/{$unidade->id}/edit")}}">
+                                            <a href="{{route("unidade-edit",$unidade->id)}}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                             <a href="#">
