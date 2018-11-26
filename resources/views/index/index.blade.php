@@ -5,18 +5,18 @@
 <section id="header">
     <div class="container-fluid">
         <div class="row">
-            @if (Route::has('login'))
-            <div class="top-right links">
-                @auth
-                    <a href="{{ route('home') }}">Home</a>
-                @else
-                    <a href="{{ route('login') }}">Entrar</a>
-                    <!-- 
-                    <a href="{{ route('register') }}">Registrar</a>
-                    -->
-                @endauth
+            <div class="col-lg-8 offset-lg-2 text-right p-0 ">
+                @if (Route::has('login'))
+                    @auth
+                        <a href="{{ route('home') }}">Home</a>
+                    @else
+                        <a href="{{ route('login') }}" class="btn btn-outline-secondary btn-pill btn-login m-1 mt-2">Entrar <i class="fa fa-user badge-info"></i></a>
+                        <!-- 
+                        <a href="{{ route('register') }}">Registrar</a>
+                        -->
+                    @endauth
+                @endif
             </div>
-            @endif
         </div>
         <div class="row">
             <div class="col-lg-12 text-center">

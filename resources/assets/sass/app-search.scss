@@ -1,0 +1,115 @@
+//@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "node_modules/font-awesome/scss/font-awesome.scss";
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    background: #f0f0f0;
+
+    hr {
+        &.split {
+            border: none;
+            height: 50px;
+            margin: 0;
+        }
+        &.split-sm {
+            border: none;
+            height: 20px;
+            margin: 0;
+        }
+    }
+
+    a {
+        color: #12586f;
+        &:hover,
+        &:focus,
+        &.active {
+            color: #073848;
+        }
+    }
+
+    .badge-info {
+        background-color: #87aab0;
+    }
+
+    h4 {
+        background-color: #12586f;
+        color: #ffffff;
+        padding: 6px 16px;
+    }
+
+    .highlight {
+        margin-top: 10px;
+    }
+    .highlight_word {
+        font-weight: bold;
+        //color: white;
+        font-size: 1em;
+        background: #ffff00;
+        padding: 0.3% 6px;
+        //border-radius: 5px;
+    }
+
+    .btn {
+        &.btn-primary {
+            background-color: #12586f;
+            border-color: #12586f;
+            &:hover,
+            &:focus,
+            &.active {
+                background-color: #073848;
+                border-color: #073848;
+            }
+        }
+        &.btn-login {
+            padding: 3px 5px 3px 20px;
+            i {
+                margin-left: 10px;
+                padding: 4px 7px;
+                border-radius: 20px;
+                display: inline-block;
+            }
+        }
+
+        &.btn-pill {
+            border-radius: 20px;
+        }
+    }
+
+    #search {
+        padding: 60px 0;
+        background-color: #ffffff;
+    }
+
+    #results {
+        .card-columns {
+            -webkit-column-count: 2;
+            -moz-column-count: 2;
+            column-count: 2;
+        }
+        .rating-container {
+            .caption {
+                display: none;
+            }
+        }
+    }
+
+    .pagination {
+        .page-item {
+            .page-link {
+                background-color: #12586f;
+                border-color: #073848;
+                color: #ffffff;
+                &:hover,
+                &:focus,
+                &.active {
+                    background-color: #073848;
+                    border-color: #073848;
+                }
+            }
+        }
+    }
+}
