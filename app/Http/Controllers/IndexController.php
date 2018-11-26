@@ -6,6 +6,9 @@ use Elasticsearch\Client;
 use Elasticsearch\ClientBuilder;
 use Illuminate\Http\Request;
 
+use App\Models\Documento;
+use Illuminate\Support\Facades\DB;
+
 class IndexController extends Controller
 {
     const RESULTS_PER_PAGE = 5;
@@ -293,7 +296,7 @@ class IndexController extends Controller
             $documentsLikes["docs"] = $resultsLikes["hits"]["hits"];
         }
         
-        return view('index.view-normativa', [ 'normativa' => $result['_source'], 'id' => $result['_id'], 'documentsLikes' => $documentsLikes ] );
+        return view('index.view-normativa', [ 'normativa' => $result['_source'], 'id' => $result['_id'], 'arquivoId' => $result['_id'],'documentsLikes' => $documentsLikes ] );
     }
 
     protected function getSearchFilterAggregations(array $queryArray)
@@ -351,6 +354,26 @@ class IndexController extends Controller
 
         return $this->client->search($params);
 
+    }
+
+    public function delete(Request $request){
+
+        $arquivoId = $request->arquivoId;
+
+        $doc = Documento::where('arquivo', $arquivoId)->first();
+        if($doc)
+            $doc->delete();
+
+        $params = [
+            'index' => 'normativas',
+            'type'  => '_doc',
+            'id'    => $arquivoId,
+        ];
+        
+        $response = $this->client->delete($params);
+
+
+        return redirect("/");
     }
 
    

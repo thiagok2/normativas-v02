@@ -35,6 +35,8 @@ Route::match('get', '/filter', [
     'as' => 'filterNormativa',
 ]);
 
+Route::get('documente/delete/{arquivoId}', 'IndexController@delete')->name('delete-elastic');
+
 
 Route::prefix('admin')->middleware('auth')->namespace('Admin')->group(function(){
 

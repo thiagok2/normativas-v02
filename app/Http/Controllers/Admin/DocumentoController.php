@@ -157,31 +157,36 @@ class DocumentoController extends Controller
 
     public function destroy($id)
     {
-        $documento = Documento::with('palavrasChaves')->find($id);
 
-        $documento->palavrasChaves()->delete();
-        $documento->delete();
+        try{
+            DB::beginTransaction();
+            $documento = Documento::with('palavrasChaves')->find($id);
 
-        //Storage::delete("uploads/$documento->arquivo");
+            $documento->palavrasChaves()->delete();
+            $documento->delete();
 
-        $params = [
-            'index' => 'normativas',
-            'type'  => '_doc',
-            'id'    => $documento->arquivo,
-        ];
-        
-        // Delete doc at /my_index/my_type/my_id
-        $response = $this->client->delete($params);
+            //Storage::delete("uploads/$documento->arquivo");
 
+            $params = [
+                'index' => 'normativas',
+                'type'  => '_doc',
+                'id'    => $documento->arquivo,
+            ];
+            
+            $response = $this->client->delete($params);
 
-        return redirect()->route('documentos')
-            ->with('success', 'Documento removido com sucesso.');
+            DB::commit();
 
+            return redirect()->route('documentos')
+                ->with('success', 'Documento removido com sucesso.');
 
-    }
+        }catch(\Exception $e){
+            DB::rollBack();
+            return redirect()
+			    ->back()
+			    ->with('error', $e->getMessage());
+        }
 
-    public function test(){
-        echo "_".uniqid();
     }
 
 }
