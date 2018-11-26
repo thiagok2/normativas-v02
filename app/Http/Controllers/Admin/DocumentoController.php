@@ -86,13 +86,15 @@ class DocumentoController extends Controller
     
                 //$extensao = $request->arquivo->extension();
                 //$arquivoNome = "{$tituloArquivo}.{$extensao}";
-                //$upload = $request->arquivo->storeAs('uploads', $arquivoNome);
-
+               
                 /**url amigável para arquivo */
                 $urlArquivo = $documento->urlizer($documento->unidade->sigla."_".$documento->numero);
 
-                $urlArquivo = $urlArquivo."_".uniqid();
+                $urlArquivo = $urlArquivo."_".uniqid().".pdf";
                 $documento->arquivo = $urlArquivo;
+
+                $upload = $request->arquivo->storeAs('uploads', $urlArquivo);
+
                 $documento->save();
     
                 $tags = explode(",", $data["palavras_chave"]);
@@ -165,7 +167,7 @@ class DocumentoController extends Controller
             $documento->palavrasChaves()->delete();
             $documento->delete();
 
-            //Storage::delete("uploads/$documento->arquivo");
+            Storage::delete("uploads/$documento->arquivo");
 
             $params = [
                 'index' => 'normativas',
