@@ -57,10 +57,15 @@
                         <a href="/normativa/pdf/{{ $id }}" class="btn btn-primary" target="_blank">
                             Baixar
                         </a>
-                         
+                        
+                        
                         @auth
                             @if (auth()->user()->isAdmin())
-                                <a href="{{route('delete-elastic',$arquivoId)}}" class="btn btn-danger btn-lg pull-right" >Excluir</a>
+
+                                <!-- 
+                                    <a href="{{route('delete-elastic',$arquivoId)}}" class="btn btn-danger btn-lg pull-right" >Excluir</a>
+                                -->
+                                
                             @endif
                         @endauth
 

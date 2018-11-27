@@ -10,7 +10,7 @@ $(function () {
       TagCanvas.weight = true;
       TagCanvas.weightFrom = 'data-weight';
       TagCanvas.wheelZoom = false;
-      TagCanvas.zoom = 1;
+      //TagCanvas.zoom = 1.25;
       TagCanvas.Start('myCanvas');
 
     }

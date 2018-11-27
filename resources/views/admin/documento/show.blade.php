@@ -140,7 +140,7 @@
                     <div class="col-sm-6">
                         <a class="btn btn-primary btn-lg" target="_blank" href="{{route('pdfNormativa',$documento->arquivo)}}">Download</a>
                     </div>
-
+                    
                     <div class="col-sm-6">
                         <form method="post" action="{{route('delete',['id' => $documento->id])}}">
                             {{ method_field('DELETE') }}
@@ -148,6 +148,7 @@
                             <button type="submit" class="btn btn-danger btn-lg pull-right" >Excluir</button>
                         </form>
                     </div>
+                    
                 </div>
             </div>
         </div>
