@@ -148,12 +148,12 @@
     <div class="col-lg-12 ">
         <div class="box box-success">
             <div class="box-header">
-                <h3 class="box-title">Palavras chaves mais referências nos documentos</h3>
+                <h3 class="box-title">Palavras-chave mais referências nos documentos</h3>
             </div>
 
             <div class="box-body no-padding">
-                <div id="myCanvasContainer" class="text-center" style="position:relative;height:300px;">
-                    <canvas style="width:80%; height:80%;"  id="myCanvas">
+                <div id="myCanvasContainer" class="text-center" style="position:relative;">
+                    <canvas width="600" height="300"  id="myCanvas">
                         <ul>
                             @foreach ($tags as $t)
                                 <li><a href=/?query={{$t->tag}}" target="_blank" data-weight="{{$t->tag_count}}">{{$t->tag}}</a></li>
