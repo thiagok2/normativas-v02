@@ -7,8 +7,8 @@ $(function () {
     if (elementsExists) {
       TagCanvas.textColour = '#363636';
       TagCanvas.outlineColour = '#ff9999';
-      TagCanvas.weight = true;
-      TagCanvas.weightFrom = 'data-weight';
+      //TagCanvas.weight = true;
+      //TagCanvas.weightFrom = 'data-weight';
       TagCanvas.wheelZoom = false;
       //TagCanvas.zoom = 1.25;
       TagCanvas.Start('myCanvas');

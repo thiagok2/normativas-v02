@@ -55,7 +55,7 @@
                                     <td>{{$doc->titulo}}</td>
                                     <td>{{date('d-m-Y', strtotime($doc->data_publicacao))}}</td>
                                     <td>{{date('d-m-Y', strtotime($doc->data_envio))}}</td>
-                                    <td>{{$doc->user->firstName()}}</td>
+                                    <td>{{$doc->unidade->sigla}} - {{$doc->user->firstName()}}</td>
                                     <td>
                                         <a href="{{ route("pdfNormativa",$doc->arquivo) }}" target="_blank">
                                             <i class="fa fa-arrow-circle-down"></i>

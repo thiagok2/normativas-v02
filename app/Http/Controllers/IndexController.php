@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use App\Models\Documento;
 use Illuminate\Support\Facades\DB;
 
+use App\Models\TipoDocumento;
+
 class IndexController extends Controller
 {
     const RESULTS_PER_PAGE = 5;
@@ -251,12 +253,15 @@ class IndexController extends Controller
         }
 
         $aggregations = $this->getSearchFilterAggregations($queryArray);
+
+
+        $tiposDocumento = TipoDocumento::all();
        
 
         return view('index.index', compact('max_score'
         ,'tipo_doc','esfera','ano','fonte','periodo','filters',
         'page','from','query','q','page','total','size_page',
-        'total_pages','hits','aggregations'));
+        'total_pages','hits','aggregations','tiposDocumento'));
         
     }
 

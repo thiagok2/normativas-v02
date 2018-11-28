@@ -49,9 +49,12 @@
                             <div class="col">
                                 <select class="form-control" name="tipo_doc">
                                     <option value="all" <?php if($tipo_doc == "all"){ echo ' selected'; }?>>Todos os Tipos</option>
-                                    <option value="resolução" <?php if($tipo_doc == "resolução"){ echo ' selected'; }?>>Apenas Resoluções</option>
-                                    <option value="deliberação" <?php if($tipo_doc == "deliberação"){ echo ' selected'; }?>>Apenas Deliberações</option>
-                                    <option value="parecer" <?php if($tipo_doc == "parecer"){ echo ' selected'; }?>>Apenas Pareceres</option>
+                                    
+                                    @foreach ($tiposDocumento as $tipo)
+                                        <option value="{{$tipo->nome}}" 
+                                            @if ($tipo_doc == $tipo->nome) selected @endif>Apenas {{$tipo->nome}}</option>
+                                    @endforeach
+                                    
                                 </select>
                             </div>
                             <div class="col">
