@@ -107,9 +107,10 @@ class UsuarioController extends Controller
 
     public function convidar(Request $request){
 
-        if(auth()->user()->isGestor())
-            $unidadeId = auth()->user()->unidade_id;
-        else if(auth()->user()->isAdmin()){
+        $unidadeId = auth()->user()->unidade_id;
+
+        
+        if(auth()->user()->isAdmin() && $request->has('unidade_id')){
             $unidadeId = $request->query('unidade_id');
         }
 
