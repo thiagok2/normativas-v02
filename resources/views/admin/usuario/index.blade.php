@@ -114,7 +114,7 @@
 
         <div class="col-lg-4">
             <div class="panel panel-default">
-                <div class="panel-heading">Outros usuáios da unidade</div>
+                <div class="panel-heading">Outros usuários da unidade</div>
                 <div class="panel-body">
                     <div class="list-group">
                         @foreach ($usuarios as $u)
