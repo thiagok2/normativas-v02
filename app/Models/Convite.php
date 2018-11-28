@@ -41,7 +41,9 @@ class Convite extends Model
             'name'      =>  $userNovo->name, 
             "password"  =>  $passwordGerado,
             "unidade"   =>  $userNovo->unidade->nome,
-            "tipo"      =>  $userNovo->tipo);
+            "tipo"      =>  $userNovo->tipo,
+            "email"     =>  $userNovo->email
+        );
     
         Mail::send('emails.acesso', $data, function($message) use ($to_name, $to_email) {
             $message->to($to_email, $to_name)
