@@ -32,6 +32,10 @@ class User extends Authenticatable
         return $this->tipo == 'gestor';
     }
 
+    public function isResponsavel(){
+        return $this->id == $this->unidade->responsavel_id;
+    }
+
 
     /**
      * The attributes that should be hidden for arrays.

@@ -99,8 +99,8 @@
                                     <a href="{{route('usuario-reconvidar',$user->id)}}" class="btn btn-primary btn-lg ">Enviar novo convite</a>    
                                 @endif
 
-                                @if (auth()->user()->id != $user->id  && !$user->confirmado &&
-                                        (auth()->user()->isGestor() || auth()->user()->isAdmin()))
+                                @if (auth()->user()->id != $user->id  &&
+                                        (auth()->user()->isResponsavel() || auth()->user()->isAdmin()))
                                     <a href="{{route('usuario-delete',$user->id)}}" class="btn btn-primary btn-lg ">Excluir</a>    
                                 @endif
                                 

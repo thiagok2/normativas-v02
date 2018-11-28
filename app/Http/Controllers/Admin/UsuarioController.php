@@ -208,7 +208,8 @@ class UsuarioController extends Controller
             DB::beginTransaction();
             $user = User::find($id);
 
-            if(!$user->confirmado){
+            if($user && $user->documentos->isEmpty()){
+
                 $user->delete();
                 DB::commit();
                 return redirect()->route('usuarios')
@@ -216,7 +217,7 @@ class UsuarioController extends Controller
             }else{
                 return redirect()
                     ->back()
-                    ->with('error', 'O usuário já confirmou seu cadastro. Não pode ser removido.');
+                    ->with('error', 'O usuário já enviou documentos. No momento, não pode ser excluído.');
             }
           
         }catch(\Exception $e){
