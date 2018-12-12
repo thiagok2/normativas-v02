@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130860561-1"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-130860561-1');
+        </script>
 
     
         <title>Normativas v0.1(alpha)</title>
@@ -10,8 +19,7 @@
         <link href="/css/star-rating.min.css" media="all" rel="stylesheet" type="text/css"/>
         <link href="/css/theme.min.css" media="all" rel="stylesheet" type="text/css"/>
         <link href="/css/app-search.css" media="all" rel="stylesheet" type="text/css"/>
-       
-       
+
     </head>
 
      <body>

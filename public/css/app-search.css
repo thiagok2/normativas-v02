@@ -3053,6 +3053,8 @@ body a:hover, body a:focus, body a.active {
 
 body .badge-info {
   background-color: #87aab0;
+  white-space: normal;
+  text-align: left;
 }
 
 body h4 {
@@ -3070,6 +3072,10 @@ body .highlight_word {
   font-size: 1em;
   background: #ffff00;
   padding: 0.3% 6px;
+}
+
+body .btn {
+  margin-bottom: 10px;
 }
 
 body .btn.btn-primary {
@@ -3119,6 +3125,23 @@ body .pagination .page-item .page-link {
 body .pagination .page-item .page-link:hover, body .pagination .page-item .page-link:focus, body .pagination .page-item .page-link.active {
   background-color: #073848;
   border-color: #073848;
+}
+
+/* Large desktops and laptops */
+/* Landscape tablets and medium desktops */
+/* Portrait tablets and small desktops */
+/* Landscape phones and portrait tablets */
+@media (max-width: 767px) {
+  h1 img {
+    max-width: 300px;
+  }
+}
+
+/* Portrait phones and smaller */
+@media (max-width: 480px) {
+  h1 img {
+    max-width: 300px;
+  }
 }
 
 /*# sourceMappingURL=app-search.css.map */
