@@ -3132,14 +3132,14 @@ body .pagination .page-item .page-link:hover, body .pagination .page-item .page-
 /* Portrait tablets and small desktops */
 /* Landscape phones and portrait tablets */
 @media (max-width: 767px) {
-  h1 img {
+  body h1 img {
     max-width: 300px;
   }
 }
 
 /* Portrait phones and smaller */
 @media (max-width: 480px) {
-  h1 img {
+  body h1 img {
     max-width: 300px;
   }
 }
