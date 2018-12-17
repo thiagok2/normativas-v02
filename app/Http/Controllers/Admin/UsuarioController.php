@@ -143,6 +143,7 @@ class UsuarioController extends Controller
 
 
             $passwordRandom = bin2hex(openssl_random_pseudo_bytes(4));
+            $user->email = trim($request->input('email'));
             $user->password = Hash::make($passwordRandom);
 
             if(auth()->user()->isGestor()){
@@ -180,7 +181,9 @@ class UsuarioController extends Controller
 
             $user = User::with('unidade')->find($id);
 
+
             $passwordRandom = bin2hex(openssl_random_pseudo_bytes(4));
+
             $user->password = Hash::make($passwordRandom);
 
             $convite = new Convite();
@@ -188,10 +191,12 @@ class UsuarioController extends Controller
             $convite->enviarNovoUsuario($user, $passwordRandom);
             $user->save();
 
+            DB::commit();
+            
             return redirect()->route('usuarios')
                 ->with(['success'=> "Novo convite enviado para $user->name($user->email)."]);
 
-            DB::commit();
+           
         }catch(\Exception $e){
             DB::rollBack();
 

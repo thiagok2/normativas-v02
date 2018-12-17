@@ -61,6 +61,10 @@
                    class="text-center"
                 >{{ trans('adminlte::adminlte.i_forgot_my_password') }}</a>
                 <br>
+                <br>
+                <p class="text-muted">
+                Caso tenha problemas de acesso, envie email para normativas@nees.com.br
+                </p>
                 <!--
                 @if (config('adminlte.register_url', 'register'))
                     <a href="{{ url(config('adminlte.register_url', 'register')) }}"
