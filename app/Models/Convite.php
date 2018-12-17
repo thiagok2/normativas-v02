@@ -37,6 +37,14 @@ class Convite extends Model
             $to_email = $userNovo->email;
         }
 
+        if($userNovo->tipo = "admin"){
+            $userNovo->tipo = "administrador(a)";
+        }else if($userNovo->tipo = "gestor"){
+            $userNovo->tipo = "gestor(a)";
+        }else if($userNovo->tipo = "colaborador"){
+            $userNovo->tipo = "colaborador(a)";
+        }
+
         $data = array(
             'name'      =>  $userNovo->name, 
             "password"  =>  $passwordGerado,
