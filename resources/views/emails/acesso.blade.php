@@ -1,12 +1,17 @@
 Olá <strong>{{ $name }}</strong>,
 
 <p>
-Bem vindo a plataforma <a href="{{getenv('APP_URL')}}">Normativas</a>.
+Bem vindo à plataforma <a href="{{getenv('APP_URL')}}">Normativas - Portal Democrático de Atos normativos de Educação. </a>.
 <br/>
-Você foi adicionad@ como {{$tipo}} pelo {{$unidade}}.
+Você foi adicionado(a) pelo Portal Normativas como {{$tipo}} representando o {{$unidade}}.
 <br/>
-Seja bem vindo. Faça seu primeiro acesso com esse email({{$email}}) como login, sua senha provisória é senha: <b>{{$password}}</b>
+Faça seu primeiro acesso com os dados abaixo:<br/>
+login(email): {{$email}}<br/>
+senha provisória:: <b>{{$password}}</b>
 </p>
+
+Clique aqui para acessar:
+<a href="{{getenv('APP_URL')}}/login">{{getenv('APP_URL')}}</a>
 
 <p>
 Atenciosamente<br/>
