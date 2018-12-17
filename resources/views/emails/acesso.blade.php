@@ -16,5 +16,6 @@ Clique aqui para acessar:
 <p>
 Atenciosamente<br/>
 --<br/>
-Normativas - NEES
+Normativas - Ministério da Educação<br/>
+NEES - UFAL
 </p>
