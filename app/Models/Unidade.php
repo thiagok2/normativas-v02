@@ -34,6 +34,10 @@ class Unidade extends Model
         return $this->belongsTo(User::class,'responsavel_id');
     }
 
+    public function estado(){
+        return $this->belongsTo(Estado::class,'estado_id');
+    }
+
     public function user(){
         return $this->belongsTo(User::class,'user_id');
     }

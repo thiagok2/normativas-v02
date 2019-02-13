@@ -71,11 +71,13 @@ class Documento extends Model
 
         $object = [
             "ato" => [
+                "id_persisted" => $this->id,
                 "ano" => $this->ano,
                 "titulo" => $this->titulo,
                 "ementa" => $this->ementa,
                 "url"   =>  $this->url,
                 "data_publicacao"   =>  $this->data_publicacao,
+                "data_envio"   =>  $this->data_envio,
                 "tipo_doc" => $this->tipoDocumento->nome,
                 "arquivo"   =>  $this->arquivo,
                 "tags"  =>  $tags,
@@ -85,7 +87,7 @@ class Documento extends Model
                     "uf" => '',
                     "uf_sigla" => '',
                     "esfera" => $this->unidade->esfera,
-                    "url" => ''
+                    "url" => $this->unidade->url
                 ]
             ]
         ];

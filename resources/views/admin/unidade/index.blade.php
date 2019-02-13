@@ -55,6 +55,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Nome</th>
+                                    <th>Estado</th>
                                     <th>Sigla</th>
                                     <th>Tipo</th>
                                     <th>Esfera</th>
@@ -64,6 +65,7 @@
                                     <tr>
                                         <td>{{ $loop->index + 1 }}</td>
                                         <td>{{ $unidade->nome }}</td>
+                                        <td>{{ $unidade->estado['nome']}}</td>
                                         <td>{{ $unidade->sigla }}</td>
                                         <td>{{ $unidade->tipo }}</td>
                                         <td>{{ $unidade->esfera }}</td>

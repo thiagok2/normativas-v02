@@ -180,11 +180,18 @@ class DocumentoController extends Controller
             $params = [
                 'index' => 'normativas',
                 'type'  => '_doc',
+                'client' => [ 
+                    'ignore' => 404
+                ],
                 'id'    => $documento->arquivo,
             ];
-            
-            $response = $this->client->delete($params);
 
+            $result = $this->client->get($params);
+
+            if($result['found']){
+                $response = $this->client->delete($params);
+            }
+            
             DB::commit();
 
             return redirect()->route('documentos')
@@ -192,9 +199,10 @@ class DocumentoController extends Controller
 
         }catch(\Exception $e){
             DB::rollBack();
+            
             return redirect()
 			    ->back()
-			    ->with('error', $e->getMessage());
+			    ->with('error', $e->getTraceAsString()." --- ".$e->getMessage());
         }
 
     }

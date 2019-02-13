@@ -19,4 +19,10 @@ class Estado extends Model
     {
         return $this->hasOne(Convite::class);
     }
+
+    public function unidades() 
+    {
+       return $this->hasMany(Unidade::class);
+    }
+ 
 }

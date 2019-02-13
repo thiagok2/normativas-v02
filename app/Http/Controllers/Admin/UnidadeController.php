@@ -32,7 +32,7 @@ class UnidadeController extends Controller
                 $clausulas[] = ['nome', 'ilike', '%'.strtoupper($nome).'%'];
             }
 
-            $unidades = Unidade::orWhere($clausulas)->get();; 
+            $unidades = Unidade::orWhere($clausulas)->with('estado')->get(); 
             $estados = Estado::all();
 
             return view('admin.unidade.index', compact('estados','unidades','esfera','estado','nome'));

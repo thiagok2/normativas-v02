@@ -221,8 +221,11 @@ class IndexController extends Controller
                     'pre_tags' => ["<span class='highlight_word'>"],
                     'post_tags' => ["</span>"],
                     'fields' => [
-                        'attachment.content' => new \stdClass()
-                    ]
+                        'attachment.content' => [
+                            "force_source"          => "true"
+                        ]
+                    ],
+                    'require_field_match' => false
                 ]
             ]
         ];
@@ -300,8 +303,13 @@ class IndexController extends Controller
         if (isset($resultsLikes["hits"]["hits"])) {
             $documentsLikes["docs"] = $resultsLikes["hits"]["hits"];
         }
+
+
+        $documento = Documento::where('arquivo', $normativaId)->first();
+
+        $persisted = isset($documento);
         
-        return view('index.view-normativa', [ 'normativa' => $result['_source'], 'id' => $result['_id'], 'arquivoId' => $result['_id'],'documentsLikes' => $documentsLikes ] );
+        return view('index.view-normativa', [ 'normativa' => $result['_source'], 'id' => $result['_id'], 'arquivoId' => $result['_id'],'documentsLikes' => $documentsLikes, 'persisted' => $persisted ] );
     }
 
     protected function getSearchFilterAggregations(array $queryArray)

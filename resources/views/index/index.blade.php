@@ -184,14 +184,16 @@
                                     </a>
                                 @endforeach
                                 <hr class="split-sm">
-                                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#highlight-collapse-{{$hit['_id']}}" aria-expanded="false" aria-controls="collapseExample">
+                                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#trechos-{{$loop->index}}" aria-expanded="false" aria-controls="highlight-collapse-{{$hit['_id']}}">
                                     Trechos encontrados
                                 </button>
 
                                 <a href="/normativa/pdf/{{ $hit['_id'] }}" class="btn btn-primary" target="_blank">
                                     Baixar
                                 </a>
-                                <div id="highlight-collapse-{{$hit['_id']}}" class="collapse highlight">
+                                <br/>
+                                
+                                <div id="trechos-{{$loop->index}}" class="collapse">
                                 @if (!empty($hit['highlight']['attachment.content']))
                                     <small>
                                     <ul class="list-group">
