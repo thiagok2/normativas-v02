@@ -53,7 +53,8 @@ Route::prefix('admin')->middleware('auth')->namespace('Admin')->group(function()
     
     Route::get('tiposdocumento', 'TipoDocumentoController@index')->name('tiposdocumento');
     Route::get('assuntos', 'AssuntoController@index')->name('Assuntos');
-    Route::get('documentos', 'DocumentoController@index')->name('documentos');
+    Route::get('documentos', 'DocumentoController@search')->name('documentos');
+    Route::get('documentos/pesquisar', 'DocumentoController@search')->name('documentos-pesquisar');
     
     Route::get('documentos/publicar', 'DocumentoController@create')->name('publicar');
     Route::post('documentos/publicar', 'DocumentoController@store')->name('enviar');

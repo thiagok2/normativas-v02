@@ -19,9 +19,9 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Filtrar</div>
                     <div class="panel-body">
-                    <form class="form-inline" method="GET" action="{{route('unidades')}}">
-                            {!! csrf_field() !!}
-                    <input type="text" id="nome" name="nome" class="form-control" value="{{$nome}}"
+                        <form class="form-inline" method="GET" action="{{route('unidades')}}">
+                            
+                            <input type="text" id="nome" name="nome" class="form-control" value="{{$nome}}"
                                 placeholder="Nome da unidade" aria-describedby="basic-addon1">
                             
                             <select class="form-control" name="esfera" id="esfera">
@@ -32,14 +32,14 @@
                             </select>
 
                             <select class="form-control" name="estado" id="estado">
-                                <option>Todos os Estados</option>
-                                @foreach ($estados as $estado)
-                                    <option value="{{$estado->id}}">{{$estado->nome}}</option>
+                                <option value=0>Todos os Estados</option>
+                                @foreach ($estados as $e)
+                                    <option value="{{$e->id}}" @if($estado==$e->id) selected @endif>{{$e->nome}}</option>
                                 @endforeach
                             </select>
 
                             <button type="submit" class="btn btn-primary">Pesquisar</button>
-                            
+                            {!! csrf_field() !!}
                         </form>
                     </div>
                 </div>
@@ -59,16 +59,22 @@
                                     <th>Sigla</th>
                                     <th>Tipo</th>
                                     <th>Esfera</th>
+                                    <th>Status</th>
                                     <th>Ações</th>
                                 </tr>
-                                @forelse ($unidades as $unidade)
+                                @forelse ($unidades as $key=>$unidade)
                                     <tr>
-                                        <td>{{ $loop->index + 1 }}</td>
+                                        <td>{{ ($unidades->currentpage()-1) * $unidades->perpage() + $key + 1 }}</td>
                                         <td>{{ $unidade->nome }}</td>
                                         <td>{{ $unidade->estado['nome']}}</td>
                                         <td>{{ $unidade->sigla }}</td>
                                         <td>{{ $unidade->tipo }}</td>
                                         <td>{{ $unidade->esfera }}</td>
+                                        <td>
+                                            {{ $unidade->documentos->count() }}
+                                            <i class="glyphicon glyphicon-file {{$unidade->documentos->count()>0 ? 'alert-success':'alert-danger'}}"></i>
+                                            <i class="glyphicon glyphicon-user {{$unidade->responsavel->confirmado ? 'alert-success':'alert-danger'}}"></i>
+                                        </td>
                                         <td>
                                             <a href="{{route("unidade-edit",$unidade->id)}}">
                                                 <i class="fa fa-edit"></i>
@@ -82,7 +88,31 @@
                                 @endforelse
                             </tbody>
                         </table>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    {{ $unidades->links() }}
+                                </div>
+                                <div class="col-lg-3 col-lg-offset-5">
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <i class="glyphicon glyphicon-file"></i>
+                                            Documentos enviados
+                            
+                                        </li>
+                                        <li class="list-group-item">
+                                                <i class="glyphicon glyphicon-user"></i>
+                                            Usuário confirmou acesso
+                                        </li>
+                                       
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    
+                    
+                   
                 </div>
             </div>
         </div>

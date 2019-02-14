@@ -32,14 +32,20 @@ class UnidadeController extends Controller
                 $clausulas[] = ['nome', 'ilike', '%'.strtoupper($nome).'%'];
             }
 
-            $unidades = Unidade::orWhere($clausulas)->with('estado')->get(); 
+            if($estado){
+                $clausulas[] = ['estado_id', $estado];
+            }
+
+            $unidades = Unidade::where($clausulas)->with('estado')
+            ->withCount('documentos')->orderBy('documentos_count', 'desc')
+            ->paginate(25); 
             $estados = Estado::all();
 
             return view('admin.unidade.index', compact('estados','unidades','esfera','estado','nome'));
 
         }else{
             $unidade = auth()->user()->unidade;
-            $users = User::where("unidade_id", $unidade->id)->get();
+            $users = User::where("unidade_id", $unidade->id)->paginate(25);
 
             return view('admin.unidade.edit', compact('unidade','users'));
         } 

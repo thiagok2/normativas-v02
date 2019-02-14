@@ -124,13 +124,15 @@
                         <div class="form-group">
                             <label for="url">URL</label>
                             <div class='input-group'>
-                                <span class="input-group-addon">
+                                <span class="input-group-addon" style="text-align: left">
                                     <span class="glyphicon glyphicon-globe">
+                                            
                                     </span>
+                                    <a href="{{$documento->url}}" target="_blank">
+                                        {{$documento->url}}
+                                    </a>
                                 </span>
-                                <input class="form-control" id="url" name="url" readonly
-                                    value="{{$documento->url}}"/>
-                                    
+                                
                             </div>
                         </div>
                     </div>
