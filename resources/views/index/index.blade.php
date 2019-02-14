@@ -184,7 +184,8 @@
                                     </a>
                                 @endforeach
                                 <hr class="split-sm">
-                                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#trechos-{{$loop->index}}" aria-expanded="false" aria-controls="highlight-collapse-{{$hit['_id']}}">
+                                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#trechos-{{$loop->index}}" aria-expanded="false" aria-controls="highlight-collapse-{{$hit['_id']}}"
+                                    {{empty($hit['highlight']['attachment.content']) ? 'disabled':''}}>
                                     Trechos encontrados
                                 </button>
 

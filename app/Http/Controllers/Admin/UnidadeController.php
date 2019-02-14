@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Estado;
 use App\User;
 use App\Models\Unidade;
+use App\Models\Documento;
 
 class UnidadeController extends Controller
 {
@@ -63,7 +64,9 @@ class UnidadeController extends Controller
 
         $users = User::where("unidade_id", $id)->get();
 
-        return view('admin.unidade.edit', compact('unidade','users'));
+        $documentos = Documento::where('unidade_id', $id)->get();
+
+        return view('admin.unidade.edit', compact('unidade','users', 'documentos'));
     }
 
 
