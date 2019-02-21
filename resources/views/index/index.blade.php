@@ -171,7 +171,7 @@
                                 @endif
                                 <br/>
                                 <strong>Conselho:</strong> 
-                                    <a href="?query={{ $hit['_source']['ato']['fonte']['uf'] }}">
+                                    <a href="?query={{$query}}&fonte={{ $hit['_source']['ato']['fonte']['sigla'] }}">
                                         {{ $hit['_source']['ato']['fonte']['orgao'] }}
                                     </a>
                                 <br/>
