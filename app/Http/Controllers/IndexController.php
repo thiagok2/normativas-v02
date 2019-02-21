@@ -298,8 +298,13 @@ class IndexController extends Controller
             'id' => $normativaId
         ]);
 
-        $resultsLikes = $this->likeDocuments($normativaId, "buscaa");
+        //dd( $normativaId);
+        //dd( $result);
 
+        $resultsLikes = $this->likeDocuments($result);
+
+        //dd($resultsLikes);
+        
         if (isset($resultsLikes["hits"]["hits"])) {
             $documentsLikes["docs"] = $resultsLikes["hits"]["hits"];
         }
@@ -338,7 +343,8 @@ class IndexController extends Controller
         return $this->client->search($params);
     }
 
-    protected function likeDocuments($normatidaId, $q){
+    protected function likeDocuments($docResult){
+        
         $params = [
             "index" => "normativas",
             "type" => "_doc",
@@ -351,12 +357,8 @@ class IndexController extends Controller
                     "more_like_this" => [
                         "fields" => ["ato.ementa","ato.tags"],
                         "like" => [
-                            [
-                            "_index" => "normativas",
-                            "_type" => "_doc",
-                            "_id" => "CEMS_Del-9375-2010"
-                            ],
-                            "Avaliação Institucional"
+                            
+                            $docResult['_source']['ato']['ementa']
                         ],
                         "min_term_freq" => 1,
                         "max_query_terms" => 15

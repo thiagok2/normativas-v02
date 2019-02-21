@@ -83,7 +83,7 @@
 
 <hr class="split-sm">
 
-<section>
+<section style="display:none">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-10 offset-lg-1">
