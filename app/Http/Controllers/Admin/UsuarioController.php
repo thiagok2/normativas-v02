@@ -97,9 +97,12 @@ class UsuarioController extends Controller
         }catch(\Exception $e){
             DB::rollBack();
 
+            $messageErro = (getenv('APP_DEBUG') === 'true') ? $e->getMessage():
+            "Problemas na indexação do documento. Caso o problema persista, entre em contato pelo email normativas@ness.com.br";
+
             return redirect()
 			    ->back()
-			    ->with('error', $e->getMessage());
+			    ->with('error', $messageErro);
         }
         
        

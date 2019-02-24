@@ -484,7 +484,7 @@
                     </p>
 
                     <div class="alert alert-danger">
-                        {{ $exception->getFile() }} - Linha {{ $exception->getLine() }}
+                        {{ $exception->getFile() }} - #{{ $exception->getLine() }}
                     </div>
 
                     <div class="alert alert-danger">

@@ -132,7 +132,7 @@ class DocumentoController extends Controller
             $validator = Validator::make($request->all(), $documento->rules, $documento->messages);
              
             if ($validator->fails()) {
-                 return redirect()->back()->withErrors($validator)->withInput();
+                 return redirect()->back()->withInput()->withErrors($validator);
             }
 
             $data= $request->all();
@@ -201,17 +201,19 @@ class DocumentoController extends Controller
     
             }else{
                 return redirect()
-			    ->back()
+			    ->back()->withInput()
 			    ->with('error', "Insira um anexo de extensão PDF.");
             }
 
         }catch(\Exception $e){
 
             DB::rollBack();
-            
+            $messageErro = (getenv('APP_DEBUG') === 'true') ? $e->getMessage():
+            "Problemas na indexação do documento. Caso o problema persista, entre em contato pelo email normativas@ness.com.br";
+
             return redirect()
-			    ->back()
-			    ->with('error', $e->getMessage());
+			    ->back()->withInput()
+			    ->with('error', $messageErro);
         }
     }
 
@@ -232,8 +234,6 @@ class DocumentoController extends Controller
             $documento->palavrasChaves()->delete();
             $documento->delete();
 
-            Storage::delete("uploads/$documento->arquivo");
-
             $params = [
                 'index' => 'normativas',
                 'type'  => '_doc',
@@ -248,6 +248,8 @@ class DocumentoController extends Controller
             if($result['found']){
                 $response = $this->client->delete($params);
             }
+
+            Storage::delete("uploads/$documento->arquivo");
             
             DB::commit();
 
@@ -256,10 +258,13 @@ class DocumentoController extends Controller
 
         }catch(\Exception $e){
             DB::rollBack();
+
+            $messageErro = (getenv('APP_DEBUG') === 'true') ? $e->getMessage():
+            "Documento não foi excluído. Caso o problema persista, entre em contato pelo email normativas@ness.com.br";
             
             return redirect()
 			    ->back()
-			    ->with('error', $e->getTraceAsString()." --- ".$e->getMessage());
+			    ->with('error', $messageErro);
         }
 
     }

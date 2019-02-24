@@ -19,6 +19,7 @@
     
     @include('admin.includes.alerts')
     
+    APP_DEBUG::{{getenv('APP_DEBUG')}}
     <form name="form" id="form" action="{{route('enviar')}}" method="post" enctype="multipart/form-data">
         {!! csrf_field() !!}
         <div class="row">
@@ -38,13 +39,13 @@
                     <div class="col-sm-2">
                         <div class="form-group">
                             <label for="ano">Ano*</label>
-                            <input type="text" required class="form-control" id="ano" name="ano" placeholder="Ex.: 2019" maxlength="4">
+                            <input type="text" value="{{ old('ano') }}" required class="form-control" id="ano" name="ano" placeholder="Ex.: 2019" maxlength="4">
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label for="numero">Número*</label>
-                            <input type="text" required class="form-control" id="numero" name="numero"  
+                            <input type="text" value="{{ old('numero') }}" required class="form-control" id="numero" name="numero"  
                             placeholder="Ex.: CEE/BR Nº 12.123" maxlength="20">
                         </div>
                     </div>
@@ -58,7 +59,7 @@
                                     <span class="glyphicon glyphicon-calendar">
                                     </span>
                                 </span>
-                                <input type='date' required class="form-control" id="data_publicacao" name="data_publicacao"/>
+                                <input type='date' value="{{ old('data_publicacao') }}" required class="form-control" id="data_publicacao" name="data_publicacao"/>
                             </div>
                         </div>
                     </div>
@@ -68,10 +69,11 @@
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label for="tipo_documento">Tipo Documento*</label>
+                               
                                 <select class="form-control" required id="tipo_documento_id" name="tipo_documento_id">
                                     <option>Selecione</option>
                                     @foreach ($tiposDocumento as $tipo)
-                                        <option value="{{$tipo->id}}">{{$tipo->nome}}</option>
+                                        <option value="{{$tipo->id}}" {{ old('tipo_documento_id') == $tipo->id ? "selected":""}}>{{$tipo->nome}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -83,7 +85,7 @@
                             <select class="form-control" required id="assunto_id" name="assunto_id">
                                 <option>Selecione</option>
                                 @foreach ($assuntos as $assunto)
-                                    <option value="{{$assunto->id}}">{{$assunto->nome}}</option>
+                                    <option value="{{$assunto->id}}" {{ old('assunto_id') == $assunto->id ? "selected":""}}>{{$assunto->nome}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -94,7 +96,7 @@
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label for="titulo">Título*</label>
-                            <input type="text" required class="form-control" id="titulo" name="titulo" placeholder="Ex.: Deliberação CEEBR Nº 12321...">
+                            <input type="text" value="{{old('titulo')}}" required class="form-control" id="titulo" name="titulo" placeholder="Ex.: Deliberação CEEBR Nº 12321...">
                         </div>
                     </div>
                 </div><!--end row -->
@@ -103,7 +105,7 @@
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label for="ementa">Ementa*</label>
-                            <textarea id="ementa" required class="form-control" rows="5" name="ementa"></textarea>
+                            <textarea id="ementa" required class="form-control" rows="5" name="ementa">{{old('ementa')}}</textarea>
                             <small class=".text-muted">Máximo de 255 caracteres</small>
                         </div>
                         
@@ -115,7 +117,7 @@
                         <div class="form-group">
                             <label for="palavras_chave">Palavras chave</label>
                             <small class=".text-muted">(Insira os termos mais relevantes abordados neste documento)</small>
-                            <input type="text"  required data-role="tagsinput" id="palavras_chave" name="palavras_chave"/>
+                            <input type="text"  value="{{old('palavras_chave')}}" required data-role="tagsinput" id="palavras_chave" name="palavras_chave"/>
 
                         </div>
                     </div>
@@ -132,7 +134,7 @@
                                     <span class="glyphicon glyphicon-globe">
                                     </span>
                                 </span>
-                                <input type='url' class="form-control" id="url" name="url" placeholder="HTTP://..." maxlength="200"/>
+                                <input type='url' value="{{old('url')}}" class="form-control" id="url" name="url" placeholder="HTTP://..." maxlength="200"/>
                             </div>
                         </div>
                     </div>
@@ -143,7 +145,7 @@
                         <div class="form-group">
                             <label for="arquivo">Arquivo(PDF)*</label>
                             <small class=".text-muted">(Tamanho máximo 5MB)</small>
-                            <input id="arquivo" required name="arquivo" class="form-control" type="file"></textarea>
+                            <input id="arquivo" value="{{old('arquivo')}}" required name="arquivo" class="form-control" type="file"></textarea>
                             <small class=".text-muted">Arquivos escaneados não são indexados para busca.</small>
                         </div>
                     </div>
