@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Documento;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 use App\Models\TipoDocumento;
 
@@ -230,41 +231,53 @@ class IndexController extends Controller
             ]
         ];
 
-
-        if(isset($query) || isset($filtro)){
-
-           
-            $result = $this->client->search($params);
-
-            //dd( $result);
-            $total = $result['hits']['total'];
-            $max_score = $result['hits']['max_score'];
-
-            //$q = $query;
-            $variables['page'] = $page;
-            $variables['total'] = $total;
-            $size_page = self::RESULTS_PER_PAGE;
-            $total_pages = ceil($total/self::RESULTS_PER_PAGE);
-
-            $max_score = $max_score;
-    
-    
-            if (isset($result['hits']['hits'])) {
-                //$variables['hits'] = $result['hits']['hits'];
-                $hits = $result['hits']['hits'];
-            }
-        }
-
-        $aggregations = $this->getSearchFilterAggregations($queryArray);
-
-
         $tiposDocumento = TipoDocumento::all();
+        try{
+            if(isset($query) || isset($filtro)){
+ 
+                $result = $this->client->search($params);
+    
+                //dd( $result);
+                $total = $result['hits']['total'];
+                $max_score = $result['hits']['max_score'];
+    
+                //$q = $query;
+                $variables['page'] = $page;
+                $variables['total'] = $total;
+                $size_page = self::RESULTS_PER_PAGE;
+                $total_pages = ceil($total/self::RESULTS_PER_PAGE);
+    
+                $max_score = $max_score;
+        
+        
+                if (isset($result['hits']['hits'])) {
+                    //$variables['hits'] = $result['hits']['hits'];
+                    $hits = $result['hits']['hits'];
+                }
+            }
+    
+            $aggregations = $this->getSearchFilterAggregations($queryArray);
+            
+            return view('index.index', compact('max_score'
+            ,'tipo_doc','esfera','ano','fonte','periodo','filters',
+            'page','from','query','q','page','total','size_page',
+            'total_pages','hits','aggregations','tiposDocumento','message'));
        
 
-        return view('index.index', compact('max_score'
-        ,'tipo_doc','esfera','ano','fonte','periodo','filters',
-        'page','from','query','q','page','total','size_page',
-        'total_pages','hits','aggregations','tiposDocumento'));
+        }catch(\Exception $e){
+
+            $erro['titulo'] = getenv('APP_DEBUG') ? "DEBUG:: ".$e->getMessage() : 'Plataforma de busca indisponível';
+            $erro['local'] = $e->getFile()." #".$e->getLine();
+            $erro['trace'] = $e->getTraceAsString();
+
+            Log::error($e->getFile().' - Linha '.$e->getLine().' - search::'.$e->getMessage());
+            return view('index.index', compact('max_score'
+            ,'tipo_doc','esfera','ano','fonte','periodo','filters',
+            'page','from','query','q','page','total','size_page',
+            'total_pages','hits','aggregations','tiposDocumento','erro'));
+           
+        }
+
         
     }
 

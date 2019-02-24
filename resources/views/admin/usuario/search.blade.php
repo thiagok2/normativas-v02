@@ -58,7 +58,7 @@
                                         @if (auth()->user()->id != $u->id && (auth()->user()->isGestor() || auth()->user()->isAdmin()))
 
                                     <a href="{{route('usuario-reconvidar',$u->id)}}" class="btn 
-                                        {{$u->confirmado_em !== null ? 'btn-primary':'btn-danger'}} ">Envir novo convite</a>    
+                                        {{$u->confirmado_em !== null ? 'btn-primary':'btn-danger'}} ">Enviar novo convite</a>    
                                         @endif
                                     </td>
                                 </tr>

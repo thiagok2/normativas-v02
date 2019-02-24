@@ -34,6 +34,33 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-8 offset-lg-2">
+                @if (isset($erro))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>{{$erro['titulo']}}</strong> 
+                        <br/>
+                        Notifique a administração do sistema através do email: 
+                        <a href="mailto:normativas@nees.com.br?Subject=Notificação de erro" target="_top">normativas@nees.com.br</a>
+
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    @if(getenv('APP_DEBUG'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <b>DEBUG</b>
+
+                            <small>
+                                <p>{{$erro['local']}}</p>
+                                
+                                <p>{{$erro['trace']}}</p>
+                            </small> 
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif    
+                @endif
+               
                 <form action="/" method="GET" class="">
                     <div class="input-group">
                         <input type="text" name="query" class="form-control" placeholder="Digite os termos da consulta" value="{{ $query }}" />
@@ -185,7 +212,7 @@
                                 @endforeach
                                 <hr class="split-sm">
                                 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#trechos-{{$loop->index}}" aria-expanded="false" aria-controls="highlight-collapse-{{$hit['_id']}}"
-                                    {{empty($hit['highlight']['attachment.content']) ? 'disabled':''}}>
+                                    {{empty($hit['highlight']) || empty($hit['highlight']['attachment.content']) ? 'disabled':''}}>
                                     Trechos encontrados
                                 </button>
 
@@ -240,9 +267,11 @@
             <!-- end pagination-->
 
         @elseif (isset($hits))
-            <div class="row" id="no-results">
-                <div class="col-xs-6 col-xs-offset-3">
-                    <p>Sem resultados!</p>
+            <div class="row mt-3" id="no-results">
+                <div class="col-lg-6 offset-md-3">
+                    <div class="alert alert-secondary" role="alert">
+                        Nenhum resultado encontrado.
+                    </div>
                 </div>
             </div>
         @endif    
