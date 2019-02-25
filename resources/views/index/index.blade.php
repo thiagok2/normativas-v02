@@ -198,9 +198,15 @@
                                 @endif
                                 <br/>
                                 <strong>Conselho:</strong> 
+                                    @if (isset($hit['_source']['ato']['fonte']['sigla']))
                                     <a href="?query={{$query}}&fonte={{ $hit['_source']['ato']['fonte']['sigla'] }}">
                                         {{ $hit['_source']['ato']['fonte']['orgao'] }}
                                     </a>
+                                    @else
+                                        {{ $hit['_source']['ato']['fonte']['orgao'] }}
+                                    @endif
+                                    
+                                    
                                 <br/>
                                 <strong>Publicação:</strong> {{ date('d/m/Y', strtotime($hit['_source']['ato']['data_publicacao'] )) }}
                                 <br />

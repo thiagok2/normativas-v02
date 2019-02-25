@@ -281,12 +281,7 @@ class IndexController extends Controller
         
     }
 
-    // public function filter(Request $request)
-    // {
-    //     $variables = [];
-    //     return view('index.index', $variables);
-    // }
-
+   
     public function pdfNormativa($normativaId)
     {
         $result = $this->client->get([
