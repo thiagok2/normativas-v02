@@ -72,9 +72,10 @@ class HomeController extends Controller
 
         $tagCount = DB::table('palavra_chaves')->distinct('tag')->count('tag');
 
+        $unidades = Unidade::withCount('documentos')->has('documentos', '>', 0)->orderBy('documentos_count', 'desc')
+            ->paginate(10); 
 
-
-        return view('home',compact('documentos','documentosCount','usersCount','tagCount','tags'));
+        return view('home',compact('documentos','documentosCount','usersCount','tagCount','tags','unidades'));
     }
 
     public function getenv(){
