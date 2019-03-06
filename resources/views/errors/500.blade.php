@@ -461,8 +461,8 @@
     <div class="md:flex min-h-screen">
         <div class="w-full md:w-1/2 bg-white flex items-center justify-center">
             <div class="max-w-sm m-8">
-                <div class="text-black text-5xl md:text-15xl font-black">
-                    500
+                <div class="text-black text-5xl md:text-5xl font-black">
+                    Desculpas. Estamos com problemas.
                 </div>
 
                 <div class="w-16 h-1 bg-purple-light my-3 md:my-6"></div>
@@ -479,9 +479,8 @@
                 </a>
               
                 @if (getenv('APP_DEBUG'))
-                    <p class="text-grey-darker text-2xl md:text-3xl font-light mb-8 leading-normal">
-                        <h2>{{ $exception->getMessage() }}</h2>
-                    </p>
+                    <p class="text-grey-darker text-2xl md:text-xl font-light mb-8 leading-normal">
+                        {{ $exception->getMessage() }}
 
                     <div class="alert alert-danger">
                         {{ $exception->getFile() }} - #{{ $exception->getLine() }}

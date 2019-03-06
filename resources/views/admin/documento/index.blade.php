@@ -96,7 +96,7 @@
                                 <th style="width: 4%">Por</th>
                                 <th style="width: 2%"></th>
                             </tr>
-                        <thead>  
+                        </thead>  
                         <tbody>
                             
                                 @forelse ($documentos as $key=>$doc)

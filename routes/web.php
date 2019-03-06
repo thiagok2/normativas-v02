@@ -52,7 +52,18 @@ Route::prefix('admin')->middleware('auth')->namespace('Admin')->group(function()
     Route::get('unidades/{id}/edit', 'UnidadeController@edit')->name('unidade-edit');
     
     Route::get('tiposdocumento', 'TipoDocumentoController@index')->name('tiposdocumento');
+    
+    
     Route::get('assuntos', 'AssuntoController@index')->name('Assuntos');
+    Route::get('assuntos/novo', 'AssuntoController@create')->name('assuntos-create');
+    Route::post('assuntos/salvar', 'AssuntoController@store')->name('assunto-store');
+    Route::get('assuntos/editar/{id}', 'AssuntoController@edit')->name('assunto-edit');
+    Route::get('assuntos/delete/{id}', 'AssuntoController@destroy')->name('assunto-delete');
+    Route::get('assuntos/removidos', 'AssuntoController@trashed')->name('assunto-removidos');
+    Route::get('assuntos/restaurar/{id}', 'AssuntoController@restore')->name('assunto-restore');
+
+    
+    
     Route::get('documentos', 'DocumentoController@search')->name('documentos');
     Route::get('documentos/pesquisar', 'DocumentoController@search')->name('documentos-pesquisar');
     
