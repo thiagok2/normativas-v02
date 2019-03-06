@@ -12,8 +12,7 @@
         <li> <a href="#" class="active">Assuntos</a></li>
     </ol>
     <div class="page-header">
-        <h2>Assuntos </h2>
-        <small>Temas Amplos dos documentos</small>
+        <small>Assuntos gerais abordados nos documentos</small>
         <a href="{{route('assuntos-create')}}" class="btn btn-primary btn-lg">Novo Assunto</a>
     </div>
 

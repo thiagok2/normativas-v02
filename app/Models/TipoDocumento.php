@@ -3,11 +3,24 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class TipoDocumento extends Model
 {
     protected $fillable = [
         'nome','descricao'
+    ];
+
+    public $timestamps = true;
+    use SoftDeletes;
+
+    public $rules = [
+        'nome' => 'required|string|unique:tipo_documentos|max:100',
+        'descricao' => 'string|max:255'
+    ];
+
+    public $messages = [
+        'required' => 'O campo :attribute é obrigatório'
     ];
 
     public function documentos(){

@@ -10,11 +10,11 @@
 @section('content')
     <ol class="breadcrumb">
         <li><a href="{{route('home')}}">Painel</a></li>
-        <li><a href="#">Assuntos</a></li>
+        <li><a href="#">Tipos de Documentos</a></li>
         <li><a href="#">Editar</a></li>
     </ol>
     <div class="page-header">
-        <a href="{{route('assuntos-create')}}" class="btn btn-primary btn-lg">Novo Assunto</a>
+        <a href="{{route('tiposdocumento-create')}}" class="btn btn-primary btn-lg">Novo Tipo de Documento</a>
     </div>
 
     <div class="container">
@@ -22,20 +22,20 @@
             @include('admin.includes.alerts')
             <div class="col-lg-8">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><b>Editar Assunto:</b> Informe nome e descrição</div>
+                    <div class="panel-heading"><b>Editar Tipo de documento:</b> Informe nome e descrição</div>
                     <div class="panel-body">
-                    @if (isset($assunto->deleted_at))
+                    @if (isset($tipodocumento->deleted_at))
                         <div class="alert alert-warning">
-                            Assunto desabilitado em {{date('d/m/Y H:i:s', strtotime($assunto->deleted_at))}}
+                            Tipo de documento desabilitado em {{date('d/m/Y H:i:s', strtotime($tipodocumento->deleted_at))}}
                         </div>
                     @endif
-                    <form  name="form" id="form" method="post" action="{{route('assunto-store')}}"> 
+                    <form  name="form" id="form" method="post" action="{{route('tiposdocumento-store')}}"> 
                         {!! csrf_field() !!}
 
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="id">Id*</label>
-                                <input type="text" class="form-control" value="{{$assunto->id}}" name="id" id="id"
+                                <input type="text" class="form-control" value="{{$tipodocumento->id}}" name="id" id="id"
                                     readonly maxlength="100" minlength="10">
                             </div>
                         </div>
@@ -43,23 +43,23 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="nome">Nome*</label>
-                                <input type="text" class="form-control" value="{{$assunto->nome}}" name="nome" id="nome"
-                                    required maxlength="100" minlength="10" @if (isset($assunto->deleted_at)) readonly @endif >
+                                <input type="text" class="form-control" value="{{$tipodocumento->nome}}" name="nome" id="nome"
+                                    required maxlength="100" minlength="10" @if (isset($tipodocumento->deleted_at)) readonly @endif >
                             </div>
                         </div>
 
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="descricao">Descrição*</label>
-                                <textarea class="form-control"  name="descricao" id="descricao" @if (isset($assunto->deleted_at)) readonly @endif>{{ $assunto->descricao }}</textarea>
+                                <textarea class="form-control"  name="descricao" id="descricao" @if (isset($tipodocumento->deleted_at)) readonly @endif>{{ $tipodocumento->descricao }}</textarea>
                             </div>
                         </div>
 
                         <button type="submit" class="btn btn-primary btn-lg " value="Salvar">Salvar</button>
-                        @if (isset($assunto->deleted_at))
-                            <a href="{{route('assunto-restore', $assunto->id)}}" class="btn btn-warning btn-lg pull-right" value="Habilitar">Habilitar</a>
+                        @if (isset($tipodocumento->deleted_at))
+                            <a href="{{route('tiposdocumento-restore', $tipodocumento->id)}}" class="btn btn-warning btn-lg pull-right" value="Habilitar">Habilitar</a>
                         @else
-                            <a href="{{route('assunto-delete', $assunto->id)}}" class="btn btn-danger btn-lg pull-right" value="Excluir">Excluir</a>
+                            <a href="{{route('tiposdocumento-delete', $tipodocumento->id)}}" class="btn btn-danger btn-lg pull-right" value="Excluir">Excluir</a>
                         @endif
                         
                     </form>
@@ -68,14 +68,14 @@
             </div><!-- end col-8 main-->
             <div class="col-lg-4">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Assuntos cadastrados</div>
+                    <div class="panel-heading">Tipos de documento cadastrados</div>
                     <div class="panel-body">
                         <div class="list-group">
-                            @foreach ($assuntos as $a)
+                            @foreach ($tipodocumentos as $t)
                                 
-                                <a href="{{route('assunto-edit',$a->id)}}" class="list-group-item @if ($a->id == $assunto->id) active @endif">
+                                <a href="{{route('tiposdocumento-edit',$t->id)}}" class="list-group-item @if ($t->id == $tipodocumento->id) active @endif">
                                     <span class="list-group-item-text">
-                                    {{$a->nome}}
+                                    {{$t->nome}}
                                     </span>
 
                                     <span class="pull-right">
@@ -93,7 +93,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
-                <div class="panel-heading">Documentos associados a {{$assunto->nome}} ({{$documentos->total()}})</div>
+                <div class="panel-heading">Documentos associados a {{$tipodocumento->nome}} ({{$documentos->total()}})</div>
                     <div class="panel-body">
                         <table class="table table-condensed table-hover">
                             <thead>

@@ -62,6 +62,14 @@ Route::prefix('admin')->middleware('auth')->namespace('Admin')->group(function()
     Route::get('assuntos/removidos', 'AssuntoController@trashed')->name('assunto-removidos');
     Route::get('assuntos/restaurar/{id}', 'AssuntoController@restore')->name('assunto-restore');
 
+
+    Route::get('tiposdocumento/novo', 'TipoDocumentoController@create')->name('tiposdocumento-create');
+    Route::post('tiposdocumento/salvar', 'TipoDocumentoController@store')->name('tiposdocumento-store');
+    Route::get('tiposdocumento/editar/{id}', 'TipoDocumentoController@edit')->name('tiposdocumento-edit');
+    Route::get('tiposdocumento/delete/{id}', 'TipoDocumentoController@destroy')->name('tiposdocumento-delete');
+    Route::get('tiposdocumento/removidos', 'TipoDocumentoController@trashed')->name('tiposdocumento-removidos');
+    Route::get('tiposdocumento/restaurar/{id}', 'TipoDocumentoController@restore')->name('tiposdocumento-restore');
+
     
     
     Route::get('documentos', 'DocumentoController@search')->name('documentos');

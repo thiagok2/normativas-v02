@@ -19,12 +19,12 @@ class Documento extends Model
 
     public function assunto()
     {
-        return $this->belongsTo(Assunto::class);
+        return $this->belongsTo(Assunto::class)->withTrashed();
     }
 
     public function tipoDocumento()
     {
-        return $this->belongsTo(TipoDocumento::class);
+        return $this->belongsTo(TipoDocumento::class)->withTrashed();
     }
 
     public function unidade()

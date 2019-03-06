@@ -30,7 +30,7 @@ class AssuntoController extends Controller
 
     public function edit(Request $request, $assuntoId){
         $assunto = Assunto::withTrashed()->find($assuntoId);
-        $documentos = Documento::where('assunto_id',$assuntoId)->paginate(10);
+        $documentos = Documento::with('tipoDocumento')->where('assunto_id',$assuntoId)->paginate(10);
         $assuntos = Assunto::all();
         return view('admin.assunto.edit', compact('assunto','assuntos','documentos'));
     }
@@ -38,12 +38,9 @@ class AssuntoController extends Controller
     public function store(Request $request){
 
         try{
-            DB::beginTransaction();
-            
+            DB::beginTransaction();            
             $data = $request->all();
 
-
-            
             if($request->has('id')){
                 $assunto = Assunto::withTrashed()->find($request['id']);
             }else{
@@ -61,7 +58,6 @@ class AssuntoController extends Controller
             return redirect()->route('Assuntos')
                         ->with('success', 'Assunto cadastrado com sucesso.');
         }catch(\Exception $e){
-
             DB::rollBack();
             
             return redirect()->back()->withInput()->with('error', 'Problemas no cadastro do assunto.\n'.$e->getMessage());;
@@ -75,14 +71,18 @@ class AssuntoController extends Controller
             $assunto = Assunto::find($id);
 
             $documentos = Documento::where('assunto_id',$id)->get();
-            if($documentos->isEmpty())
+            if($documentos->isEmpty()){
+                $mensagem = "Assunto removido permanentemente. Não havia documentos associados a esse assunto.";
                 $assunto->forceDelete();
-            else
+            }else{
+                $mensagem = "Assunto desabilitado. Havia documentos associados a esse assunto.
+                Você pode reabilitar esse assunto através do sistema.";
                 $assunto->delete();
+            }
             DB::commit();
 
             return redirect()->route('Assuntos')
-                            ->with(['success'=> "Assunto removido com sucesso"]);
+                            ->with(['success'=> $mensagem ]);
         }catch(\Exception $e){
             DB::rollBack();
 

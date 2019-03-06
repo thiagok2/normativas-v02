@@ -479,14 +479,14 @@
                 </a>
               
                 @if (getenv('APP_DEBUG'))
-                    <p class="text-grey-darker text-2xl md:text-xl font-light mb-8 leading-normal">
+                    <p class="text-grey-darker text-xl md:text-xl font-light mb-8 leading-normal">
                         {{ $exception->getMessage() }}
 
-                    <div class="alert alert-danger">
+                    <div class="alert alert-danger small">
                         {{ $exception->getFile() }} - #{{ $exception->getLine() }}
                     </div>
 
-                    <div class="alert alert-danger">
+                    <div class="alert alert-danger small">
                         {{ $exception->getTraceAsString() }} }}
                     </div>
                 @endif
