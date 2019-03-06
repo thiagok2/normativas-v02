@@ -477,17 +477,39 @@
                         Retornar a página inicial
                     </button>
                 </a>
+                <br/><br/>
+                @if (Auth::check())
+                    <a href="{{getenv('APP_URL').'/admin/home'}}">
+                        <button class="bg-transparent text-grey-darkest font-bold uppercase tracking-wide py-3 px-6 border-2 border-grey-light hover:border-grey rounded-lg">
+                            Voltar ao sistema de administração
+                        </button>
+                    </a>
+                @endif
               
                 @if (getenv('APP_DEBUG'))
                     <p class="text-grey-darker text-xl md:text-xl font-light mb-8 leading-normal">
+                        @if (isset($exception))
                         {{ $exception->getMessage() }}
+                        @else
+                            Mensagem da exceção
+                        @endif
+                       
 
                     <div class="alert alert-danger small">
+                        @if (isset($exception))
                         {{ $exception->getFile() }} - #{{ $exception->getLine() }}
+                        @else
+                            Localização do erro. File... linha Y
+                        @endif
+                       
                     </div>
 
                     <div class="alert alert-danger small">
+                        @if (isset($exception))
                         {{ $exception->getTraceAsString() }} }}
+                        @else
+                            Trace da exceção....
+                        @endif
                     </div>
                 @endif
 

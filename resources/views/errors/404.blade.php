@@ -457,8 +457,9 @@
     <div class="md:flex min-h-screen">
         <div class="w-full md:w-1/2 bg-white flex items-center justify-center">
             <div class="max-w-sm m-8">
-                <div class="text-black text-5xl md:text-10xl font-black">
-                    404
+                <div class="text-black text-2xl md:text-10xl font-black">
+                    Desculpa, mas você está no endereço certo?
+                    :)
                 </div>
 
                 <div class="w-16 h-1 bg-purple-light my-3 md:my-6"></div>
@@ -472,6 +473,14 @@
                         Retornar para busca
                     </button>
                 </a>
+                <br/><br/>
+                @if (Auth::check())
+                    <a href="{{getenv('APP_URL').'/admin/home'}}">
+                        <button class="bg-transparent text-grey-darkest font-bold uppercase tracking-wide py-3 px-6 border-2 border-grey-light hover:border-grey rounded-lg">
+                            Voltar ao sistema de administração
+                        </button>
+                    </a>
+                @endif
 
                 
             </div>
