@@ -37,10 +37,20 @@ Route::match('get', '/filter', [
 
 Route::get('documente/delete/{arquivoId}', 'IndexController@delete')->name('delete-elastic');
 
+Route::get('errors/500', function () {
+    return view('errors/500');
+});
+
+Route::get('errors/404', function () {
+    return view('errors/404');
+});
 
 Route::prefix('admin')->middleware('auth')->namespace('Admin')->group(function(){
 
     Route::get('getenv', 'HomeController@getenv')->name('getenv');
+
+    
+
 
     Route::get('home', 'HomeController@index')->name('home');
 

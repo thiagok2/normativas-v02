@@ -56,6 +56,18 @@
                                     <td>DATABASE_URL</td>
                                     <td>{{$DATABASE_URL}}</td>
                                 </tr>
+                                <tr>
+                                    <td>PAGE_ERRO_500</td>
+                                    <td>
+                                        <a href="../errors/500" >error.500</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>404</td>
+                                    <td>
+                                        <a href="../errors/404" >error.404</a>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>

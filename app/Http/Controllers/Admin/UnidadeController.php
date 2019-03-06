@@ -114,8 +114,11 @@ class UnidadeController extends Controller
         }catch(\Exception $e){
 
             DB::rollBack();
-            
-            return redirect()->back()->withInput()->with('error', 'Confirme os dados obrigatórios.');;
+            $messageError = getenv('APP_DEBUG') === 'true' ? $e->getMessage():
+            "Operação não foi realizada. Verifique se os dados estão corretos. 
+            Caso o problema persista, entre em contato com os administradores.";
+        
+            return redirect()->back()->withInput()->with('error', $messageError);
         }
        
 

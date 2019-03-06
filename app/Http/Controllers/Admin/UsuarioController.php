@@ -98,7 +98,7 @@ class UsuarioController extends Controller
             DB::rollBack();
 
             $messageErro = (getenv('APP_DEBUG') === 'true') ? $e->getMessage():
-            "Problemas na indexação do documento. Caso o problema persista, entre em contato pelo email normativas@ness.com.br";
+            "Problemas na indexação do documento. Caso o problema persista, entre em contato com os administradores.";
 
             return redirect()
 			    ->back()
@@ -170,9 +170,11 @@ class UsuarioController extends Controller
         }catch(\Exception $e){
             DB::rollBack();
 
-            return redirect()
-			    ->back()
-			    ->with('error', $e->getMessage());
+            $messageError = getenv('APP_DEBUG') === 'true' ? $e->getMessage():
+            "Operação não foi realizada. Verifique se os dados estão corretos. 
+            Caso o problema persista, entre em contato com os administradores.";
+        
+            return redirect()->back()->withInput()->with('error', $messageError);
         }
 
     }
@@ -203,9 +205,11 @@ class UsuarioController extends Controller
         }catch(\Exception $e){
             DB::rollBack();
 
-            return redirect()
-			    ->back()
-			    ->with('error', $e->getMessage());
+            $messageError = getenv('APP_DEBUG') === 'true' ? $e->getMessage():
+            "Operação não foi realizada. Verifique se os dados estão corretos. 
+            Caso o problema persista, entre em contato com os administradores.";
+        
+            return redirect()->back()->withInput()->with('error', $messageError);
         }
         
     }
@@ -231,9 +235,11 @@ class UsuarioController extends Controller
         }catch(\Exception $e){
             DB::rollBack();
 
-            return redirect()
-			    ->back()
-			    ->with('error', $e->getMessage());
+            $messageError = getenv('APP_DEBUG') === 'true' ? $e->getMessage():
+            "Operação não foi realizada. Verifique se os dados estão corretos. 
+            Caso o problema persista, entre em contato com os administradores.";
+        
+            return redirect()->back()->withInput()->with('error', $messageError);
         }
        
 

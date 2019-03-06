@@ -67,7 +67,11 @@ class TipoDocumentoController extends Controller
         }catch(\Exception $e){
             DB::rollBack();
             
-            return redirect()->back()->withInput()->with('error', 'Problemas no cadastro do tipo de documento.\n'.$e->getMessage());;
+            $messageError = getenv('APP_DEBUG') === 'true' ? $e->getMessage():
+            "Operação não foi realizada. Verifique se os dados estão corretos. 
+            Caso o problema persista, entre em contato com os administradores.";
+        
+            return redirect()->back()->withInput()->with('error', $messageError);
         }
         
     }
@@ -94,9 +98,11 @@ class TipoDocumentoController extends Controller
         }catch(\Exception $e){
             DB::rollBack();
 
-            return redirect()
-			    ->back()
-			    ->with('error', $e->getMessage());
+            $messageError = getenv('APP_DEBUG') === 'true' ? $e->getMessage():
+            "Operação não foi realizada. Verifique se os dados estão corretos. 
+            Caso o problema persista, entre em contato com os administradores.";
+        
+            return redirect()->back()->withInput()->with('error', $messageError);
         }
     }
 
