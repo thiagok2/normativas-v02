@@ -43,6 +43,9 @@
                             <button type="submit" class="btn btn-primary mr-1"><i class="fa fa-search"></i> 
                                 Pesquisar conselhos
                             </button>
+                            <a class="btn btn-info ml-1" href="/" target="_blank">
+                                <i class="fa fa-search"></i> Pesquisar Atos Normativos
+                            </a>
                         </div>
                     </div>
                 </form>
@@ -127,7 +130,7 @@
                             @if (isset($federal->confirmado_em))
                             <div class="col-lg-8">
                                 <label class="form-label">Ingressou na plataforma em:</label>
-                                <span class="form-value">{{$federal->confirmado_em}}</span>
+                                <span class="form-value">{{date('d/m/Y', strtotime($federal->confirmado_em))}}</span>
                             </div>
                             @endif
 
@@ -148,7 +151,7 @@
                 <div class="col-lg-10 offset-lg-1">
                     <div class="card mb-3 @if ($u->documentos_count > 0) border-secondary @else border-light @endif ">
                         <div class="card-header">
-                            <a href="#">
+                            <a href="{{route('unidades-page',$u->id)}}">
                                 <i class="fa fa-external-link"></i>  {{ $u->nome }}
                             </a>
                         </div>
@@ -216,7 +219,7 @@
                             @if (isset($u->confirmado_em))
                             <div class="col-lg-8">
                                 <label class="form-label">Ingressou na plataforma em:</label>
-                                <span class="form-value">{{$u->confirmado_em}}</span>
+                                <span class="form-value">{{date('d/m/Y', strtotime($u->confirmado_em))}}</span>
                             </div>
                             @endif
 
