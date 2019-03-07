@@ -9,7 +9,7 @@
 @section('content')
     <ol class="breadcrumb">
         <li><a href="{{route('home')}}">Painel</a></li>
-        <li><a href="#">Tipos de Documento</a></li>
+        <li><a href="{{route('tiposdocumento')}}">Tipos de Documento</a></li>
         <li><a href="#">Novo</a></li>
     </ol>
     <div class="page-header">
@@ -57,6 +57,7 @@
                                 <a href="{{route('tiposdocumento-edit',$t->id)}}" class="list-group-item">
                                     <span class="list-group-item-text">
                                     {{$t->nome}}
+                                    ({{$t->documentos_count}})
                                     </span>
 
                                     <span class="pull-right">

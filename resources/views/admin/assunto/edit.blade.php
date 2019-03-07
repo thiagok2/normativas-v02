@@ -10,7 +10,7 @@
 @section('content')
     <ol class="breadcrumb">
         <li><a href="{{route('home')}}">Painel</a></li>
-        <li><a href="#">Assuntos</a></li>
+        <li><a href="{{route('Assuntos')}}">Assuntos</a></li>
         <li><a href="#">Editar</a></li>
     </ol>
     <div class="page-header">
@@ -76,6 +76,7 @@
                                 <a href="{{route('assunto-edit',$a->id)}}" class="list-group-item @if ($a->id == $assunto->id) active @endif">
                                     <span class="list-group-item-text">
                                     {{$a->nome}}
+                                    ({{$a->documentos_count}})
                                     </span>
 
                                     <span class="pull-right">

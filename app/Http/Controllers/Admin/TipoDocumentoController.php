@@ -14,18 +14,18 @@ use Illuminate\Support\Facades\Validator;
 class TipoDocumentoController extends Controller
 {
     public function index(){
-        $tipodocumentos = TipoDocumento::all();
+        $tipodocumentos = TipoDocumento::withCount('documentos')->get()->sortByDesc("documentos_count");
 
         return view('admin.tipodocumento.index', compact('tipodocumentos'));
     }
 
     public function trashed(){
-        $tipodocumentos = TipoDocumento::onlyTrashed()->get();
+        $tipodocumentos = TipoDocumento::onlyTrashed()->withCount('documentos')->get()->sortByDesc("documentos_count");
         return view('admin.tipodocumento.trashed',compact('tipodocumentos'));
     }
 
     public function create(Request $request){
-        $tipodocumentos = TipoDocumento::all();
+        $tipodocumentos = TipoDocumento::withCount('documentos')->get()->sortByDesc("documentos_count");
 
         return view('admin.tipodocumento.create', compact('tipodocumentos'));
     }
@@ -37,7 +37,7 @@ class TipoDocumentoController extends Controller
         
         $documentos = Documento::with('tipoDocumento')->where('tipo_documento_id',$tipoId)->paginate(10);
         
-        $tipodocumentos = TipoDocumento::all();
+        $tipodocumentos = TipoDocumento::withCount('documentos')->get()->sortByDesc("documentos_count");
 
         return view('admin.tipodocumento.edit', compact('tipodocumento','tipodocumentos','documentos'));
     }

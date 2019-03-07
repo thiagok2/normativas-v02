@@ -9,7 +9,7 @@
 @section('content')
     <ol class="breadcrumb">
         <li><a href="{{route('home')}}">Painel</a></li>
-        <li> <a href="#" class="active">Assuntos</a></li>
+        <li><a href="{{route('Assuntos')}}" class="active">Assuntos</a></li>
     </ol>
     <div class="page-header">
         <small>Assuntos gerais abordados nos documentos</small>
@@ -24,7 +24,10 @@
                 <div class="col-lg-4">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <span class="lead">{{$assunto->nome}}</span>
+                            <span class="lead">
+                                {{$assunto->nome}}
+                                ({{$assunto->documentos_count}})
+                            </span>
 
                             <div class="pull-right">
                                 <a href="{{route('assunto-edit',$assunto->id)}}">

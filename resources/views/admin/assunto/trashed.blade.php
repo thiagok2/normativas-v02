@@ -9,7 +9,8 @@
 @section('content')
     <ol class="breadcrumb">
         <li><a href="{{route('home')}}">Painel</a></li>
-        <li> <a href="#" class="active">Assuntos de Removidos</a></li>
+        <li><a href="{{route('Assuntos')}}">Assuntos</a></li>
+        <li> <a href="#" class="active">Removidos</a></li>
     </ol>
     <div class="page-header">
         <a href="{{route('assuntos-create')}}" class="btn btn-primary btn-lg">Novo Assunto</a>
@@ -21,7 +22,11 @@
                 <div class="col-lg-12">
                     <div class="panel panel-danger">
                         <div class="panel-heading">
-                            <span class="lead">{{$assunto->nome}}</span>
+                            <span class="lead">
+                                {{$assunto->nome}}
+                                ({{$assunto->documentos_count}})
+                            
+                            </span>
 
                             <div class="pull-right">
                                 <a href="{{route('assunto-edit',$assunto->id)}}">

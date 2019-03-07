@@ -13,17 +13,17 @@ use App\Models\Documento;
 class AssuntoController extends Controller
 {
     public function index(){
-        $assuntos = Assunto::all()->sortBy("created_at");;
+        $assuntos = Assunto::withCount('documentos')->get()->sortByDesc("documentos_count");
         return view('admin.assunto.index',compact('assuntos'));
     }
 
     public function trashed(){
-        $assuntos = Assunto::onlyTrashed()->get();
+        $assuntos = Assunto::onlyTrashed()->withCount('documentos')->get()->sortByDesc("documentos_count");
         return view('admin.assunto.trashed',compact('assuntos'));
     }
 
     public function create(Request $request){
-        $assuntos = Assunto::all();
+        $assuntos = Assunto::withCount('documentos')->get()->sortByDesc("documentos_count");
 
         return view('admin.assunto.create', compact('assuntos'));
     }
@@ -31,7 +31,7 @@ class AssuntoController extends Controller
     public function edit(Request $request, $assuntoId){
         $assunto = Assunto::withTrashed()->find($assuntoId);
         $documentos = Documento::with('tipoDocumento')->where('assunto_id',$assuntoId)->paginate(10);
-        $assuntos = Assunto::all();
+        $assuntos = Assunto::withCount('documentos')->get()->sortByDesc("documentos_count");
         return view('admin.assunto.edit', compact('assunto','assuntos','documentos'));
     }
 

@@ -25,7 +25,10 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <span class="lead">{{$doc->nome}}</span>
+                            <span class="lead">
+                                {{$doc->nome}}
+                                ({{$doc->documentos_count}})
+                            </span>
 
                             <div class="pull-right">
                                 <a href="{{route('tiposdocumento-edit', $doc->id)}}">
