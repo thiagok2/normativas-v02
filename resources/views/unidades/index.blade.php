@@ -62,7 +62,7 @@
                 <div class="col-lg-10 offset-lg-1">
                     <div class="card mb-3 border-dark">
                         <div class="card-header">
-                            <a href="#">
+                            <a href="{{route('unidades-page',$federal->id)}}">
                                 <i class="fa fa-external-link"></i>  {{ $federal->nome }}
                             </a>
                         </div>
