@@ -123,4 +123,24 @@ class UnidadeController extends Controller
        
 
     }
+
+    protected $q;
+    public function search(Request $request){
+        $q = $request->q;
+        $federal = Unidade::where('esfera','Federal')->first();
+
+        $query = Unidade::with('estado')->withCount('documentos')->whereIn('esfera',['Estadual','Municipal']);
+        if($request->has('q')){
+            $this->q = $q;
+            $query->whereHas('estado', function($query){
+                $query->where('nome', 'ilike', '%'.$this->q.'%');
+                $query->orWhere('sigla', 'ilike', '%'.$this->q.'%');
+            });
+        }
+        
+
+
+        $unidades = $query->orderBy('documentos_count', 'desc')->paginate(10);
+        return view('unidades.index', compact('unidades','federal','q'));
+    }
 }

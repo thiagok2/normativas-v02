@@ -91,7 +91,7 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="email">Email*</label>
-                                <small class=".text-muted">(Separar emails com <b>;(ponto e virgula))</b></small>
+                                <small class="text-muted">(Separar emails com <b>;(ponto e virgula))</b></small>
                                 <input type="text" class="form-control" value="{{ $unidade->email }}" name="email"
                                     required maxlength="255">
                             </div>
@@ -102,7 +102,7 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="url">URL</label>
-                                <small class=".text-muted">(Endereço online - opcional)</small>
+                                <small class="text-muted">(Endereço online - opcional)</small>
                                 <div class='input-group'>
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-globe">
@@ -119,7 +119,7 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="endereco">Endereço</label>
-                                <small class=".text-muted">(opcional)</small>
+                                <small class="text-muted">(opcional)</small>
                                 <input type='text' class="form-control" name="endereco" value="{{ $unidade->endereco }}" maxlength="255"/>
                             </div>
                         </div>
@@ -129,7 +129,7 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="endereco">Contato</label>
-                                <small class=".text-muted">(opcional)</small>
+                                <small class="text-muted">(opcional)</small>
                                 <input type='text' class="form-control" id="contato" name="contato" 
                                     value="{{ $unidade->contato }}" maxlength="255"/>
                             </div>
@@ -138,7 +138,7 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="endereco">Contato 2</label>
-                                <small class=".text-muted">(opcional)</small>
+                                <small class="text-muted">(opcional)</small>
                                 <textarea class="form-control" id="contato2" name="contato2" maxlength="255">{{ $unidade->contato2 }}</textarea>
                             </div>
                         </div>
