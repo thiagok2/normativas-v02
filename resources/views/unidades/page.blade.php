@@ -11,7 +11,7 @@
                         <a href="{{ route('home') }}">Home</a>
                     @else
                         <a href="{{ route('login') }}" class="btn btn-outline-secondary btn-pill btn-login m-1 mt-2">Entrar <i class="fa fa-user badge-info"></i></a>
-                        <!-- 
+                        <!--
                         <a href="{{ route('register') }}">Registrar</a>
                         -->
                     @endauth
@@ -40,63 +40,44 @@
 
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-lg-4">
-                                <label class="form-label">Esfera:</label>
-                                <span class="form-value">{{$unidade->esfera}}</span> 
-                            </div>
-                            <div class="col-lg-4">
-                                <label class="form-label">Sigla:</label>
+                            <div class="col-lg-6">
+                                <strong> Esfera:</strong>
+                                <span class="form-value">{{$unidade->esfera}}</span>
+                                <br />
+                                <strong> Sigla:</strong>
                                 <span class="form-value">{{$unidade->sigla}}</span>
-                            </div>
-                            <div class="col-lg-4">
-                                <label class="form-label">Estado/Município:</label>
+                                <br />
+                                <strong> Estado/Município:</strong>
                                 <span class="form-value">
                                     {{$unidade->estado['nome'].'('.$unidade->estado['sigla'].')'}}
                                 </span>
-                                
+                                <br />
+                                <strong> Gestão:</strong><br />
+                                <span class="form-value">{{$unidade->contato}}</span>
+                                <span class="form-value">{{$unidade->contato2}}</span>
+
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <label class="form-label">Email:</label>
+
+                            <div class="col-lg-6">
+                                <strong> Email:</strong>
                                 <span class="form-value">{{$unidade->email}}</span>
-                                
-                            </div>
-                            <div class="col-lg-4">
-                                
-                                <label class="form-label">URL:</label>
+                                <br />
+                                <strong> URL:</strong>
                                 <a class="form-value" href="{{$unidade->url}}" target="_blank">{{$unidade->url}}</a>
-                                
-                            </div>
-                            <div class="col-lg-4">
-                                <label class="form-label">Telefone:</label>
+                                <br />
+                                <strong> Telefone:</strong>
                                 <span class="form-value">
                                         <a href="tel:{{$unidade->telefone}}">{{$unidade->telefone}}</a>
                                 </span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <label class="form-label">Gestão:</label>
-                                <span class="form-value">{{$unidade->contato}}</span>
-                                
-                            </div>
-                            <div class="col-lg-4">
-                                <span class="form-value">{{$unidade->contato2}}</span> 
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <label class="form-label">Endereço:</label>
-                                
+                                <br />
+                                <strong> Endereço:</strong>
+
                                 <span class="form-value">
                                     <address>{{$unidade->endereco}}</address>
                                 </span>
                             </div>
                         </div>
-                    </div><!-- end card-body -->
-
-                    <div class="card-footer">
+                        <br />
                         <div class="row">
                             <div class="col-lg-4">
                                 <a href="javascript:history.back();" class="btn btn-primary pull-left"><i class="fa fa-long-arrow-left" aria-hidden="true"></i> Voltar</a>
@@ -107,16 +88,16 @@
                                 <span class="form-value">{{date('d/m/Y', strtotime($unidade->confirmado_em))}}</span>
                             </div>
                             @endif
-    
+
                             @if ($unidade->documentos_count > 0)
                             <div class="col-lg-4">
                                 <label class="form-label">Atos normativos enviados:</label>
                                 <span class="form-value">{{$unidade->documentos_count}}</span>
                             </div>
                             @endif
-                           
+
                         </div>
-                    </div>
+                    </div><!-- end card-body -->
 
                 </div><!-- end card -->
             </div><!-- end col-10 -->
@@ -125,7 +106,7 @@
         <div class="row">
             <div class="col-lg-10 offset-lg-1">
                 <div id="accordion">
-                    
+
                     @forelse ($tiposTotal as $i => $tipo)
                         <div class="card">
                             <div class="card-header" id="headingOne">
@@ -135,7 +116,7 @@
                                 </button>
                             </h5>
                             </div>
-                        
+
                             <div id="collapse_{{$tipo->id}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                             <div class="card-body">
                                 @foreach ($documentos as $k => $docs)
@@ -167,10 +148,10 @@
                             </div>
                         </div>
                     @empty
-                        
+
                     @endforelse
 
-                    
+
                 </div>
             </div>
         </div>

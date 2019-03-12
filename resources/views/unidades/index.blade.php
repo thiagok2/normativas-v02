@@ -11,7 +11,7 @@
                         <a href="{{ route('home') }}">Home</a>
                     @else
                         <a href="{{ route('login') }}" class="btn btn-outline-secondary btn-pill btn-login m-1 mt-2">Entrar <i class="fa fa-user badge-info"></i></a>
-                        <!-- 
+                        <!--
                         <a href="{{ route('register') }}">Registrar</a>
                         -->
                     @endauth
@@ -21,7 +21,7 @@
         <div class="row">
             <div class="col-lg-12 text-center">
                 <h1><img src="/img/normativos-logo.png" srcset="/img/normativos-logo@2x.png 3x" alt="Normativas" /></h1>
-                <h3><small class="text-muted">Pesquisar conselhos(federal, estaduais e municipais)</small></h3>
+                <h3><small class="text-muted">Pesquisar conselhos(federais, estaduais e municipais)</small></h3>
             </div>
         </div>
     </div>
@@ -35,16 +35,16 @@
             <div class="col-lg-8 offset-lg-2">
                 <form action="{{route('unidades-search')}}" method="GET" class="">
                     <div class="input-group">
-                    <input type="text" name="q" id="q" class="form-control" value="{{$q}}" 
+                    <input type="text" name="q" id="q" class="form-control" value="{{$q}}"
                             placeholder="Ex.: Maceió, Alagoas, Distrito Federal..." value="" />
                     </div>
                     <div class="row">
                         <div class="col text-center mt-2 mb-2">
-                            <button type="submit" class="btn btn-primary mr-1"><i class="fa fa-search"></i> 
+                            <button type="submit" class="btn btn-primary mr-1"><i class="fa fa-search"></i>
                                 Pesquisar conselhos
                             </button>
                             <a class="btn btn-info ml-1" href="/" target="_blank">
-                                <i class="fa fa-search"></i> Pesquisar Atos Normativos
+                                <i class="fa fa-cogs"></i> Atos Normativos
                             </a>
                         </div>
                     </div>
@@ -60,88 +60,76 @@
     <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-10 offset-lg-1">
-                    <div class="card mb-3 border-dark">
+                    <div class="card mb-3">
                         <div class="card-header">
                             <a href="{{route('unidades-page',$federal->id)}}">
                                 <i class="fa fa-external-link"></i>  {{ $federal->nome }}
                             </a>
                         </div>
-    
+
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-lg-4">
-                                    <label class="form-label">Esfera:</label>
-                                    <span class="form-value">{{$federal->esfera}}</span> 
-                                </div>
-                                <div class="col-lg-4">
-                                    <label class="form-label">Sigla:</label>
+                                <div class="col-lg-6">
+                                    <p>
+                                    <strong>Esfera:</strong>
+                                    <span class="form-value">{{$federal->esfera}}</span>
+                                    <br />
+                                    <strong>Sigla:</strong>
                                     <span class="form-value">{{$federal->sigla}}</span>
-                                </div>
-                                <div class="col-lg-4">
-                                    <label class="form-label">Estado/Município:</label>
+                                    <br />
+                                    <strong>Estado/Município:</strong>
                                     <span class="form-value">
                                         {{$federal->estado['nome'].'('.$federal->estado['sigla'].')'}}
                                     </span>
-                                    
+                                    <br />
+                                    <strong>Gestão:</strong><br />
+                                    <span class="form-value">{{$federal->contato}}</span><br />
+                                    <span class="form-value">{{$federal->contato2}}</span>
+                                    </p>
+
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <label class="form-label">Email:</label>
+
+                                <div class="col-lg-6">
+                                <p>
+                                    <strong>Email:</strong>
                                     <span class="form-value">{{$federal->email}}</span>
-                                    
-                                </div>
-                                <div class="col-lg-4">
-                                    
-                                    <label class="form-label">URL:</label>
+                                    <br />
+                                    <strong>URL:</strong>
                                     <a class="form-value" href="{{$federal->url}}" target="_blank">{{$federal->url}}</a>
-                                    
-                                </div>
-                                <div class="col-lg-4">
-                                    <label class="form-label">Telefone:</label>
+                                    <br />
+                                    <strong>Telefone:</strong>
                                     <span class="form-value">
                                             <a href="tel:{{$federal->telefone}}">{{$federal->telefone}}</a>
                                     </span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <label class="form-label">Gestão:</label>
-                                    <span class="form-value">{{$federal->contato}}</span>
-                                    
-                                </div>
-                                <div class="col-lg-4">
-                                    <span class="form-value">{{$federal->contato2}}</span> 
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <label class="form-label">Endereço:</label>
-                                    
+                                    <br />
+                                    <strong>Endereço:</strong>
                                     <span class="form-value">
                                         <address>{{$federal->endereco}}</address>
                                     </span>
+                                </p>
                                 </div>
                             </div>
                         </div><!-- end card-body -->
 
+                        @if (isset($federal->confirmado_em) || $federal->documentos_count > 0)
                         <div class="card-footer">
 
                             @if (isset($federal->confirmado_em))
                             <div class="col-lg-8">
-                                <label class="form-label">Ingressou na plataforma em:</label>
+                                <label class="form-label"><strong>Ingressou na plataforma em:</strong></label>
                                 <span class="form-value">{{date('d/m/Y', strtotime($federal->confirmado_em))}}</span>
                             </div>
                             @endif
 
                             @if ($federal->documentos_count > 0)
                             <div class="col-lg-4">
-                                <label class="form-label">Atos normativos enviados:</label>
+                                <label class="form-label"><strong>Atos normativos enviados:</strong></label>
                                 <span class="form-value">{{$federal->documentos_count}}</span>
                             </div>
                             @endif
-    
                         </div>
+                        @endif
+
 
                     </div><!-- end card -->
                 </div><!-- end col-10 -->
@@ -149,64 +137,48 @@
         @forelse ($unidades as $u)
             <div class="row">
                 <div class="col-lg-10 offset-lg-1">
-                    <div class="card mb-3 @if ($u->documentos_count > 0) border-secondary @else border-light @endif ">
+                    <div class="card mb-3 @if ($u->documentos_count > 0) bs@else bl @endif ">
                         <div class="card-header">
                             <a href="{{route('unidades-page',$u->id)}}">
                                 <i class="fa fa-external-link"></i>  {{ $u->nome }}
                             </a>
                         </div>
-    
+
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-lg-4">
-                                    <label class="form-label">Esfera:</label>
-                                    <span class="form-value">{{$u->esfera}}</span> 
-                                </div>
-                                <div class="col-lg-4">
-                                    <label class="form-label">Sigla:</label>
+                                <div class="col-lg-6">
+                                <p>
+                                    <strong>Esfera:</strong>
+                                    <span class="form-value">{{$u->esfera}}</span>
+                                    <br />
+                                    <strong>Sigla:</strong>
                                     <span class="form-value">{{$u->sigla}}</span>
-                                </div>
-                                <div class="col-lg-4">
-                                    <label class="form-label">Estado/Município:</label>
+                                    <br />
+                                    <strong>Estado/Município:</strong>
                                     <span class="form-value">
                                         {{$u->estado['nome'].'('.$u->estado['sigla'].')'}}
                                     </span>
-                                    
+                                    <br />
+                                    <strong>Gestão:</strong><br />
+                                    <span class="form-value">{{$u->contato}}</span><br />
+                                    <span class="form-value">{{$u->contato2}}</span>
+                                </p>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <label class="form-label">Email:</label>
+
+                                <div class="col-lg-6">
+                                    <strong>Email:</strong>
                                     <span class="form-value">{{$u->email}}</span>
-                                    
-                                </div>
-                                <div class="col-lg-4">
-                                    
-                                    <label class="form-label">URL:</label>
+                                    <br />
+                                    <strong>URL:</strong>
                                     <a class="form-value" href="{{$u->url}}" target="_blank">{{$u->url}}</a>
-                                    
-                                </div>
-                                <div class="col-lg-4">
-                                    <label class="form-label">Telefone:</label>
+                                    <br />
+                                    <strong>Telefone:</strong>
                                     <span class="form-value">
                                             <a href="tel:{{$u->telefone}}">{{$u->telefone}}</a>
                                     </span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <label class="form-label">Gestão:</label>
-                                    <span class="form-value">{{$u->contato}}</span>
-                                    
-                                </div>
-                                <div class="col-lg-4">
-                                    <span class="form-value">{{$u->contato2}}</span> 
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <label class="form-label">Endereço:</label>
-                                    
+                                    <br />
+                                    <strong>Endereço:</strong>
+
                                     <span class="form-value">
                                         <address>{{$u->endereco}}</address>
                                     </span>
@@ -214,44 +186,45 @@
                             </div>
                         </div><!-- end card-body -->
 
+                        @if (isset($federal->confirmado_em) || $federal->documentos_count > 0)
                         <div class="card-footer">
 
                             @if (isset($u->confirmado_em))
                             <div class="col-lg-8">
-                                <label class="form-label">Ingressou na plataforma em:</label>
+                                <label class="form-label"><strong>Ingressou na plataforma em:</strong></label>
                                 <span class="form-value">{{date('d/m/Y', strtotime($u->confirmado_em))}}</span>
                             </div>
                             @endif
 
                             @if ($u->documentos_count > 0)
                             <div class="col-lg-4">
-                                <label class="form-label">Atos normativos enviados:</label>
+                                <label class="form-label"><strong>Atos normativos enviados:</strong></label>
                                 <span class="form-value">{{$u->documentos_count}}</span>
                             </div>
                             @endif
-    
                         </div>
+                        @endif
 
                     </div><!-- end card -->
                 </div><!-- end col-10 -->
             </div><!-- end row-->
         @empty
             <div class="row">
-                <div class="col-lg-6 offset-md-3">
+                <div class="col-lg-10 offset-lg-1">
                     <div class="alert alert-secondary" role="alert">
                         Nenhum resultado encontrado.
                     </div>
                 </div>
             </div>
-            
+
         @endforelse
 
         <div class="row">
-            <div class="col-lg-10 offset-lg-1">
+            <div class="col-lg-10 offset-lg-1 d-flex justify-content-end">
                     {{ $unidades->links() }}
             </div>
         </div>
-        
+
     </div>
 </section>
 

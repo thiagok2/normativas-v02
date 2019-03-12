@@ -3144,4 +3144,8 @@ body .pagination .page-item .page-link:hover, body .pagination .page-item .page-
   }
 }
 
+label .form-label {
+  font-weight: bold;
+}
+
 /*# sourceMappingURL=app-search.css.map */
