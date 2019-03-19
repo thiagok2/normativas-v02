@@ -78,7 +78,7 @@
         
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="assunto">Abrangência</label>
+                            <label for="assunto">Assunto</label>
                             <input type='text' class="form-control" id="tipo_documento" name="tipo_documento"
                                     value="{{ $documento->assunto->nome }}" readonly/>
                         </div>

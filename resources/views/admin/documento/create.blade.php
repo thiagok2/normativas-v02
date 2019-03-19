@@ -80,7 +80,7 @@
         
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="assunto">Abrangência*</label>
+                            <label for="assunto">Assunto*</label>
                             <select class="form-control" required id="assunto_id" name="assunto_id">
                                 <option>Selecione</option>
                                 @foreach ($assuntos as $assunto)
