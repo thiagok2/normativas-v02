@@ -13,6 +13,8 @@ use App\Models\PalavraChave;
 use App\Services\UnidadeQuery;
 use App\Services\DocumentoQuery;
 use App\Services\SearchQuery;
+use App\Services\UsuarioQuery;
+
 
 class HomeController extends Controller
 {
@@ -35,7 +37,10 @@ class HomeController extends Controller
     {
 
         $unidade = Unidade::find(auth()->user()->unidade_id);
-
+        
+        $user = auth()->user();
+        $user->ultimo_acesso_em = date("Y-m-d H:i:s");
+        $user->save();
         
         if(!$unidade->confirmado){
             return redirect()->route('unidade-edit', ['id' => $unidade->id])
@@ -94,14 +99,16 @@ class HomeController extends Controller
 
         $topConsultas = $searchQuery->topConsultas(100);
 
-        
+        $usuarioQuery = new UsuarioQuery();
+        $acessosGestores30Dias = $usuarioQuery->countAcessos30Dias();
+
+        //dd($acessosGestores30Dias);
 
         $tags = DB::table('palavra_chaves')
                      ->select(DB::raw('count(*) as tag_count, tag'))
                      ->groupBy('tag')
                      ->get();
         
-        //dd($tags);
 
         $tagCount = DB::table('palavra_chaves')->distinct('tag')->count('tag');
 
@@ -109,6 +116,7 @@ class HomeController extends Controller
             ->paginate(10); 
 
         return view('home',compact('documentos',
+            'acessosGestores30Dias',
             'topConsultas',
             'totalConsultas', 'totalConsultas3060','percentConsultas',
                         'documentosPorTipo','documentosPorAssunto',

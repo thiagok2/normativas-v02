@@ -155,18 +155,21 @@
     <!-- /.col -->
     <div class="col-md-3 col-sm-6 col-xs-12">
         <div class="info-box bg-teal-active">
-        <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
+        <span class="info-box-icon"><i class="fa fa-users"></i></span>
 
         <div class="info-box-content">
-            <span class="info-box-text">Acessos</span>
-            <span class="info-box-number">?</span>
+            <span class="info-box-text">Acessos dos gestores</span>
+            <span class="info-box-number">
+               {{$acessosGestores30Dias}}
+               <small></small>
+            </span>
 
             <div class="progress">
-            <div class="progress-bar" style="width: 70%"></div>
+                <div class="progress-bar" style="width: 100%"></div>
             </div>
-                <span class="progress-description">
-               ??????????????
-                </span>
+            <span class="progress-description">
+                Acessaram nos últimos 30 dias 
+            </span>
         </div>
         <!-- /.info-box-content -->
         </div>

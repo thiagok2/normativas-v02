@@ -20,10 +20,7 @@ class SearchQuery{
         union all
         select 'anterior' as periodo ,
         count(*) as total from consultas
-        where (CURRENT_DATE - DATE(data_consulta)) between 31 and 60
-        
-
-        ");
+        where (CURRENT_DATE - DATE(data_consulta)) between 31 and 60");
 
         return $result;
     }
