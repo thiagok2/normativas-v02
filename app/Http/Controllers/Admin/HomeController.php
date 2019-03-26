@@ -10,6 +10,9 @@ use App\User;
 use Illuminate\Support\Facades\DB;
 use App\Models\PalavraChave;
 
+use App\Services\UnidadeQuery;
+use App\Services\DocumentoQuery;
+
 class HomeController extends Controller
 {
     /**
@@ -62,7 +65,24 @@ class HomeController extends Controller
             $usersCount = User::where('unidade_id', $unidade->id)->count();
         }
 
-       
+        $unidadeQuery = new UnidadeQuery();
+
+        $countUnidadesConfirmadas = $unidadeQuery->countUnidadeConfirmadas();
+        $countUnidadesNaoConfirmadas = $unidadeQuery->countUnidadeNaoConfirmadas();
+        $porcentagemConfirmadas = number_format(100*$countUnidadesConfirmadas/($countUnidadesConfirmadas + $countUnidadesNaoConfirmadas),2);
+        $totalUnidades = $countUnidadesConfirmadas + $countUnidadesNaoConfirmadas;
+        $countUnidadesConfirmadas30Dias = $unidadeQuery->countUnidadeConfirmadasUltimos30dias();
+        
+        $evolucaoUnidadesConfirmadasMes = $unidadeQuery->evolucaoUnidadesConfirmadas();
+
+        $documentoQuery = new DocumentoQuery();
+        $countEnviados30dias = $documentoQuery->countEnviados30dias();
+        $evolucaoEnviados6Meses = $documentoQuery->evolucaoEnviados6Meses();
+
+        $unidadesNaoConfirmadas = Unidade::where('confirmado',false)->paginate(10);
+
+        $documentosPorAssunto = $documentoQuery->documentosPorAssuntos();
+        $documentosPorTipo = $documentoQuery->documentosPorTipos();
 
 
         $tags = DB::table('palavra_chaves')
@@ -75,7 +95,12 @@ class HomeController extends Controller
         $unidades = Unidade::withCount('documentos')->has('documentos', '>', 0)->orderBy('documentos_count', 'desc')
             ->paginate(10); 
 
-        return view('home',compact('documentos','documentosCount','usersCount','tagCount','tags','unidades'));
+        return view('home',compact('documentos',
+                        'documentosPorTipo','documentosPorAssunto',
+                        'evolucaoEnviados6Meses','countEnviados30dias','evolucaoUnidadesConfirmadasMes',
+                        'unidadesNaoConfirmadas','countUnidadesConfirmadas30Dias',
+                        'countUnidadesConfirmadas','porcentagemConfirmadas',
+                        'totalUnidades','documentosCount','usersCount','tagCount','tags','unidades'));
     }
 
     public function getenv(){
