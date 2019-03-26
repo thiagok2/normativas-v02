@@ -201,9 +201,8 @@
 </div>
 @endif
 <!-- /.row -->
-
-<div class="row">
-    
+@if (auth()->user()->isAdmin())
+<div class="row"> 
     <div class="col-lg-4">
         <div class="box box-danger">
             <div class="box-header">
@@ -310,6 +309,7 @@
         </div>
     </div>
 </div>
+@endif
 
 <div class="row">
     <div class="col-lg-12">
@@ -376,7 +376,7 @@
         </div>
     </div>
 </div>
-
+@if (auth()->user()->isAdmin())
 <div class="row">
     <div class="col-lg-6 ">
         <div class="box box-success">
@@ -459,6 +459,7 @@
         </div> <!-- end box -->
     </div> <!-- end col-6 -->
 </div> <!-- end row-->
+@endif
 <div class="row">
     <div class="col-lg-6">
         <div class="box box-success">
