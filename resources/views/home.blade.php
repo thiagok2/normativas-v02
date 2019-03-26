@@ -112,7 +112,7 @@
 <div class="row">
     <div class="col-md-3 col-sm-6 col-xs-12">
         <div class="info-box bg-aqua">
-        <span class="info-box-icon"><i class="far fa-bell"></i></span>
+        <span class="info-box-icon"><i class="fa fa-university"></i></span>
 
         <div class="info-box-content">
             <span class="info-box-text">Conselhos Confirmados</span>
@@ -135,7 +135,7 @@
     <!-- /.col -->
     <div class="col-md-3 col-sm-6 col-xs-12">
         <div class="info-box bg-lime">
-        <span class="info-box-icon"><i class="fa fa-thumbs-o-up"></i></span>
+        <span class="info-box-icon"><i class="fa fa-bookmark"></i></span>
 
         <div class="info-box-content">
             <span class="info-box-text">Documentos</span>
@@ -175,17 +175,19 @@
     <!-- /.col -->
     <div class="col-md-3 col-sm-6 col-xs-12">
         <div class="info-box bg-orange-active">
-        <span class="info-box-icon"><i class="fa fa-comments-o"></i></span>
+        <span class="info-box-icon"><i class="fa fa-search"></i></span>
 
         <div class="info-box-content">
-            <span class="info-box-text">Pesquisas</span>
-            <span class="info-box-number">????</span>
+            <span class="info-box-text">Pesquisas ({{$totalConsultas}})</span>
+            <span class="info-box-number">
+                {{$totalConsultas3060[0]->total}} <small>nos últimos 30 dias</small>
+            </span>
 
             <div class="progress">
-            <div class="progress-bar" style="width: 70%"></div>
+            <div class="progress-bar" style="width: {{$percentConsultas}}%"></div>
             </div>
                 <span class="progress-description">
-                ???
+                    Mês anterior {{$totalConsultas3060[1]->total}}
                 </span>
         </div>
         <!-- /.info-box-content -->
@@ -361,8 +363,13 @@
                         
                     </tbody>
                 </table>
+            </div><!-- /.box-body -->
+            <div class="box-footer">
+                <span class="text-muted">
+                    Já foram enviados {{$documentos->count()}} documentos no total.
+                </span>
             </div>
-                <!-- /.box-body -->
+                
         </div>
     </div>
 </div>
@@ -450,7 +457,7 @@
     </div> <!-- end col-6 -->
 </div> <!-- end row-->
 <div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-6">
         <div class="box box-success">
             <div class="box-header">
                 <h3 class="box-title">Palavras-chave mais referências nos documentos</h3>
@@ -462,6 +469,29 @@
                         <ul>
                             @foreach ($tags as $t)
                                 <li><a href=/?query={{$t->tag}}" target="_blank" data-weight="{{$t->tag_count}}">{{$t->tag}}</a></li>
+                            @endforeach
+                        </ul>
+                    </canvas>
+                </div>
+            </div>
+            <div class="box-footer">
+                
+            </div>
+        </div> <!-- end box -->
+    </div>
+
+    <div class="col-lg-6">
+        <div class="box box-success">
+            <div class="box-header">
+                <h3 class="box-title">Termos mais pesquisados</h3>
+            </div>
+
+            <div class="box-body no-padding">
+                <div id="myCanvasContainer2" class="text-center" style="position:relative;">
+                    <canvas width="600" height="300"  id="myCanvas2">
+                        <ul>
+                            @foreach ($topConsultas as $t)
+                                <li><a href=/?query={{$t->termos}}" target="_blank" data-weight="{{$t->total}}">{{$t->termos}}</a></li>
                             @endforeach
                         </ul>
                     </canvas>

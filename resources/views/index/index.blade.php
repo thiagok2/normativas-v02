@@ -143,29 +143,32 @@
                                 </a>
                             @endif
                             
-                            @foreach ($aggregations['aggregations']['ano']['buckets'] as $bucket)
-                                <a href="?query={{ $query }}&ano={{ urlencode($bucket['key']) }}&esfera={{ $esfera  }}&fonte={{ $fonte  }}" 
+                            @if (isset($aggregations))
+                                @foreach ($aggregations['aggregations']['ano']['buckets'] as $bucket)
+                                    <a href="?query={{ $query }}&ano={{ urlencode($bucket['key']) }}&esfera={{ $esfera  }}&fonte={{ $fonte  }}" 
+                                        class="btn btn-outline-secondary btn-pill btn-sm mb-2">
+                                        {{ ucfirst($bucket['key']) }} 
+                                        <span class="badge badge-pill badge-info">{{ $bucket['doc_count'] }}</span>
+                                    </a>
+                                @endforeach
+                            
+                                @foreach ($aggregations['aggregations']['esfera']['buckets'] as $bucket)
+                                    <a href="?query={{ $query }}&esfera={{ urlencode($bucket['key']) }}&ano={{ $ano }}&fonte={{ $fonte  }}" 
                                     class="btn btn-outline-secondary btn-pill btn-sm mb-2">
-                                    {{ ucfirst($bucket['key']) }} 
-                                    <span class="badge badge-pill badge-info">{{ $bucket['doc_count'] }}</span>
-                                </a>
-                            @endforeach
-                        
-                            @foreach ($aggregations['aggregations']['esfera']['buckets'] as $bucket)
-                                <a href="?query={{ $query }}&esfera={{ urlencode($bucket['key']) }}&ano={{ $ano }}&fonte={{ $fonte  }}" 
-                                class="btn btn-outline-secondary btn-pill btn-sm mb-2">
-                                    {{ ucfirst($bucket['key']) }} 
-                                    <span class="badge badge-pill badge-info">{{ $bucket['doc_count'] }}</span>
-                                </a>
-                            @endforeach
-                        
-                            @foreach ($aggregations['aggregations']['fonte']['buckets'] as $bucket)
-                                <a href="?query={{ $query }}&fonte={{ urlencode($bucket['key']) }}&ano={{ $ano  }}&esfera={{ $esfera }}" 
-                                class="btn btn-outline-secondary btn-pill btn-sm mb-2">
-                                    {{ ucfirst($bucket['key']) }} 
-                                    <span class="badge badge-pill badge-info">{{ $bucket['doc_count'] }}</span>
-                                </a>
-                            @endforeach
+                                        {{ ucfirst($bucket['key']) }} 
+                                        <span class="badge badge-pill badge-info">{{ $bucket['doc_count'] }}</span>
+                                    </a>
+                                @endforeach
+                            
+                                @foreach ($aggregations['aggregations']['fonte']['buckets'] as $bucket)
+                                    <a href="?query={{ $query }}&fonte={{ urlencode($bucket['key']) }}&ano={{ $ano  }}&esfera={{ $esfera }}" 
+                                    class="btn btn-outline-secondary btn-pill btn-sm mb-2">
+                                        {{ ucfirst($bucket['key']) }} 
+                                        <span class="badge badge-pill badge-info">{{ $bucket['doc_count'] }}</span>
+                                    </a>
+                                @endforeach
+                            @endif
+                            
                         </div>
                     </div>
                 </div>

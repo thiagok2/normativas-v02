@@ -53,6 +53,34 @@ LEFT OUTER JOIN documentos d on TO_CHAR(d.data_envio,'YYYYMM') = t.ano_mes
 WHERE (CURRENT_DATE - t.data_atual) between 0 and 30
 
 
+select 
+	t.nome, 
+	count(*) as total,
+	(100*count(*)/(select count(t.id) from documentos d inner join tipo_documentos t on t.id = d.tipo_documento_id))as percent
+from documentos d
+inner join tipo_documentos t on t.id = d.tipo_documento_id
+group by t.nome
+
+
+select 
+	a.nome, 
+	count(*) as total,
+	(100*count(*)/(select count(a.id) from documentos d inner join assuntos a on a.id = d.assunto_id))as percent
+from documentos d
+inner join assuntos a on a.id = d.assunto_id
+group by a.nome
+limit 10
+
+select 'atual' as periodo ,
+count(*) as anterior from consultas
+where (CURRENT_DATE - DATE(data_consulta)) between 0 and 30
+union all
+select 'anterior' as periodo ,
+count(*) as anterior from consultas
+where (CURRENT_DATE - DATE(data_consulta)) between 31 and 60
+
+
+
 
 
 

@@ -15,8 +15,22 @@ $(function () {
 
     }
 
+    var elementsExists = document.getElementById('myCanvasContainer2');
+
+    if (elementsExists) {
+      TagCanvas.textColour = '#363636';
+      TagCanvas.outlineColour = '#ff9999';
+      //TagCanvas.weight = true;
+      //TagCanvas.weightFrom = 'data-weight';
+      TagCanvas.wheelZoom = false;
+      //TagCanvas.zoom = 1.25;
+      TagCanvas.Start('myCanvas2');
+
+    }
+
   } catch (e) {
     document.getElementById('myCanvasContainer').style.display = 'none';
+    document.getElementById('myCanvasContainer2').style.display = 'none';
   }
 
   $("#palavras_chave").tagsinput({

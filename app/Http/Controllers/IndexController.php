@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 use App\Models\TipoDocumento;
+use App\Services\SearchComponent;
 
 class IndexController extends Controller
 {
@@ -253,6 +254,10 @@ class IndexController extends Controller
                 if (isset($result['hits']['hits'])) {
                     //$variables['hits'] = $result['hits']['hits'];
                     $hits = $result['hits']['hits'];
+                }
+
+                if(isset($query)){
+                    SearchComponent::logging($query);
                 }
             }
     

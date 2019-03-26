@@ -12,6 +12,7 @@ use App\Models\PalavraChave;
 
 use App\Services\UnidadeQuery;
 use App\Services\DocumentoQuery;
+use App\Services\SearchQuery;
 
 class HomeController extends Controller
 {
@@ -84,11 +85,23 @@ class HomeController extends Controller
         $documentosPorAssunto = $documentoQuery->documentosPorAssuntos();
         $documentosPorTipo = $documentoQuery->documentosPorTipos();
 
+        $searchQuery = new SearchQuery();
+        $totalConsultas = $searchQuery->countQuery();
+        $totalConsultas3060 = $searchQuery->countQuery3060Dias();
+
+        $denominador = ($totalConsultas3060[1]->total != 0) ? $totalConsultas3060[1]->total : 1;
+        $percentConsultas = 100 * (($totalConsultas3060[0]->total - $totalConsultas3060[1]->total) / $denominador);
+
+        $topConsultas = $searchQuery->topConsultas(100);
+
+        
 
         $tags = DB::table('palavra_chaves')
                      ->select(DB::raw('count(*) as tag_count, tag'))
                      ->groupBy('tag')
                      ->get();
+        
+        //dd($tags);
 
         $tagCount = DB::table('palavra_chaves')->distinct('tag')->count('tag');
 
@@ -96,6 +109,8 @@ class HomeController extends Controller
             ->paginate(10); 
 
         return view('home',compact('documentos',
+            'topConsultas',
+            'totalConsultas', 'totalConsultas3060','percentConsultas',
                         'documentosPorTipo','documentosPorAssunto',
                         'evolucaoEnviados6Meses','countEnviados30dias','evolucaoUnidadesConfirmadasMes',
                         'unidadesNaoConfirmadas','countUnidadesConfirmadas30Dias',
