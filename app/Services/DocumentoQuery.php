@@ -5,20 +5,29 @@ use Illuminate\Support\Facades\DB;
 
 class DocumentoQuery{
 
-    public function evolucaoEnviados(){
-        $result = DB::select("SELECT t.ano_mes, t.mes_ano_abrev,
+    public function evolucaoEnviados($dataInicio = null, $dataFim = null){
+        $sql = "SELECT trim(t.ano_mes) as ano_mes, trim(t.mes_ano_abrev) as mes_ano_abrev,
         COUNT(DISTINCT(d.id)) as enviados
         FROM tempo t
         LEFT OUTER JOIN documentos d on TO_CHAR(d.data_envio,'YYYYMM') = t.ano_mes
-        WHERE t.data_atual between '20181101' and CURRENT_DATE
-        GROUP BY t.ano_mes, t.mes_ano_abrev
-        ORDER BY t.ano_mes");
+        WHERE t.data_atual between '20181101' and CURRENT_DATE ";
+        
+        if($dataInicio)
+            $sql = $sql." and t.data_atual >= '".$dataInicio."'";
+        
+        if($dataFim)
+            $sql = $sql." and t.data_atual <= '".$dataFim."'";
+        
+        $sql = $sql." GROUP BY t.ano_mes, t.mes_ano_abrev
+        ORDER BY t.ano_mes";
+        
+        $result = DB::select($sql);
 
         return $result;
     }
 
     public function evolucaoEnviados6Meses(){
-        $result = DB::select("SELECT t.ano_mes, t.mes_ano_abrev,
+        $result = DB::select("SELECT trim(t.ano_mes) as ano_mes , trim(t.mes_ano_abrev) as mes_ano_abrev,
         COUNT(DISTINCT(d.id)) as enviados
         FROM tempo t
         LEFT OUTER JOIN documentos d on TO_CHAR(d.data_envio,'YYYYMM') = t.ano_mes

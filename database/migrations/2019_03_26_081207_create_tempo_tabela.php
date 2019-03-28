@@ -80,9 +80,9 @@ class CreateTempoTabela extends Migration
             (DATE_TRUNC('MONTH',datum) +INTERVAL '1 MONTH - 1 day')::DATE AS ultimo_day_of_month,
             TO_DATE(EXTRACT(isoyear FROM datum) || '-01-01','YYYY-MM-DD') AS primeiro_dia_ano,
             TO_DATE(EXTRACT(isoyear FROM datum) || '-12-31','YYYY-MM-DD') AS ultimo_dia_ano,
-            TO_CHAR(datum,'yyyyMM') AS ano_mes,
-            TO_CHAR(datum,'mm/yyyy') AS mes_ano,
-            TO_CHAR(datum,'TMMon/yyyy') AS mes_ano_abrev,
+            trim(TO_CHAR(datum,'yyyyMM')) AS ano_mes,
+            trim(TO_CHAR(datum,'mm/yyyy')) AS mes_ano,
+            trim(TO_CHAR(datum,'TMMon/yyyy')) AS mes_ano_abrev,
             CASE
                 WHEN EXTRACT(isodow FROM datum) IN (6,7) THEN TRUE
                 ELSE FALSE

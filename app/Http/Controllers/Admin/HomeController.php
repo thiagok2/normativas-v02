@@ -79,7 +79,7 @@ class HomeController extends Controller
         $totalUnidades = $countUnidadesConfirmadas + $countUnidadesNaoConfirmadas;
         $countUnidadesConfirmadas30Dias = $unidadeQuery->countUnidadeConfirmadasUltimos30dias();
         
-        $evolucaoUnidadesConfirmadasMes = $unidadeQuery->evolucaoUnidadesConfirmadas();
+        $evolucaoUnidadesConfirmadasMes = $unidadeQuery->evolucaoUnidadesConfirmadas6Meses();
 
         $documentoQuery = new DocumentoQuery();
         $countEnviados30dias = $documentoQuery->countEnviados30dias();
