@@ -2,9 +2,10 @@
 
 @section('title', 'Normativas')
 
+
 @section('content_header')
     
-@stop
+@endsection
 
 @section('content')
 
@@ -510,5 +511,8 @@
 </div>
 
 
+@endsection
 
-@stop
+@push('scripts')
+    <script src="{{ asset('js/app-home.js') }}"></script>
+@endpush

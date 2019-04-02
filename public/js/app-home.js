@@ -1,5 +1,14 @@
 
 $(function () {
+
+  console.log('api-normativas');
+  var url = 'http://normativas-v02.com/api/unidades/confirmadas/periodo';
+  $.getJSON(url, function (data) {
+    console.log(data);
+
+  });
+
+
   try {
 
     var elementsExists = document.getElementById('myCanvasContainer');

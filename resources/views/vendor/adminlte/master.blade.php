@@ -77,9 +77,11 @@
 <script src="{{ asset('vendor/mask/jquery.mask.min.js') }}"></script>
 <script src="{{ asset('vendor/tagcanvas/jquery.tagcanvas.min.js') }}"></script>
 <script src="{{ asset('vendor/tagsinput/bootstrap-tagsinput.min.js') }}"></script>
-<script src="{{ asset('js/app-home.js') }}"></script>
 
 
 
 </body>
+
+@stack('scripts')
+
 </html>
