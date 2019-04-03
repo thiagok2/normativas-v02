@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(UsersTableSeeder::class);
         $this->call(EstadoTableSeeder::class);
+        $this->call(BrasilEstadoTableSeeder::class);
         $this->call(MunicipioTableSeeder::class);
         $this->call(TipoDocumentoTableSeeder::class);
         $this->call(AssuntoTableSeeder::class);
@@ -22,9 +23,6 @@ class DatabaseSeeder extends Seeder
         $this->call(UserUnidadeConselhoFederalSeeder::class);
 
         $this->call(AddAssuntoEducacaoInfantil::class);
-
-
-        
-        
+   
     }
 }

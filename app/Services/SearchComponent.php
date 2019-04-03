@@ -11,5 +11,17 @@ class SearchComponent{
         $consulta->save();
     }
 
+    public function likeDocumentos($documento){
+
+    }
+
+    public function aggResults($queryArray){
+
+    }
+
+    public function search(){
+        
+    }
+
     
 }

@@ -84,8 +84,8 @@ class Documento extends Model
                 "fonte"   =>  [
                     "orgao"  => $this->unidade->nome,
                     "sigla" => $this->unidade->sigla,
-                    "uf" => '',
-                    "uf_sigla" => '',
+                    "uf" =>  $this->unidade->estado->nome,
+                    "uf_sigla" => $this->unidade->estado->sigla,
                     "esfera" => $this->unidade->esfera,
                     "url" => $this->unidade->url
                 ]

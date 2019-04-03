@@ -24,7 +24,7 @@ Route::get('/login', 'LoginController@login');
 //Route::get('home', 'IndexController@index');
 
 Route::match('get', '/normativa/pdf/{normativaId}', [
-    'uses' => 'IndexController@pdfNormativa',
+    'uses' => 'PDFController@pdfNormativa',
     'as' => 'pdfNormativa',
 ]);
 
@@ -38,7 +38,7 @@ Route::match('get', '/filter', [
     'as' => 'filterNormativa',
 ]);
 
-Route::get('documente/delete/{arquivoId}', 'IndexController@delete')->name('delete-elastic');
+Route::get('documento/delete/{arquivoId}', 'IndexController@delete')->name('delete-elastic');
 
 Route::get('errors/500', function () {
     return view('errors/500');

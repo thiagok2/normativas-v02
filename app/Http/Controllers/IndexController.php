@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Log;
 
 use App\Models\TipoDocumento;
 use App\Services\SearchComponent;
+use App\Searches\Commands\SearchCommandA1;
 
 class IndexController extends Controller
 {
@@ -35,238 +36,49 @@ class IndexController extends Controller
     }
 
     public function index(Request $request)
-    {
-
-        //dd ($request->all());
-        $variables = [];
-
-        $queryArray = [
-            'bool' => [
-                "minimum_should_match"=> 1,
-                'must' => [],
-                'filter' => [],
-                'should' => []
-            ]
-        ];
-
-        $filters = false;
-
+    {       
         $tipo_doc = $request->query("tipo_doc");
-        $variables['tipo_doc'] = $tipo_doc;
-        if(!empty($tipo_doc) && $tipo_doc != "all"){
-            $queryArray['bool']['must'][] = [
-                "term" => [
-                    "ato.tipo_doc" => $tipo_doc
-                ]
-            ];
-
-            $filters = true;
-        }
-
         $esfera = $request->query("esfera");
-        $variables['esfera'] = $esfera;
-        if(!empty($esfera) && $esfera != "all"){
-            $queryArray['bool']['must'][] = [
-                "term" => [
-                    "ato.fonte.esfera" => $esfera
-                ]
-            ];
-
-            $filters = true;
-        }
-
-        /**Links agg*/
-        $ano = $request->query("ano");
-        $variables['ano'] = $ano;
-        if(!empty($ano)){
-            $queryArray['bool']['must'][] = [
-                "term" => [
-                    "ato.ano" => $ano
-                ]
-            ];
-        }
-
-         /**Links agg*/
-         $fonte = $request->query("fonte");
-         $variables['fonte'] = $fonte;
-         if(!empty($fonte)){
-             $queryArray['bool']['must'][] = [
-                 "term" => [
-                     "ato.fonte.sigla" => $fonte
-                 ]
-             ];
-         }
-        
-        /**Menu */
         $periodo = $request->query("periodo");
-        $variables['periodo'] = $periodo;
-        if(!empty($periodo) && $periodo != "all"){
-            $queryArray['bool']['must'][] = [
-                "range" => [
-                    "ato.ano" => [
-                        "gte" => $periodo
-                    ]
-                ]
-            ];
 
-            $filters = true;
-        }
+        $ano = $request->query("ano");
+        $fonte = $request->query("fonte");
+        
+        $tiposDocumento = TipoDocumento::has('documentos')->get();;
+        $query = $request->query('query');
 
+        $queryFilters = $request->query();
+        $filters = $this->hasFilters($queryFilters);
 
+        $documentos = [];
 
-        $variables['filters'] = $filters;
-
-        if ($query = $request->query('query'))  {
-            
-            $query = trim($query);
-
-            $page = $request->query('page', 1);
-            $from = (($page - 1) * self::RESULTS_PER_PAGE);
-
-            $variables['page'] = $page;
-            $variables['from'] = $from;
-             
-            
-            
-            if($query){
-                $variables['query'] = $query;
-            
-
-                $queryArray['bool']['should'][] = [
-                    'match_phrase' => [
-                        'ato.ementa' => [
-                            'query' => $query,
-                            'boost' => 1.5,
-                            "slop" => 5
-                        ]
-                    ]
-                ];
-
-                $queryArray['bool']['should'][] = [
-                    'match' => [
-                        'ato.ementa' => [
-                            'query' => $query,
-                            'boost' => 1.5,
-							"fuzziness" => "1",
-                            "prefix_length" => 3
-                        ]
-                    ]
-                ];
-    
-                $queryArray['bool']['should'][] = [
-                    'match_phrase' => [
-                        'ato.titulo' => [
-                            'query' => $query,
-                            'boost' => 1.5,
-                            "slop" => 2
-                        ]
-                    ]
-                ];
-                $queryArray['bool']['should'][] = [         
-                    'match_phrase' => [
-                        'ato.tags' => [
-                            'query' => $query,
-                            'boost' => 1.5,
-                            "slop" => 2
-                        ]
-                    ]
-                ];
-
-                $queryArray['bool']['should'][] = [         
-                    'match' => [
-                        'ato.tags' => [
-                            'query' => $query,
-                            'boost' => 1.5,
-							"fuzziness" => "1",
-                            "prefix_length" => 3
-                        ]
-                    ]
-                ];
-    
-                $queryArray['bool']['should'][] = [  
-                    'match_phrase' => [
-                        'attachment.content' => [
-                            'query' => $query,
-                            'boost' => 1.25,
-                            "slop" => 5
-                        ]
-                    ]
-                ];
-
-                $queryArray['bool']['should'][] = [  
-                    'match' => [
-                        'attachment.content' => [
-                            'query' => $query,
-                            'boost' => 1,
-                            "fuzziness" => "1",
-                            "prefix_length" => 3
-                        ]
-                    ]
-                ];
-
-            }       
-        }
-
-        $params = [
-                
-            'index' => 'normativas',
-            'type' => '_doc',
-            'body' => [
-                'query' => $queryArray,
-                'size' => self::RESULTS_PER_PAGE,
-                'from' => isset($from) ? $from:0,
-                '_source' => ['ato.*'],
-                'highlight' => [
-                    'encoder' => 'default',
-                    'number_of_fragments' => 20,
-                    'fragment_size' => 200,
-                    'pre_tags' => ["<span class='highlight_word'>"],
-                    'post_tags' => ["</span>"],
-                    'fields' => [
-                        'attachment.content' => [
-                            "force_source"          => "true"
-                        ]
-                    ],
-                    'require_field_match' => false
-                ]
-            ]
-        ];
-
-        $tiposDocumento = TipoDocumento::all();
         try{
-            if(isset($query) || isset($filtro)){
- 
-                $result = $this->client->search($params);
-    
-                //dd( $result);
-                $total = $result['hits']['total'];
-                $max_score = $result['hits']['max_score'];
-    
-                //$q = $query;
-                $variables['page'] = $page;
-                $variables['total'] = $total;
-                $size_page = self::RESULTS_PER_PAGE;
-                $total_pages = ceil($total/self::RESULTS_PER_PAGE);
-    
-                $max_score = $max_score;
-        
-        
-                if (isset($result['hits']['hits'])) {
-                    //$variables['hits'] = $result['hits']['hits'];
-                    $hits = $result['hits']['hits'];
-                }
+            if(isset($query)){
+                $query = trim($query);
+                SearchComponent::logging($query);
 
-                if(isset($query)){
-                    SearchComponent::logging($query);
-                }
+                $page = $request->query('page', 1);
+                $from = (($page - 1) * self::RESULTS_PER_PAGE);
+ 
+                $searchCommand = new SearchCommandA1('normativas','ato');
+                $result =  $searchCommand->search($query, $queryFilters, $from, self::RESULTS_PER_PAGE);
+
+                $total = $result->totalResults;
+                $max_score = $result->maxScore;
+
+                $size_page = self::RESULTS_PER_PAGE;
+                $total_pages = $result->totalPages;
+
+                $documentos =  $result->documentsResult;
+                $aggregations = $result->aggResults;
             }
-    
-            $aggregations = $this->getSearchFilterAggregations($queryArray);
+
             
-            return view('index.index', compact('max_score'
-            ,'tipo_doc','esfera','ano','fonte','periodo','filters',
-            'page','from','query','q','page','total','size_page',
-            'total_pages','hits','aggregations','tiposDocumento','message'));
+            return view('index.index', compact('query',
+            'tiposDocumento','tipo_doc','esfera','periodo',
+            'ano','fonte','filters',
+            'page','total','size_page','total_pages',
+            'max_score','documentos','aggregations','message'));
        
 
         }catch(\Exception $e){
@@ -276,31 +88,14 @@ class IndexController extends Controller
             $erro['trace'] = $e->getTraceAsString();
 
             Log::error($e->getFile().' - Linha '.$e->getLine().' - search::'.$e->getMessage());
-            return view('index.index', compact('max_score'
-            ,'tipo_doc','esfera','ano','fonte','periodo','filters',
-            'page','from','query','q','page','total','size_page',
-            'total_pages','hits','aggregations','tiposDocumento','erro'));
-           
+            
+            return view('index.index', compact('query',
+            'tiposDocumento','tipo_doc','esfera','periodo',
+            'ano','fonte','filters',
+            'page','total','size_page','total_pages',
+            'max_score','documentos','aggregations','message'));
         }
-
         
-    }
-
-   
-    public function pdfNormativa($normativaId)
-    {
-        $result = $this->client->get([
-            'index' => 'normativas',
-            'type' => '_doc',
-            'id' => $normativaId
-        ]);
-
-        $base64 =  $result['_source']['data'];
-        
-        
-        $data = base64_decode($base64);
-        header('Content-Type: application/pdf');
-        echo $data;
     }
 
     public function viewNormativa($normativaId)
@@ -311,12 +106,7 @@ class IndexController extends Controller
             'id' => $normativaId
         ]);
 
-        //dd( $normativaId);
-        //dd( $result);
-
         $resultsLikes = $this->likeDocuments($result);
-
-        //dd($resultsLikes);
         
         if (isset($resultsLikes["hits"]["hits"])) {
             $documentsLikes["docs"] = $resultsLikes["hits"]["hits"];
@@ -330,30 +120,11 @@ class IndexController extends Controller
         return view('index.view-normativa', [ 'normativa' => $result['_source'], 'id' => $result['_id'], 'arquivoId' => $result['_id'],'documentsLikes' => $documentsLikes, 'persisted' => $persisted ] );
     }
 
-    protected function getSearchFilterAggregations(array $queryArray)
-    {
-        $params = [
-            'index' => 'normativas',
-            'type' => '_doc',
-            'body' => [
-                'query' => $queryArray,
-                'size' => 0,
-                'aggs' => [
-                    'ano' => [
-                        'terms' => [ 'field' => 'ato.ano' ]
-                    ],
-                    'esfera' => [
-                        'terms' => [ 'field' => 'ato.fonte.esfera' ]
-                    ],
-                    'fonte' => [
-                        'terms' => [ 'field' => 'ato.fonte.sigla' ]
-                    ]
-
-                ]
-            ]
-        ];
-
-        return $this->client->search($params);
+    private function hasFilters($queryParams){
+        foreach($queryParams as $q => $v){
+            if($q != "query" && isset($v) && $v != "all")
+                return true;
+        }
     }
 
     protected function likeDocuments($docResult){
@@ -383,6 +154,7 @@ class IndexController extends Controller
         return $this->client->search($params);
 
     }
+
 
     public function delete(Request $request){
 

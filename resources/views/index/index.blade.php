@@ -115,7 +115,7 @@
 <!-- results -->
 <section id="results">
     <div class="container-fluid">
-        @if (!empty($hits))
+        @if (!empty($documentos))
             <!--<div class="row" id="results-text">
                 <div class="col-lg-10 offset-lg-1">
                 <p class="mb-3 mt-3">
@@ -126,7 +126,7 @@
                 </div>
             </div>-->
             <!-- aggregates -->
-            @if (!empty($query) && (!empty($hits)))
+            @if (!empty($query) && (!empty($documentos)))
                 <div class="row">
                     <div class="col-lg-10 offset-lg-1">
                         <p class="mb-3 mt-3">
@@ -144,27 +144,27 @@
                             @endif
                             
                             @if (isset($aggregations))
-                                @foreach ($aggregations['aggregations']['ano']['buckets'] as $bucket)
-                                    <a href="?query={{ $query }}&ano={{ urlencode($bucket['key']) }}&esfera={{ $esfera  }}&fonte={{ $fonte  }}" 
+                                @foreach ($aggregations['ano']['labels'] as $bucket)
+                                    <a href="?query={{ $query }}&ano={{ urlencode($bucket['nome']) }}&esfera={{ $esfera  }}&fonte={{ $fonte  }}" 
                                         class="btn btn-outline-secondary btn-pill btn-sm mb-2">
-                                        {{ ucfirst($bucket['key']) }} 
-                                        <span class="badge badge-pill badge-info">{{ $bucket['doc_count'] }}</span>
+                                        {{ ucfirst($bucket['nome']) }} 
+                                        <span class="badge badge-pill badge-info">{{ $bucket['quantidade'] }}</span>
                                     </a>
                                 @endforeach
                             
-                                @foreach ($aggregations['aggregations']['esfera']['buckets'] as $bucket)
-                                    <a href="?query={{ $query }}&esfera={{ urlencode($bucket['key']) }}&ano={{ $ano }}&fonte={{ $fonte  }}" 
+                                @foreach ($aggregations['esfera']['labels'] as $bucket)
+                                    <a href="?query={{ $query }}&esfera={{ urlencode($bucket['nome']) }}&ano={{ $ano }}&fonte={{ $fonte  }}" 
                                     class="btn btn-outline-secondary btn-pill btn-sm mb-2">
-                                        {{ ucfirst($bucket['key']) }} 
-                                        <span class="badge badge-pill badge-info">{{ $bucket['doc_count'] }}</span>
+                                        {{ ucfirst($bucket['nome']) }} 
+                                        <span class="badge badge-pill badge-info">{{ $bucket['quantidade'] }}</span>
                                     </a>
                                 @endforeach
                             
-                                @foreach ($aggregations['aggregations']['fonte']['buckets'] as $bucket)
-                                    <a href="?query={{ $query }}&fonte={{ urlencode($bucket['key']) }}&ano={{ $ano  }}&esfera={{ $esfera }}" 
+                                @foreach ($aggregations['fonte']['labels'] as $bucket)
+                                    <a href="?query={{ $query }}&fonte={{ urlencode($bucket['nome']) }}&ano={{ $ano  }}&esfera={{ $esfera }}" 
                                     class="btn btn-outline-secondary btn-pill btn-sm mb-2">
-                                        {{ ucfirst($bucket['key']) }} 
-                                        <span class="badge badge-pill badge-info">{{ $bucket['doc_count'] }}</span>
+                                        {{ ucfirst($bucket['nome']) }} 
+                                        <span class="badge badge-pill badge-info">{{ $bucket['quantidade'] }}</span>
                                     </a>
                                 @endforeach
                             @endif
@@ -176,17 +176,17 @@
             @endif
             <!-- fim aggregates -->
 
-            @foreach ($hits as $hit)
+            @foreach ($documentos as $doc)
                 <div class="row">
                     <div class="col-lg-10 offset-lg-1">
                         <div class="card mb-3">
                             <div class="card-header">
-                                <a href="/normativa/view/{{ $hit['_id'] }}?query={{$query}}">
-                                    <i class="fa fa-external-link"></i>  {{ $hit['_source']['ato']['titulo'] }}
+                                <a href="/normativa/view/{{ $doc['id'] }}?query={{$query}}">
+                                    <i class="fa fa-external-link"></i>  {{ $doc['titulo'] }}
                                 </a>
 
                                 <div id="max_score" class="float-lg-right float-xs-left">
-                                    <input value="{{ ($hit['_score'])  }}" type="text" class="kv-fa rating-loading" 
+                                    <input value="{{ ($doc['score'])  }}" type="text" class="kv-fa rating-loading" 
                                         data-min=0 
                                         data-max={{$max_score}}
                                         data-step=0.01 
@@ -196,48 +196,48 @@
                             </div>
                             
                             <div class="card-body">
-                                <strong>Ementa:&nbsp;&nbsp;</strong>{{ $hit['_source']['ato']['ementa'] }}
+                                <strong>Ementa:&nbsp;&nbsp;</strong>{{ $doc['ementa'] }}
 
                                 <hr/>
-                                @if (!empty($hit['_source']['ato']['tipo_doc']))
-                                <strong>Tipo:</strong> {{ $hit['_source']['ato']['tipo_doc'] }}
+                                @if (!empty($doc['tipo_doc']))
+                                <strong>Tipo:</strong> {{ $doc['tipo_doc'] }}
                                 @endif
                                 <br/>
                                 <strong>Conselho:</strong> 
-                                    @if (isset($hit['_source']['ato']['fonte']['sigla']))
-                                    <a href="?query={{$query}}&fonte={{ $hit['_source']['ato']['fonte']['sigla'] }}">
-                                        {{ $hit['_source']['ato']['fonte']['orgao'] }}
+                                    @if (isset($doc['fonte']['sigla']))
+                                    <a href="?query={{$query}}&fonte={{ $doc['fonte']['sigla'] }}">
+                                        {{ $doc['fonte']['orgao'] }}
                                     </a>
                                     @else
-                                        {{ $hit['_source']['ato']['fonte']['orgao'] }}
+                                        {{ $doc['fonte']['orgao'] }}
                                     @endif
                                     
                                     
                                 <br/>
-                                <strong>Publicação:</strong> {{ date('d/m/Y', strtotime($hit['_source']['ato']['data_publicacao'] )) }}
+                                <strong>Publicação:</strong> {{ date('d/m/Y', strtotime($doc['data_publicacao'] )) }}
                                 <br />
                                 <strong>Palavras-Chave:</strong>
-                                @foreach ($hit['_source']['ato']['tags'] as $tag)
+                                @foreach ($doc['tags'] as $tag)
                                     <a href="?query={{$tag}}" class="badge badge-info">
                                         {{ $tag }}
                                     </a>
                                 @endforeach
                                 <hr class="split-sm">
-                                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#trechos-{{$loop->index}}" aria-expanded="false" aria-controls="highlight-collapse-{{$hit['_id']}}"
-                                    {{empty($hit['highlight']) || empty($hit['highlight']['attachment.content']) ? 'disabled':''}}>
+                                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#trechos-{{$loop->index}}" aria-expanded="false" aria-controls="highlight-collapse-{{$doc['id']}}"
+                                    {{empty($doc['trechos_destaque']) ? 'disabled':''}}>
                                     Trechos encontrados
                                 </button>
 
-                                <a href="/normativa/pdf/{{ $hit['_id'] }}" class="btn btn-primary" target="_blank">
+                                <a href="/normativa/pdf/{{ $doc['id'] }}" class="btn btn-primary" target="_blank">
                                     Baixar
                                 </a>
                                 <br/>
                                 
                                 <div id="trechos-{{$loop->index}}" class="collapse">
-                                @if (!empty($hit['highlight']['attachment.content']))
+                                @if (!empty($doc['trechos_destaque']))
                                     <small>
                                     <ul class="list-group">
-                                        @foreach ($hit['highlight']['attachment.content'] as $highlight)
+                                        @foreach ($doc['trechos_destaque'] as $highlight)
                                         <li class="list-group-item">
                                             <?php echo html_entity_decode ($highlight); ?>
                                         </li>
@@ -278,7 +278,7 @@
             </div>
             <!-- end pagination-->
 
-        @elseif (isset($hits))
+        @else
             <div class="row mt-3" id="no-results">
                 <div class="col-lg-6 offset-md-3">
                     <div class="alert alert-secondary" role="alert">

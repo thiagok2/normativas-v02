@@ -157,8 +157,6 @@ class UnidadeController extends Controller
         foreach($tiposTotal as $tipo){
             $documentos["".$tipo->id.""] = Documento::where([['unidade_id',$unidadeId],['tipo_documento_id',$tipo->id]])->get();
         }
-
-        //dd($documentos);
         
         return view('unidades.page', compact('unidade','tiposTotal','documentos'));
     }
