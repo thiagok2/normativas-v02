@@ -5751,3 +5751,9 @@ table.text-center th {
 .icon-success{
     color:#00a65a !important;
 }
+
+td i.fa{
+        font-size: 16px;
+        margin-right: 3px;
+        margin-left: 3px;
+    }

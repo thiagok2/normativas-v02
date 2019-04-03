@@ -72,8 +72,8 @@
                                         <td>{{ $unidade->esfera }}</td>
                                         <td>
                                             {{ $unidade->documentos->count() }}
-                                            <i class="glyphicon glyphicon-file {{$unidade->documentos->count()>0 ? 'icon-success':'icon-danger'}}"></i>
-                                            <i class="glyphicon glyphicon-user {{$unidade->responsavel->confirmado ? 'icon-success':'icon-danger'}}"></i>
+                                            <i class="fa fa-file {{$unidade->documentos->count()>0 ? 'icon-success':'icon-danger'}}"></i>
+                                            <i class="fa fa-user {{$unidade->responsavel->confirmado ? 'icon-success':'icon-danger'}}"></i>
                                         </td>
                                         <td>
                                             <a href="{{route("unidade-edit",$unidade->id)}}">
