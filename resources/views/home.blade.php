@@ -135,7 +135,7 @@
     </div>
     <!-- /.col -->
     <div class="col-md-3 col-sm-6 col-xs-12">
-        <div class="info-box bg-lime">
+        <div class="info-box bg-olive">
         <span class="info-box-icon"><i class="fa fa-bookmark"></i></span>
 
         <div class="info-box-content">
@@ -246,6 +246,9 @@
                 <h3 class="box-title">Assuntos</h3>
             </div>
             <div class="box-body">
+                <canvas id="chartAssuntos"></canvas>
+                <br />
+                <br />
                 @foreach ($documentosPorAssunto as $v)
                     <div class="clearfix">
                     <span class="pull-left">{{$v->nome}} ({{$v->total}})</span>
@@ -265,6 +268,9 @@
                 <h3 class="box-title">Tipos</h3>
             </div>
             <div class="box-body">
+                <canvas id="chartTipos"></canvas>
+                <br />
+                <br />
                 @foreach ($documentosPorTipo as $v)
                     <div class="clearfix">
                     <span class="pull-left">{{$v->nome}} ({{$v->total}})</span>
@@ -438,8 +444,8 @@
                                 </td>
                                 <td>
                                     {{ $unidade->documentos->count() }}
-                                    <i class="glyphicon glyphicon-file {{$unidade->documentos->count()>0 ? 'alert-success':'alert-danger'}}"></i>
-                                    <i class="glyphicon glyphicon-user {{$unidade->responsavel->confirmado ? 'alert-success':'alert-danger'}}"></i>
+                                    <i class="fa fa-file {{$unidade->documentos->count()>0 ? 'icon-success':'icon-danger'}}"></i>
+                                    <i class="glyphicon glyphicon-user {{$unidade->responsavel->confirmado ? 'icon-success':'icon-danger'}}"></i>
                                 </td>
                             </tr>
                         @empty
@@ -520,50 +526,8 @@
 
 
 <script>
-        //Conselhos Confirmados
-        var ctxConsConfirmados = document.getElementById('chartConsConfirmados')
-        var labels = [];
-        var criados = [];
-        var confirmados = [];
-        @foreach ($evolucaoUnidadesConfirmadasMes as $e)
-        labels.push('{!!$e->mes_ano_abrev!!}');
-        criados.push('{!!$e->criados!!}');
-        confirmados.push('{!!$e->confirmados!!}');
-        @endforeach
 
-        var chartConsConfirmados = new Chart(ctxConsConfirmados, {
-            type: 'line',
-            data: {
-                labels: labels,
-                datasets: [
-                    {
-                        label: 'Criados',
-                        data: criados,
-                        backgroundColor: 'rgba(36, 123, 160, 0.2)',
-                        borderColor: 'rgba(36, 123, 160, 1)'
-                    },
-                    {
-                        label: 'Confirmados',
-                        data: confirmados,
-                        backgroundColor: ['rgba(112, 192, 179, 0.2)'],
-                        borderColor: ['rgba(112, 192, 179, 1)']
-
-                    }
-                ]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                }
-            }
-        });
-        //fim conselhos confirmados
-
-        var ctxUploadsMeses = document.getElementById('chartUploadsMeses')
+        /*var ctxUploadsMeses = document.getElementById('chartUploadsMeses')
         var labels = [];
         var enviados = [];
 
@@ -594,7 +558,7 @@
                     }]
                 }
             }
-        });
+        });*/
 
 
 </script>

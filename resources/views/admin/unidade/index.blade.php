@@ -3,7 +3,7 @@
 @section('title', 'Normativas')
 
 @section('content_header')
-    
+
 @stop
 
 @section('content')
@@ -20,15 +20,15 @@
                     <div class="panel-heading">Filtrar</div>
                     <div class="panel-body">
                         <form class="form-inline" method="GET" action="{{route('unidades')}}">
-                            
+
                             <input type="text" id="nome" name="nome" class="form-control" value="{{$nome}}"
                                 placeholder="Nome da unidade" aria-describedby="basic-addon1">
-                            
+
                             <select class="form-control" name="esfera" id="esfera">
                                 <option value="0">Todas as Esferas</option>
                                 <option value="Federal"     @if($esfera=="Federal") selected @endif>Federal</option>
                                 <option value="Estadual"    @if($esfera=="Estadual") selected @endif>Estadual</option>
-                                <option value="Municipal"   @if($esfera=="Municipal") selected @endif>Municipal</option>    
+                                <option value="Municipal"   @if($esfera=="Municipal") selected @endif>Municipal</option>
                             </select>
 
                             <select class="form-control" name="estado" id="estado">
@@ -72,8 +72,8 @@
                                         <td>{{ $unidade->esfera }}</td>
                                         <td>
                                             {{ $unidade->documentos->count() }}
-                                            <i class="glyphicon glyphicon-file {{$unidade->documentos->count()>0 ? 'alert-success':'alert-danger'}}"></i>
-                                            <i class="glyphicon glyphicon-user {{$unidade->responsavel->confirmado ? 'alert-success':'alert-danger'}}"></i>
+                                            <i class="glyphicon glyphicon-file {{$unidade->documentos->count()>0 ? 'icon-success':'icon-danger'}}"></i>
+                                            <i class="glyphicon glyphicon-user {{$unidade->responsavel->confirmado ? 'icon-success':'icon-danger'}}"></i>
                                         </td>
                                         <td>
                                             <a href="{{route("unidade-edit",$unidade->id)}}">
@@ -98,21 +98,21 @@
                                         <li class="list-group-item">
                                             <i class="glyphicon glyphicon-file"></i>
                                             Documentos enviados
-                            
+
                                         </li>
                                         <li class="list-group-item">
                                                 <i class="glyphicon glyphicon-user"></i>
                                             Usuário confirmou acesso
                                         </li>
-                                       
+
                                     </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
-                    
-                   
+
+
+
                 </div>
             </div>
         </div>
