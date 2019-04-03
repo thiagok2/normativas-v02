@@ -246,9 +246,9 @@
                 <h3 class="box-title">Assuntos</h3>
             </div>
             <div class="box-body">
-                <canvas id="chartAssuntos"></canvas>
+                <!--<canvas id="chartAssuntos"></canvas>
                 <br />
-                <br />
+                <br />-->
                 @foreach ($documentosPorAssunto as $v)
                     <div class="clearfix">
                     <span class="pull-left">{{$v->nome}} ({{$v->total}})</span>
@@ -268,9 +268,9 @@
                 <h3 class="box-title">Tipos</h3>
             </div>
             <div class="box-body">
-                <canvas id="chartTipos"></canvas>
+                <!--<canvas id="chartTipos"></canvas>
                 <br />
-                <br />
+                <br />-->
                 @foreach ($documentosPorTipo as $v)
                     <div class="clearfix">
                     <span class="pull-left">{{$v->nome}} ({{$v->total}})</span>
