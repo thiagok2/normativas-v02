@@ -1,9 +1,8 @@
 
 $(function () {
-    var urlBase = "http://dev.normativas-v02:8888";
     console.log('api-normativas');
     //Conselhos confirmados
-    var url = urlBase+'/api/unidades/confirmadas/periodo';
+    var url = '/api/unidades/confirmadas/periodo';
     $.getJSON(url, function (data) {
         var ctxConsConfirmados = document.getElementById('chartConsConfirmados')
         var labels = [];
@@ -50,7 +49,7 @@ $(function () {
     //fim conselhos confirmados
 
     //Documentos enviados
-    var url =urlBase+"/api/documentos/enviados/6meses";
+    var url ="/api/documentos/enviados/6meses";
     $.getJSON(url, function(data) {
         var ctxUploadsMeses = document.getElementById("chartUploadsMeses");
         var labels = [];
@@ -91,7 +90,7 @@ $(function () {
     //fim documentos enviados
 
     //assuntos
-    var url =urlBase+"/api/documentos/assuntos/total"
+    var url ="/api/documentos/assuntos/total"
     $.getJSON(url, function (data) {
         var ctxAssuntos = document.getElementById("chartAssuntos");
         var labels = [];
@@ -123,7 +122,7 @@ $(function () {
     //fim assuntos
 
     //tipos
-    var url = urlBase+"/api/documentos/tipos/total"
+    var url = "/api/documentos/tipos/total"
     $.getJSON(url, function (data) {
         var ctxTipos = document.getElementById("chartTipos");
         var labels = [];
