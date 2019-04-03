@@ -48,7 +48,7 @@ $(function () {
   });
 
   $(".bootstrap-tagsinput > input").on('keydown',function (e) {
- 
+
     if (e.which == 9 || e.which == 13)
       {
         $("#palavras_chave").tagsinput('add',$(this).val());
@@ -58,7 +58,7 @@ $(function () {
 
   });
 
-  $('.cpf').mask('000.000.000-00', 
+  $('.cpf').mask('000.000.000-00',
             {reverse: true});
 
 });

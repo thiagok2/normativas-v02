@@ -4,7 +4,7 @@
 
 
 @section('content_header')
-    
+
 @endsection
 
 @section('content')
@@ -48,7 +48,7 @@
         <a href="{{route('publicar')}}">
             <div class="small-box bg-green">
                 <div class="inner">
-                
+
                     <h3>Novo</h3>
 
                     <p>Publique um novo documento</p>
@@ -75,7 +75,7 @@
                     <p>Documentos enviados</p>
                 </div>
                 <div class="icon">
-                    
+
                     <i class="ion ion-search"></i>
                 </div>
                 <div class="small-box-footer">
@@ -100,7 +100,7 @@
                     <i class="ion ion-person-add"></i>
                 </div>
                 <div class="small-box-footer">
-                    Acesse a lista de Colaboradores 
+                    Acesse a lista de Colaboradores
                     <i class="fa fa-arrow-circle-right"></i>
                 </div>
             </div>
@@ -126,7 +126,7 @@
             <div class="progress-bar" style="width: {{$porcentagemConfirmadas}}%"></div>
             </div>
                 <span class="progress-description">
-                {{$countUnidadesConfirmadas30Dias}} nos últimos 30 dias 
+                {{$countUnidadesConfirmadas30Dias}} nos últimos 30 dias
                 </span>
         </div>
         <!-- /.info-box-content -->
@@ -169,7 +169,7 @@
                 <div class="progress-bar" style="width: 100%"></div>
             </div>
             <span class="progress-description">
-                Acessaram nos últimos 30 dias 
+                Acessaram nos últimos 30 dias
             </span>
         </div>
         <!-- /.info-box-content -->
@@ -203,14 +203,15 @@
 @endif
 <!-- /.row -->
 @if (auth()->user()->isAdmin())
-<div class="row"> 
+<div class="row">
     <div class="col-lg-4">
         <div class="box box-danger">
             <div class="box-header">
                 <h3 class="box-title">Conselhos confirmados </h3>
             </div>
             <div class="box-body no-padding">
-                <table class="table table-condensed table-hover table-striped">
+                <canvas id="chartConsConfirmados"></canvas>
+                <!--<table class="table table-condensed table-hover table-striped">
                     <thead>
                         <tr>
                             <th>Mês</th>
@@ -227,7 +228,7 @@
                             </tr>
                         @endforeach
                     </tbody>
-                </table>
+                </table>-->
             </div>
             <div class="box-footer">
                 <span class="text-muted pull-right">
@@ -283,7 +284,8 @@
                 <h3 class="box-title">Uploads dos últimos meses</h3>
             </div>
             <div class="box-body no-padding">
-                <table class="table table-condensed table-hover table-striped">
+                <canvas id="chartUploadsMeses"></canvas>
+                <!--<table class="table table-condensed table-hover table-striped">
                     <thead>
                         <tr>
                             <th>Mês</th>
@@ -298,7 +300,7 @@
                             </tr>
                         @endforeach
                     </tbody>
-                </table>
+                </table>-->
             </div>
             <div class="box-footer">
                 <span class="text-muted pull-right">
@@ -363,8 +365,8 @@
                                 </td>
                             </tr>
                         @endforeach
-                        
-                        
+
+
                     </tbody>
                 </table>
             </div><!-- /.box-body -->
@@ -373,7 +375,7 @@
                     Já foram enviados {{$documentos->count()}} documentos no total.
                 </span>
             </div>
-                
+
         </div>
     </div>
 </div>
@@ -452,9 +454,9 @@
             </div>
             <div class="box-footer">
                 <span class="text-muted pull-left">
-                    
+
                     Até momento, {{$unidades->total()}} conselhos enviaram documentos.
-                    
+
                 </span>
             </div>
         </div> <!-- end box -->
@@ -480,7 +482,7 @@
                 </div>
             </div>
             <div class="box-footer">
-                
+
             </div>
         </div> <!-- end box -->
     </div>
@@ -503,7 +505,7 @@
                 </div>
             </div>
             <div class="box-footer">
-                
+
             </div>
         </div> <!-- end box -->
     </div>
@@ -515,4 +517,85 @@
 
 @push('scripts')
     <script src="{{ asset('js/app-home.js') }}"></script>
+
+
+<script>
+        //Conselhos Confirmados
+        var ctxConsConfirmados = document.getElementById('chartConsConfirmados')
+        var labels = [];
+        var criados = [];
+        var confirmados = [];
+        @foreach ($evolucaoUnidadesConfirmadasMes as $e)
+        labels.push('{!!$e->mes_ano_abrev!!}');
+        criados.push('{!!$e->criados!!}');
+        confirmados.push('{!!$e->confirmados!!}');
+        @endforeach
+
+        var chartConsConfirmados = new Chart(ctxConsConfirmados, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Criados',
+                        data: criados,
+                        backgroundColor: 'rgba(36, 123, 160, 0.2)',
+                        borderColor: 'rgba(36, 123, 160, 1)'
+                    },
+                    {
+                        label: 'Confirmados',
+                        data: confirmados,
+                        backgroundColor: ['rgba(112, 192, 179, 0.2)'],
+                        borderColor: ['rgba(112, 192, 179, 1)']
+
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+        //fim conselhos confirmados
+
+        var ctxUploadsMeses = document.getElementById('chartUploadsMeses')
+        var labels = [];
+        var enviados = [];
+
+        @foreach ($evolucaoEnviados6Meses as $e)
+            labels.push('{!!$e->mes_ano_abrev!!}');
+            enviados.push('{!!$e->enviados!!}');
+        @endforeach
+
+        var chartUploadsMeses = new Chart(ctxUploadsMeses, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Enviados',
+                        data: enviados,
+                        backgroundColor: 'rgba(36, 123, 160, 0.2)',
+                        borderColor: 'rgba(36, 123, 160, 1)'
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+
+
+</script>
 @endpush
