@@ -25,7 +25,8 @@
 <div class="row">
     <div class="col-lg-3">
         <!-- small box -->
-        <a href="{{route('documentos')}}">
+        <!--<a href="{{route('documentos')}}">-->
+        <a href="/Manual_Upload.pdf" download target="_blank">
             <div class="small-box bg-light-blue">
                 <div class="inner">
                     <h3>Guia</h3>
@@ -37,7 +38,7 @@
                     <i class="fa fa-book"></i>
                 </div>
                 <div class="small-box-footer">
-                    Acesso o PDF guia da plataforma
+                    Acesse o PDF guia da plataforma
                     <i class="fa fa-arrow-circle-right"></i>
                 </div>
             </div>
@@ -445,7 +446,7 @@
                                 <td>
                                     {{ $unidade->documentos->count() }}
                                     <i class="fa fa-file {{$unidade->documentos->count()>0 ? 'icon-success':'icon-danger'}}"></i>
-                                    <i class="fa fa-user {{$unidade->responsavel->confirmado ? 'icon-success':'icon-danger'}}"></i>
+                                    <i class="glyphicon glyphicon-user {{$unidade->responsavel->confirmado ? 'icon-success':'icon-danger'}}"></i>
                                 </td>
                             </tr>
                         @empty
