@@ -199,6 +199,9 @@
                                 <strong>Ementa:&nbsp;&nbsp;</strong>{{ $doc['ementa'] }}
 
                                 <hr/>
+                                @if (!empty($doc['numero']))
+                                <strong>Número:</strong> {{ $doc['numero']}} 
+                                @endif
                                 @if (!empty($doc['tipo_doc']))
                                 <strong>Tipo:</strong> {{ $doc['tipo_doc']}} 
                                 @endif

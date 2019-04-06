@@ -21,16 +21,16 @@ class SearchResult
             $doc['id'] = $hit['_id'];
             $doc['score'] = $hit['_score'];
 
-            $this->addKeyValueAto( $doc , $hit, "id_persisted" );
-            $this->addKeyValueAto( $doc , $hit, "numero" );
-            $this->addKeyValueAto( $doc , $hit, "ano" );
-            $this->addKeyValueAto( $doc , $hit, "tipo_doc" );
-            $this->addKeyValueAto( $doc , $hit, "ementa" );
-            $this->addKeyValueAto( $doc , $hit, "titulo" );
+            $doc = $this->addKeyValueAto( $doc , $hit, "id_persisted" );
+            $doc = $this->addKeyValueAto( $doc , $hit, "numero" );
+            $doc = $this->addKeyValueAto( $doc , $hit, "ano" );
+            $doc = $this->addKeyValueAto( $doc , $hit, "tipo_doc" );
+            $doc = $this->addKeyValueAto( $doc , $hit, "ementa" );
+            $doc = $this->addKeyValueAto( $doc , $hit, "titulo" );
             
-            $this->addKeyValueAto( $doc , $hit, "data_publicacao" );
-            $this->addKeyValueAto( $doc , $hit, "url" );
-            $this->addKeyValueAto( $doc , $hit, "tags" );
+            $doc = $this->addKeyValueAto( $doc , $hit, "data_publicacao" );
+            $doc = $this->addKeyValueAto( $doc , $hit, "url" );
+            $doc = $this->addKeyValueAto( $doc , $hit, "tags" );
 
 
             if(array_key_exists( "data_envio" , $hit['_source']['ato'] ) 
