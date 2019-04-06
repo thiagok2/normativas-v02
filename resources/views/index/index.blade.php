@@ -278,7 +278,7 @@
             </div>
             <!-- end pagination-->
 
-        @else
+        @elseif($query)
             <div class="row mt-3" id="no-results">
                 <div class="col-lg-6 offset-md-3">
                     <div class="alert alert-secondary" role="alert">

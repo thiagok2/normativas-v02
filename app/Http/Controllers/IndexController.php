@@ -52,9 +52,13 @@ class IndexController extends Controller
 
         $documentos = [];
 
+        //dd($query);
         try{
             if(isset($query)){
                 $query = trim($query);
+
+               
+
                 SearchComponent::logging($query);
 
                 $page = $request->query('page', 1);
@@ -62,6 +66,10 @@ class IndexController extends Controller
  
                 $searchCommand = new SearchCommandA1('normativas','ato');
                 $result =  $searchCommand->search($query, $queryFilters, $from, self::RESULTS_PER_PAGE);
+
+
+               
+
 
                 $total = $result->totalResults;
                 $max_score = $result->maxScore;
@@ -89,7 +97,9 @@ class IndexController extends Controller
 
             Log::error($e->getFile().' - Linha '.$e->getLine().' - search::'.$e->getMessage());
             
-            return view('index.index', compact('query',
+            // throw  $e;
+
+            return view('index.index', compact('query','erro',
             'tiposDocumento','tipo_doc','esfera','periodo',
             'ano','fonte','filters',
             'page','total','size_page','total_pages',
