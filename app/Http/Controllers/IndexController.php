@@ -81,7 +81,6 @@ class IndexController extends Controller
                 $aggregations = $result->aggResults;
             }
 
-            
             return view('index.index', compact('query',
             'tiposDocumento','tipo_doc','esfera','periodo',
             'ano','fonte','filters',
@@ -91,19 +90,20 @@ class IndexController extends Controller
 
         }catch(\Exception $e){
 
+          
             $erro['titulo'] = getenv('APP_DEBUG') ? "DEBUG:: ".$e->getMessage() : 'Plataforma de busca indisponível';
             $erro['local'] = $e->getFile()." #".$e->getLine();
             $erro['trace'] = $e->getTraceAsString();
 
             Log::error($e->getFile().' - Linha '.$e->getLine().' - search::'.$e->getMessage());
-            
-            // throw  $e;
+           
+            throw  $e;
 
-            return view('index.index', compact('query','erro',
-            'tiposDocumento','tipo_doc','esfera','periodo',
-            'ano','fonte','filters',
-            'page','total','size_page','total_pages',
-            'max_score','documentos','aggregations','message'));
+            // return view('index.index', compact('query','erro',
+            // 'tiposDocumento','tipo_doc','esfera','periodo',
+            // 'ano','fonte','filters',
+            // 'page','total','size_page','total_pages',
+            // 'max_score','documentos','aggregations','message'));
         }
         
     }

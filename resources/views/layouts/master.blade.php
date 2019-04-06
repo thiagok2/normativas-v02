@@ -12,7 +12,7 @@
         </script>
 
     
-        <title>Normativas v0.1.0-beta</title>
+        <title>Normativas v0.2.1</title>
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
 
         <link href="/css/bootstrap.min.css" rel="stylesheet">

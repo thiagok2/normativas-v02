@@ -21,7 +21,10 @@ class SearchResult
             $doc['id'] = $hit['_id'];
             $doc['score'] = $hit['_score'];
 
-            $doc['id_persisted'] = $hit['_source']['ato']['id_persisted'];
+            if(array_key_exists( "id_persisted" , $hit['_source']['ato'] ) && isset($hit['_source']['ato']['id_persisted']))
+                $doc['id_persisted'] = $hit['_source']['ato']['id_persisted'];
+            
+            
             $doc['ano'] = $hit['_source']['ato']['ano'];
 
             $doc['tipo_doc'] = $hit['_source']['ato']['tipo_doc'];
@@ -36,7 +39,8 @@ class SearchResult
 
             $doc['fonte'] =  $hit['_source']['ato']['fonte'];
 
-            $doc['trechos_destaque'] =  $hit['highlight']['attachment.content'];
+            if(array_key_exists( "attachment.content" , $hit['highlight'] ) && isset($hit['highlight']['attachment.content']))
+                $doc['trechos_destaque'] =  $hit['highlight']['attachment.content'];
 
             $this->documentsResult[] = $doc;
         }
