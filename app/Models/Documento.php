@@ -72,6 +72,7 @@ class Documento extends Model
         $object = [
             "ato" => [
                 "id_persisted" => $this->id,
+                "numero" => $this->numero,
                 "ano" => $this->ano,
                 "titulo" => $this->titulo,
                 "ementa" => $this->ementa,

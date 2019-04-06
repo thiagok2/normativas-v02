@@ -21,49 +21,59 @@ class SearchResult
             $doc['id'] = $hit['_id'];
             $doc['score'] = $hit['_score'];
 
-            if(array_key_exists( "id_persisted" , $hit['_source']['ato'] ) && isset($hit['_source']['ato']['id_persisted']))
-                $doc['id_persisted'] = $hit['_source']['ato']['id_persisted'];
+            $this->addKeyValueAto( $doc , $hit, "id_persisted" );
+            $this->addKeyValueAto( $doc , $hit, "numero" );
+            $this->addKeyValueAto( $doc , $hit, "ano" );
+            $this->addKeyValueAto( $doc , $hit, "tipo_doc" );
+            $this->addKeyValueAto( $doc , $hit, "ementa" );
+            $this->addKeyValueAto( $doc , $hit, "titulo" );
             
-            
-            $doc['ano'] = $hit['_source']['ato']['ano'];
+            $this->addKeyValueAto( $doc , $hit, "data_publicacao" );
+            $this->addKeyValueAto( $doc , $hit, "url" );
+            $this->addKeyValueAto( $doc , $hit, "tags" );
 
-            $doc['tipo_doc'] = $hit['_source']['ato']['tipo_doc'];
-            $doc['ementa'] = $hit['_source']['ato']['ementa'];
-            $doc['titulo'] = $hit['_source']['ato']['titulo'];
-
-            $doc['data_publicacao'] = $hit['_source']['ato']['data_publicacao'];
 
             if(array_key_exists( "data_envio" , $hit['_source']['ato'] ) 
                 && array_key_exists( "date" , $hit['_source']['ato']['data_envio'])
                 && isset($hit['_source']['ato']['data_envio'])){
 
                 $doc['data_envio'] = $hit['_source']['ato']['data_envio']['date'];
+            }else{
+                $doc['data_envio'] = null;
             }
-
-   
-            $doc['url'] = $hit['_source']['ato']['url'];
-            
-            $doc['tags'] =  $hit['_source']['ato']['tags'];
+           
 
             $doc['fonte'] =  $hit['_source']['ato']['fonte'];
 
-            if(array_key_exists( "attachment.content" , $hit['highlight'] ) && isset($hit['highlight']['attachment.content']))
+            if(array_key_exists( "attachment.content" , $hit['highlight'] ) && isset($hit['highlight']['attachment.content'])){
                 $doc['trechos_destaque'] =  $hit['highlight']['attachment.content'];
+            }else{
+                $doc['trechos_destaque'] = null;
+            }
 
             $this->documentsResult[] = $doc;
         }
 
         $this->aggResults = array();
-        foreach( $elasticAggs['aggregations'] as $aggKey => $aggVal){       
-            $this->aggResults[$aggKey]["labels"] = array();
-            
-            foreach($aggVal["buckets"] as $bucket){
-                $this->aggResults[$aggKey]["labels"][] = ["nome" => $bucket["key"], "quantidade" => $bucket["doc_count"]];
-            }            
+        if(array_key_exists( "aggregations" , $elasticAggs )){
+            foreach( $elasticAggs['aggregations'] as $aggKey => $aggVal){       
+                $this->aggResults[$aggKey]["labels"] = array();
+                
+                foreach($aggVal["buckets"] as $bucket){
+                    $this->aggResults[$aggKey]["labels"][] = ["nome" => $bucket["key"], "quantidade" => $bucket["doc_count"]];
+                }            
+            }
         }
-
+        
     }
 
+    private function addKeyValueAto(&$doc, $hit, $key){
+        if(array_key_exists( $key , $hit['_source']['ato'] ) && isset($hit['_source']['ato'][$key])){
+            $doc[$key] =  $hit['_source']['ato'][$key];
+        }else{
+            $doc[$key] = null;
+        }
 
-
+        return $doc;
+    }
 }

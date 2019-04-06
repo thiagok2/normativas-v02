@@ -200,7 +200,7 @@
 
                                 <hr/>
                                 @if (!empty($doc['tipo_doc']))
-                                <strong>Tipo:</strong> {{ $doc['tipo_doc'] }}
+                                <strong>Tipo:</strong> {{ $doc['tipo_doc']}} 
                                 @endif
                                 <br/>
                                 <strong>Conselho:</strong> 
