@@ -32,7 +32,15 @@ class SearchResult
             $doc['titulo'] = $hit['_source']['ato']['titulo'];
 
             $doc['data_publicacao'] = $hit['_source']['ato']['data_publicacao'];
-            $doc['data_envio'] = $hit['_source']['ato']['data_envio']['date'];
+
+            if(array_key_exists( "data_envio" , $hit['_source']['ato'] ) 
+                && array_key_exists( "date" , $hit['_source']['ato']['data_envio'])
+                && isset($hit['_source']['ato']['data_envio'])){
+
+                $doc['data_envio'] = $hit['_source']['ato']['data_envio']['date'];
+            }
+
+   
             $doc['url'] = $hit['_source']['ato']['url'];
             
             $doc['tags'] =  $hit['_source']['ato']['tags'];
