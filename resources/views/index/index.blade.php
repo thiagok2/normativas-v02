@@ -11,7 +11,7 @@
                         <a href="{{ route('home') }}">Home</a>
                     @else
                         <a href="{{ route('login') }}" class="btn btn-outline-secondary btn-pill btn-login m-1 mt-2">Entrar <i class="fa fa-user badge-info"></i></a>
-                        <!-- 
+                        <!--
                         <a href="{{ route('register') }}">Registrar</a>
                         -->
                     @endauth
@@ -36,9 +36,9 @@
             <div class="col-lg-8 offset-lg-2">
                 @if (isset($erro))
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <strong>{{$erro['titulo']}}</strong> 
+                        <strong>{{$erro['titulo']}}</strong>
                         <br/>
-                        Notifique a administração do sistema através do email: 
+                        Notifique a administração do sistema através do email:
                         <a href="mailto:normativas@nees.com.br?Subject=Notificação de erro" target="_top">normativas@nees.com.br</a>
 
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -51,16 +51,16 @@
 
                             <small>
                                 <p>{{$erro['local']}}</p>
-                                
+
                                 <p>{{$erro['trace']}}</p>
-                            </small> 
+                            </small>
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                    @endif    
+                    @endif
                 @endif
-               
+
                 <form action="/" method="GET" class="">
                     <div class="input-group">
                         <input type="text" name="query" class="form-control" placeholder="Digite os termos da consulta" value="{{ $query }}" />
@@ -69,9 +69,9 @@
                         <div class="col text-center mt-3 mb-3">
                             <button type="submit" class="btn btn-primary mr-1"><i class="fa fa-search"></i> Pesquisar normativas</button>
                             <button type="button" class="btn btn-info ml-1" data-toggle="collapse" data-target="#filters-menu" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-cogs"></i> Configurações da busca</button>
-                            <a class="btn btn-info ml-1" href="{{route('unidades-search')}}" target="_blank">
+                            <!--<a class="btn btn-info ml-1" href="{{route('unidades-search')}}" target="_blank">
                                 <i class="fa fa-cogs"></i> Pesquisar Conselhos
-                            </a>
+                            </a>-->
                         </div>
                     </div>
                     <div id="filters-menu" class="collapse <?php if($filters){ echo 'show'; }?>">
@@ -79,12 +79,12 @@
                             <div class="col">
                                 <select class="form-control" name="tipo_doc">
                                     <option value="all" <?php if($tipo_doc == "all"){ echo ' selected'; }?>>Todos os Tipos</option>
-                                    
+
                                     @foreach ($tiposDocumento as $tipo)
-                                        <option value="{{$tipo->nome}}" 
+                                        <option value="{{$tipo->nome}}"
                                             @if ($tipo_doc == $tipo->nome) selected @endif>Apenas {{$tipo->nome}}</option>
                                     @endforeach
-                                    
+
                                 </select>
                             </div>
                             <div class="col">
@@ -135,40 +135,40 @@
                             <!--Score máximo ({{ $max_score }}).-->
                         </p>
                         <div class="mt-2">
-                            @if ((($esfera && $esfera!="all") || $ano || $fonte)) 
-                                <a href="?query={{ $query }}" 
+                            @if ((($esfera && $esfera!="all") || $ano || $fonte))
+                                <a href="?query={{ $query }}"
                                     class="btn btn-outline-secondary btn-pill btn-sm mb-2">
                                     Limpar Filtros
                                     <span class="badge badge-pill badge-info"></span>
                                 </a>
                             @endif
-                            
+
                             @if (isset($aggregations))
                                 @foreach ($aggregations['ano']['labels'] as $bucket)
-                                    <a href="?query={{ $query }}&ano={{ urlencode($bucket['nome']) }}&esfera={{ $esfera  }}&fonte={{ $fonte  }}" 
+                                    <a href="?query={{ $query }}&ano={{ urlencode($bucket['nome']) }}&esfera={{ $esfera  }}&fonte={{ $fonte  }}"
                                         class="btn btn-outline-secondary btn-pill btn-sm mb-2">
-                                        {{ ucfirst($bucket['nome']) }} 
+                                        {{ ucfirst($bucket['nome']) }}
                                         <span class="badge badge-pill badge-info">{{ $bucket['quantidade'] }}</span>
                                     </a>
                                 @endforeach
-                            
+
                                 @foreach ($aggregations['esfera']['labels'] as $bucket)
-                                    <a href="?query={{ $query }}&esfera={{ urlencode($bucket['nome']) }}&ano={{ $ano }}&fonte={{ $fonte  }}" 
+                                    <a href="?query={{ $query }}&esfera={{ urlencode($bucket['nome']) }}&ano={{ $ano }}&fonte={{ $fonte  }}"
                                     class="btn btn-outline-secondary btn-pill btn-sm mb-2">
-                                        {{ ucfirst($bucket['nome']) }} 
+                                        {{ ucfirst($bucket['nome']) }}
                                         <span class="badge badge-pill badge-info">{{ $bucket['quantidade'] }}</span>
                                     </a>
                                 @endforeach
-                            
+
                                 @foreach ($aggregations['fonte']['labels'] as $bucket)
-                                    <a href="?query={{ $query }}&fonte={{ urlencode($bucket['nome']) }}&ano={{ $ano  }}&esfera={{ $esfera }}" 
+                                    <a href="?query={{ $query }}&fonte={{ urlencode($bucket['nome']) }}&ano={{ $ano  }}&esfera={{ $esfera }}"
                                     class="btn btn-outline-secondary btn-pill btn-sm mb-2">
-                                        {{ ucfirst($bucket['nome']) }} 
+                                        {{ ucfirst($bucket['nome']) }}
                                         <span class="badge badge-pill badge-info">{{ $bucket['quantidade'] }}</span>
                                     </a>
                                 @endforeach
                             @endif
-                            
+
                         </div>
                     </div>
                 </div>
@@ -186,27 +186,27 @@
                                 </a>
 
                                 <div id="max_score" class="float-lg-right float-xs-left">
-                                    <input value="{{ ($doc['score'])  }}" type="text" class="kv-fa rating-loading" 
-                                        data-min=0 
+                                    <input value="{{ ($doc['score'])  }}" type="text" class="kv-fa rating-loading"
+                                        data-min=0
                                         data-max={{$max_score}}
-                                        data-step=0.01 
+                                        data-step=0.01
                                         data-size="xs"
                                         required title="">
                                 </div>
                             </div>
-                            
+
                             <div class="card-body">
                                 <strong>Ementa:&nbsp;&nbsp;</strong>{{ $doc['ementa'] }}
 
                                 <hr/>
                                 @if (!empty($doc['numero']))
-                                <strong>Número:</strong> {{ $doc['numero']}} 
+                                <strong>Número:</strong> {{ $doc['numero']}}
                                 @endif
                                 @if (!empty($doc['tipo_doc']))
-                                <strong>Tipo:</strong> {{ $doc['tipo_doc']}} 
+                                <strong>Tipo:</strong> {{ $doc['tipo_doc']}}
                                 @endif
                                 <br/>
-                                <strong>Conselho:</strong> 
+                                <strong>Conselho:</strong>
                                     @if (isset($doc['fonte']['sigla']))
                                     <a href="?query={{$query}}&fonte={{ $doc['fonte']['sigla'] }}">
                                         {{ $doc['fonte']['orgao'] }}
@@ -214,8 +214,8 @@
                                     @else
                                         {{ $doc['fonte']['orgao'] }}
                                     @endif
-                                    
-                                    
+
+
                                 <br/>
                                 <strong>Publicação:</strong> {{ date('d/m/Y', strtotime($doc['data_publicacao'] )) }}
                                 <br />
@@ -235,7 +235,7 @@
                                     Baixar
                                 </a>
                                 <br/>
-                                
+
                                 <div id="trechos-{{$loop->index}}" class="collapse">
                                 @if (!empty($doc['trechos_destaque']))
                                     <small>
@@ -289,7 +289,7 @@
                     </div>
                 </div>
             </div>
-        @endif    
+        @endif
     </div>
 </section>
 <!-- results -->
