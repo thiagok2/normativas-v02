@@ -524,8 +524,6 @@
 
 @push('scripts')
     <script src="{{ asset('js/app-home.js') }}"></script>
-
-
 <script>
 
         /*var ctxUploadsMeses = document.getElementById('chartUploadsMeses')

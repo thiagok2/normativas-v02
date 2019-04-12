@@ -161,7 +161,7 @@ class DocumentoController extends Controller
                 $upload = $request->arquivo->storeAs('uploads', $urlArquivo);
 
                 $documento->save();
-    
+                
                 $tags = explode(",", $data["palavras_chave"]);
                 if(is_array($tags) && count($tags)>0){
                     foreach ($tags as $t) {
@@ -226,7 +226,7 @@ class DocumentoController extends Controller
 
     public function destroy($id)
     {
-
+        $id = (int)$id;
         try{
             DB::beginTransaction();
             $documento = Documento::with('palavrasChaves')->find($id);

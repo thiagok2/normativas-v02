@@ -1,6 +1,5 @@
 
 $(function () {
-    console.log('api-normativas');
     //Conselhos confirmados
     var url = '/api/unidades/confirmadas/periodo';
     $.getJSON(url, function (data) {

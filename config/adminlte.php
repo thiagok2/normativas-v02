@@ -121,6 +121,11 @@ return [
             'icon'        => 'upload'
         ],
         [
+            'text'        => 'Publicar em Lote',
+            'url'         => 'admin/documentos/publicar-lote',
+            'icon'        => 'upload'
+        ],
+        [
             'text'        => 'Últimos Documentos',
             'url'         => 'admin/documentos',
             'icon'        => 'list-alt'
