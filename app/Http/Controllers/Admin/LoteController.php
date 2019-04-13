@@ -34,7 +34,7 @@ class LoteController extends Controller
 
         $documentos = Documento::whereIn("id", explode(",", $request->ids))->get();
         $alerta = "Complete os dados dos arquivos enviados, assim terão uma maior possibilidade de retorno nas buscas (Ano, Tipo Documento e Assunto).";
-        //dd($documentos);
+      
 
         return view('admin.documento.lote-edit', compact('unidade','tiposDocumento', 'assuntos','documentos','alerta'));
 
