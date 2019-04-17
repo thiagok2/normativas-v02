@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Storage;
 
 use Elasticsearch\Client;
 use Elasticsearch\ClientBuilder;
+use Illuminate\Support\Facades\Log;
 
 class DocumentoController extends Controller
 {
@@ -148,7 +149,7 @@ class DocumentoController extends Controller
             if ($request->hasFile('arquivo') && $request->file('arquivo')->isValid()) {
     
                 DB::beginTransaction();
-    
+                $documento->nome_original = $request->arquivo->getClientOriginalName();
                 //$extensao = $request->arquivo->extension();
                 //$arquivoNome = "{$tituloArquivo}.{$extensao}";
                
@@ -211,6 +212,10 @@ class DocumentoController extends Controller
             $messageErro = (getenv('APP_DEBUG') === 'true') ? $e->getMessage():
             "Problemas na indexação do documento. Caso o problema persista, entre em contato pelo email normativas@ness.com.br";
 
+
+            Log::error($e->getFile().' - Linha '.$e->getLine().' - search::'.$e->getMessage());
+
+            
             return redirect()
 			    ->back()->withInput()
 			    ->with('error', $messageErro);
@@ -261,6 +266,9 @@ class DocumentoController extends Controller
 
             $messageErro = (getenv('APP_DEBUG') === 'true') ? $e->getMessage():
             "Documento não foi excluído. Caso o problema persista, entre em contato pelo email normativas@ness.com.br";
+            
+            Log::error($e->getFile().' - Linha '.$e->getLine().' - search::'.$e->getMessage());
+
             
             return redirect()
 			    ->back()

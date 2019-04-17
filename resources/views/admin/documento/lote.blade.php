@@ -15,18 +15,18 @@
     </ol>
 
 
-    <div class="container">
+    <div class="container-fluid">
         @include('admin.includes.alerts')
         <form name="form" id="form" action="{{route('enviar-lote')}}" method="post" enctype="multipart/form-data">
             {!! csrf_field() !!}
             <div class="row">
-                <div class="col-sm-3">
+                <div class="col-sm-4">
                     <div class="form-group">
                         <input type="text" class="form-control input-lg"  name="ano" id="ano" placeholder="Ano* (Ex.: 2019)"/>
                     </div>     
                 </div>
 
-                <div class="col-sm-3">
+                <div class="col-sm-4">
                     <div class="form-group">   
                         <select class="form-control input-lg" required id="tipo_documento_id" name="tipo_documento_id">
                             <option value="0">Tipo de Documento*</option>
@@ -37,7 +37,7 @@
                     </div>
                 </div>
 
-                <div class="col-sm-3">
+                <div class="col-sm-4">
                     <div class="form-group">   
                         <select class="form-control input-lg" required id="assunto_id" name="assunto_id">
                             <option value="0">Assunto</option>
@@ -51,7 +51,7 @@
             </div>
 
             <div class="row">
-                <div class="col-sm-9">
+                <div class="col-sm-12">
                     <div class="form-group">
                         <label for="palavras_chave">Palavras chave</label>
                         <small class=".text-muted">(Insira os termos mais relevantes abordados neste documento)</small>
@@ -61,7 +61,7 @@
                 </div>
             </div>  
             <div class="row">
-                <div class="col-sm-10">
+                <div class="col-sm-12">
                     <div class="alert alert-warning hidden" id="alertas">
                                 
                     </div>

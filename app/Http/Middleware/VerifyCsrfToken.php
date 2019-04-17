@@ -19,6 +19,10 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        //
+        '/documentos/update-item-lote',
+        'update-item-lote',
+        '\update-item-lote',
+        '\documentos\update-item-lote',
+
     ];
 }

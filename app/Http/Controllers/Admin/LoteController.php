@@ -11,9 +11,23 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Documento;
 use App\Models\PalavraChave;
 use App\Services\DocumentoService;
+use Elasticsearch\ClientBuilder;
 
 class LoteController extends Controller
 {
+     /**
+     * @var \Elasticsearch\Client
+     */
+    private $client;
+
+    public function __construct()
+    {
+        $hosts = [        
+            getenv('ELASTIC_URL')
+        ];
+        $this->client = ClientBuilder::create()->setHosts($hosts)->build();
+    }
+
     public function create(){
         $unidade = auth()->user()->unidade;
 
@@ -45,9 +59,12 @@ class LoteController extends Controller
         
         foreach ($request->documentos as $doc) {
     
-            $arquivoNome = basename($doc->getClientOriginalName(), ".pdf");;
+            
             $documento = new Documento();
+            $documento->nome_original = $doc->getClientOriginalName();
             $documento->completed = false;
+
+            $arquivoNome = basename($doc->getClientOriginalName(), ".pdf");
             $tipoDocumento = TipoDocumento::find($request->tipo_documento_id);
            
             if($tipoDocumento && !strpos(strtolower($arquivoNome), strtolower($tipoDocumento->nome))){
@@ -106,6 +123,34 @@ class LoteController extends Controller
 
        
         return response()->json(array('files' => $files), 200);
+    }
+
+    public function updateItemLote(Request $request, $documentoId){
+        $documento = Documento::find($documentoId);
+
+        $data = $request->all();
+    
+        $documento->fill($data);
+        $documento->completed = true;
+
+        $bodyDocumentElastic = $documento->toElasticObject();
+        $arquivoData = Storage::get('uploads/'.$documento->arquivo);
+        $bodyDocumentElastic["data"] = base64_encode($arquivoData);
+
+        //dd($bodyDocumentElastic);
+
+        $params = [
+            'index' => 'normativas',
+            'type'  => '_doc',
+            'id'    => $documento->arquivo,
+            'pipeline' => 'attachment', 
+            'body'  => $bodyDocumentElastic
+            
+        ];
+
+        $resultElastic = $this->client->index($params);
+
+        return response()->json($resultElastic, 200);
     }
 
     public function destroy($id){
