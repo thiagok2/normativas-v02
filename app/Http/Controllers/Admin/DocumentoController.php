@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Storage;
 
 use Elasticsearch\Client;
 use Elasticsearch\ClientBuilder;
+use Illuminate\Support\Facades\Log;
 
 class DocumentoController extends Controller
 {
@@ -148,7 +149,7 @@ class DocumentoController extends Controller
             if ($request->hasFile('arquivo') && $request->file('arquivo')->isValid()) {
     
                 DB::beginTransaction();
-    
+                $documento->nome_original = $request->arquivo->getClientOriginalName();
                 //$extensao = $request->arquivo->extension();
                 //$arquivoNome = "{$tituloArquivo}.{$extensao}";
                
@@ -161,7 +162,7 @@ class DocumentoController extends Controller
                 $upload = $request->arquivo->storeAs('uploads', $urlArquivo);
 
                 $documento->save();
-    
+                
                 $tags = explode(",", $data["palavras_chave"]);
                 if(is_array($tags) && count($tags)>0){
                     foreach ($tags as $t) {
@@ -211,6 +212,10 @@ class DocumentoController extends Controller
             $messageErro = (getenv('APP_DEBUG') === 'true') ? $e->getMessage():
             "Problemas na indexação do documento. Caso o problema persista, entre em contato pelo email normativas@ness.com.br";
 
+
+            Log::error($e->getFile().' - Linha '.$e->getLine().' - search::'.$e->getMessage());
+
+            
             return redirect()
 			    ->back()->withInput()
 			    ->with('error', $messageErro);
@@ -226,7 +231,7 @@ class DocumentoController extends Controller
 
     public function destroy($id)
     {
-
+        $id = (int)$id;
         try{
             DB::beginTransaction();
             $documento = Documento::with('palavrasChaves')->find($id);
@@ -261,6 +266,9 @@ class DocumentoController extends Controller
 
             $messageErro = (getenv('APP_DEBUG') === 'true') ? $e->getMessage():
             "Documento não foi excluído. Caso o problema persista, entre em contato pelo email normativas@ness.com.br";
+            
+            Log::error($e->getFile().' - Linha '.$e->getLine().' - search::'.$e->getMessage());
+
             
             return redirect()
 			    ->back()

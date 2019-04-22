@@ -22,3 +22,9 @@
       @endforeach
   </div>
 @endif
+
+@if (isset($alerta))
+	<div class="alert alert-warning">
+    	{{$alerta}}
+   </div>
+@endif

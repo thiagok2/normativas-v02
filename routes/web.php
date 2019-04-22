@@ -90,9 +90,17 @@ Route::prefix('admin')->middleware('auth')->namespace('Admin')->group(function()
     
     Route::get('documentos/publicar', 'DocumentoController@create')->name('publicar');
     Route::post('documentos/publicar', 'DocumentoController@store')->name('enviar');
+
+    Route::get('documentos/publicar-lote', 'LoteController@create')->name('publicar-lote');
+    Route::post('documentos/publicar-lote', 'LoteController@store')->name('enviar-lote');
+    Route::post('documentos/upload-lote', 'LoteController@upload')->name('upload-lote');
+    Route::post('documentos/update-item-lote/{id}', 'LoteController@updateItemLote')->name('update-item-lote');
+
+    Route::get('documentos/pendentes', 'LoteController@documentosPendentes')->name('docs-pendentes');
     
     Route::get('documento/{id}', 'DocumentoController@show')->name('documento');
     Route::delete('documentos/{id}', 'DocumentoController@destroy')->name('delete');
+    Route::get('lote/upload/{id}/delete', 'LoteController@destroy')->name('delete-upload');
     
     
     Route::get('usuarios/{id}/editar', 'UsuarioController@edit')->name('usuario-edit');

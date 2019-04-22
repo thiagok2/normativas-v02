@@ -10,7 +10,7 @@ class Documento extends Model
 
     protected $fillable = [
         'ano', 'titulo','numero','ementa','url','data_publicacao','tipo_documento_id',
-        'assunto_id','unidade_id'   ];
+        'assunto_id','unidade_id' , 'nome_original'  ];
 
 
     public function palavrasChaves(){
@@ -78,7 +78,7 @@ class Documento extends Model
                 "ementa" => $this->ementa,
                 "url"   =>  $this->url,
                 "data_publicacao"   =>  $this->data_publicacao,
-                "data_envio"   =>  $this->data_envio,
+                //"data_envio"   =>  date('Y-m-d', strtotime($this->data_envio)),
                 "tipo_doc" => $this->tipoDocumento->nome,
                 "arquivo"   =>  $this->arquivo,
                 "tags"  =>  $tags,

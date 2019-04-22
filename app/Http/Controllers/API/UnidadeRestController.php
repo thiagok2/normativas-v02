@@ -12,6 +12,10 @@ use App\Services\UnidadeQuery;
 
 class UnidadeRestController extends Controller
 {
+
+    public function get(){
+        return response()->json(Unidade::paginate(15));
+    }
     public function evolucaoUnidadesConfirmadas6Meses(){
         $unidadeQuery = new UnidadeQuery();
         $evolucaoUnidadesConfirmadasMes = $unidadeQuery->evolucaoUnidadesConfirmadas6Meses();
