@@ -71,7 +71,13 @@
                                 <td>
                                     <input type="text" class="form-control"  name="titulo_{{$doc->id}}" id="titulo_{{$doc->id}}" value="{{$doc->titulo}}"/>
                                     <a href='{{ Storage::url("uploads/$doc->arquivo")}}' target="_blank">
-                                        <small>{{$doc->nome_original}}</small>
+                                        <small>
+                                            @if ($doc->nome_original)
+                                                {{$doc->nome_original}}
+                                            @else
+                                                {{$doc->arquivo}}
+                                            @endif
+                                        </small>
                                     </a> 
                                 </td>
                                 <td>
