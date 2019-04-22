@@ -409,6 +409,12 @@
         width: 100%;
     }
 
+    .alert-danger-blue{
+        color: #005762;
+        background-color: #ccedf2;
+        border-color: #b6e7ec;
+    }
+
     @media (min-width: 768px) {
         .md\:bg-left {
             background-position: left;
@@ -465,10 +471,10 @@
                     Desculpas. Estamos com problemas.
                 </div>
 
-                <div class="w-16 h-1 bg-purple-light my-3 md:my-6"></div>
+                <div class="w-16 h-1 bg-blue-dark my-3 md:my-6"></div>
 
-                <div class="alert alert-danger">
-                    Persistendo o problema, notifique a administração do sistema através do email: 
+                <div class="alert alert-danger-blue">
+                    Persistendo o problema, notifique a administração do sistema através do email:
                     <a href="mailto:normativas@nees.com.br?Subject=Notificação de erro" target="_top">normativas@nees.com.br</a>
                 </div>
 
@@ -485,7 +491,7 @@
                         </button>
                     </a>
                 @endif
-              
+
                 @if (getenv('APP_DEBUG'))
                     <p class="text-grey-darker text-xl md:text-xl font-light mb-8 leading-normal">
                         @if (isset($exception))
@@ -493,18 +499,18 @@
                         @else
                             Mensagem da exceção
                         @endif
-                       
 
-                    <div class="alert alert-danger small">
+
+                    <div class="alert alert-danger-blue small">
                         @if (isset($exception))
                         {{ $exception->getFile() }} - #{{ $exception->getLine() }}
                         @else
                             Localização do erro. File... linha Y
                         @endif
-                       
+
                     </div>
 
-                    <div class="alert alert-danger small">
+                    <div class="alert alert-danger-blue small">
                         @if (isset($exception))
                         {{ $exception->getTraceAsString() }} }}
                         @else
