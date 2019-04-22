@@ -71,9 +71,11 @@
         <a href="{{route('documentos')}}">
             <div class="small-box bg-aqua">
                 <div class="inner">
-                    <h3>{{$documentosCount}}</h3>
+                    <h3>{{$documentosCount}} atos</h3>
 
-                    <p>Documentos enviados</p>
+                    <p>
+                        {{$documentosPendentesCount}} com informação pendentes
+                    </p>
                 </div>
                 <div class="icon">
 

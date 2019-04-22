@@ -95,6 +95,8 @@ Route::prefix('admin')->middleware('auth')->namespace('Admin')->group(function()
     Route::post('documentos/publicar-lote', 'LoteController@store')->name('enviar-lote');
     Route::post('documentos/upload-lote', 'LoteController@upload')->name('upload-lote');
     Route::post('documentos/update-item-lote/{id}', 'LoteController@updateItemLote')->name('update-item-lote');
+
+    Route::get('documentos/pendentes', 'LoteController@documentosPendentes')->name('docs-pendentes');
     
     Route::get('documento/{id}', 'DocumentoController@show')->name('documento');
     Route::delete('documentos/{id}', 'DocumentoController@destroy')->name('delete');

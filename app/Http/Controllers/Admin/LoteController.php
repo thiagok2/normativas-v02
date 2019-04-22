@@ -46,7 +46,7 @@ class LoteController extends Controller
         $tiposDocumento = TipoDocumento::all();
         $assuntos = Assunto::all(); 
 
-        $documentos = Documento::whereIn("id", explode(",", $request->ids))->get();
+        $documentos = Documento::whereIn("id", explode(",", $request->ids))->where('completed',false)->get();
         $alerta = "Complete os dados dos arquivos enviados, assim terão uma maior possibilidade de retorno nas buscas (Ano, Tipo Documento e Assunto).";
       
 
@@ -128,6 +128,8 @@ class LoteController extends Controller
     public function updateItemLote(Request $request, $documentoId){
         $documento = Documento::find($documentoId);
 
+        //dd($documento);
+
         $data = $request->all();
     
         $documento->fill($data);
@@ -149,8 +151,26 @@ class LoteController extends Controller
         ];
 
         $resultElastic = $this->client->index($params);
-
+        $documento->save();
         return response()->json($resultElastic, 200);
+    }
+
+    public function documentosPendentes(Request $request){
+        
+        $unidade = auth()->user()->unidade;
+
+        $documentos = Documento::where([
+            ['unidade_id', $unidade->id],
+            ['completed', false]
+        ])->get();
+
+        $tiposDocumento = TipoDocumento::all();
+        $assuntos = Assunto::all(); 
+
+        $alerta = "Complete os dados dos arquivos enviados, assim terão uma maior possibilidade de retorno nas buscas (Ano, Tipo Documento e Assunto).";
+      
+
+        return view('admin.documento.lote-edit', compact('unidade','tiposDocumento', 'assuntos','documentos','alerta'));
     }
 
     public function destroy($id){

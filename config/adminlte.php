@@ -123,12 +123,18 @@ return [
         [
             'text'        => 'Publicar em Lote',
             'url'         => 'admin/documentos/publicar-lote',
-            'icon'        => 'upload'
+            'icon'        => 'cloud-upload'
+        ],
+        [
+            'text'        => 'Documentos Pendentes',
+            'url'         => 'admin/documentos/pendentes',
+            'icon'        => 'exclamation-triangle
+            '
         ],
         [
             'text'        => 'Últimos Documentos',
             'url'         => 'admin/documentos',
-            'icon'        => 'list-alt'
+            'icon'        => 'search'
         ],
         [
             'text'    => 'Glossário',

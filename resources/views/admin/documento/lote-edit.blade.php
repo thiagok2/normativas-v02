@@ -95,7 +95,7 @@
                    
                 </div><!--end body -->
             </div><!--end box -->
-            <input type="button" class="btn btn-primary btn-lg" value="Concluir">
+            <a href="{{route('home')}}" class="btn btn-primary btn-lg">Concluir</a>
         </div><!-- end row -->
         
     </div><!-- end container -->

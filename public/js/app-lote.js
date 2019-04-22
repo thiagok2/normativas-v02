@@ -85,10 +85,11 @@ $(function () {
                 console.log('sucesso');
                 $('#tr_doc_'+id).hide(1000);
             }).fail(function (msg) {
-                console.log('falhou');
-               alert('Problemas na operação: '+msg);
+                console.log(JSON.stringify(msg));
+
+               alert('Problemas na operação: ' + JSON.stringify(msg));
             }).always(function (msg) {
-                console.log('ALWAYS');
+                
             });
 
         }else{

@@ -58,6 +58,7 @@ class HomeController extends Controller
                 ->orderBy('data_envio', 'desc')->take(10)->get();
             
             $documentosCount = Documento::count();  
+            $documentosPendentesCount = Documento::where('completed', false)->count();
             
             $usersCount = User::count();
             
@@ -67,6 +68,10 @@ class HomeController extends Controller
                 ->orderBy('data_envio', 'desc')->take(10)->get();
             
             $documentosCount = Documento::where('unidade_id',$unidade->id)->count();
+            $documentosPendentesCount = Documento::where([
+                ['completed', false],
+                ['unidade_id', $unidade->id]
+            ])->count();
 
             $usersCount = User::where('unidade_id', $unidade->id)->count();
         }
@@ -123,7 +128,7 @@ class HomeController extends Controller
                         'evolucaoEnviados6Meses','countEnviados30dias','evolucaoUnidadesConfirmadasMes',
                         'unidadesNaoConfirmadas','countUnidadesConfirmadas30Dias',
                         'countUnidadesConfirmadas','porcentagemConfirmadas',
-                        'totalUnidades','documentosCount','usersCount','tagCount','tags','unidades'));
+                        'totalUnidades','documentosCount','documentosPendentesCount','usersCount','tagCount','tags','unidades'));
     }
 
     public function getenv(){
