@@ -69,9 +69,9 @@
                         <div class="col text-center mt-3 mb-3">
                             <button type="submit" class="btn btn-primary mr-1"><i class="fa fa-search"></i> Pesquisar normativas</button>
                             <button type="button" class="btn btn-info ml-1" data-toggle="collapse" data-target="#filters-menu" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-cogs"></i> Configurações da busca</button>
-                            <!--<a class="btn btn-info ml-1" href="{{route('unidades-search')}}" target="_blank">
+                            <a class="btn btn-info ml-1" href="{{route('unidades-search')}}" target="_blank">
                                 <i class="fa fa-cogs"></i> Pesquisar Conselhos
-                            </a>-->
+                            </a>
                         </div>
                     </div>
                     <div id="filters-menu" class="collapse <?php if($filters){ echo 'show'; }?>">
