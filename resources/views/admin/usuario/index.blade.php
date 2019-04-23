@@ -144,9 +144,9 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Documentos enviados</div>
                 <div class="panel-body">
-                    <table class="table table-striped table-hover">
+                    <table class="table table-hover">
                         <thead>
-                            <tr>
+                            <tr >
                                 <th style="width: 1%">#</th>
                                 <th style="width: 2%">Ano</th>
                                 <th style="width: 4%">Número</th>
@@ -162,7 +162,7 @@
                         <tbody>
                             
                                 @forelse ($documentos as $doc)
-                                <tr>
+                                <tr  @if ($doc->completed) class='bg-success' @else class='bg-warning' @endif>
                                     <td>{{$loop->index + 1}}</td>
                                     <td>{{$doc->ano}}</td>
                                     <td>{{$doc->numero}}</td>

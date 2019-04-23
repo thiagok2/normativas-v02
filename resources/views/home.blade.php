@@ -399,10 +399,10 @@
             </div>
 
             <div class="box-body no-padding">
-                <table class="table table-striped table-hover table-condensed">
+                <table class="table table-hover table-condensed">
                     <tbody>
                         @forelse ($unidadesNaoConfirmadas as $key=>$unidade)
-                            <tr>
+                            <tr class='bg-warning'>
                                 <td>{{ ($unidades->currentpage()-1) * $unidades->perpage() + $key + 1 }}</td>
                                 <td>
                                     <a href="{{route("unidade-edit",$unidade->id)}}">
@@ -440,7 +440,7 @@
                 <table class="table table-striped table-hover table-condensed">
                     <tbody>
                         @forelse ($unidades as $key=>$unidade)
-                            <tr>
+                            <tr >
                                 <td>{{ ($unidades->currentpage()-1) * $unidades->perpage() + $key + 1 }}</td>
                                 <td>
                                     <a href="{{route("unidade-edit",$unidade->id)}}">

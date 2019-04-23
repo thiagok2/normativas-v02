@@ -63,7 +63,7 @@
                                     <th>Ações</th>
                                 </tr>
                                 @forelse ($unidades as $key=>$unidade)
-                                    <tr>
+                                    <tr @if ($unidade->documentos->count()>0 && $unidade->responsavel->confirmado) class='bg-success' @endif>
                                         <td>{{ ($unidades->currentpage()-1) * $unidades->perpage() + $key + 1 }}</td>
                                         <td>{{ $unidade->nome }}</td>
                                         <td>{{ $unidade->estado['nome']}}</td>
