@@ -83,11 +83,11 @@ $(function () {
                 data: data
             }).done(function () {
                 console.log('sucesso');
-                $('#tr_doc_'+id).hide(1000);
+                $('#tr_doc_'+id).hide(600);
             }).fail(function (msg) {
                 console.log(JSON.stringify(msg));
-
-               alert('Problemas na operação: ' + JSON.stringify(msg));
+                $('#alertas').removeClass('hidden');
+                $('#alertas-msg').text(JSON.stringify(msg));
             }).always(function (msg) {
                 
             });
@@ -102,6 +102,8 @@ $(function () {
 
         $('#fileupload').fileupload({
             dataType: 'json',
+            limitMultiFileUploads: 10,
+            multipart:true,
             add: function (e, data) {
                 if($('#ano').val()  
                         && $('#tipo_documento_id').val() && $('#tipo_documento_id').val() != 0 
@@ -110,43 +112,56 @@ $(function () {
                     $('#loading').text('Enviando...');
                     $('#progress').removeClass('hidden');
                     $('#alertas').addClass('hidden');
-                    console.log($('#assunto_id').val());
+                   
                     data.submit();
 
                 }else{
                     $('#alertas').removeClass('hidden');
-                    $('#alertas').text("Preencha os campos obrigatórios")
+                    $('#alertas-msg').text("Preencha os campos obrigatórios(Ano, Tipo de Documento e Assunto)");
                 }
             
             },
             done: function (e, data) {
                 $('#uploads').removeClass('hidden');
                 $.each(data.result.files, function (index, file) {
-                    $("<tr id='tr_upload_id_"+file.id+"'/>").html(
-                        '<td>'  +   file.ano +'</td>'+  
-                        '<td>'  +   file.tipo_documento_nome    + '</td>'+
-                        '<td>'  +   file.assunto_nome    + '</td>'+
-                        '<td>'  +   file.name   + '</td>'+
-                        '<td>'  +   file.tags   + '</td>'+
-                        '<td>('  +   file.size + ' KB)'+ '</td>'+
-                        "<td><button type='button' onclick='deleteUpload("+file.id+")' value='Remover' class='btn btn-danger'>Remover</button>"
-                        )
+                    var tags =  file.tags != null ? file.tags : '';
+                    if(file.size == 0 ){
+                        $('#alertas').removeClass('hidden');
+                        $('#progress').addClass('hidden');
+                        $('#alertas-msg').text("O arquivo "+ file.name + " não pode ser indexado. Verifique o tamanho(até 5MB) e extensão do arquivo(PDF).");
+                    }else{
+                        $("<tr id='tr_upload_id_"+file.id+"'/>").html(
+                            '<td>'  +   file.ano +'</td>'+  
+                            '<td>'  +   file.tipo_documento_nome    + '</td>'+
+                            '<td>'  +   file.assunto_nome    + '</td>'+
+                            '<td>'  +   file.name   + '</td>'+
+                            '<td>'  +   tags   + '</td>'+
+                            '<td class="text-muted">('  +   file.size + ' KB)'+ '</td>'+
+                            "<td><button type='button' onclick='deleteUpload("+file.id+")' value='Remover' class='btn btn-danger btn-sm'>Remover</button>"
+                            )
+                            
+                            .appendTo($('#files_list'));
                         
-                        .appendTo($('#files_list'));
-                    
-                    if ($('#file_ids').val() != '') {
-                        $('#file_ids').val($('#file_ids').val() + ',');
-                    }
-                    $('#file_ids').val($('#file_ids').val() + file.id);
+                        if ($('#file_ids').val() != '') {
+                            $('#file_ids').val($('#file_ids').val() + ',');
+                        }
+                        $('#file_ids').val($('#file_ids').val() + file.id);
+    
+                        if ($('#ids').val() != '') {
+                            $('#ids').val($('#ids').val() + ',');
+                        }
+                        $('#ids').val($('#ids').val() + file.id);
 
-                    if ($('#ids').val() != '') {
-                        $('#ids').val($('#ids').val() + ',');
+                        $('#alertas').addClass('hidden');
+                        $('#progress').removeClass('hidden');
                     }
-                    $('#ids').val($('#ids').val() + file.id);
+
+                    
                 });
                 $('#loading').text('');
             },
             progressall: function (e, data) {
+                
                 var progress = parseInt(data.loaded / data.total * 100, 10);
                 $('#progress .progress-bar').css(
                     'width',

@@ -144,8 +144,8 @@
                         <div class="form-group">
                             <label for="arquivo">Arquivo(PDF)*</label>
                             <small class=".text-muted">(Tamanho máximo 5MB)</small>
-                            <input id="arquivo" value="{{old('arquivo')}}" required name="arquivo" class="form-control" type="file"></textarea>
-                            <small class=".text-muted">Arquivos escaneados não são indexados para busca.</small>
+                            <input id="arquivo" value="{{old('arquivo')}}" required name="arquivo" class="form-control" type="file" accept="application/pdf"></textarea>
+                            <small class=".text-muted">Arquivos mal escaneados não são indexados para busca.</small>
                         </div>
                     </div>
                 </div><!--end row -->

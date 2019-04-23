@@ -55,15 +55,15 @@
                     <div class="form-group">
                         <label for="palavras_chave">Palavras chave</label>
                         <small class=".text-muted">(Insira os termos mais relevantes abordados neste documento)</small>
-                        <input type="text" required data-role="tagsinput" id="palavras_chave" name="palavras_chave" class="input-lg"/>
+                        <input type="text" data-role="tagsinput" id="palavras_chave" name="palavras_chave" class="input-lg"/>
 
                     </div>
                 </div>
             </div>  
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="alert alert-warning hidden" id="alertas">
-                                
+                    <div class="alert alert-danger hidden alert-dismissible" id="alertas">
+                        <div id="alertas-msg"></div>
                     </div>
                     <br>
                     <p id="loading"></p>
@@ -72,7 +72,7 @@
                         <i class="glyphicon glyphicon-plus"></i>
                         <span>Anexar documentos...</span>
                         <!-- The file input field used as target for the file upload widget -->
-                        <input type="file" id="fileupload" name="documentos[]" data-url="{{route('upload-lote')}}" multiple="">
+                        <input type="file" id="fileupload" name="documentos[]" data-url="{{route('upload-lote')}}" multiple="" accept="application/pdf">
                     </span>
                     <p>
                     <div id="progress" class="progress hidden">
