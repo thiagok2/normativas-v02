@@ -100,11 +100,11 @@
                         <tbody>
                             
                                 @forelse ($documentos as $key=>$doc)
-                                <tr>
+                                <tr @if ($doc->completed) class='bg-success' @else class='bg-warning' @endif>
                                     <td>
-                                        <div @if (!$doc->completed) class='alert alert-warning' @else class='alert alert-success' @endif>
-                                            {{ ($documentos->currentpage()-1) * $documentos->perpage() + $key + 1 }}
-                                        </div>
+                                       
+                                        {{ ($documentos->currentpage()-1) * $documentos->perpage() + $key + 1 }}
+                                      
                                     <td>
                                     <td>{{$doc->ano}}</td>
                                     <td>{{$doc->numero}}</td>

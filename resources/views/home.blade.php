@@ -346,8 +346,10 @@
                     </thead>
                     <tbody>
                         @foreach ($documentos as $doc)
-                            <tr>
-                                <td>{{$loop->index+1}}</td>
+                            <tr  @if ($doc->completed) class='bg-success' @else class='bg-warning' @endif>
+                                <td>
+                                    {{$loop->index+1}}
+                                </td>
                                 <td>{{$doc->numero}}</td>
                                 <td>{{$doc->titulo}}</td>
                                 <td>{{date('d-m-Y', strtotime($doc->data_envio))}}</td>

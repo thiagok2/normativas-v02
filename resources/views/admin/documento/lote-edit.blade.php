@@ -85,7 +85,7 @@
                                 </td>
                                 
                                 <td>
-                                    <button type="button" class="btn btn-primary  btn-sm btn_salvar" id="btn_{{$doc->id}}" data-id="{{$doc->id}}" > Salvar1 </button>
+                                    <button type="button" class="btn btn-primary  btn-sm btn_salvar" id="btn_{{$doc->id}}" data-id="{{$doc->id}}" > Salvar </button>
                                     <button type='button' onclick="deleteUpload({{$doc->id}})" value='Remover' class='btn btn-danger btn-sm'>Remover</button>
                                 </td>
                             </tr>
