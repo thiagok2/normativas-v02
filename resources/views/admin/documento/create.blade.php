@@ -106,26 +106,29 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="col-md-12" style="padding:0;">
-                            <div class="form-group">
-                                <label for="palavras_chave">Palavras chave</label>
-                                <small class=".text-muted">(Insira os termos mais relevantes abordados neste documento)</small>
-                                <input type="text"  value="{{old('palavras_chave')}}" required data-role="tagsinput" id="palavras_chave" name="palavras_chave"/>
-                            </div>
-                        </div>
-                        <div class="col-md-12" style="padding:0;">
-                            <div class="form-group">
-                                <label for="url">URL</label>
-                                <small class=".text-muted">(Endereço online - opcional)</small>
-                                <div class='input-group'>
-                                    <span class="input-group-addon">
-                                        <span class="glyphicon glyphicon-globe">
-                                        </span>
-                                    </span>
-                                    <input type='url' value="{{old('url')}}" class="form-control" id="url" name="url" placeholder="HTTP://..." maxlength="200"/>
+                        <fieldset>
+                            <legend>Opcional:</legend>
+                            <div class="col-md-12" style="padding:0;">
+                                <div class="form-group">
+                                    <label for="palavras_chave">Palavras chave</label>
+                                    <small class=".text-muted">(Insira os termos mais relevantes abordados neste documento)</small>
+                                    <input type="text"  value="{{old('palavras_chave')}}" data-role="tagsinput" id="palavras_chave" name="palavras_chave"/>
                                 </div>
                             </div>
-                        </div>
+                            <div class="col-md-12" style="padding:0;">
+                                <div class="form-group">
+                                    <label for="url">URL</label>
+                                    <small class=".text-muted">(Endereço online - opcional)</small>
+                                    <div class='input-group'>
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-globe">
+                                            </span>
+                                        </span>
+                                        <input type='url' value="{{old('url')}}" class="form-control" id="url" name="url" placeholder="HTTP://..." maxlength="200"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
                     </div>
                 </div><!--end row -->
 
