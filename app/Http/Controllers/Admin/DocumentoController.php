@@ -49,6 +49,9 @@ class DocumentoController extends Controller
         $this->queryParams['dataInicioPublicacao'] = $request['dataInicioPublicacao'];
         $this->queryParams['dataFimPublicacao'] = $request['dataFimPublicacao'];
 
+        $this->queryParams['numero'] = $request['numero'];
+        $this->queryParams['arquivo'] = $request['arquivo'];
+
         $list = Documento::query();
         
         if(isset($this->queryParams['unidadeQuery'])){
@@ -274,6 +277,80 @@ class DocumentoController extends Controller
 			    ->back()
 			    ->with('error', $messageErro);
         }
+
+    }
+
+    public function edit(Request $request, $documentoId){
+        $documento = Documento::find($documentoId);
+
+        $unidade = auth()->user()->unidade;
+
+        $tiposDocumento = TipoDocumento::all();
+
+        $assuntos = Assunto::all(); 
+        
+        $tags = ( $documento->palavrasChaves ) ? $documento->palavrasChaves->pluck('tag') : [];
+        $tags = str_replace('"', '', $tags);
+        $tags = str_replace('[', '', $tags);
+        $tags = str_replace(']', '', $tags);
+    
+        return view('admin.documento.edit', compact('tags','documento','unidade','tiposDocumento',  'assuntos'));
+    }
+
+    public function update(Request $request, $documentoId){
+        $documento = Documento::find($documentoId);
+
+        $data= $request->all();
+        $documento->fill($data);
+
+        $tags = explode(",", $data["palavras_chave"]);
+        if(is_array($tags) && count($tags)>0){
+            $documento->palavrasChaves()->delete(); 
+            foreach ($tags as $t) {
+                $palavra = new PalavraChave();
+                $palavra->tag = substr($t,0,100);
+
+                $palavra->documento()->associate($documento);
+                $documento->palavrasChaves()->save($palavra);
+            }
+        }
+
+        $documento->save();
+
+        $bodyDocumentElastic = $documento->toElasticObject();
+
+        if($request->hasFile('arquivo_novo') && $request->file('arquivo_novo')->isValid())
+            $arquivoData = file_get_contents($request["arquivo_novo"]);
+        else{
+            if(Storage::exists('uploads/'.$documento->arquivo))
+                $arquivoData = Storage::get('uploads/'.$documento->arquivo);
+            elseif($documento->completed){
+                $result = $this->client->get([
+                    'index' => 'normativas',
+                    'type' => '_doc',
+                    'id' => $documento->arquivo
+                ]);
+                    
+                $arquivoData =  $result['_source']['data'];
+            }
+        }
+            
+
+        $bodyDocumentElastic["data"] = base64_encode($arquivoData);
+        $params = [
+            'index' => 'normativas',
+            'type'  => '_doc',
+            'id'    => $documento->arquivo,
+            'pipeline' => 'attachment', 
+            'body'  => $bodyDocumentElastic
+            
+        ];
+
+       $this->client->index($params);
+
+        
+        return redirect()->route('documentos')->with('success', 'Documento atualizado com sucesso.');
+
 
     }
 

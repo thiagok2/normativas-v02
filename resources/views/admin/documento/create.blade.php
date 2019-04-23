@@ -106,29 +106,26 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <fieldset>
-                            <legend>Opcional:</legend>
-                            <div class="col-md-12" style="padding:0;">
-                                <div class="form-group">
-                                    <label for="palavras_chave">Palavras chave</label>
-                                    <small class=".text-muted">(Insira os termos mais relevantes abordados neste documento)</small>
-                                    <input type="text"  value="{{old('palavras_chave')}}" data-role="tagsinput" id="palavras_chave" name="palavras_chave"/>
-                                </div>
+                        <div class="col-md-12" style="padding:0;">
+                            <div class="form-group">
+                                <label for="palavras_chave">Palavras chave</label>
+                                <small class=".text-muted">(Insira os termos mais relevantes abordados neste documento)</small>
+                                <input type="text"  value="{{old('palavras_chave')}}"  data-role="tagsinput" id="palavras_chave" name="palavras_chave"/>
                             </div>
-                            <div class="col-md-12" style="padding:0;">
-                                <div class="form-group">
-                                    <label for="url">URL</label>
-                                    <small class=".text-muted">(Endereço online - opcional)</small>
-                                    <div class='input-group'>
-                                        <span class="input-group-addon">
-                                            <span class="glyphicon glyphicon-globe">
-                                            </span>
+                        </div>
+                        <div class="col-md-12" style="padding:0;">
+                            <div class="form-group">
+                                <label for="url">URL</label>
+                                <small class=".text-muted">(Endereço online - opcional)</small>
+                                <div class='input-group'>
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-globe">
                                         </span>
-                                        <input type='url' value="{{old('url')}}" class="form-control" id="url" name="url" placeholder="HTTP://..." maxlength="200"/>
-                                    </div>
+                                    </span>
+                                    <input type='url' value="{{old('url')}}" class="form-control" id="url" name="url" placeholder="HTTP://..." maxlength="200"/>
                                 </div>
                             </div>
-                        </fieldset>
+                        </div>
                     </div>
                 </div><!--end row -->
 
@@ -137,7 +134,7 @@
                         <div class="form-group">
                             <label for="arquivo">Arquivo(PDF)*</label>
                             <small class=".text-muted">(Tamanho máximo 5MB)</small>
-                            <input id="arquivo" value="{{old('arquivo')}}" required name="arquivo" class="form-control" type="file" accept="application/pdf"></textarea>
+                            <input id="arquivo" value="{{old('arquivo')}}" name="arquivo" class="form-control" type="file" accept="application/pdf"></textarea>
                             <small class=".text-muted">Arquivos mal escaneados não são indexados para busca.</small>
                         </div>
                     </div>
@@ -150,3 +147,6 @@
     </div> <!--end container ALL 4332-->
 
 @stop
+@push('scripts')
+    <script src="{{ asset('js/app-create.js') }}"></script>
+@endpush

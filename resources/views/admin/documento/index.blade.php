@@ -59,6 +59,14 @@
                                     </div>
                                 </div>
 
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="numero">Número:</label>
+                                        <input class="form-control" id="numero" name="numero" value="{{$queryParams['numero']}}" placeholder="Número: Ex: CEE-PE 2/2019"> 
+                                        <input class="form-control" id="arquivo" name="arquivo" value="{{$queryParams['arquivo']}}" placeholder="Nome do arquivo">
+                                    </div>
+                                </div>
+
                             </div>
                             
                         </div>  
@@ -90,10 +98,11 @@
                                 <th style="width: 2%">Ano</th>
                                 <th style="width: 8%">Número</th>
                                 <th style="width: 6%">Tipo</th>
-                                <th style="width: 20%">Título</th>
-                                <th style="width: 6%">Publicação</th>
-                                <th style="width: 6%">Envio</th>
-                                <th style="width: 4%">Por</th>
+                                <th style="width: 20%">Documento</th>
+                                <th style="width: 20%">Tags</th>
+                                <th style="width: 10%">Publicação</th>
+                                <th style="width: 10%">Envio</th>
+                                <th style="width: 10%">Por</th>
                                 <th style="width: 2%"></th>
                             </tr>
                         </thead>  
@@ -102,23 +111,36 @@
                                 @forelse ($documentos as $key=>$doc)
                                 <tr @if ($doc->completed) class='bg-success' @else class='bg-warning' @endif>
                                     <td>
-                                       
                                         {{ ($documentos->currentpage()-1) * $documentos->perpage() + $key + 1 }}
-                                      
-                                    <td>
+                                    </td>
                                     <td>{{$doc->ano}}</td>
                                     <td>{{$doc->numero}}</td>
                                     <td>{{$doc->tipoDocumento->nome}}</td>
                                     <td>{{$doc->titulo}}</td>
+                                    <td>
+                                        @foreach ($doc->palavrasChaves as $p)
+                                            <span class="badge bg-secondary">{{$p->tag}}</span>
+                                        @endforeach
+                                    </td>
                                     <td>{{date('d-m-Y', strtotime($doc->data_publicacao))}}</td>
                                     <td>{{date('d-m-Y', strtotime($doc->data_envio))}}</td>
                                     <td>{{$doc->unidade->sigla}} - {{$doc->user->firstName()}}</td>
                                     <td>
-                                        <a href="{{ route("pdfNormativa",$doc->arquivo) }}" target="_blank">
-                                            <i class="fa fa-arrow-circle-down"></i>
-                                        </a>
+                                        @if ($doc->completed)
+                                            <a  target="_blank"  href="{{route('pdfNormativa',$doc->arquivo)}}">
+                                                <i class="fa fa-download"></i>
+                                            </a>
+                                        @else
+                                            <a href='{{ Storage::url("uploads/$doc->arquivo")}}' target="_blank">
+                                                <i class="fa fa-download"></i>
+                                            </a>
+                                        @endif
+                                        
                                         <a href="{{ route("documento",$doc->id) }}">
-                                            <i class="fa fa-arrow-circle-right"></i>
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+                                        <a href="{{ route("documento-edit",$doc->id) }}">
+                                            <i class="fa fa-edit"></i>
                                         </a>
                                     </td>
                                 </tr>

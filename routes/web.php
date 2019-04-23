@@ -99,7 +99,10 @@ Route::prefix('admin')->middleware('auth')->namespace('Admin')->group(function()
     Route::get('documentos/pendentes', 'LoteController@documentosPendentes')->name('docs-pendentes');
     
     Route::get('documento/{id}', 'DocumentoController@show')->name('documento');
+    Route::get('documento/{id}/edit', 'DocumentoController@edit')->name('documento-edit');
+    Route::post('documento/{id}/update', 'DocumentoController@update')->name('documento-update');
     Route::delete('documentos/{id}', 'DocumentoController@destroy')->name('delete');
+    Route::get('documentos/{id}/delete', 'DocumentoController@destroy')->name('delete-edit');
     Route::get('lote/upload/{id}/delete', 'LoteController@destroy')->name('delete-upload');
     
     

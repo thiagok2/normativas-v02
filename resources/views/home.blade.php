@@ -367,11 +367,20 @@
                                     </span>
                                 </td>
                                 <td>
-                                    <a  target="_blank"  href="{{route('pdfNormativa',$doc->arquivo)}}">
-                                        <i class="fa fa-arrow-circle-down"></i>
-                                    </a>
+                                    @if ($doc->completed)
+                                        <a  target="_blank"  href="{{route('pdfNormativa',$doc->arquivo)}}">
+                                            <i class="fa fa-download"></i>
+                                        </a>
+                                    @else
+                                        <a href='{{ Storage::url("uploads/$doc->arquivo")}}' target="_blank">
+                                            <i class="fa fa-download"></i>
+                                        </a>
+                                    @endif
                                     <a href="{{ route("documento",$doc->id) }}">
-                                        <i class="fa fa-arrow-circle-right"></i>
+                                        <i class="fa fa-eye fa-2x"></i>
+                                    </a>
+                                    <a href="{{ route("documento-edit",$doc->id) }}">
+                                        <i class="fa fa-edit fa-2x"></i>
                                     </a>
                                 </td>
                             </tr>
