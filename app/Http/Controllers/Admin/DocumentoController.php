@@ -83,6 +83,14 @@ class DocumentoController extends Controller
             $list->where('data_publicacao','<=',$this->queryParams['dataFimPublicacao']);
         }
 
+        if(isset($this->queryParams['numero'])){
+            $list->where('numero','ilike','%'.$this->queryParams['numero'].'%');
+        }
+
+        if(isset($this->queryParams['arquivo'])){
+            $list->where('nome_original','ilike','%'.$this->queryParams['arquivo'].'%');
+        }
+
 
         $unidadeUser = auth()->user()->unidade;
         if(!auth()->user()->isAdmin()){
@@ -319,12 +327,28 @@ class DocumentoController extends Controller
 
         $bodyDocumentElastic = $documento->toElasticObject();
 
-        if($request->hasFile('arquivo_novo') && $request->file('arquivo_novo')->isValid())
+        if($request->hasFile('arquivo_novo') && $request->file('arquivo_novo')->isValid()){
+            $urlArquivo = $documento->urlizer($documento->unidade->sigla."_".$documento->numero);
+            $urlArquivo = $urlArquivo."_".uniqid().".pdf";
+
+            $arquivoOld = $documento->arquivo;
+
+            $documento->arquivo = $urlArquivo;
+            $documento->nome_original = $request->arquivo_novo->getClientOriginalName();
+            $request->arquivo_novo->storeAs('uploads', $urlArquivo);
+            $documento->save();
+
             $arquivoData = file_get_contents($request["arquivo_novo"]);
+
+            
+            Storage::delete("uploads/$arquivoOld");
+
+            //dd("passou");
+        }
         else{
-            if(Storage::exists('uploads/'.$documento->arquivo))
+            if(Storage::exists('uploads/'.$documento->arquivo)){
                 $arquivoData = Storage::get('uploads/'.$documento->arquivo);
-            elseif($documento->completed){
+            }elseif($documento->completed){
                 $result = $this->client->get([
                     'index' => 'normativas',
                     'type' => '_doc',
@@ -334,7 +358,6 @@ class DocumentoController extends Controller
                 $arquivoData =  $result['_source']['data'];
             }
         }
-            
 
         $bodyDocumentElastic["data"] = base64_encode($arquivoData);
         $params = [
@@ -346,7 +369,7 @@ class DocumentoController extends Controller
             
         ];
 
-       $this->client->index($params);
+        $this->client->index($params);
 
         
         return redirect()->route('documentos')->with('success', 'Documento atualizado com sucesso.');

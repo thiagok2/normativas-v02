@@ -37,6 +37,10 @@ class Documento extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function nomeOriginal(){
+        return $this->nome_original ? $this->nome_original : $this->arquivo;
+    }
+
     public $rules = [
         'numero'    =>  'required|unique:documentos|max:20',
         'titulo'    =>  'required|max:255',

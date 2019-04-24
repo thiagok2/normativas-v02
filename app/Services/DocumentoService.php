@@ -28,7 +28,8 @@ class DocumentoService{
             DB::beginTransaction();
             $documento = Documento::with('palavrasChaves')->find($id);
 
-            $documento->palavrasChaves()->delete();
+            if($documento->palavrasChaves)
+                $documento->palavrasChaves()->delete();
             $documento->delete();
 
             Storage::delete("uploads/$documento->arquivo");

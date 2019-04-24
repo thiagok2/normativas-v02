@@ -28,15 +28,11 @@
                         <thead>
                             <tr>
                                 <th style="width: 7%">Ano</th>
-                                <th>Publicação</th>
-                                <th style="width: 8%">Número</th>
-                                <th style="width: 15%">Tipo</th>
-                                <th style="width: 15%">Assunto</th>
-                                <th style="width: 30%">Título</th>
-                                <th style="width: 25%">Ementa</th>
-                                
-                               
-                                <th style="width: 2%"></th>
+                                <th style="width: 10%">Publicação/Número</th>
+                                <th style="width: 25%">Tipo/Assunto</th>
+                                <th style="width: 25%">Título</th>
+                                <th style="width: 20%">Ementa</th>
+                                <th style="width: 5%"></th>
                             </tr>
                         </thead>  
                         <tbody>
@@ -49,35 +45,33 @@
                                 <td>
                                     
                                     <input type='date' class="form-control" id="data_publicacao_{{$doc->id}}" name="data_publicacao_{{$doc->id}}"/>
+                                    <br/>
+                                    <input type="text" class="form-control"  name="numero_{{$doc->id}}" id="numero_{{$doc->id}}" value="{{$doc->numero}}" placeholder="Número: Ex.: 123/2019"/>
                                     
                                 </td>
+                                
                                 <td>
-                                    <input type="text" class="form-control"  name="numero_{{$doc->id}}" id="numero_{{$doc->id}}" value="{{$doc->numero}}"/>
-                                </td>
-                                <td>
-                                    <select class="form-control" required id="tipo_documento_id_{{$doc->id}}" name="tipo_documento_id_{{$doc->id}}">
-                                        @foreach ($tiposDocumento as $tipo)
-                                            <option value="{{$tipo->id}}" {{($doc->tipoDocumento->id == $tipo->id ? 'selected="selected"':'')}}>{{$tipo->nome}}</option>
-                                        @endforeach
-                                    </select>
-                                </td>
-                                <td>
+
                                     <select class="form-control" required id="assunto_id_{{$doc->id}}" name="assunto_id_{{$doc->id}}">
                                         @foreach ($assuntos as $ass)
                                             <option value="{{$ass->id}}" {{($doc->assunto->id == $ass->id ? 'selected="selected"':'')}}>{{$ass->nome}}</option>
                                         @endforeach
                                     </select>
+                                    <br/>
+                                    <select class="form-control" required id="tipo_documento_id_{{$doc->id}}" name="tipo_documento_id_{{$doc->id}}">
+                                        @foreach ($tiposDocumento as $tipo)
+                                            <option value="{{$tipo->id}}" {{($doc->tipoDocumento->id == $tipo->id ? 'selected="selected"':'')}}>{{$tipo->nome}}</option>
+                                        @endforeach
+                                    </select>
+
                                 </td>
+                               
                                 <td>
-                                    <input type="text" class="form-control"  name="titulo_{{$doc->id}}" id="titulo_{{$doc->id}}" value="{{$doc->titulo}}"/>
+                                    <input type="text" class="form-control"  name="titulo_{{$doc->id}}" id="titulo_{{$doc->id}}" value="{{$doc->titulo}}" placeholder="Título do ato normativo"/>
+                                    <br/>
                                     <a href='{{ Storage::url("uploads/$doc->arquivo")}}' target="_blank">
-                                        <small>
-                                            @if ($doc->nome_original)
-                                                {{$doc->nome_original}}
-                                            @else
-                                                {{$doc->arquivo}}
-                                            @endif
-                                        </small>
+                                        {{$doc->nomeOriginal()}}
+                                        <i class="fa fa-download fa-2x"></i>
                                     </a> 
                                 </td>
                                 <td>
@@ -85,8 +79,14 @@
                                 </td>
                                 
                                 <td>
-                                    <button type="button" class="btn btn-primary  btn-sm btn_salvar" id="btn_{{$doc->id}}" data-id="{{$doc->id}}" > Salvar </button>
-                                    <button type='button' onclick="deleteUpload({{$doc->id}})" value='Remover' class='btn btn-danger btn-sm'>Remover</button>
+                                    <button type="button" class="btn btn-primary  btn-sm btn_salvar" id="btn_{{$doc->id}}" data-id="{{$doc->id}}" > 
+                                        <span class="fa fa-save fa-lg" aria-hidden="true"></span>
+                                    </button>
+                                    <br/>
+                                    <br/>
+                                    <button type='button' onclick="deleteUpload({{$doc->id}})" value='Remover' class='btn btn-danger btn-sm'>
+                                        <span class="fa fa-trash-o fa-lg" aria-hidden="true"></span>
+                                    </button>
                                 </td>
                             </tr>
                             @empty

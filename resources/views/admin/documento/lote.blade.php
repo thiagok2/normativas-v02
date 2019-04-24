@@ -81,7 +81,7 @@
                     <br/>
                     <div id="uploads" class="box hidden">
                         <div class="box-body">
-                            <table id="files_list" class="table table-striped table-bordered table-hover table-responsive">
+                            <table id="files_list" class="table table-striped table-hover table-responsive">
                                 
                             </table>
                         </div>

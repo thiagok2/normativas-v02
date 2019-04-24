@@ -140,13 +140,17 @@
 
                 <div class="row">
                     <div class="col-sm-6">
-                        @if ($doc->completed)
+                        @if ($documento->completed)
                             <a  target="_blank"  href="{{route('pdfNormativa',$documento->arquivo)}}">
-                                <i class="fa fa-download"></i>
+                                <i class="fa fa-download fa-3x"></i>
+                                <br/>
+                                {{$documento->nomeOriginal()}}
                             </a>
                         @else
                             <a href='{{ Storage::url("uploads/$documento->arquivo")}}' target="_blank">
-                                <i class="fa fa-download"></i>
+                                <i class="fa fa-download fa-3x"></i>
+                                <br/>
+                                {{$documento->nomeOriginal()}}
                             </a>
                         @endif
                     </div>

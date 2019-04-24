@@ -2,9 +2,9 @@
 function deleteUpload(fileId){
     console.log('deleting::'+fileId);
     $.ajax("/admin/lote/upload/"+fileId+"/delete").done(function() {
-        $( "#tr_upload_id_"+fileId).remove();
-
+        $('#tr_doc_'+fileId).hide(600);
     });
+   
 }
 
 $(function () {
@@ -130,14 +130,14 @@ $(function () {
                         $('#progress').addClass('hidden');
                         $('#alertas-msg').text("O arquivo "+ file.name + " não pode ser indexado. Verifique o tamanho(até 5MB) e extensão do arquivo(PDF).");
                     }else{
-                        $("<tr id='tr_upload_id_"+file.id+"'/>").html(
+                        $("<tr id='tr_doc_"+file.id+"'/>").html(
                             '<td>'  +   file.ano +'</td>'+  
                             '<td>'  +   file.tipo_documento_nome    + '</td>'+
                             '<td>'  +   file.assunto_nome    + '</td>'+
                             '<td>'  +   file.name   + '</td>'+
                             '<td>'  +   tags   + '</td>'+
                             '<td class="text-muted">('  +   file.size + ' KB)'+ '</td>'+
-                            "<td><button type='button' onclick='deleteUpload("+file.id+")' value='Remover' class='btn btn-danger btn-sm'>Remover</button>"
+                            "<td><button type='button' onclick='deleteUpload("+file.id+")' value='Remover' class='btn btn-danger btn-sm' style='margin:5px;'><span class='fa fa-trash-o fa-lg' aria-hidden='true'></span></button>"
                             )
                             
                             .appendTo($('#files_list'));
