@@ -1,11 +1,17 @@
 
 function deleteUpload(fileId){
     console.log('deleting::'+fileId);
-    $.ajax("/admin/lote/upload/"+fileId+"/delete").done(function() {
-        $('#tr_doc_'+fileId).hide(600);
-    });
-   
+
+    if (confirm('Tem certeza que deseja deletar este registro?')) {
+        $.ajax("/admin/lote/upload/"+fileId+"/delete").done(function() {
+            $('#tr_doc_'+fileId).hide(600);
+            triggerAlertSuccess("success");
+        });
+    }
+
 }
+
+
 
 $(function () {
     console.log('api-normativas');
@@ -38,10 +44,10 @@ $(function () {
         confirmKeys: [9,188,13]
     });
 
-    
-    
+
+
     $(".bootstrap-tagsinput > input").on('keydown',function (e) {
-    
+
         if (e.which == 9 || e.which == 13){
             $("#palavras_chave").tagsinput('add',$(this).val());
             $(this).val("");
@@ -83,13 +89,16 @@ $(function () {
                 data: data
             }).done(function () {
                 console.log('sucesso');
+                triggerAlertSuccess("success");
                 $('#tr_doc_'+id).hide(600);
+
             }).fail(function (msg) {
                 console.log(JSON.stringify(msg));
+                triggerAlertSuccess("danger");
                 $('#alertas').removeClass('hidden');
                 $('#alertas-msg').text(JSON.stringify(msg));
             }).always(function (msg) {
-                
+
             });
 
         }else{
@@ -105,21 +114,21 @@ $(function () {
             limitMultiFileUploads: 10,
             multipart:true,
             add: function (e, data) {
-                if($('#ano').val()  
-                        && $('#tipo_documento_id').val() && $('#tipo_documento_id').val() != 0 
+                if($('#ano').val()
+                        && $('#tipo_documento_id').val() && $('#tipo_documento_id').val() != 0
                         && $('#assunto_id').val() && $('#assunto_id').val() != 0){
 
                     $('#loading').text('Enviando...');
                     $('#progress').removeClass('hidden');
                     $('#alertas').addClass('hidden');
-                   
+
                     data.submit();
 
                 }else{
                     $('#alertas').removeClass('hidden');
                     $('#alertas-msg').text("Preencha os campos obrigatórios(Ano, Tipo de Documento e Assunto)");
                 }
-            
+
             },
             done: function (e, data) {
                 $('#uploads').removeClass('hidden');
@@ -131,7 +140,7 @@ $(function () {
                         $('#alertas-msg').text("O arquivo "+ file.name + " não pode ser indexado. Verifique o tamanho(até 5MB) e extensão do arquivo(PDF).");
                     }else{
                         $("<tr id='tr_doc_"+file.id+"'/>").html(
-                            '<td>'  +   file.ano +'</td>'+  
+                            '<td>'  +   file.ano +'</td>'+
                             '<td>'  +   file.tipo_documento_nome    + '</td>'+
                             '<td>'  +   file.assunto_nome    + '</td>'+
                             '<td>'  +   file.name   + '</td>'+
@@ -139,14 +148,14 @@ $(function () {
                             '<td class="text-muted">('  +   file.size + ' KB)'+ '</td>'+
                             "<td><button type='button' onclick='deleteUpload("+file.id+")' value='Remover' class='btn btn-danger btn-sm' style='margin:5px;'><span class='fa fa-trash-o fa-lg' aria-hidden='true'></span></button>"
                             )
-                            
+
                             .appendTo($('#files_list'));
-                        
+
                         if ($('#file_ids').val() != '') {
                             $('#file_ids').val($('#file_ids').val() + ',');
                         }
                         $('#file_ids').val($('#file_ids').val() + file.id);
-    
+
                         if ($('#ids').val() != '') {
                             $('#ids').val($('#ids').val() + ',');
                         }
@@ -156,12 +165,12 @@ $(function () {
                         $('#progress').removeClass('hidden');
                     }
 
-                    
+
                 });
                 $('#loading').text('');
             },
             progressall: function (e, data) {
-                
+
                 var progress = parseInt(data.loaded / data.total * 100, 10);
                 $('#progress .progress-bar').css(
                     'width',
@@ -170,7 +179,20 @@ $(function () {
             }
         });
     }
-    
-  
+
+
 
 });
+
+
+var timeOutVar = null;
+function triggerAlertSuccess(alertType) {
+    $(".autoclose-alert-" + alertType).show();
+    $(".autoclose-alert-" + alertType).stop().fadeIn(0);
+    clearTimeout(timeOutVar);
+    timeOutVar = window.setTimeout(function () {
+        $(".autoclose-alert-" + alertType).stop().fadeOut(1000, function () {
+            $(this).hide();
+        });
+    }, 4000);
+}

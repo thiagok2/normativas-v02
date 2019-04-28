@@ -3,7 +3,7 @@
 @section('title', 'Normativas')
 
 @section('content_header')
-   
+
 @stop
 
 @section('content')
@@ -15,16 +15,16 @@
     </ol>
 
 
-    <div class="container-fluid">
+    <div class="container">
         @include('admin.includes.alerts')
         <div class="row">
             <div class="box box-warning">
                 <div class="box-header">
                     <h3 class="box-title">Últimos documentos enviados</h3>
                 </div> <!-- /.box-header -->
-                   
+
                 <div class="box-body no-padding">
-                    <table class="table table-condensed table-hover">
+                    <table class="table table-striped table-hover table-responsive">
                         <thead>
                             <tr>
                                 <th style="width: 7%">Ano</th>
@@ -34,22 +34,22 @@
                                 <th style="width: 20%">Ementa</th>
                                 <th style="width: 5%"></th>
                             </tr>
-                        </thead>  
+                        </thead>
                         <tbody>
                             @forelse ($documentos as $key=>$doc)
                             <tr id="tr_doc_{{$doc->id}}">
-                                
+
                                 <td>
                                     <input type="text" class="form-control"  name="ano_{{$doc->id}}" id="ano_{{$doc->id}}" value="{{$doc->ano}}"/>
                                 </td>
                                 <td>
-                                    
+
                                     <input type='date' class="form-control" id="data_publicacao_{{$doc->id}}" name="data_publicacao_{{$doc->id}}"/>
                                     <br/>
                                     <input type="text" class="form-control"  name="numero_{{$doc->id}}" id="numero_{{$doc->id}}" value="{{$doc->numero}}" placeholder="Número: Ex.: 123/2019"/>
-                                    
+
                                 </td>
-                                
+
                                 <td>
 
                                     <select class="form-control" required id="assunto_id_{{$doc->id}}" name="assunto_id_{{$doc->id}}">
@@ -65,21 +65,21 @@
                                     </select>
 
                                 </td>
-                               
+
                                 <td>
                                     <input type="text" class="form-control"  name="titulo_{{$doc->id}}" id="titulo_{{$doc->id}}" value="{{$doc->titulo}}" placeholder="Título do ato normativo"/>
                                     <br/>
                                     <a href='{{ Storage::url("uploads/$doc->arquivo")}}' target="_blank">
                                         {{$doc->nomeOriginal()}}
                                         <i class="fa fa-download fa-2x"></i>
-                                    </a> 
+                                    </a>
                                 </td>
                                 <td>
                                     <textarea rows="4" cols="50" name="ementa_{{$doc->id}}" id="ementa_{{$doc->id}}"></textarea>
                                 </td>
-                                
+
                                 <td>
-                                    <button type="button" class="btn btn-primary  btn-sm btn_salvar" id="btn_{{$doc->id}}" data-id="{{$doc->id}}" > 
+                                    <button type="button" class="btn btn-primary  btn-sm btn_salvar" id="btn_{{$doc->id}}" data-id="{{$doc->id}}" >
                                         <span class="fa fa-save fa-lg" aria-hidden="true"></span>
                                     </button>
                                     <br/>
@@ -98,19 +98,28 @@
                             @endforelse
                         </tbody>
                     </table>
-                   
+
                 </div><!--end body -->
             </div><!--end box -->
             <a href="{{route('home')}}" class="btn btn-primary btn-lg">Concluir</a>
         </div><!-- end row -->
-        
+
     </div><!-- end container -->
-   
+
+
+    <div class="alert alert-success alert-dismissible autoclose-alert-success" >
+        Operação realizada com sucesso!
+    </div>
+
+    <div class="alert alert-danger alert-dismissible autoclose-alert-danger" >
+        Algo deu errado com esta operação.
+    </div>
+
 @endsection
 @push('scripts')
     <script src="{{ asset('js/app-lote.js') }}"></script>
     <script src="{{ asset('js/jquery.ui.widget.js') }}"></script>
-    
+
     <script src="{{ asset('js/jquery.iframe-transport.js') }}"></script>
     <script src="{{ asset('js/jquery.fileupload.js') }}"></script>
 @endpush

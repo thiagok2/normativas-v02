@@ -3,7 +3,7 @@
 @section('title', 'Normativas')
 
 @section('content_header')
-    
+
 @stop
 
 @section('content')
@@ -25,7 +25,7 @@
                 <div class="panel-heading">Filtrar</div>
                 <div class="panel-body">
                     <form class="form" method="GET" action="{{route('documentos-pesquisar')}}">
-                        
+
 
                         <div class="container">
                             <div class="row">
@@ -39,12 +39,12 @@
                                         <small class="form-text text-muted">Nome/sigla do conselho e/ou nome do usuário</small>
                                     </div>
                                 </div>
-                           
+
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label for="periodoEnvio">Data Envio</label>
-                                       
-                                        <input class="form-control" type="date" id="dataInicioEnvio" name="dataInicioEnvio" value="{{$queryParams['dataInicioEnvio']}}"> 
+
+                                        <input class="form-control" type="date" id="dataInicioEnvio" name="dataInicioEnvio" value="{{$queryParams['dataInicioEnvio']}}">
                                         <input class="form-control" type="date" id="dataFimEnvio" name="dataFimEnvio" value="{{$queryParams['dataFimEnvio']}}">
                                         <small class="form-text text-muted">Data início e fim do envio no sistema</small>
                                     </div>
@@ -53,7 +53,7 @@
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label for="periodoPublicacao">Data Publicação</label>
-                                        <input class="form-control" type="date" id="dataInicioPublicacao" name="dataInicioPublicacao" value="{{$queryParams['dataInicioPublicacao']}}"> 
+                                        <input class="form-control" type="date" id="dataInicioPublicacao" name="dataInicioPublicacao" value="{{$queryParams['dataInicioPublicacao']}}">
                                         <input class="form-control" type="date" id="dataFimPublicacao" name="dataFimPublicacao" value="{{$queryParams['dataFimPublicacao']}}">
                                         <small class="form-text text-muted">Data início e fim do publicação</small>
                                     </div>
@@ -62,14 +62,14 @@
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label for="numero">Número:</label>
-                                        <input class="form-control" id="numero" name="numero" value="{{$queryParams['numero']}}" placeholder="Número: Ex: CEE-PE 2/2019"> 
+                                        <input class="form-control" id="numero" name="numero" value="{{$queryParams['numero']}}" placeholder="Número: Ex: CEE-PE 2/2019">
                                         <input class="form-control" id="arquivo" name="arquivo" value="{{$queryParams['arquivo']}}" placeholder="Nome do arquivo">
                                     </div>
                                 </div>
 
                             </div>
-                            
-                        </div>  
+
+                        </div>
 
                         <button type="submit" class="btn btn-primary">Pesquisar</button>
                         {!! csrf_field() !!}
@@ -78,7 +78,7 @@
             </div>
         </div>
     </div>
-    
+
     @include('admin.includes.alerts')
 
     <div class="row">
@@ -105,9 +105,9 @@
                                 <th style="width: 10%">Por</th>
                                 <th style="width: 2%"></th>
                             </tr>
-                        </thead>  
+                        </thead>
                         <tbody>
-                            
+
                                 @forelse ($documentos as $key=>$doc)
                                 <tr @if ($doc->completed) class='bg-success' @else class='bg-warning' @endif>
                                     <td>
@@ -126,22 +126,24 @@
                                     <td>{{date('d-m-Y', strtotime($doc->data_envio))}}</td>
                                     <td>{{$doc->unidade->sigla}} - {{$doc->user->firstName()}}</td>
                                     <td>
+                                        <div style="width:80px">
                                         @if ($doc->completed)
                                             <a  target="_blank"  href="{{route('pdfNormativa',$doc->arquivo)}}">
-                                                <i class="fa fa-download"></i>
+                                                <i class="fa fa-download" title="Download"></i>
                                             </a>
                                         @else
                                             <a href='{{ Storage::url("uploads/$doc->arquivo")}}' target="_blank">
-                                                <i class="fa fa-download"></i>
+                                                <i class="fa fa-download" title="Download"></i>
                                             </a>
                                         @endif
-                                        
+
                                         <a href="{{ route("documento",$doc->id) }}">
-                                            <i class="fa fa-eye"></i>
+                                            <i class="fa fa-eye" title="Visualizar"></i>
                                         </a>
                                         <a href="{{ route("documento-edit",$doc->id) }}">
-                                            <i class="fa fa-edit"></i>
+                                            <i class="fa fa-edit" title="Editar"></i>
                                         </a>
+                                        </div>
                                     </td>
                                 </tr>
                                 @empty
@@ -154,12 +156,12 @@
 
                         </tbody>
                     </table>
-                </div><!-- /.box-body --> 
+                </div><!-- /.box-body -->
                 <div class="box-footer">
                     {{ $documentos->links() }}
                 </div>
             </div>
         </div>
     </div>
-    
+
 @stop
