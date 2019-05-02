@@ -40,13 +40,13 @@
                             <tr id="tr_doc_{{$doc->id}}">
 
                                 <td>
-                                    <input type="text" class="form-control"  name="ano_{{$doc->id}}" id="ano_{{$doc->id}}" value="{{$doc->ano}}"/>
+                                    <input type="text" class="form-control"  name="ano_{{$doc->id}}" id="ano_{{$doc->id}}" value="{{$doc->ano}}" required/>
                                 </td>
                                 <td>
 
-                                    <input type='date' class="form-control" id="data_publicacao_{{$doc->id}}" name="data_publicacao_{{$doc->id}}"/>
+                                    <input type='date' class="form-control" id="data_publicacao_{{$doc->id}}" name="data_publicacao_{{$doc->id}}" required/>
                                     <br/>
-                                    <input type="text" class="form-control"  name="numero_{{$doc->id}}" id="numero_{{$doc->id}}" value="{{$doc->numero}}" placeholder="Número: Ex.: 123/2019"/>
+                                    <input type="text" class="form-control"  name="numero_{{$doc->id}}" id="numero_{{$doc->id}}" value="{{$doc->numero}}" placeholder="Número: Ex.: 123/2019" required/>
 
                                 </td>
 
@@ -67,7 +67,7 @@
                                 </td>
 
                                 <td>
-                                    <input type="text" class="form-control"  name="titulo_{{$doc->id}}" id="titulo_{{$doc->id}}" value="{{$doc->titulo}}" placeholder="Título do ato normativo"/>
+                                    <input type="text" class="form-control"  name="titulo_{{$doc->id}}" id="titulo_{{$doc->id}}" value="{{$doc->titulo}}" placeholder="Título do ato normativo" required/>
                                     <br/>
                                     <a href='{{ Storage::url("uploads/$doc->arquivo")}}' target="_blank">
                                         {{$doc->nomeOriginal()}}
@@ -75,7 +75,7 @@
                                     </a>
                                 </td>
                                 <td>
-                                    <textarea rows="4" cols="50" name="ementa_{{$doc->id}}" id="ementa_{{$doc->id}}"></textarea>
+                                    <textarea rows="4" cols="50" name="ementa_{{$doc->id}}" id="ementa_{{$doc->id}}" required></textarea>
                                 </td>
 
                                 <td>
@@ -101,7 +101,7 @@
 
                 </div><!--end body -->
             </div><!--end box -->
-            <a href="{{route('home')}}" class="btn btn-primary btn-lg">Concluir</a>
+            <a href="{{route('home')}}" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-remove"></span> Fechar</a>
         </div><!-- end row -->
 
     </div><!-- end container -->

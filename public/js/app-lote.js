@@ -67,8 +67,23 @@ $(function () {
 
         var ementa = $('#ementa_'+id).val().trim();
 
+        var isValid = true;
 
-        if(ano && data_publicacao && numero && tipo_documento_id && assunto_id && titulo && ementa){
+        $('#tr_doc_' + id).find(':input').each(function () {
+            if ($(this).prop('required')) {
+                if (!$(this).is(':valid')) {
+                    $(this).addClass('invalid');
+                    isValid = false;
+                    console.log($(this));
+                } else {
+                    $(this).removeClass('invalid');
+                }
+            }
+        });
+
+
+        //if(ano && data_publicacao && numero && tipo_documento_id && assunto_id && titulo && ementa){
+        if(isValid){
             var data = {
                 "ano": ano,
                 "data_publicacao": data_publicacao,
@@ -102,9 +117,11 @@ $(function () {
             });
 
         }else{
-                alert('Preencha todos os campos');
+            alert('Preencha todos os campos');
         }
     });
+
+
 
 
     if ( $("#fileupload") ){

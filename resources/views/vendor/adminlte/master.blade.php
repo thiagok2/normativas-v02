@@ -72,6 +72,11 @@
             right:20px;
             display:none;
         }
+
+        .invalid{
+            border:solid 1px red;
+        }
+
     </style>
 </head>
 <body class="hold-transition @yield('body_class')">
