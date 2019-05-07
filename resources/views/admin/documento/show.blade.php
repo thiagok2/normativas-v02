@@ -138,6 +138,78 @@
                     </div>
                 </div><!--end row -->
 
+                <div class="extra_fields">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="criado">Criação</label>
+                                <input readonly value="{{$documento->created_at->format('d-m-Y')}}" class="form-control">
+                            </div>
+                        </div>
+                        @if ($documento->updated_at)
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="update">Atualização</label>
+                                    <input readonly value="{{$documento->updated_at->format('d-m-Y')}}" class="form-control">
+                                </div>
+                            </div>
+                        @endif
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label for="nome_original">Arquivo Original</label>
+                                <input readonly value="{{$documento->nome_original}}" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="tipo_entrada">Tipo Entrada</label>
+                                <input readonly value="{{$documento->tipo_entrada}}" class="form-control">
+                            </div>
+                        </div>
+        
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="formato">Formato</label>
+                                <input readonly value="{{$documento->formato}}" class="form-control">
+                            </div>
+                        </div>
+        
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label for="url_extrator">URL Extrator</label>
+                                <input readonly value="{{$documento->url_extrator}}" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="numero_processo">Num. Processo</label>
+                                <input readonly value="{{$documento->numero_processo}}" class="form-control">
+                            </div>
+                        </div>
+        
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="status_extrator">Status Extrator</label>
+                                <input readonly value="{{$documento->status_extrator}}" class="form-control">
+                            </div>
+                        </div>
+        
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="usuario">Usuário</label>
+                                <input readonly value="{{$documento->user->name}}" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+    
+                </div><!-- end div extra fields-->
+
                 <div class="row">
                     <div class="col-sm-6">
                         @if ($documento->completed)
