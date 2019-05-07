@@ -40,6 +40,44 @@
 
     <link rel="stylesheet" href="{{ asset('vendor/tagsinput/bootstrap-tagsinput.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/jquery-fileupload/jquery.fileupload.css') }}">
+
+
+    <style>
+        .bootstrap-tagsinput .tag{
+            font-size: 100%;
+            padding:.2em .6em .3em;
+            font-weight:400;
+            border-radius:20px;
+        }
+
+        .alert{
+            padding:8px 15px;
+        }
+        .table-striped tr > td:first-child{
+            padding-left:5px;
+        }
+        textarea{
+            width:100% !important;
+        }
+        .table-striped > tr:nth-of-type(odd) {
+            background-color: #f5f5f5;
+        }
+        .table-hover > tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .autoclose-alert-success, .autoclose-alert-danger{
+            position:fixed;
+            bottom:0px;
+            right:20px;
+            display:none;
+        }
+
+        .invalid{
+            border:solid 1px red;
+        }
+
+    </style>
 </head>
 <body class="hold-transition @yield('body_class')">
 
