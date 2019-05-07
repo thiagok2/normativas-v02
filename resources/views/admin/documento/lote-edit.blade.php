@@ -100,6 +100,9 @@
                     </table>
                    
                 </div><!--end body -->
+                <div class="box-footer">
+                    {{ $documentos->links() }}
+                </div>
             </div><!--end box -->
             <a href="{{route('home')}}" class="btn btn-primary btn-lg">Concluir</a>
         </div><!-- end row -->

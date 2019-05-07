@@ -52,6 +52,9 @@ class DocumentoController extends Controller
         $this->queryParams['numero'] = $request['numero'];
         $this->queryParams['arquivo'] = $request['arquivo'];
 
+        $this->queryParams['tipo_entrada'] = $request['tipo_entrada'];
+        $this->queryParams['status'] = $request['status'];
+
         $list = Documento::query();
         
         if(isset($this->queryParams['unidadeQuery'])){
@@ -89,6 +92,21 @@ class DocumentoController extends Controller
 
         if(isset($this->queryParams['arquivo'])){
             $list->where('nome_original','ilike','%'.$this->queryParams['arquivo'].'%');
+        }
+
+        if(isset($this->queryParams['tipo_entrada'])){
+
+            if($this->queryParams['tipo_entrada'] == 'manual'){
+                $list->where('tipo_entrada','!=', Documento::ENTRADA_EXTRATOR);
+            }else{
+                $list->where('tipo_entrada','=', Documento::ENTRADA_EXTRATOR);
+            }
+        }
+
+        if(isset($this->queryParams['status'])){
+           
+            $list->where('completed', $this->queryParams['status'] == 'indexado');
+            
         }
 
 
@@ -323,58 +341,60 @@ class DocumentoController extends Controller
             }
         }
 
+        $documento->completed = $documento->isCompleto();
         $documento->save();
 
-        $bodyDocumentElastic = $documento->toElasticObject();
+        if($documento->completed){
+            $bodyDocumentElastic = $documento->toElasticObject();
 
-        if($request->hasFile('arquivo_novo') && $request->file('arquivo_novo')->isValid()){
-            $urlArquivo = $documento->urlizer($documento->unidade->sigla."_".$documento->numero);
-            $urlArquivo = $urlArquivo."_".uniqid().".pdf";
-
-            $arquivoOld = $documento->arquivo;
-
-            $documento->arquivo = $urlArquivo;
-            $documento->nome_original = $request->arquivo_novo->getClientOriginalName();
-            $request->arquivo_novo->storeAs('uploads', $urlArquivo);
-            $documento->save();
-
-            $arquivoData = file_get_contents($request["arquivo_novo"]);
-
-            
-            Storage::delete("uploads/$arquivoOld");
-
-            //dd("passou");
-        }
-        else{
-            if(Storage::exists('uploads/'.$documento->arquivo)){
-                $arquivoData = Storage::get('uploads/'.$documento->arquivo);
-            }elseif($documento->completed){
-                $result = $this->client->get([
-                    'index' => 'normativas',
-                    'type' => '_doc',
-                    'id' => $documento->arquivo
-                ]);
-                    
-                $arquivoData =  $result['_source']['data'];
+            if($request->hasFile('arquivo_novo') && $request->file('arquivo_novo')->isValid()){
+                $urlArquivo = $documento->urlizer($documento->unidade->sigla."_".$documento->numero);
+                $urlArquivo = $urlArquivo."_".uniqid().".pdf";
+    
+                $arquivoOld = $documento->arquivo;
+    
+                $documento->arquivo = $urlArquivo;
+                $documento->nome_original = $request->arquivo_novo->getClientOriginalName();
+                $request->arquivo_novo->storeAs('uploads', $urlArquivo);
+                $documento->save();
+    
+                $arquivoData = file_get_contents($request["arquivo_novo"]);
+    
+                
+                Storage::delete("uploads/$arquivoOld");
+    
             }
+            else{//atualizar dados novos
+                if(Storage::exists('uploads/'.$documento->arquivo)){
+                    $arquivoData = Storage::get('uploads/'.$documento->arquivo);
+                }elseif($documento->completed){
+                    $result = $this->client->get([
+                        'index' => 'normativas',
+                        'type' => '_doc',
+                        'id' => $documento->arquivo
+                    ]);
+                        
+                    $arquivoData =  $result['_source']['data'];
+                }
+            }
+    
+            $bodyDocumentElastic["data"] = base64_encode($arquivoData);
+            $params = [
+                'index' => 'normativas',
+                'type'  => '_doc',
+                'id'    => $documento->arquivo,
+                'pipeline' => 'attachment', 
+                'body'  => $bodyDocumentElastic
+                
+            ];
+    
+            $this->client->index($params);
         }
-
-        $bodyDocumentElastic["data"] = base64_encode($arquivoData);
-        $params = [
-            'index' => 'normativas',
-            'type'  => '_doc',
-            'id'    => $documento->arquivo,
-            'pipeline' => 'attachment', 
-            'body'  => $bodyDocumentElastic
-            
-        ];
-
-        $this->client->index($params);
-
         
         return redirect()->route('documentos')->with('success', 'Documento atualizado com sucesso.');
 
-
     }
+
+    
 
 }

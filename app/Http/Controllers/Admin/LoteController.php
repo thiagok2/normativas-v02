@@ -133,6 +133,7 @@ class LoteController extends Controller
         $data = $request->all();
     
         $documento->fill($data);
+        $documento->tipo_entrada = Documento::ENTRADA_LOTE;
         $documento->completed = true;
 
         $bodyDocumentElastic = $documento->toElasticObject();
@@ -161,8 +162,9 @@ class LoteController extends Controller
 
         $documentos = Documento::where([
             ['unidade_id', $unidade->id],
-            ['completed', false]
-        ])->get();
+            ['completed', false],
+            ['tipo_entrada', Documento::ENTRADA_LOTE]
+        ])->paginate(25);
 
         $tiposDocumento = TipoDocumento::all();
         $assuntos = Assunto::all(); 

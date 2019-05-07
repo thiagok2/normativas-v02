@@ -8,10 +8,24 @@ use App\User;
 class Documento extends Model
 {
 
+    public const ENTRADA_INDIVIDUAL = 'individual';
+    public const ENTRADA_LOTE = 'lote';
+    public const ENTRADA_EXTRATOR = 'extrator';
+
+    public const STATUS_EXTRATOR_CADASTRADO = 'CADASTRADO';
+    public const STATUS_EXTRATOR_BAIXADO = 'BAIXADO';
+    public const STATUS_EXTRATOR_FALHA = 'FALHA';
+    public const STATUS_EXTRATOR_INDEXADO = 'INDEXADO';
+
     protected $fillable = [
         'ano', 'titulo','numero','ementa','url','data_publicacao','tipo_documento_id',
-        'assunto_id','unidade_id' , 'nome_original'  ];
+        'assunto_id','unidade_id' , 'nome_original', 
+        'tipo_entrada','url_extrator', 'id_extrator', 'numero_processo'  ];
 
+
+    public function isCompleto(){
+        return $this->ano && $this->titulo && $this->ementa && $this->data_publicacao && !is_null($this->tipo_documento_id) && !is_null($this->assunto_id);
+    }
 
     public function palavrasChaves(){
         return $this->hasMany(PalavraChave::class);

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Services\DocumentoQuery;
-use App\Services\UnidadeQuery;
+
 
 class DocumentoRestController extends Controller
 {

@@ -40,7 +40,7 @@
                                     </div>
                                 </div>
                            
-                                <div class="col-lg-3">
+                                <div class="col-lg-2">
                                     <div class="form-group">
                                         <label for="periodoEnvio">Data Envio</label>
                                        
@@ -50,7 +50,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-lg-3">
+                                <div class="col-lg-2">
                                     <div class="form-group">
                                         <label for="periodoPublicacao">Data Publicação</label>
                                         <input class="form-control" type="date" id="dataInicioPublicacao" name="dataInicioPublicacao" value="{{$queryParams['dataInicioPublicacao']}}"> 
@@ -61,9 +61,25 @@
 
                                 <div class="col-lg-3">
                                     <div class="form-group">
-                                        <label for="numero">Número:</label>
-                                        <input class="form-control" id="numero" name="numero" value="{{$queryParams['numero']}}" placeholder="Número: Ex: CEE-PE 2/2019"> 
+                                        <label for="numero">Número/Nome:</label>
+                                        <input class="form-control" id="numero" name="numero" value="{{$queryParams['numero']}}" placeholder="CEE-AL 2/2019"> 
                                         <input class="form-control" id="arquivo" name="arquivo" value="{{$queryParams['arquivo']}}" placeholder="Nome do arquivo">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-2">
+                                    <div class="form-group">
+                                        <label for="numero">Entrada/Completo:</label>
+                                        <select class="form-control select2" id="tipo_entrada" name="tipo_entrada">
+                                            <option value="">Todos</option>
+                                            <option value="manual" @if ($queryParams['tipo_entrada'] == 'manual') selected @endif>Manual</option>
+                                            <option value="extrator" @if ($queryParams['tipo_entrada'] == 'extrator') selected @endif>Extrator</option>
+                                        </select>
+                                        <select class="form-control select2" id="status" name="status">
+                                            <option value="">Todos</option>
+                                            <option value="indexado" @if ($queryParams['status'] == 'indexado') selected @endif>Indexado</option>
+                                            <option value="pendente" @if ($queryParams['status'] == 'pendente') selected @endif>Pendente</option>
+                                        </select>
                                     </div>
                                 </div>
 
@@ -85,7 +101,7 @@
         <div class="col-sm-12">
             <div class="box box-info">
                 <div class="box-header">
-                    <h3 class="box-title">Últimos documentos enviados</h3>
+                    <h3 class="box-title">Documentos pesquisados</h3>
                     <br/>
                     <small class="form-text text-muted">Total de {{$documentos->total()}} registros</small>
                 </div>

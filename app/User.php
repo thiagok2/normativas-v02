@@ -12,6 +12,12 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    public const TIPO_ADMIN = 'admin';
+    public const TIPO_GESTOR= 'gestor';
+    public const TIPO_COLABORADOR = 'colaborador';
+    public const TIPO_EXTRATOR = 'extrator';
+
+
     /**
      * The attributes that are mass assignable.
      *
@@ -25,11 +31,15 @@ class User extends Authenticatable
 
 
     public function isAdmin(){
-        return $this->tipo == 'admin';
+        return $this->tipo == User::TIPO_ADMIN;
     }
 
     public function isGestor(){
-        return $this->tipo == 'gestor';
+        return $this->tipo == User::TIPO_GESTOR;
+    }
+
+    public function isColaborador(){
+        return $this->tipo == User::TIPO_COLABORADOR;
     }
 
     public function isResponsavel(){

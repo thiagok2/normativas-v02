@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class TipoDocumento extends Model
 {
     protected $fillable = [
-        'nome','descricao'
+        'nome','descricao','sigla'
     ];
 
     public $timestamps = true;
@@ -16,7 +16,8 @@ class TipoDocumento extends Model
 
     public $rules = [
         'nome' => 'required|string|unique:tipo_documentos|max:100',
-        'descricao' => 'string|max:255'
+        'descricao' => 'string|max:255',
+        'sigla' => 'string|nullable|unique:tipo_documentos|min:3|max:10'
     ];
 
     public $messages = [

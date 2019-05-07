@@ -40,11 +40,19 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-12">
+                        <div class="col-sm-9">
                             <div class="form-group">
                                 <label for="nome">Nome*</label>
                                 <input type="text" class="form-control" value="{{$tipodocumento->nome}}" name="nome" id="nome"
                                     required maxlength="100" minlength="10" @if (isset($tipodocumento->deleted_at)) readonly @endif >
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="sigla">Sigla</label>
+                                <input type="text" class="form-control" value="{{$tipodocumento->sigla}}" name="sigla" id="sigla"
+                                    maxlength="10" minlength="3" @if (isset($tipodocumento->deleted_at)) readonly @endif >
                             </div>
                         </div>
 
