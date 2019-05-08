@@ -29,31 +29,37 @@ class ElasticDocumentoController extends Controller
     }
 
     public function indexar(Request $request, $documentoId){
+        try{
+            $documento = Documento::find( $documentoId );
 
-        $documento = Documento::find( $documentoId );
+            $bodyDocumentElastic = $documento->toElasticObject();
+            $arquivoData = Storage::get('uploads/'.$documento->arquivo);
+            $bodyDocumentElastic["data"] = base64_encode($arquivoData);
 
-        $bodyDocumentElastic = $documento->toElasticObject();
-        $arquivoData = Storage::get('uploads/'.$documento->arquivo);
-        $bodyDocumentElastic["data"] = base64_encode($arquivoData);
+            $params = [
+                'index' => 'normativas',
+                'type'  => '_doc',
+                'id'    => $documento->arquivo,
+                'pipeline' => 'attachment', 
+                'body'  => $bodyDocumentElastic
+                
+            ];
 
-        $params = [
-            'index' => 'normativas',
-            'type'  => '_doc',
-            'id'    => $documento->arquivo,
-            'pipeline' => 'attachment', 
-            'body'  => $bodyDocumentElastic
+            $result = $this->client->index($params);
+
+            if($result['result'] == 'created' || $result['result'] == 'updated'){
+                $documento->status_extrator = Documento::STATUS_EXTRATOR_INDEXADO;
+            }else{
+                $documento->status_extrator = Documento::STATUS_EXTRATOR_FALHA;
+            }
+
+            $documento->save();
             
-        ];
-
-        $result = $this->client->index($params);
-
-        if($result['result'] == 'created' || $result['result'] == 'updated'){
-            $documento->status_extrator = Documento::STATUS_EXTRATOR_INDEXADO;
-        }else{
+            return response()->json($result, 200);
+        }catch(\Exception $e){
             $documento->status_extrator = Documento::STATUS_EXTRATOR_FALHA;
+            $documento->save();
         }
-        $documento->save();
-        
-        return response()->json($result, 200);
+       
     }
 }
