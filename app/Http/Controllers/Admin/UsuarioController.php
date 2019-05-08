@@ -145,7 +145,7 @@ class UsuarioController extends Controller
             $user->fill($data);
 
 
-            $passwordRandom = bin2hex(openssl_random_pseudo_bytes(4));
+            $passwordRandom = '987654321';//bin2hex(openssl_random_pseudo_bytes(4));
             $user->email = trim($request->input('email'));
             $user->password = Hash::make($passwordRandom);
 
@@ -159,7 +159,7 @@ class UsuarioController extends Controller
 
             $convite = new Convite();
 
-            $convite->enviarNovoUsuario($user, $passwordRandom);
+            //$convite->enviarNovoUsuario($user, $passwordRandom);
             $user->save();
             DB::commit();
 

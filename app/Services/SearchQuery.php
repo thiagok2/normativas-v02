@@ -29,6 +29,7 @@ class SearchQuery{
         $result = DB::table('consultas')
                      ->select(DB::raw('count(*) as total, termos'))
                      ->groupBy('termos')
+                     ->limit($limit)
                      ->get();
 
         return $result;

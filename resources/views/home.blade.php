@@ -327,7 +327,7 @@
     <div class="col-lg-12">
         <div class="box box-danger">
             <div class="box-header">
-                <h3 class="box-title">Documentos recentes(10)</h3>
+                <h3 class="box-title">Últimos 10 documentos</h3>
             </div>
                 <!-- /.box-header -->
             <div class="box-body no-padding">
@@ -392,7 +392,7 @@
             </div><!-- /.box-body -->
             <div class="box-footer">
                 <span class="text-muted">
-                    Já foram enviados {{$documentos->count()}} documentos no total.
+                    Já foram enviados {{$documentos->total()}} documentos no total.
                 </span>
             </div>
 
