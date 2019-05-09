@@ -138,6 +138,11 @@ body {
                 max-width: 300px;
             }
         }
+        .btn-mobile{
+            display: block;
+            width:100%;
+            margin-left:0 !important;
+        }
     }
 }
 
@@ -148,6 +153,11 @@ body {
             img {
                 max-width: 300px;
             }
+        }
+
+        .btn-mobile{
+            display: block;
+            width:100%;
         }
     }
 }
