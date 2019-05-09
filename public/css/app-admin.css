@@ -3027,134 +3027,48 @@ body {
   height: 100%;
 }
 
-body {
-  background: #f0f0f0;
-}
-
-body hr.split {
-  border: none;
-  height: 50px;
-  margin: 0;
-}
-
-body hr.split-sm {
-  border: none;
-  height: 20px;
-  margin: 0;
-}
-
-body a {
-  color: #12586f;
-}
-
-body a:hover, body a:focus, body a.active {
-  color: #073848;
-}
-
-body .badge-info {
-  background-color: #87aab0;
-  white-space: normal;
-  text-align: left;
-}
-
-body h4 {
-  background-color: #12586f;
-  color: #ffffff;
-  padding: 6px 16px;
-}
-
-body .highlight {
-  margin-top: 10px;
-}
-
-body .highlight_word {
-  font-weight: bold;
-  font-size: 1em;
-  background: #ffff00;
-  padding: 0.3% 6px;
-}
-
-body .btn {
-  margin-bottom: 10px;
-}
-
-body .btn.btn-primary {
-  background-color: #12586f;
-  border-color: #12586f;
-}
-
-body .btn.btn-primary:hover, body .btn.btn-primary:focus, body .btn.btn-primary.active {
-  background-color: #073848;
-  border-color: #073848;
-}
-
-body .btn.btn-login {
-  padding: 3px 5px 3px 20px;
-}
-
-body .btn.btn-login i {
-  margin-left: 10px;
-  padding: 4px 7px;
-  border-radius: 20px;
-  display: inline-block;
-}
-
-body .btn.btn-pill {
+body .bootstrap-tagsinput .tag {
+  font-size: 100%;
+  padding: .2em .6em .3em;
+  font-weight: 400;
   border-radius: 20px;
 }
 
-body #search {
-  padding: 60px 0;
-  background-color: #ffffff;
+body .alert {
+  padding: 8px 15px;
 }
 
-body #results .card-columns {
-  column-count: 2;
+body .table-striped tr > td:first-child {
+  padding-left: 5px;
 }
 
-body #results .rating-container .caption {
+body textarea {
+  width: 100% !important;
+}
+
+body .table-striped > tr:nth-of-type(odd) {
+  background-color: #f5f5f5;
+}
+
+body .table-hover > tr:hover {
+  background-color: #f5f5f5;
+}
+
+body .autoclose-alert-success, body .autoclose-alert-danger {
+  position: fixed;
+  bottom: 0px;
+  right: 20px;
   display: none;
 }
 
-body .pagination .page-item .page-link {
-  background-color: #12586f;
-  border-color: #073848;
-  color: #ffffff;
-}
-
-body .pagination .page-item .page-link:hover, body .pagination .page-item .page-link:focus, body .pagination .page-item .page-link.active {
-  background-color: #073848;
-  border-color: #073848;
+body .invalid {
+  border: solid 1px red;
 }
 
 /* Large desktops and laptops */
 /* Landscape tablets and medium desktops */
 /* Portrait tablets and small desktops */
 /* Landscape phones and portrait tablets */
-@media (max-width: 767px) {
-  body h1 img {
-    max-width: 300px;
-  }
-  body .btn-mobile {
-    display: block;
-    width: 100%;
-    margin-left: 0 !important;
-  }
-}
-
 /* Portrait phones and smaller */
-@media (max-width: 480px) {
-  body h1 img {
-    max-width: 300px;
-  }
-  body .btn-mobile {
-    display: block;
-    width: 100%;
-  }
-}
 
-label .form-label {
-  font-weight: bold;
-}
-
-/*# sourceMappingURL=app-search.css.map */
+/*# sourceMappingURL=app-admin.css.map */

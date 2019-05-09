@@ -1,0 +1,74 @@
+//@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "node_modules/font-awesome/scss/font-awesome.scss";
+
+html,
+body {
+    height: 100%;
+
+}
+
+body {
+
+    .bootstrap-tagsinput{
+        .tag{
+            font-size: 100%;
+            padding:.2em .6em .3em;
+            font-weight:400;
+            border-radius:20px;
+        }
+    }
+
+        .alert{
+            padding:8px 15px;
+        }
+        .table-striped tr > td:first-child{
+            padding-left:5px;
+        }
+        textarea{
+            width:100% !important;
+        }
+        .table-striped > tr:nth-of-type(odd) {
+            background-color: #f5f5f5;
+        }
+        .table-hover > tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .autoclose-alert-success, .autoclose-alert-danger{
+            position:fixed;
+            bottom:0px;
+            right:20px;
+            display:none;
+        }
+
+        .invalid{
+            border:solid 1px red;
+        }
+
+}
+
+/* Large desktops and laptops */
+@media (min-width: 1200px) {
+}
+
+/* Landscape tablets and medium desktops */
+@media (min-width: 992px) and (max-width: 1199px) {
+}
+
+/* Portrait tablets and small desktops */
+@media (min-width: 768px) and (max-width: 991px) {
+}
+
+/* Landscape phones and portrait tablets */
+@media (max-width: 767px) {
+    body {
+
+    }
+}
+
+/* Portrait phones and smaller */
+@media (max-width: 480px) {
+    body {
+
+    }
+}

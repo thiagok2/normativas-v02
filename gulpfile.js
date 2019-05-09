@@ -21,6 +21,7 @@ var paths = {
 
 elixir(function(mix) {
     mix.sass("app-search.scss")
+        .sass("app-admin.scss")
         .scripts("normativas-search.js")
         .copy(paths.bootstrap + "css/bootstrap.min.css", "public/css")
         .copy("node_modules/font-awesome/fonts/*.*", "public/fonts/")

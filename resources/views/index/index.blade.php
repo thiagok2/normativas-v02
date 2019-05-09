@@ -67,16 +67,16 @@
                     </div>
                     <div class="row">
                         <div class="col text-center mt-3 mb-3">
-                            <button type="submit" class="btn btn-primary mr-1"><i class="fa fa-search"></i> Pesquisar normativas</button>
-                            <button type="button" class="btn btn-info ml-1" data-toggle="collapse" data-target="#filters-menu" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-cogs"></i> Configurações da busca</button>
-                            <a class="btn btn-info ml-1" href="{{route('unidades-search')}}" target="_blank">
+                            <button type="submit" class="btn btn-mobile btn-primary mr-1"><i class="fa fa-search"></i> Pesquisar normativas</button>
+                            <button type="button" class="btn btn-mobile btn-info ml-1" data-toggle="collapse" data-target="#filters-menu" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-cogs"></i> Configurações da busca</button>
+                            <a class="btn btn-mobile btn-info ml-1" href="{{route('unidades-search')}}" target="_blank">
                                 <i class="fa fa-cogs"></i> Pesquisar Conselhos
                             </a>
                         </div>
                     </div>
                     <div id="filters-menu" class="collapse <?php if($filters){ echo 'show'; }?>">
                         <div class="row">
-                            <div class="col">
+                            <div class="col col-12 col-lg-4 mb-1">
                                 <select class="form-control" name="tipo_doc">
                                     <option value="all" <?php if($tipo_doc == "all"){ echo ' selected'; }?>>Todos os Tipos</option>
 
@@ -87,7 +87,7 @@
 
                                 </select>
                             </div>
-                            <div class="col">
+                            <div class="col col-12 col-lg-4 mb-1">
                                 <select class="form-control" name="esfera" >
                                     <option value="all" <?php if($esfera == "all"){ echo ' selected'; }?>>Todas as Esfera</option>
                                     <option value="Federal" <?php if($esfera == "Federal"){ echo ' selected'; }?>>Federal</option>
@@ -95,7 +95,7 @@
                                     <option value="Municipal" <?php if($esfera == "Municipal"){ echo ' selected'; }?>>Municipal</option>
                                 </select>
                             </div>
-                            <div class="col">
+                            <div class="col col-12 col-lg-4 mb-1">
                                 <select class="form-control" name="periodo">
                                     <option value="all">Todos os Tempos</option>
                                     <option value="<?php echo date("Y"); ?>" <?php if($periodo == date("Y")){ echo ' selected'; }?>>Deste Ano</option>
