@@ -14,7 +14,6 @@ class AddDefaultCreateAtDocumentos2 extends Migration
      */
     public function up()
     {
-        
         DB::select("ALTER TABLE documentos ALTER COLUMN created_at SET DEFAULT now()");
     }
 

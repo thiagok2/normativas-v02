@@ -18,6 +18,7 @@ class UnidadeDefaultTableSeeder extends Seeder
             'nome' => 'Conselho Normativas', 
             'tipo' => 'Conselho', 
             'esfera' => 'Estadual',
+            'admin' => true,
             'email' => 'cfnormativas@normativas.com.br',
             'url' => 'http://normativas.nees.com.br',
             'sigla' => 'NBR',
