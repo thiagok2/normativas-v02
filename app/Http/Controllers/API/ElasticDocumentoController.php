@@ -10,8 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use Elasticsearch\Client;
 use Elasticsearch\ClientBuilder;
 use App\Models\Documento;
-
-
+use Illuminate\Support\Facades\Log;
 
 class ElasticDocumentoController extends Controller
 {
@@ -30,7 +29,11 @@ class ElasticDocumentoController extends Controller
 
     public function indexar(Request $request, $documentoId){
         try{
+           
+
             $documento = Documento::find( $documentoId );
+
+            Log::warning('Indexing: '.$documento->arquivo);
 
             $bodyDocumentElastic = $documento->toElasticObject();
             $arquivoData = Storage::get('uploads/'.$documento->arquivo);
@@ -59,6 +62,11 @@ class ElasticDocumentoController extends Controller
         }catch(\Exception $e){
             $documento->status_extrator = Documento::STATUS_EXTRATOR_FALHA;
             $documento->save();
+            
+            Log::error('ElasticDocumentoController::indexar - message: ('.$e->getLine().') '. $e->getMessage());
+
+            return response()->json(
+                array('message' => $e->getMessage()) , 500);
         }
        
     }
