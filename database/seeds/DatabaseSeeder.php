@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
         //$this->call(BrasilEstadoTableSeeder::class);
 
         //$this->call(AddAssuntoDesconhecidoSeeder::class);
-        $this->call(AddTipoDocumentoDesconhecidoSeeder::class);
+        //$this->call(AddTipoDocumentoDesconhecidoSeeder::class);
         $this->call(AddUsersRoboUnidadesSeeder::class);
         //$this->call(CreateCache::class);
 
