@@ -68,7 +68,11 @@ class ElasticDocumentoController extends Controller
             Log::error('ElasticDocumentoController::indexar - message: ('.$e->getLine().') '. $e->getMessage());
 
             return response()->json(
-                array('message' => $e->getMessage(), 'trace' => $e->getTraceAsString()) , 500);
+                array(
+                    'message' => $e->getMessage(), 
+                    'trace' => $e->getTraceAsString(),
+                    'code' => $e->getFile().'('.$e->getLine().')'
+                    ) , 500);
         }
        
     }
