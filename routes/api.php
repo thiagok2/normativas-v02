@@ -30,4 +30,4 @@ Route::get('unidades/confirmadas/6meses', 'API\UnidadeRestController@evolucaoUni
 
 Route::get('unidades', 'API\UnidadeRestController@get');
 
-Route::post('documentos/{documentoId}/indexar', 'API\ElasticDocumentoController@indexar');
+Route::get('documentos/{documentoId}/indexar', 'API\ElasticDocumentoController@indexar');
