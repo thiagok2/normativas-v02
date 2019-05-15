@@ -50,6 +50,8 @@ class ElasticDocumentoController extends Controller
 
             $result = $this->client->index($params);
 
+
+            
             if($result['result'] == 'created' || $result['result'] == 'updated'){
                 $documento->status_extrator = Documento::STATUS_EXTRATOR_INDEXADO;
             }else{
@@ -60,13 +62,13 @@ class ElasticDocumentoController extends Controller
             
             return response()->json($result, 200);
         }catch(\Exception $e){
-            $documento->status_extrator = Documento::STATUS_EXTRATOR_FALHA;
+            $documento->status_extrator = Documento::STATUS_EXTRATOR_FALHA_ELASTIC;
             $documento->save();
             
             Log::error('ElasticDocumentoController::indexar - message: ('.$e->getLine().') '. $e->getMessage());
 
             return response()->json(
-                array('message' => $e->getMessage()) , 500);
+                array('message' => $e->getMessage(), 'trace' => $e->getTraceAsString()) , 500);
         }
        
     }
