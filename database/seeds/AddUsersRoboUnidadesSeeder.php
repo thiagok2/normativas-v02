@@ -55,15 +55,15 @@ class AddUsersRoboUnidadesSeeder extends Seeder
         //     'tipo' => User::TIPO_EXTRATOR
         // ]);
 
-        $unidadeDF = Unidade::where('sigla', "CEE-DF")->first();
+        // $unidadeDF = Unidade::where('sigla', "CEE-DF")->first();
 
-        $usuarioRobo5 = User::create([
-            'name' => "Robô extrator CEE-DF",
-            'email' => "ceedf@extrator.com.br",
-            'password' => Hash::make('extrator'),
-            'unidade_id' => $unidadeDF->id,
-            'tipo' => User::TIPO_EXTRATOR
-        ]);
+        // $usuarioRobo5 = User::create([
+        //     'name' => "Robô extrator CEE-DF",
+        //     'email' => "ceedf@extrator.com.br",
+        //     'password' => Hash::make('extrator'),
+        //     'unidade_id' => $unidadeDF->id,
+        //     'tipo' => User::TIPO_EXTRATOR
+        // ]);
 
 
     }
