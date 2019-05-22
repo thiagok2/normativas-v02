@@ -97,10 +97,11 @@ class Documento extends Model
                 "ementa" => $this->ementa,
                 "url"   =>  $this->url,
                 "data_publicacao"   =>  $this->data_publicacao,
-                //"data_envio"   =>  date('Y-m-d', strtotime($this->data_envio)),
+                "data_indexacao"   =>  date('Y-m-d', strtotime($this->data_envio)),
                 "tipo_doc" => $this->tipoDocumento->nome,
                 "arquivo"   =>  $this->arquivo,
                 "tags"  =>  $tags,
+                "tipo_entrada" => ( $this->tipo_entrada != null ? $this->tipo_entrada : Documento::ENTRADA_INDIVIDUAL),
                 "fonte"   =>  [
                     "orgao"  => $this->unidade->nome,
                     "sigla" => $this->unidade->sigla,
