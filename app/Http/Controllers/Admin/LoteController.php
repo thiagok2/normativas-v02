@@ -46,7 +46,7 @@ class LoteController extends Controller
         $tiposDocumento = TipoDocumento::all();
         $assuntos = Assunto::all(); 
 
-        $documentos = Documento::whereIn("id", explode(",", $request->ids))->where('completed',false)->get();
+        $documentos = Documento::whereIn("id", explode(",", $request->ids))->where('completed',false)->paginate(25);
         $alerta = "Complete os dados dos arquivos enviados, assim terão uma maior possibilidade de retorno nas buscas (Ano, Tipo Documento e Assunto).";
       
 

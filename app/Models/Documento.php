@@ -88,6 +88,8 @@ class Documento extends Model
             $tags[] = $tag->tag;
         }
 
+        $dataEnvio = new \DateTime();
+
         $object = [
             "ato" => [
                 "id_persisted" => $this->id,
@@ -97,7 +99,7 @@ class Documento extends Model
                 "ementa" => $this->ementa,
                 "url"   =>  $this->url,
                 "data_publicacao"   =>  $this->data_publicacao,
-                "data_indexacao"   =>  date('Y-m-d', strtotime($this->data_envio)),
+                "data_indexacao"   =>  $dataEnvio->format('Y-m-d'),
                 "tipo_doc" => $this->tipoDocumento->nome,
                 "arquivo"   =>  $this->arquivo,
                 "tags"  =>  $tags,

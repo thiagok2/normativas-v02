@@ -228,7 +228,7 @@ class DocumentoController extends Controller
                 }
 
                
-    
+                
             }else{
                 return redirect()
 			    ->back()->withInput()
@@ -238,7 +238,7 @@ class DocumentoController extends Controller
         }catch(\Exception $e){
 
             DB::rollBack();
-            $messageErro = (getenv('APP_DEBUG') === 'true') ? $e->getMessage():
+            $messageErro = (getenv('APP_DEBUG') === 'true') ? $e->getMessage()." : ".$e->getTraceAsString():
             "Problemas na indexação do documento. Caso o problema persista, entre em contato pelo email normativas@ness.com.br";
 
 
