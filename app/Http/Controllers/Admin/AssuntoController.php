@@ -74,7 +74,7 @@ class AssuntoController extends Controller
             DB::beginTransaction();
             $assunto = Assunto::find($id);
 
-            $documentos = Documento::where('assunto_id',$id)->get();
+            $documentos = Documento::where('assunto_id',$id)->limit(1)->get();
             if($documentos->isEmpty()){
                 $mensagem = "Assunto removido permanentemente. Não havia documentos associados a esse assunto.";
                 $assunto->forceDelete();

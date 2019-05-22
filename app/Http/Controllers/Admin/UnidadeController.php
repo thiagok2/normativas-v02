@@ -64,7 +64,9 @@ class UnidadeController extends Controller
 
         $users = User::where("unidade_id", $id)->get();
 
-        $documentos = Documento::where('unidade_id', $id)->get();
+        $documentos = Documento::where('unidade_id', $id)
+            ->orderBy('ano', 'desc')
+            ->paginate(50);
 
         return view('admin.unidade.edit', compact('unidade','users', 'documentos'));
     }
@@ -155,7 +157,7 @@ class UnidadeController extends Controller
         
 
         foreach($tiposTotal as $tipo){
-            $documentos["".$tipo->id.""] = Documento::where([['unidade_id',$unidadeId],['tipo_documento_id',$tipo->id]])->get();
+            $documentos["".$tipo->id.""] = Documento::where([['unidade_id',$unidadeId],['tipo_documento_id',$tipo->id]])->orderBy('ano','desc')->paginate(25);
         }
         
         return view('unidades.page', compact('unidade','tiposTotal','documentos'));
