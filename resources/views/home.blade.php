@@ -456,7 +456,7 @@
                                         {{ $unidade->nome }}
                                     </a>
                                 </td>
-                                <td>
+                                <td style="text-align:right;">
                                     {{ $unidade->documentos->count() }}
                                     <i class="fa fa-file {{$unidade->documentos->count()>0 ? 'icon-success':'icon-danger'}}"></i>
                                     <i class="glyphicon glyphicon-user {{$unidade->responsavel->confirmado ? 'icon-success':'icon-danger'}}"></i>

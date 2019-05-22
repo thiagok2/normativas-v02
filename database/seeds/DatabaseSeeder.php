@@ -30,7 +30,8 @@ class DatabaseSeeder extends Seeder
         //$this->call(AddTipoDocumentoDesconhecidoSeeder::class);
         //$this->call(AddUsersRoboUnidadesSeeder::class);
         //$this->call(TipoIndicacaoSPTipoDocumento::class);
-        $this->call(UpdateStatusExtratorDFSeeder::class);
+        //$this->call(UpdateStatusExtratorDFSeeder::class);
+        $this->call(UpdateTipoUsuarioAdminSeeder::class);
         //$this->call(CreateCache::class);
 
 

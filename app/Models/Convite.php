@@ -37,19 +37,20 @@ class Convite extends Model
             $to_email = $userNovo->email;
         }
 
+        $tipoLabel = "";
         if($userNovo->isAdmin()){
-            $userNovo->tipo = "administrador(a)";
+            $tipoLabel = "administrador(a)";
         }else if($userNovo->isGestor()){
-            $userNovo->tipo = "gestor(a)";
+            $tipoLabel  = "gestor(a)";
         }else if($userNovo->isColaborador()){
-            $userNovo->tipo = "colaborador(a)";
+            $tipoLabel  = "colaborador(a)";
         }
 
         $data = array(
             'name'      =>  $userNovo->name, 
             "password"  =>  $passwordGerado,
             "unidade"   =>  $userNovo->unidade->nome,
-            "tipo"      =>  $userNovo->tipo,
+            "tipo"      =>  $tipoLabel,
             "email"     =>  $userNovo->email
         );
     

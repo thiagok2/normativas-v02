@@ -31,7 +31,7 @@ class User extends Authenticatable
 
 
     public function isAdmin(){
-        return $this->tipo == User::TIPO_ADMIN;
+        return $this->tipo == User::TIPO_ADMIN || $this->tipo == 'administrador(a)';
     }
 
     public function isGestor(){
