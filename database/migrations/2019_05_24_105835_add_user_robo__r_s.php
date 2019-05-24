@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 use App\Models\Unidade;
 use App\User;
 
-class AddUserRoboCe extends Migration
+class AddUserRoboRS extends Migration
 {
     /**
      * Run the migrations.
@@ -15,11 +15,11 @@ class AddUserRoboCe extends Migration
      */
     public function up()
     {
-        $unidade = Unidade::where('sigla', "CEE-CE")->first();
+        $unidade = Unidade::where('sigla', "CEED-RS")->first();
 
         $usuarioRobo = User::create([
-            'name' => "Robô extrator CEE-CE",
-            'email' => "ceece@extrator.com.br",
+            'name' => "Robô extrator CEED-RS",
+            'email' => "ceers@extrator.com.br",
             'password' => Hash::make('extrator'),
             'unidade_id' => $unidade->id,
             'tipo' => User::TIPO_EXTRATOR
