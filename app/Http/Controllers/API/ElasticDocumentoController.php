@@ -33,7 +33,7 @@ class ElasticDocumentoController extends Controller
 
             $documento = Documento::find( $documentoId );
 
-            Log::warning('Indexing: '.$documento->arquivo);
+            //Log::warning('Indexing: '.$documento->arquivo);
 
             $bodyDocumentElastic = $documento->toElasticObject();
             $arquivoData = Storage::get('uploads/'.$documento->arquivo);
