@@ -75,7 +75,7 @@
                                         <td>{{ $unidade->sigla }}</td>
                                         <td>{{ $unidade->tipo }}</td>
                                         <td>{{ $unidade->esfera }}</td>
-                                        <td>
+                                        <td style="float:left;">
                                             {{ $unidade->documentos->count() }}
                                             <i class="fa fa-file {{$unidade->documentos->count()>0 ? 'icon-success':'icon-danger'}}"></i>
                                             <i class="fa fa-user {{$unidade->responsavel->confirmado ? 'icon-success':'icon-danger'}}"></i>
