@@ -191,33 +191,33 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Normativas enviadas</div>
+                    <div class="panel-heading">Normativas enviadas ({{$documentos->total()}})</div>
                     <div class="panel-body">
                         <div class="row">
                             @forelse ($documentos as $doc)
-                            <div class="col-lg-4">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">{{ $doc->titulo }}</div>
-                                <div class="panel-body">
-                                    {{ $doc->ementa }}
-                                    <hr/>
-                                    
-                                    <br/>
-                                    Ano: {{ $doc->ano }}
-                                    <br/>
-                                    Publicação: {{date('d-m-Y', strtotime($doc->data_publicacao))}}
-                                    <br/>
-                                    Número: {{ $doc->numero }}
-                                </div>
-                                <div class="panel-footer">
-                                        <a href="{{ route("pdfNormativa",$doc->arquivo) }}" target="_blank" class="btn btn-primary btn-lg">
-                                            Baixar
-                                        </a>
-                                        <a href="{{ route("documento",$doc->id) }}" class="btn btn-primary btn-lg">
-                                            Visualizar
-                                        </a>
-                                </div>
-                            </div>   
+                            <div class="col-lg-6">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">{{ $doc->titulo }}</div>
+                                    <div class="panel-body">
+                                        {{ $doc->ementa }}
+                                        <hr/>
+                                        
+                                        <br/>
+                                        Ano: {{ $doc->ano }}
+                                        <br/>
+                                        Publicação: {{date('d-m-Y', strtotime($doc->data_publicacao))}}
+                                        <br/>
+                                        Número: {{ $doc->numero }}
+                                    </div>
+                                    <div class="panel-footer">
+                                            <a href="{{ route("pdfNormativa",$doc->arquivo) }}" target="_blank" class="btn btn-primary btn-lg">
+                                                Baixar
+                                            </a>
+                                            <a href="{{ route("documento",$doc->id) }}" class="btn btn-primary btn-lg">
+                                                Visualizar
+                                            </a>
+                                    </div>
+                                </div>   
                             </div><!-- end panel-doc-->
                             
                         @empty
@@ -228,7 +228,10 @@
                             </div>
                         @endforelse  
                         </div>
-                    </div>
+                    </div><!-- end panel body -->
+                </div> <!-- panel body-->
+                <div class="box-footer">
+                    {{ $documentos->links() }}
                 </div>
             </div>
         </div>

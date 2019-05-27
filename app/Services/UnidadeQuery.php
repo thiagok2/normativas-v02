@@ -67,4 +67,14 @@ class UnidadeQuery{
 
         return $result;
     }
+
+    public function documentosEtlPorStatus($unidadeId){
+        $sql = "SELECT status_extrator as status, count(*) total from documentos
+                WHERE tipo_entrada = 'extrator' and unidade_id = ? 
+                GROUP BY status_extrator";
+
+        $result = DB::select( $sql, [$unidadeId] );
+
+        return $result;
+    }
 }

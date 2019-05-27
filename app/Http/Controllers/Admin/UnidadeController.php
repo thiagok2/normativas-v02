@@ -12,6 +12,7 @@ use App\Models\Estado;
 use App\User;
 use App\Models\Unidade;
 use App\Models\Documento;
+use App\Services\UnidadeQuery;
 
 class UnidadeController extends Controller
 {
@@ -54,8 +55,19 @@ class UnidadeController extends Controller
     }
 
     public function show($id){
+
+        $unidadQuery = new UnidadeQuery();
+        $statusExtrator = $unidadQuery->documentosEtlPorStatus($id);
+
         $unidade = Unidade::find($id);
 
+        $documentosCount = Documento::where('unidade_id',$unidade->id)->count();
+        $documentosPendentesCount = Documento::where([
+            ['completed', false],
+            ['unidade_id', $unidade->id]
+        ])->count();
+
+        return view('admin.unidade.show', compact('unidade', 'statusExtrator','documentosCount','documentosPendentesCount'));
 
     }
 
@@ -66,7 +78,7 @@ class UnidadeController extends Controller
 
         $documentos = Documento::where('unidade_id', $id)
             ->orderBy('ano', 'desc')
-            ->paginate(50);
+            ->paginate(10);
 
         return view('admin.unidade.edit', compact('unidade','users', 'documentos'));
     }
