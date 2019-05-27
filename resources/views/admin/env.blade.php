@@ -61,6 +61,12 @@
                                     <td>
                                         <a href="../errors/500" >error.500</a>
                                     </td>
+                                </tr>STORAGE_PATH
+                                <tr>
+                                    <td>STORAGE_PATH</td>
+                                    <td>
+                                        {{$STORAGE_PATH}}
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>404</td>
