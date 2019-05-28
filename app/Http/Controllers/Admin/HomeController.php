@@ -16,6 +16,7 @@ use App\Services\SearchQuery;
 use App\Services\UsuarioQuery;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 class HomeController extends Controller
 {
@@ -176,18 +177,5 @@ class HomeController extends Controller
 
     }
 
-    public function getenv(){
-        $APP_DEBUG = getenv('APP_DEBUG');
-        $APP_ENV = getenv('APP_ENV');
-        $APP_URL = getenv('APP_URL');
-        $ELASTIC_URL = getenv('ELASTIC_URL');
-        $MAIL_USERNAME = getenv('MAIL_USERNAME');
-        $MAIL_PASSWORD = getenv('MAIL_PASSWORD');
-        $DATABASE_URL = getenv('DATABASE_URL');
-
-        $STORAGE_PATH = Storage::disk('public')->path('uploads');
-
-        return view('admin.env', compact('APP_DEBUG','APP_ENV','APP_URL','ELASTIC_URL'
-            ,'MAIL_USERNAME','MAIL_PASSWORD','DATABASE_URL','STORAGE_PATH'));
-    }
+    
 }

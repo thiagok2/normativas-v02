@@ -50,7 +50,7 @@ Route::get('errors/404', function () {
 
 Route::prefix('admin')->middleware('auth')->namespace('Admin')->group(function(){
 
-    Route::get('getenv', 'HomeController@getenv')->name('getenv');
+    Route::get('getenv', 'EnvController@getenv')->name('getenv');
 
     
 

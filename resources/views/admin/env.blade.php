@@ -57,15 +57,42 @@
                                     <td>{{$DATABASE_URL}}</td>
                                 </tr>
                                 <tr>
-                                    <td>PAGE_ERRO_500</td>
+                                    <td>Log Status</td>
                                     <td>
-                                        <a href="../errors/500" >error.500</a>
+                                        {{$LOG_STATUS}}
                                     </td>
-                                </tr>STORAGE_PATH
+                                </tr>
+                                <tr>
+                                    <td>Elastic Status</td>
+                                    <td>
+                                       {{$ELASTIC_STATUS}}
+                                    </td>
+                                </tr>
                                 <tr>
                                     <td>STORAGE_PATH</td>
                                     <td>
                                         {{$STORAGE_PATH}}
+                                        &emsp;&emsp;&emsp;
+                                        @if ($STORAGE_PATH_EXISTS)
+                                            Diretório existe
+                                        @else
+                                            Não encontrado
+                                        @endif
+                                        &emsp;&emsp;&emsp;
+                                        Permissões:&emsp;
+                                        {{$STORAGE_PATH_PERMISSION}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>RESULT_MOVE_FILE</td>
+                                    <td>
+                                        {{$RESULT_MOVE}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>PAGE_ERRO_500</td>
+                                    <td>
+                                        <a href="../errors/500" >error.500</a>
                                     </td>
                                 </tr>
                                 <tr>
