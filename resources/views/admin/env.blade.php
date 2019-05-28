@@ -56,19 +56,19 @@
                                     <td>DATABASE_URL</td>
                                     <td>{{$DATABASE_URL}}</td>
                                 </tr>
-                                <tr>
-                                    <td>Log Status</td>
+                                <tr @if(strpos($LOG_STATUS, 'FALHA') !== false) class="alert alert-danger" role="alert" @endif>
+                                    <td>Log Status: ?{{strpos($LOG_STATUS, 'FALHA')}}?</td>
                                     <td>
                                         {{$LOG_STATUS}}
                                     </td>
                                 </tr>
-                                <tr>
+                                <tr @if(strpos($ELASTIC_STATUS, 'FALHA') !== false) class="alert alert-danger" role="alert" @endif>
                                     <td>Elastic Status</td>
                                     <td>
                                        {{$ELASTIC_STATUS}}
                                     </td>
                                 </tr>
-                                <tr>
+                                <tr @if(strpos($STORAGE_PATH_PERMISSION, '755') === false) class="alert alert-warning" role="alert" @endif>
                                     <td>STORAGE_PATH</td>
                                     <td>
                                         {{$STORAGE_PATH}}
@@ -83,7 +83,7 @@
                                         {{$STORAGE_PATH_PERMISSION}}
                                     </td>
                                 </tr>
-                                <tr>
+                                <tr @if(strpos($RESULT_MOVE, 'FALHA') !== false) class="alert alert-danger" role="alert" @endif>
                                     <td>RESULT_MOVE_FILE</td>
                                     <td>
                                         {{$RESULT_MOVE}}
