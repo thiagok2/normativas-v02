@@ -1,4 +1,4 @@
-<h1>Normativas-admin</h1>
+<h1>Normativas-app</h1>
 
 # Arquitetura
 1. PHP >= 7.1
