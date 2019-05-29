@@ -72,6 +72,7 @@ class EnvController extends Controller
             if($result['result'] == 'created' || $result['result'] == 'updated'){
                 $ELASTIC_STATUS = "OK";
             }else{
+                dd($result);   
                 $ELASTIC_STATUS = "FALHA. ".$result;
             }
         }catch(\Exception $e){
