@@ -72,11 +72,10 @@ class EnvController extends Controller
             if($result['result'] == 'created' || $result['result'] == 'updated'){
                 $ELASTIC_STATUS = "OK";
             }else{
-                dd($result);   
                 $ELASTIC_STATUS = "FALHA. ".$result;
             }
         }catch(\Exception $e){
-            $ELASTIC_STATUS = "FALHA. ".$e->getMessage();
+            $ELASTIC_STATUS = "FALHA. ".$e->getMessage()."\n<br>:".$e->getTraceAsString();
         }
 
         return view('admin.env', compact('APP_DEBUG','APP_ENV','APP_URL','ELASTIC_URL'

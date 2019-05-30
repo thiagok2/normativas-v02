@@ -14,7 +14,7 @@ class Documento extends Model
 
     public const STATUS_EXTRATOR_CADASTRADO = 'CADASTRADO';
     public const STATUS_EXTRATOR_BAIXADO = 'BAIXADO';
-    public const STATUS_EXTRATOR_FALHA = 'FALHA_DOWNLOAD';
+    public const STATUS_EXTRATOR_FALHA_DOWNLOAD = 'FALHA_DOWNLOAD';
     public const STATUS_EXTRATOR_INDEXADO = 'INDEXADO';
     public const STATUS_EXTRATOR_FALHA_ELASTIC = 'FALHA_ELASTIC';
 
