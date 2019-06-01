@@ -45,7 +45,7 @@ class SearchResult
 
             $doc['fonte'] =  $hit['_source']['ato']['fonte'];
 
-            if(array_key_exists( "attachment.content" , $hit['highlight'] ) && isset($hit['highlight']['attachment.content'])){
+            if( isset($hit['highlight']) && isset($hit['highlight']['attachment.content']) && array_key_exists( "attachment.content" , $hit['highlight'] )){
                 $doc['trechos_destaque'] =  $hit['highlight']['attachment.content'];
             }else{
                 $doc['trechos_destaque'] = null;
