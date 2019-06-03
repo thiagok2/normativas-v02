@@ -57,23 +57,32 @@ class EnvController extends Controller
 
         try{
             $documento = Documento::where('completed',true)->first();
-            $bodyDocumentElastic = $documento->toElasticObject();
-            $arquivoData = Storage::get('uploads/'.$documento->arquivo);
-            $bodyDocumentElastic["data"] = base64_encode($arquivoData);
-            $params = [
-                'index' => 'normativas',
-                'type'  => '_doc',
-                'id'    => $documento->arquivo,
-                'pipeline' => 'attachment', 
-                'body'  => $bodyDocumentElastic
-                
-            ];
-            $result = $this->client->index($params);
-            if($result['result'] == 'created' || $result['result'] == 'updated'){
-                $ELASTIC_STATUS = "OK";
-            }else{
-                $ELASTIC_STATUS = "FALHA. ".$result;
+            
+            if(isset($documento)){
+                $bodyDocumentElastic = $documento->toElasticObject();
+                $arquivoData = Storage::get('uploads/'.$documento->arquivo);
+                $bodyDocumentElastic["data"] = base64_encode($arquivoData);
+                $params = [
+                    'index' => 'normativas',
+                    'type'  => '_doc',
+                    'id'    => $documento->arquivo,
+                    'pipeline' => 'attachment', 
+                    'body'  => $bodyDocumentElastic
+                    
+                ];
+                $result = $this->client->index($params);
+                if($result['result'] == 'created' || $result['result'] == 'updated'){
+                    $ELASTIC_STATUS = "OK";
+                }else{
+                    //dd($result);   
+                    $ELASTIC_STATUS = "FALHA. ".$result;
+                }
+            } else{
+                $result = "NENHUM DOCUMENTO PRESENTE NO BANCO";
+                //dd($result);   
+                $ELASTIC_STATUS = "NAO FOI POSSIVEL TESTAR. ".$result;
             }
+            
         }catch(\Exception $e){
             $ELASTIC_STATUS = "FALHA. ".$e->getMessage()."\n<br>:".$e->getTraceAsString();
         }
