@@ -75,7 +75,7 @@ class EnvController extends Controller
                 $ELASTIC_STATUS = "FALHA. ".$result;
             }
         }catch(\Exception $e){
-            $ELASTIC_STATUS = "FALHA. ".$e->getMessage()."\n<br>:".$e->getTraceAsString();
+            $ELASTIC_STATUS = "FALHA. ".$e->getMessage();
         }
 
         return view('admin.env', compact('APP_DEBUG','APP_ENV','APP_URL','ELASTIC_URL'
