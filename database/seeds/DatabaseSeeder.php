@@ -26,12 +26,12 @@ class DatabaseSeeder extends Seeder
 
         //$this->call(BrasilEstadoTableSeeder::class);
 
-        //$this->call(AddAssuntoDesconhecidoSeeder::class);
-        //$this->call(AddTipoDocumentoDesconhecidoSeeder::class);
-        //$this->call(AddUsersRoboUnidadesSeeder::class);
-        //$this->call(TipoIndicacaoSPTipoDocumento::class);
-        //$this->call(UpdateStatusExtratorDFSeeder::class);
-        //$this->call(UpdateTipoUsuarioAdminSeeder::class);
+        $this->call(AddAssuntoDesconhecidoSeeder::class);
+        $this->call(AddTipoDocumentoDesconhecidoSeeder::class);
+        $this->call(AddUsersRoboUnidadesSeeder::class);
+        $this->call(TipoIndicacaoSPTipoDocumento::class);
+        $this->call(UpdateStatusExtratorDFSeeder::class);
+        $this->call(UpdateTipoUsuarioAdminSeeder::class);
         $this->call(AddTipoDocumentoPublicacao::class);
 
 
