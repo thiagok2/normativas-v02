@@ -34,6 +34,7 @@ class EnvController extends Controller
         $MAIL_USERNAME = getenv('MAIL_USERNAME');
         $MAIL_PASSWORD = getenv('MAIL_PASSWORD');
         $DATABASE_URL = getenv('DATABASE_URL');
+        $ETL_DIR = getenv('ETL_DIR');
 
         $STORAGE_PATH = Storage::disk('public')->path('uploads');
         $STORAGE_PATH_EXISTS = is_dir( $STORAGE_PATH );
@@ -87,7 +88,7 @@ class EnvController extends Controller
             $ELASTIC_STATUS = "FALHA. ".$e->getMessage();
         }
 
-        return view('admin.env', compact('APP_DEBUG','APP_ENV','APP_URL','ELASTIC_URL'
+        return view('admin.env', compact('APP_DEBUG','APP_ENV','APP_URL','ELASTIC_URL','ETL_DIR'
             ,'MAIL_USERNAME','MAIL_PASSWORD','DATABASE_URL','STORAGE_PATH',
             'LOG_STATUS', 'STORAGE_PATH_EXISTS', 'STORAGE_PATH_PERMISSION','RESULT_MOVE', 'ELASTIC_STATUS'));
     }

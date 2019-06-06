@@ -62,6 +62,10 @@
                                     <td>DATABASE_URL</td>
                                     <td>{{$DATABASE_URL}}</td>
                                 </tr>
+                                <tr>
+                                    <td>ETL_DIR</td>
+                                    <td>{{$ETL_DIR}}</td>
+                                </tr>
                                 <tr @if(strpos($LOG_STATUS, 'FALHA') !== false) class="alert alert-danger" role="alert" @endif>
                                     <td>Log Status: ?{{strpos($LOG_STATUS, 'FALHA')}}?</td>
                                     <td>

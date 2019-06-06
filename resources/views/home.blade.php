@@ -367,7 +367,7 @@
                                     </span>
                                 </td>
                                 <td>
-                                    @if ($doc->completed)
+                                    @if ($doc->isIndexado())
                                         <a  target="_blank"  href="{{route('pdfNormativa',$doc->arquivo)}}">
                                             <i class="fa fa-download"></i>
                                         </a>
