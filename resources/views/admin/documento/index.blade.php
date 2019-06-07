@@ -186,7 +186,7 @@
                     </table>
                 </div><!-- /.box-body -->
                 <div class="box-footer">
-                    {{ $documentos->links() }}
+                    {{ $documentos->appends($queryParams)->links() }}
                 </div>
             </div>
         </div>
