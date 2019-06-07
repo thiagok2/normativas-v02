@@ -20,6 +20,12 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
+                <a class="btn btn-lg btn-info" href="{{route('etl-comandos')}}">ETL</a><br/><br/>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-sm-12">
                 <div class="box box-info">
                     <div class="box-header">
                         <h3 class="box-title">Últimos documentos enviados</h3>
@@ -55,6 +61,10 @@
                                 <tr>
                                     <td>DATABASE_URL</td>
                                     <td>{{$DATABASE_URL}}</td>
+                                </tr>
+                                <tr>
+                                    <td>ETL_DIR</td>
+                                    <td>{{$ETL_DIR}}</td>
                                 </tr>
                                 <tr @if(strpos($LOG_STATUS, 'FALHA') !== false) class="alert alert-danger" role="alert" @endif>
                                     <td>Log Status: ?{{strpos($LOG_STATUS, 'FALHA')}}?</td>

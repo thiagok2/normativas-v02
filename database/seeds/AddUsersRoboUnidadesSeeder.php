@@ -14,56 +14,56 @@ class AddUsersRoboUnidadesSeeder extends Seeder
     public function run()
     {
         
-        // $unidadeSP = Unidade::where('sigla', "CEE-SP")->first();
+        $unidadeSP = Unidade::where('sigla', "CEE-SP")->first();
 
-        // $usuarioRobo1 = User::create([
-        //     'name' => "Robô extrator CEE-SP",
-        //     'email' => "ceesp@extrator.com.br",
-        //     'password' => Hash::make('extrator'),
-        //     'unidade_id' => $unidadeSP->id,
-        //     'tipo' => User::TIPO_EXTRATOR
-        // ]);
+        $usuarioRobo1 = User::create([
+            'name' => "Robô extrator CEE-SP",
+            'email' => "ceesp@extrator.com.br",
+            'password' => Hash::make('extrator'),
+            'unidade_id' => $unidadeSP->id,
+            'tipo' => User::TIPO_EXTRATOR
+        ]);
         
 
-        // $unidadeAL = Unidade::where('sigla', "CEE-AL")->first();
+        $unidadeAL = Unidade::where('sigla', "CEE-AL")->first();
 
-        // $usuarioRobo2 = User::create([
-        //     'name' => "Robô extrator CEE-AL",
-        //     'email' => "ceeal@extrator.com.br",
-        //     'password' => Hash::make('extrator'),
-        //     'unidade_id' => $unidadeAL->id,
-        //     'tipo' => User::TIPO_EXTRATOR
-        // ]);
+        $usuarioRobo2 = User::create([
+            'name' => "Robô extrator CEE-AL",
+            'email' => "ceeal@extrator.com.br",
+            'password' => Hash::make('extrator'),
+            'unidade_id' => $unidadeAL->id,
+            'tipo' => User::TIPO_EXTRATOR
+        ]);
 
-        // $unidadeES = Unidade::where('sigla', "CEE-ES")->first();
+        $unidadeES = Unidade::where('sigla', "CEE-ES")->first();
 
-        // $usuarioRobo3 = User::create([
-        //     'name' => "Robô extrator CEE-ES",
-        //     'email' => "ceees@extrator.com.br",
-        //     'password' => Hash::make('extrator'),
-        //     'unidade_id' => $unidadeES->id,
-        //     'tipo' => User::TIPO_EXTRATOR
-        // ]);
+        $usuarioRobo3 = User::create([
+            'name' => "Robô extrator CEE-ES",
+            'email' => "ceees@extrator.com.br",
+            'password' => Hash::make('extrator'),
+            'unidade_id' => $unidadeES->id,
+            'tipo' => User::TIPO_EXTRATOR
+        ]);
 
-        // $unidadeMG = Unidade::where('sigla', "CEE-MG")->first();
+        $unidadeMG = Unidade::where('sigla', "CEE-MG")->first();
 
-        // $usuarioRobo4 = User::create([
-        //     'name' => "Robô extrator CEE-MG",
-        //     'email' => "ceemg@extrator.com.br",
-        //     'password' => Hash::make('extrator'),
-        //     'unidade_id' => $unidadeMG->id,
-        //     'tipo' => User::TIPO_EXTRATOR
-        // ]);
+        $usuarioRobo4 = User::create([
+            'name' => "Robô extrator CEE-MG",
+            'email' => "ceemg@extrator.com.br",
+            'password' => Hash::make('extrator'),
+            'unidade_id' => $unidadeMG->id,
+            'tipo' => User::TIPO_EXTRATOR
+        ]);
 
-        // $unidadeDF = Unidade::where('sigla', "CEE-DF")->first();
+        $unidadeDF = Unidade::where('sigla', "CEE-DF")->first();
 
-        // $usuarioRobo5 = User::create([
-        //     'name' => "Robô extrator CEE-DF",
-        //     'email' => "ceedf@extrator.com.br",
-        //     'password' => Hash::make('extrator'),
-        //     'unidade_id' => $unidadeDF->id,
-        //     'tipo' => User::TIPO_EXTRATOR
-        // ]);
+        $usuarioRobo5 = User::create([
+            'name' => "Robô extrator CEE-DF",
+            'email' => "ceedf@extrator.com.br",
+            'password' => Hash::make('extrator'),
+            'unidade_id' => $unidadeDF->id,
+            'tipo' => User::TIPO_EXTRATOR
+        ]);
 
 
     }

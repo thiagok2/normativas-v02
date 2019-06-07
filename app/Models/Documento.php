@@ -28,6 +28,10 @@ class Documento extends Model
         return $this->ano && $this->titulo && $this->ementa && $this->data_publicacao && !is_null($this->tipo_documento_id) && !is_null($this->assunto_id);
     }
 
+    public function isIndexado(){
+        return $this->status_extrator == Documento::STATUS_EXTRATOR_INDEXADO;
+    }
+
     public function palavrasChaves(){
         return $this->hasMany(PalavraChave::class);
     }

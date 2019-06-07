@@ -221,7 +221,7 @@
                
                 <div class="row">
                     <div class="col-sm-6">
-                        @if ($documento->completed)
+                        @if ($documento->isIndexado())
                             <a  target="_blank"  href="{{route('pdfNormativa',$documento->arquivo)}}">
                                 <i class="fa fa-download fa-3x"></i>
                                 <br/>
