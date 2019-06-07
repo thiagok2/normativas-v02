@@ -25,29 +25,88 @@
                 </div>
 
                 <div class="card-body">
-                    <form>    
-                        <p>
-                            <strong>Ementa</strong><br />{{ $normativa['ato']['ementa'] }}
-                        </p>
-                        <hr/>
-                        <strong>Tipo: </strong>
-                        {{ $normativa['ato']['tipo_doc'] }}
-                        <br />
-                        <strong>Publicação: </strong>
-                        {{ date('d/m/Y', strtotime($normativa['ato']['data_publicacao'])) }}
-                        <br />
-                        <strong>Conselho: </strong>
-                        {{ $normativa['ato']['fonte']['orgao'] }}
-                        <br />
-                        <strong>Esfera: </strong>
-                        {{ $normativa['ato']['fonte']['esfera'] }}
-                        <br />
-                        <strong>Palavras-Chave:</strong>
-                        @foreach ($normativa['ato']['tags'] as $tag)
-                            <span class="badge badge-info tags">{{ $tag }}</span>
-                        @endforeach
-                        <hr class="split-sm">
+                    <form>                            
+                        <table class="table">
+                            <tr>
+                                <th>
+                                    <strong>Ementa</strong>                                                
+                                </th>
+                                <td>
+                                    {{ $normativa['ato']['ementa'] }}
+                                </td>                                        
+                            </tr>
+                            <tr>
+                                <th>
+                                    <strong>Tipo: </strong>
+                                </th>
+                                <td>
+                                    {{ $normativa['ato']['tipo_doc'] }}
+                                </td>                                        
+                            </tr>
+                            <tr>
+                                <th>
+                                    <strong>Publicação: </strong>
+                                </th>
+                                <td>
+                                    {{ date('d/m/Y', strtotime($normativa['ato']['data_publicacao'])) }}
+                                </td>                                        
+                            </tr>
+                            <tr>
+                                <th>
+                                    <strong>Conselho: </strong>
+                                </th>
+                                <td>
+                                    {{ $normativa['ato']['fonte']['orgao'] }}
+                                </td>                                        
+                            </tr>     
+                            <tr>
+                                <th>
+                                    <strong>Esfera: </strong>
+                                </th>
+                                <td>
+                                    {{ $normativa['ato']['fonte']['esfera'] }}
+                                </td>                                        
+                            </tr>    
+                            <tr>
+                                <th>
+                                    <strong>Palavras-Chave: </strong>
+                                </th>
+                                <td>
+                                    @foreach ($normativa['ato']['tags'] as $tag)
+                                        <span class="badge badge-primary tags">{{ $tag }}</span>
+                                    @endforeach
+                                </td>                                        
+                            </tr>                           
+                                    
 
+                                </table>
+                                {{-- <p>
+                                    <strong>Ementa</strong><br />{{ $normativa['ato']['ementa'] }}
+                                </p>
+                                <hr/>
+                                <strong>Tipo: </strong>
+                                {{ $normativa['ato']['tipo_doc'] }}
+                                <br />
+                                <strong>Publicação: </strong>
+                                {{ date('d/m/Y', strtotime($normativa['ato']['data_publicacao'])) }}
+                                <br />
+                                <strong>Conselho: </strong>
+                                {{ $normativa['ato']['fonte']['orgao'] }}
+                                <br />
+                                <strong>Esfera: </strong>
+                                {{ $normativa['ato']['fonte']['esfera'] }}
+                                <br />
+                                <strong>Palavras-Chave:</strong>
+                                @foreach ($normativa['ato']['tags'] as $tag)
+                                    <span class="badge badge-primary tags">{{ $tag }}</span>
+                                @endforeach --}}
+                                <hr class="split-sm">
+                            </div>
+
+                            <div class="col-sm-12">
+                                <iframe src="/normativa/pdf/{{ $id }}" width="100%" height="600px">
+                                </iframe>                                                 
+                                                
                         <a href="javascript:history.back();" class="btn btn-primary"><i class="fa fa-long-arrow-left" aria-hidden="true"></i> Voltar</a>
 
                         <a href="/" class="btn btn-primary">
@@ -60,18 +119,10 @@
                         
                         
                         @auth
-                            @if (auth()->user()->isAdmin() && !$persisted)
-
-                                 
-                                <a href="{{route('delete-elastic',$arquivoId)}}" class="btn btn-danger btn-lg pull-right" >Excluir</a>
-                                
-                                
+                            @if (auth()->user()->isAdmin() && !$persisted)                                 
+                                <a href="{{route('delete-elastic',$arquivoId)}}" class="btn btn-danger btn-lg pull-right" >Excluir</a>                                                            
                             @endif
-                        @endauth
-
-                       
-                           
-                        
+                        @endauth                                                                          
                         
                     </form>
                 </div>
