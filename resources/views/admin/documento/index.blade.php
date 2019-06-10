@@ -146,7 +146,7 @@
                                     <td>{{$doc->unidade->sigla}} - {{$doc->user->firstName()}}</td>
                                     <td>
                                         <div style="width:80px">
-                                        @if ($doc->completed)
+                                        @if ($doc->isIndexado())
                                             <a  target="_blank"  href="{{route('pdfNormativa',$doc->arquivo)}}">
                                                 <i class="fa fa-download" title="Download"></i>
                                             </a>
