@@ -29,11 +29,13 @@
 
                         <div class="container">
                             <div class="row">
-                                <div class="col-lg-3">
+                                <div class="col-lg-2">
                                     <div class="form-group">
-                                        <label for="unidadeNome">Unidade/Usuário</label>
-                                    <input type="text" id="unidadeNome" name="unidadeNome" class="form-control" value="{{$queryParams['unidadeQuery']}}"
+                                        <label for="unidadeNome">Unidade:</label>
+                                        <input type="text" id="unidadeNome" name="unidadeNome" class="form-control" value="{{$queryParams['unidadeQuery']}}"
                                             placeholder="Ex.: Alagoas, Maceió..." aria-describedby="basic-addon1"/>
+                                        <br/>
+                                        <label for="usuarioNome">Usuário:</label>
                                         <input type="text" id="usuarioNome" name="usuarioNome" class="form-control"  value="{{$queryParams['usuarioNome']}}"
                                             placeholder="Ex.: Maria, João..." aria-describedby="basic-addon1"/>
                                         <small class="form-text text-muted">Nome/sigla do conselho e/ou nome do usuário</small>
@@ -43,18 +45,21 @@
                                 <div class="col-lg-2">
 
                                     <div class="form-group">
-                                        <label for="periodoEnvio">Data Envio</label>
-
+                                        <label for="dataInicioEnvio">Data de Envio (Início):</label>
                                         <input class="form-control" type="date" id="dataInicioEnvio" name="dataInicioEnvio" value="{{$queryParams['dataInicioEnvio']}}">
+                                        <br/>
+                                        <label for="dataFimEnvio">Data de Envio (Fim):</label>
                                         <input class="form-control" type="date" id="dataFimEnvio" name="dataFimEnvio" value="{{$queryParams['dataFimEnvio']}}">
                                         <small class="form-text text-muted">Data início e fim do envio no sistema</small>
                                     </div>
                                 </div>
 
-                                <div class="col-lg-2">
+                                <div class="col-lg-3">
                                     <div class="form-group">
-                                        <label for="periodoPublicacao">Data Publicação</label>
+                                        <label for="dataInicioPublicacao">Data de Publicação (Início):</label>
                                         <input class="form-control" type="date" id="dataInicioPublicacao" name="dataInicioPublicacao" value="{{$queryParams['dataInicioPublicacao']}}">
+                                        <br/>
+                                        <label for="dataFimPublicacao">Data de Publicação (Fim):</label>
                                         <input class="form-control" type="date" id="dataFimPublicacao" name="dataFimPublicacao" value="{{$queryParams['dataFimPublicacao']}}">
                                         <small class="form-text text-muted">Data início e fim do publicação</small>
                                     </div>
@@ -62,20 +67,24 @@
 
                                 <div class="col-lg-3">
                                     <div class="form-group">
-                                        <label for="numero">Número/Nome:</label>
+                                        <label for="numero">Número:</label>
                                         <input class="form-control" id="numero" name="numero" value="{{$queryParams['numero']}}" placeholder="CEE-AL 2/2019">               
+                                        <br/>
+                                        <label for="arquivo">Nome:</label>
                                         <input class="form-control" id="arquivo" name="arquivo" value="{{$queryParams['arquivo']}}" placeholder="Nome do arquivo">
                                     </div>
                                 </div>
 
                                 <div class="col-lg-2">
                                     <div class="form-group">
-                                        <label for="numero">Entrada/Completo:</label>
+                                        <label for="tipo_entrada">Entrada:</label>
                                         <select class="form-control select2" id="tipo_entrada" name="tipo_entrada">
                                             <option value="">Todos</option>
                                             <option value="manual" @if ($queryParams['tipo_entrada'] == 'manual') selected @endif>Manual</option>
                                             <option value="extrator" @if ($queryParams['tipo_entrada'] == 'extrator') selected @endif>Extrator</option>
                                         </select>
+                                        <br/>
+                                        <label for="status">Completo:</label>
                                         <select class="form-control select2" id="status" name="status">
                                             <option value="">Todos</option>
                                             <option value="indexado" @if ($queryParams['status'] == 'indexado') selected @endif>Indexado</option>
@@ -177,7 +186,7 @@
                     </table>
                 </div><!-- /.box-body -->
                 <div class="box-footer">
-                    {{ $documentos->links() }}
+                    {{ $documentos->appends($queryParams)->links() }}
                 </div>
             </div>
         </div>

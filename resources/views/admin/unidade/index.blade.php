@@ -6,14 +6,13 @@
 
 @stop
 
-@section('content')
+@section('content')    
+    <div class="container-fluid">
+        <ol class="breadcrumb">
+            <li><a href="{{route('home')}}">Painel</a></li>
+            <li> <a href="#" class="active"><a href="#">Unidades</a></li>
+        </ol>
 
-    <ol class="breadcrumb">
-        <li><a href="{{route('home')}}">Painel</a></li>
-        <li> <a href="#" class="active"><a href="#">Unidades</a></li>
-    </ol>
-
-    <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
@@ -93,12 +92,12 @@
                                 @endforelse
                             </tbody>
                         </table>
-                        <div class="container">
+                        <div class="container-fluid">
                             <div class="row">
-                                <div class="col-lg-3">
+                                <div class="col-lg-6 no-padding">
                                     {{ $unidades->links() }}
                                 </div>
-                                <div class="col-lg-3 col-lg-offset-5">
+                                <div class="col-lg-3 pull-right no-padding  ">
                                     <ul class="list-group">
                                         <li class="list-group-item">
                                             <i class="glyphicon glyphicon-file"></i>
@@ -109,7 +108,6 @@
                                                 <i class="glyphicon glyphicon-user"></i>
                                             Usuário confirmou acesso
                                         </li>
-
                                     </ul>
                                 </div>
                             </div>

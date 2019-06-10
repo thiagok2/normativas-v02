@@ -8,16 +8,16 @@
 @stop
 
 @section('content')
-    <ol class="breadcrumb">
-        <li><a href="{{route('home')}}">Painel</a></li>
-        <li><a href="{{route('tiposdocumento')}}">Tipos de Documento</a></li>
-        <li><a href="#">Editar</a></li>
-    </ol>
-    <div class="page-header">
-        <a href="{{route('tiposdocumento-create')}}" class="btn btn-primary btn-lg">Novo Tipo de Documento</a>
-    </div>
+    <div class="container-fluid">
+        <ol class="breadcrumb">
+            <li><a href="{{route('home')}}">Painel</a></li>
+            <li><a href="{{route('tiposdocumento')}}">Tipos de Documento</a></li>
+            <li><a href="#">Editar</a></li>
+        </ol>
+        <div class="page-header">
+            <a href="{{route('tiposdocumento-create')}}" class="btn btn-primary btn-lg">Novo Tipo de Documento</a>
+        </div>
 
-    <div class="container">
         <div class="row">
             @include('admin.includes.alerts')
             <div class="col-lg-8">

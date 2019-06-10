@@ -6,18 +6,17 @@
     
 @stop
 
-@section('content')
-    <ol class="breadcrumb">
-        <li><a href="{{route('home')}}">Painel</a></li>
-        <li><a href="{{route('Assuntos')}}" class="active">Assuntos</a></li>
-    </ol>
-    <div class="page-header">
-        <small>Assuntos gerais abordados nos documentos</small>
-        <a href="{{route('assuntos-create')}}" class="btn btn-primary btn-lg">Novo Assunto</a>
-    </div>
+@section('content')    
+    <div class="container-fluid">
+        <ol class="breadcrumb">
+            <li><a href="{{route('home')}}">Painel</a></li>
+            <li><a href="{{route('Assuntos')}}" class="active">Assuntos</a></li>
+        </ol>
+        <div class="page-header">
+            <small>Assuntos gerais abordados nos documentos</small>
+            <a href="{{route('assuntos-create')}}" class="btn btn-primary btn-lg">Novo Assunto</a>
+        </div>
 
-
-    <div class="container">
         @include('admin.includes.alerts')
         <div class="row">
             @forelse ($assuntos as $assunto)
@@ -45,7 +44,9 @@
             @endforelse
         </div>
         <div class="row">
-            <a href="{{route('assunto-removidos')}}" class="btn btn-danger btn-lg">Assuntos Removidos</a>
+            <div class="col-lg-12">
+                <a href="{{route('assunto-removidos')}}" class="btn btn-danger btn-lg">Assuntos Removidos</a>
+            </div>            
         </div>
     </div>
 

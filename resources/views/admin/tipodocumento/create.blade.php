@@ -6,18 +6,14 @@
     
 @stop
 
-@section('content')
-    <ol class="breadcrumb">
-        <li><a href="{{route('home')}}">Painel</a></li>
-        <li><a href="{{route('tiposdocumento')}}">Tipos de Documento</a></li>
-        <li><a href="#">Novo</a></li>
-    </ol>
-    <div class="page-header">
-       
-    </div>
+@section('content')        
+    <div class="container-fluid">
+        <ol class="breadcrumb">
+            <li><a href="{{route('home')}}">Painel</a></li>
+            <li><a href="{{route('tiposdocumento')}}">Tipos de Documento</a></li>
+            <li><a href="#">Novo</a></li>
+        </ol>
 
-
-    <div class="container">
         <div class="row">
             @include('admin.includes.alerts')
             <div class="col-lg-8">
@@ -49,7 +45,7 @@
             </div><!-- end col-8 main-->
             <div class="col-lg-4">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Tipos de Documentos cadastrados</div>
+                    <div class="panel-heading">Tipos de Documentos cadastrados: Clique para editar</div>
                     <div class="panel-body">
                         <div class="list-group">
                             @foreach ($tipodocumentos as $t)

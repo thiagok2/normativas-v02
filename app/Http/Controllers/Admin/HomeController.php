@@ -64,13 +64,14 @@ class HomeController extends Controller
                 ->with('success', 'Confirme seus dados e cadastre uma nova senha.');
         }
 
-        if(auth()->user()->isAdmin()){
+        $documentosCount = Documento::count();  
+
+        $documentosPendentesCount = Documento::where('completed', false)->count();
+
+        if(auth()->user()->isAdmin() && false){
 
             $documentos = Documento::with('unidade','tipoDocumento','palavrasChaves')
-                ->orderBy('data_envio', 'desc')->paginate(10);
-            
-            $documentosCount = Documento::count();  
-            $documentosPendentesCount = Documento::where('completed', false)->count();
+                ->orderBy('data_envio', 'desc')->paginate(10);                                    
             
             $usersCount = User::count();
 
@@ -163,11 +164,11 @@ class HomeController extends Controller
                 ->where('unidade_id',$unidade->id)
                 ->orderBy('data_envio', 'desc')->paginate(10);
             
-            $documentosCount = Documento::where('unidade_id',$unidade->id)->count();
-            $documentosPendentesCount = Documento::where([
-                ['completed', false],
-                ['unidade_id', $unidade->id]
-            ])->count();
+            //$documentosCount = Documento::where('unidade_id',$unidade->id)->count();
+            // $documentosPendentesCount = Documento::where([
+            //     ['completed', false],
+            //     ['unidade_id', $unidade->id]
+            // ])->count();
 
             $usersCount = User::where('unidade_id', $unidade->id)->count();
 

@@ -11,16 +11,18 @@
 
 <div class="container-fluid">
 <div class="row">
-    @include('admin.includes.alerts')
+    <div class="col-lg-12">
+        @include('admin.includes.alerts')
 
-    @if (auth()->user()->isAdmin())
-        <div class="alert bg-red alert-dismissible fade in">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <p>
-                <a href="{{route('getenv')}}">Acesse as variáveis de ambiente do sistema.</a>
-            </p>
-        </div>
-    @endif
+        @if (auth()->user()->isAdmin())
+            <div class="alert bg-red alert-dismissible fade in">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <p>
+                    <a href="{{route('getenv')}}">Acesse as variáveis de ambiente do sistema.</a>
+                </p>
+            </div>
+        @endif
+    </div>    
 </div>
 <div class="row">
     <div class="col-lg-3">

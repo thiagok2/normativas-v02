@@ -11,16 +11,18 @@
 
 <div class="container-fluid">
 <div class="row">
-    @include('admin.includes.alerts')
+    <div class="col-lg-12">
+        @include('admin.includes.alerts')
 
-    @if (auth()->user()->isAdmin())
-        <div class="alert bg-red alert-dismissible fade in">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <p>
-                <a href="{{route('getenv')}}">Acesse as variáveis de ambiente do sistema.</a>
-            </p>
-        </div>
-    @endif
+        @if (auth()->user()->isAdmin())
+            <div class="alert bg-red fade in">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <p>
+                    <a href="{{route('getenv')}}">Acesse as variáveis de ambiente do sistema.</a>
+                </p>
+            </div>
+        @endif
+    </div>
 </div>
 <div class="row">
     <div class="col-lg-3">
@@ -111,6 +113,14 @@
     </div>
     <!-- ./col -->
 </div><!-- ./row-->
+
+<div class="alert bg-yellow fade in">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <h2>
+            Idicadores temporariamente indisponíveis
+        </h2>
+    </div>
+
 <div class="row">
     <div class="col-lg-12">
         <div class="box box-danger">
