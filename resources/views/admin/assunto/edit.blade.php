@@ -7,17 +7,17 @@
     
 @stop
 
-@section('content')
-    <ol class="breadcrumb">
-        <li><a href="{{route('home')}}">Painel</a></li>
-        <li><a href="{{route('Assuntos')}}">Assuntos</a></li>
-        <li><a href="#">Editar</a></li>
-    </ol>
-    <div class="page-header">
-        <a href="{{route('assuntos-create')}}" class="btn btn-primary btn-lg">Novo Assunto</a>
-    </div>
-
-    <div class="container">
+@section('content')    
+    <div class="container-fluid">
+        <ol class="breadcrumb">
+            <li><a href="{{route('home')}}">Painel</a></li>
+            <li><a href="{{route('Assuntos')}}">Assuntos</a></li>
+            <li><a href="#">Editar</a></li>
+        </ol>
+        <div class="page-header">
+            <a href="{{route('assuntos-create')}}" class="btn btn-primary btn-lg">Novo Assunto</a>
+        </div>
+        
         <div class="row">
             @include('admin.includes.alerts')
             <div class="col-lg-8">

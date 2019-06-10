@@ -6,19 +6,19 @@
     
 @stop
 
-@section('content')
-    <ol class="breadcrumb">
-        <li><a href="{{route('home')}}">Painel</a></li>
-        <li> <a href="#" class="active">Tipos Documento</a></li>
-    </ol>
-    <div class="page-header">
-        <h2> 
-            <small>Tipos de documentos a serem enviados</small>
-        </h2>
-        <a href="{{route('tiposdocumento-create')}}" class="btn btn-primary btn-lg">Novo Tipo de Documento</a>
-    </div>
+@section('content')    
+    <div class="container-fluid">
+        <ol class="breadcrumb">
+            <li><a href="{{route('home')}}">Painel</a></li>
+            <li> <a href="#" class="active">Tipos Documento</a></li>
+        </ol>
+        <div class="page-header">
+            <h2> 
+                <small>Tipos de documentos a serem enviados</small>
+            </h2>
+            <a href="{{route('tiposdocumento-create')}}" class="btn btn-primary btn-lg">Novo Tipo de Documento</a>
+        </div>
 
-    <div class="container">
         @include('admin.includes.alerts')
         <div class="row">
             @forelse ($tipodocumentos as $doc)
@@ -46,7 +46,9 @@
             @endforelse
         </div>
         <div class="row">
-            <a href="{{route('tiposdocumento-removidos')}}" class="btn btn-danger btn-lg">Tipos de Documentos Removidos</a>
+            <div class="col-lg-12">
+                <a href="{{route('tiposdocumento-removidos')}}" class="btn btn-danger btn-lg">Tipos de Documentos Removidos</a>
+            </div>    
         </div>
     </div>
 @stop

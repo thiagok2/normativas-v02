@@ -6,18 +6,14 @@
     
 @stop
 
-@section('content')
-    <ol class="breadcrumb">
-        <li><a href="{{route('home')}}">Painel</a></li>
-        <li><a href="{{route('Assuntos')}}">Assuntos</a></li>
-        <li><a href="#" class="active">Novo</a></li>
-    </ol>
-    <div class="page-header">
-       
-    </div>
+@section('content')    
+    <div class="container-fluid">
+        <ol class="breadcrumb">
+            <li><a href="{{route('home')}}">Painel</a></li>
+            <li><a href="{{route('Assuntos')}}">Assuntos</a></li>
+            <li><a href="#" class="active">Novo</a></li>
+        </ol>
 
-
-    <div class="container">
         <div class="row">
             @include('admin.includes.alerts')
             <div class="col-lg-8">

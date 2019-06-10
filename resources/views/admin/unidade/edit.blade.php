@@ -7,14 +7,14 @@
 @stop
 
 @section('content')
-    <ol class="breadcrumb">
-        <li><a href="{{route('home')}}">Painel</a></li>
-        <li> <a href="#" ><a href="#">Unidade</a></li>
-    </ol>
+    <div class="container-fluid">
+        <ol class="breadcrumb">
+            <li><a href="{{route('home')}}">Painel</a></li>
+            <li> <a href="#" ><a href="#">Unidade</a></li>
+        </ol>
+            
+        @include('admin.includes.alerts')
 
-    @include('admin.includes.alerts')
-
-    <div class="container">
         <div class="row">
             <div class="col-lg-8">
             <div class="panel panel-default">

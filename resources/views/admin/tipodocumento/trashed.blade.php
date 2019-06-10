@@ -6,16 +6,17 @@
     
 @stop
 
-@section('content')
-    <ol class="breadcrumb">
-        <li><a href="{{route('home')}}">Painel</a></li>
-        <li><a href="{{route('tiposdocumento')}}">Tipos de documentos</a></li>
-        <li> <a href="#" class="active">Removidos</a></li>
-    </ol>
-    <div class="page-header">
-        <a href="{{route('tiposdocumento-create')}}" class="btn btn-primary btn-lg">Novo Tipo de Documento</a>
-    </div>
-    <div class="container">
+@section('content')    
+    <div class="container-fluid">
+        <ol class="breadcrumb">
+            <li><a href="{{route('home')}}">Painel</a></li>
+            <li><a href="{{route('tiposdocumento')}}">Tipos de documentos</a></li>
+            <li> <a href="#" class="active">Removidos</a></li>
+        </ol>
+        <div class="page-header">
+            <a href="{{route('tiposdocumento-create')}}" class="btn btn-primary btn-lg">Novo Tipo de Documento</a>
+        </div>
+
         @include('admin.includes.alerts')
         <div class="row">
             @forelse ($tipodocumentos as $t)
@@ -42,8 +43,10 @@
                     </div>
                 </div>
             @empty
-                <div class="alert alert-warning">
-                    Nenhum tipo de documento utilizado anteriormente foi desabilitado.
+                <div class="col-lg-12">        
+                    <div class="alert alert-warning">
+                        Nenhum tipo de documento utilizado anteriormente foi desabilitado.
+                    </div>
                 </div>
             @endforelse
         </div>

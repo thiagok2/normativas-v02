@@ -6,16 +6,14 @@
 
 @stop
 
-@section('content')
+@section('content')    
+    <div class="container-fluid">
 
     <ol class="breadcrumb">
         <li><a href="{{route('home')}}">Painel</a></li>
         <li> <a href="#" ><a href="#">Documentos</a></li>
         <li> <a href="#" class="active"><a href="#">Publicar</a></li>
     </ol>
-
-
-    <div class="container">
 
     @include('admin.includes.alerts')
 
@@ -25,7 +23,7 @@
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <div class="form-group no-margin">
-                        <label for="unidade"><h4>Orgão: {{ $unidade->nome }} - {{ $unidade->sigla }}</h4></label>
+                        <label for="unidade"><h4>Envio de arquivo <small>Orgão: {{ $unidade->nome }} - {{ $unidade->sigla }}</small></h4></label>
                         <input type="hidden" class="form-control" readonly
                         value="{{ $unidade->nome }} - {{ $unidade->sigla }}" id="unidade">
                     </div>

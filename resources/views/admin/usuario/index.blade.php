@@ -7,17 +7,17 @@
 @stop
 
 @section('content')
-<ol class="breadcrumb">
-    <li><a href="{{route('home')}}">Painel</a></li>
-    <li> <a href="{{route('usuarios')}}" class="active">Usuário</a></li>
-</ol>
-@include('admin.includes.alerts')
-<div class="container">
+<div class="container-fluid">
+    <ol class="breadcrumb">
+        <li><a href="{{route('home')}}">Painel</a></li>
+        <li> <a href="{{route('usuarios')}}" class="active">Usuário</a></li>
+    </ol>
+    @include('admin.includes.alerts')
     <div class="row">
         @if (auth()->user()->isAdmin() || auth()->user()->isGestor())
             
             <div class="col-lg-2">
-            <a href="{{route('usuario-convidar')}}" class="btn btn-primary btn-lg">Novo colaborador</a>
+            <a href="{{route('usuario-convidar')}}" class="btn btn-primary btn-block btn-lg">Novo colaborador</a>
                 <p>
             </div>
         
@@ -25,7 +25,7 @@
         @if (auth()->user()->isAdmin())
             
             <div class="col-lg-2">
-                <a href="{{route('usuario-search')}}" class="btn btn-primary btn-lg">Pesquisar</a>
+                <a href="{{route('usuario-search')}}" class="btn btn-primary btn-block btn-lg">Pesquisar</a>
                     <p>
             </div>
             
@@ -140,7 +140,7 @@
     </div><!-- end row -->
 
     <div class="row">
-        <div class="container">
+        <div class="container-fluid">
             <div class="panel panel-default">
                 <div class="panel-heading">Documentos enviados</div>
                 <div class="panel-body">
