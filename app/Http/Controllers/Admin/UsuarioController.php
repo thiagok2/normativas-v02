@@ -159,7 +159,7 @@ class UsuarioController extends Controller
 
             $convite = new Convite();
 
-            //$convite->enviarNovoUsuario($user, $passwordRandom);
+            $convite->enviarNovoUsuario($user, $passwordRandom);
             $user->save();
             DB::commit();
 
