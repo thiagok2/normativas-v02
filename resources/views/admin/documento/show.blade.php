@@ -7,7 +7,6 @@
 @stop
 
 @section('content')
-
     <div class="container-fluid">        
         <div class="row">
             <div class="col-sm-12 mb-2">
@@ -252,7 +251,25 @@
                 <form method="post" action="{{route('delete',['id' => $documento->id])}}">
                     {{ method_field('DELETE') }}
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <button type="submit" class="btn btn-danger btn-lg pull-right" >Excluir</button>
+                    <button type="button" class="btn btn-danger btn-lg pull-right" data-toggle="modal" data-target="#modalConfirm">Excluir</button>
+
+                    <div class="modal fade" id="modalConfirm" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title">Confirmação de exclusão</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Tem certeza que deseja excluir este documento?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                    <button type="submit" class="btn btn-danger">Excluir</button>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div><!-- /.modal -->                                        
                 </form>
             </div>                    
         </div><!--end row -->

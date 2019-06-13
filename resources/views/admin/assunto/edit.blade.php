@@ -58,8 +58,26 @@
                         <button type="submit" class="btn btn-primary btn-lg " value="Salvar">Salvar</button>
                         @if (isset($assunto->deleted_at))
                             <a href="{{route('assunto-restore', $assunto->id)}}" class="btn btn-warning btn-lg pull-right" value="Habilitar">Habilitar</a>
-                        @else
-                            <a href="{{route('assunto-delete', $assunto->id)}}" class="btn btn-danger btn-lg pull-right" value="Excluir">Excluir</a>
+                        @else                            
+                            <a href="#modalConfirm" class="btn btn-danger btn-lg pull-right" data-toggle="modal">Excluir</button></a>                                                                                                    
+
+                            <div class="modal fade" id="modalConfirm" tabindex="-1" role="dialog">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title">Confirmação de exclusão</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Tem certeza que deseja excluir este assunto?</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                            <a href="{{route('assunto-delete', $assunto->id)}}" class="btn btn-danger">Excluir</a>                                                        
+                                        </div>
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal-dialog -->
+                            </div><!-- /.modal --> 
                         @endif
                         
                     </form>

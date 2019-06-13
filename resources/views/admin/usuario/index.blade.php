@@ -7,6 +7,26 @@
 @stop
 
 @section('content')
+@if (auth()->user()->id != $user->id  && (auth()->user()->isResponsavel() || auth()->user()->isAdmin()))                                                                                                            
+    <div class="modal fade" id="modalConfirm" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Confirmação de exclusão</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Tem certeza que deseja excluir este usuário?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <a href="{{route('usuario-delete',$user->id)}}" class="btn btn-danger">Excluir</a>                                                        
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal --> 
+@endif
+
 <div class="container-fluid">
     <ol class="breadcrumb">
         <li><a href="{{route('home')}}">Painel</a></li>
@@ -100,8 +120,8 @@
                                 @endif
 
                                 @if (auth()->user()->id != $user->id  &&
-                                        (auth()->user()->isResponsavel() || auth()->user()->isAdmin()))
-                                    <a href="{{route('usuario-delete',$user->id)}}" class="btn btn-primary btn-lg ">Excluir</a>    
+                                        (auth()->user()->isResponsavel() || auth()->user()->isAdmin()))                                    
+                                    <a href="#modalConfirm" class="btn btn-primary btn-lg" data-toggle="modal">Excluir</button></a>                                                                        
                                 @endif
                                 
                                 <a href="{{route('home')}}" class="btn btn-primary btn-lg" value="Fechar">Fechar</a>
