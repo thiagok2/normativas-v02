@@ -241,9 +241,26 @@
             <div class="col-md-12">
                 <div class="pull-right">
                     <button type="submit" class="btn btn-primary btn-lg" value="Enviar">Atualizar</button>
-                    <a href="{{route('documentos')}}" class="btn btn-warning btn-lg">Fechar</a>
-                    <a href="{{route('delete-edit',['id' => $documento->id])}}" class="btn btn-danger btn-lg">Deletar</a>        
-                </div>                 
+                    <a href="{{route('documentos')}}" class="btn btn-warning btn-lg">Fechar</a>                
+                    <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#modalConfirm">Excluir</button>
+                </div>                                 
+                <div class="modal fade" id="modalConfirm" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">Confirmação de exclusão</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Tem certeza que deseja excluir este documento?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                <a href="{{route('delete-edit',['id' => $documento->id])}}" class="btn btn-danger">Excluir</a>                                                        
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal --> 
             </div>
         </form>
     </div><!-- end div container-->
