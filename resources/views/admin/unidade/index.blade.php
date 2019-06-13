@@ -62,7 +62,7 @@
                                     <th>Ações</th>
                                 </tr>
                                 @forelse ($unidades as $key=>$unidade)
-                                    <tr @if ($unidade->documentos->count()>0 && $unidade->responsavel->confirmado) class='bg-success' @endif>
+                                    <tr @if ($unidade->documentos_count > 0 && $unidade->responsavel->confirmado) class='bg-success' @endif>
                                         <td>{{ ($unidades->currentpage()-1) * $unidades->perpage() + $key + 1 }}</td>
                                         <td>
                                             <a href="{{route("unidade-show",$unidade->id)}}">
@@ -75,8 +75,8 @@
                                         <td>{{ $unidade->tipo }}</td>
                                         <td>{{ $unidade->esfera }}</td>
                                         <td style="float:left;">
-                                            {{ $unidade->documentos->count() }}
-                                            <i class="fa fa-file {{$unidade->documentos->count()>0 ? 'icon-success':'icon-danger'}}"></i>
+                                            {{ $unidade->documentos_count }}
+                                            <i class="fa fa-file {{$unidade->documentos_count > 0 ? 'icon-success':'icon-danger'}}"></i>
                                             <i class="fa fa-user {{$unidade->responsavel->confirmado ? 'icon-success':'icon-danger'}}"></i>
                                         </td>
                                         <td>
