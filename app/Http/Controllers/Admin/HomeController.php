@@ -68,7 +68,7 @@ class HomeController extends Controller
 
         $documentosPendentesCount = Documento::where('completed', false)->count();
 
-        if(auth()->user()->isAdmin() && false){
+        if(auth()->user()->isAdmin()){
 
             $documentos = Documento::with('unidade','tipoDocumento','palavrasChaves')
                 ->orderBy('data_envio', 'desc')->paginate(10);                                    
@@ -77,22 +77,22 @@ class HomeController extends Controller
 
             /** Indicadores Gestor */
             
-            $countUnidadesConfirmadas = Cache::remember('countUnidadesConfirmadas', 3600, function () {
+            $countUnidadesConfirmadas = Cache::remember('countUnidadesConfirmadas', 7200, function () {
                 return $this->unidadeQuery->countUnidadeConfirmadas();
             });
 
-            $countUnidadesNaoConfirmadas = Cache::remember('countUnidadesNaoConfirmadas', 3600, function () {
+            $countUnidadesNaoConfirmadas = Cache::remember('countUnidadesNaoConfirmadas', 7200, function () {
                 return $this->unidadeQuery->countUnidadeNaoConfirmadas();
             });
 
             $porcentagemConfirmadas = number_format(100*$countUnidadesConfirmadas/($countUnidadesConfirmadas + $countUnidadesNaoConfirmadas),2);
             $totalUnidades = $countUnidadesConfirmadas + $countUnidadesNaoConfirmadas;
 
-            $countUnidadesConfirmadas30Dias = Cache::remember('countUnidadesConfirmadas30Dias', 3600, function () {
+            $countUnidadesConfirmadas30Dias = Cache::remember('countUnidadesConfirmadas30Dias', 7200, function () {
                 return $this->unidadeQuery->countUnidadeConfirmadasUltimos30dias();
             });
             
-            $evolucaoUnidadesConfirmadasMes = Cache::remember('evolucaoUnidadesConfirmadasMes', 3600, function () {
+            $evolucaoUnidadesConfirmadasMes = Cache::remember('evolucaoUnidadesConfirmadasMes', 7200, function () {
                 return $this->unidadeQuery->evolucaoUnidadesConfirmadas6Meses();
             });
 
@@ -100,21 +100,18 @@ class HomeController extends Controller
                 return $this->documentoQuery->countEnviados30dias();
             });
             
-            $evolucaoEnviados6Meses = Cache::remember('evolucaoEnviados6Meses', 3600, function () {
+            $evolucaoEnviados6Meses = Cache::remember('evolucaoEnviados6Meses', 5400, function () {
                 return $this->documentoQuery->evolucaoEnviados6Meses();
             });
     
             $unidadesNaoConfirmadas = Unidade::where('confirmado',false)->paginate(10);
     
-            $documentosPorAssunto = Cache::remember('documentosPorAssunto', 3600, function () {
-                return $this->documentoQuery->documentosPorAssuntos();
-            });
 
-            $documentosPorTipo = Cache::remember('documentosPorTipo', 3600, function () {
+            $documentosPorTipo = Cache::remember('documentosPorTipo', 5400, function () {
                 return $this->documentoQuery->documentosPorTipos();
             });
 
-            $totalConsultas = Cache::remember('totalConsultas', 3600, function () {
+            $totalConsultas = Cache::remember('totalConsultas', 5400, function () {
                 return $this->searchQuery->countQuery();
             });
 
@@ -133,7 +130,7 @@ class HomeController extends Controller
                 return $this->usuarioQuery->countAcessos30Dias();
             });
     
-            $tags = Cache::remember('tags', 3600, function () {
+            $tags = Cache::remember('tags', 4800, function () {
                 return DB::table('palavra_chaves')
                 ->select(DB::raw('count(*) as tag_count, tag'))
                 ->groupBy('tag')
@@ -141,19 +138,21 @@ class HomeController extends Controller
                 ->get();
             });
 
-            $tagCount = Cache::remember('tagCount', 3600, function () {
+            $tagCount = Cache::remember('tagCount', 4800, function () {
                 return DB::table('palavra_chaves')->distinct('tag')->count('tag');
             });
 
 
-            $unidades = Unidade::withCount('documentos')->has('documentos', '>', 0)->orderBy('documentos_count', 'desc')
+            $unidades = Unidade::withCount('documentos')
+                //>having('documentos_count', '>', 0)
+                ->orderBy('documentos_count', 'desc')
                 ->paginate(10); 
     
             return view('home',compact('documentos',
                 'acessosGestores30Dias',
                 'topConsultas',
                 'totalConsultas', 'totalConsultas3060','percentConsultas',
-                            'documentosPorTipo','documentosPorAssunto',
+                            'documentosPorTipo',
                             'evolucaoEnviados6Meses','countEnviados30dias','evolucaoUnidadesConfirmadasMes',
                             'unidadesNaoConfirmadas','countUnidadesConfirmadas30Dias',
                             'countUnidadesConfirmadas','porcentagemConfirmadas',

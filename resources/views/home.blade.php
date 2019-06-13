@@ -209,7 +209,7 @@
 <!-- /.row -->
 @if (auth()->user()->isAdmin())
 <div class="row">
-    <div class="col-lg-4">
+    <div class="col-lg-5">
         <div class="box box-danger">
             <div class="box-header">
                 <h3 class="box-title">Conselhos confirmados </h3>
@@ -248,28 +248,6 @@
     <div class="col-lg-2">
         <div class="box box-danger">
             <div class="box-header">
-                <h3 class="box-title">Assuntos</h3>
-            </div>
-            <div class="box-body">
-                <!--<canvas id="chartAssuntos"></canvas>
-                <br />
-                <br />-->
-                @foreach ($documentosPorAssunto as $v)
-                    <div class="clearfix">
-                    <span class="pull-left">{{$v->nome}} ({{$v->total}})</span>
-                        <small class="pull-right">{{$v->percent}}%</small>
-                    </div>
-                    <div class="progress xs" style="margin-bottom: 8px;">
-                        <div class="progress-bar progress-bar-green" style="width: {{$v->percent}}%;"></div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </div>
-
-    <div class="col-lg-2">
-        <div class="box box-danger">
-            <div class="box-header">
                 <h3 class="box-title">Tipos</h3>
             </div>
             <div class="box-body">
@@ -289,7 +267,7 @@
         </div>
     </div>
 
-    <div class="col-lg-4">
+    <div class="col-lg-5">
         <div class="box box-danger">
             <div class="box-header">
                 <h3 class="box-title">Uploads dos últimos meses</h3>
@@ -459,8 +437,8 @@
                                     </a>
                                 </td>
                                 <td style="text-align:right;">
-                                    {{ $unidade->documentos->count() }}
-                                    <i class="fa fa-file {{$unidade->documentos->count()>0 ? 'icon-success':'icon-danger'}}"></i>
+                                    {{ $unidade->documentos_count }}
+                                    <i class="fa fa-file {{$unidade->documentos_count > 0 ? 'icon-success':'icon-danger'}}"></i>
                                     <i class="glyphicon glyphicon-user {{$unidade->responsavel->confirmado ? 'icon-success':'icon-danger'}}"></i>
                                 </td>
                             </tr>
