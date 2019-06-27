@@ -57,8 +57,6 @@ class IndexController extends Controller
             if(isset($query)){
                 $query = trim($query);
 
-               
-
                 SearchComponent::logging($query);
 
                 $page = $request->query('page', 1);
@@ -66,9 +64,6 @@ class IndexController extends Controller
  
                 $searchCommand = new SearchCommandA1('normativas','ato');
                 $result =  $searchCommand->search($query, $queryFilters, $from, self::RESULTS_PER_PAGE);
-
-
-               
 
 
                 $total = $result->totalResults;
@@ -88,9 +83,7 @@ class IndexController extends Controller
             'max_score','documentos','aggregations','message'));
        
 
-        }catch(\Exception $e){
-
-          
+        }catch(\Exception $e){          
             $erro['titulo'] = getenv('APP_DEBUG') ? "DEBUG:: ".$e->getMessage() : 'Plataforma de busca indisponível';
             $erro['local'] = $e->getFile()." #".$e->getLine();
             $erro['trace'] = $e->getTraceAsString();

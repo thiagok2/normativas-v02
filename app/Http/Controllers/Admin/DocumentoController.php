@@ -277,12 +277,16 @@ class DocumentoController extends Controller
                 'id'    => $documento->arquivo,
             ];
 
-            $result = $this->client->get($params);
+            try{
+                $result = $this->client->get($params);
 
-            if($result['found']){
-                $response = $this->client->delete($params);
+                if($result['found']){
+                    $response = $this->client->delete($params);
+                }
+            }catch(\Exception $e){
+                //Tentou excluir um documento que não estava indexado
             }
-
+           
             Storage::delete("uploads/$documento->arquivo");
             
             DB::commit();
