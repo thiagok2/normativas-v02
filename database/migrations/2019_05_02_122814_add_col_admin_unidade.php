@@ -18,11 +18,11 @@ class AddColAdminUnidade extends Migration
             $table->boolean('admin')->default(false);
         });
 
-        $unidadeAdmin = Unidade::find(1);
-        if($unidadeAdmin){
-            $unidadeAdmin->admin = true;
-            $unidadeAdmin->save();
-        }
+        // $unidadeAdmin = Unidade::find(1);
+        // if($unidadeAdmin){
+        //     $unidadeAdmin->admin = true;
+        //     $unidadeAdmin->save();
+        // }
         
     }
 
