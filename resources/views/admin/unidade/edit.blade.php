@@ -174,9 +174,9 @@
                         <div class="panel-footer">
                             @if (auth()->user()->id != $user->id  &&
                                 (auth()->user()->isResponsavel() || auth()->user()->isAdmin()))                            
-                                <a href="#modalConfirm" class="btn btn-primary btn-lg" data-toggle="modal">Excluir</button></a>                                                                                                    
+                                <a href="#modalConfirm{{$user->id}}" class="btn btn-primary btn-lg" data-toggle="modal">Excluir</button></a>                                                                                                    
 
-                                <div class="modal fade" id="modalConfirm" tabindex="-1" role="dialog">
+                                <div class="modal fade" id="modalConfirm{{$user->id}}" tabindex="-1" role="dialog">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
