@@ -54,5 +54,7 @@ class TipoDocumentoTableSeeder extends Seeder
 
         TipoDocumento::create(['nome' => 'Instrução', 'descricao' => '.', 'sigla' => 'INSTR']);
         TipoDocumento::create(['nome' => 'Pauta', 'descricao' => '.', 'sigla' => 'PAU']);
+
+        TipoDocumento::create(['nome' => 'Ementa', 'descricao' => '.', 'sigla' => 'EME']);
     }
 }

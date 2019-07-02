@@ -26,7 +26,7 @@
 
                 <div class="card-body">
                     <form>                            
-                        <table class="table">
+                        <table class="table table-condensed">
                             <tr>
                                 <th>
                                     <strong>Ementa</strong>                                                
