@@ -1,0 +1,297 @@
+ {
+
+ "settings": {
+
+    "analysis": {
+
+      "filter": {
+
+        "synonym_test": {
+
+          "type": "synonym", 
+
+          "synonyms": [
+
+            "9394/96, 9.394/96, Diretrizes e Bases da Educação, Diretrizes e Bases  => LDB",
+
+            "Educação para Jovens e Adultos, Jovens e Adultos => EJA",
+
+            "Educação a Distância => EAD",
+
+            "Técnico => Profissionalizante",
+
+            "Profissional => Profissionalizante",
+
+            "Ensino Técnico, Curso FIC => PRONATEC",
+
+            "Capacitação => Qualificação",
+
+            "infância => criança",
+
+            "diversidade, deficiência, surdo, cego, síndrome de down, autismo, educação Especial,  dificuldades auditivas => inclusiva",
+
+            "13.146,  Lei Brasileira de Inclusão => Inclusão"
+
+          ]
+
+        },
+
+        "brazilian_stop": {
+
+          "type":       "stop",
+
+          "stopwords":  "_brazilian_" 
+
+        },
+
+        "brazilian_keywords": {
+
+          "type":       "keyword_marker",
+
+          "keywords":   [] 
+
+        },
+
+        "brazilian_stemmer": {
+
+          "type":       "stemmer",
+
+          "language":   "brazilian"
+
+        }
+
+      },
+
+      "analyzer": {
+
+        "my_analyzer": {
+
+          "tokenizer": "standard",
+
+          "filter": [
+
+            "lowercase",
+
+            "synonym_test",
+
+            "brazilian_stop",
+
+            "brazilian_keywords",
+
+            "brazilian_stemmer"
+
+          ]
+
+        }
+
+      }
+
+    }
+
+  },
+
+  "mappings": {
+
+    "_doc": {
+
+      "properties": {
+
+      	
+
+      	"ato": {
+
+    		"properties": {
+
+    			"arquivo":  {
+
+			    	"type": "text",
+
+			    	"fields": {
+
+			        	"keyword": {
+
+			        		"type": "keyword"
+
+			        	}
+
+			    	}
+
+    			},
+
+    			"titulo":  {
+
+			    	"type": "text",
+
+			    	"fields": {
+
+			        	"keyword": {
+
+			        		"type": "keyword"
+
+			        	}
+
+			    	}
+
+    			},
+
+    			"ato_id":  {
+
+			    	"type": "text",
+
+			    	"fields": {
+
+			        	"keyword": {
+
+			        		"type": "keyword"
+
+			        	}
+
+			    	}
+
+    			},
+
+    			"numero":  {
+
+			    	"type": "text",
+
+			    	"fields": {
+
+			        	"keyword": {
+
+			        		"type": "keyword"
+
+			        	}
+
+			    	}
+
+    			},
+
+    			"data_publicacao":  {
+
+			    	"type": "date"
+
+    			},
+
+    			"ano":  {
+
+			    	"type": "integer"
+
+    			},
+
+    			"ementa":  {
+
+			    	"type": "text",
+
+			    	"analyzer": "my_analyzer",
+
+			    	"fields": {
+
+			        	"keyword": {
+
+			        		"type": "keyword"
+
+			        	}
+
+			    	}
+
+    			},
+
+    			"fonte":{
+
+    				"properties":{
+
+    					"orgao": {
+
+    						"type": "text",
+
+					    	"fields": {
+
+					        	"keyword": {
+
+					        		"type": "keyword"
+
+					        	}
+
+					    	}
+
+    					},
+
+    					"uf": {
+
+    						"type": "keyword"
+
+					    	
+
+    					},
+
+    					"uf_sigla": {
+
+    						"type": "keyword"
+
+    					},
+
+    					"sigla": {
+
+    						"type": "keyword"
+
+    					},
+
+    					"esfera": {
+
+    						"type": "keyword"
+
+    					},
+
+    					"url": {
+
+    						"type": "keyword"
+
+					    	
+
+    					}
+
+    				}
+
+    			}
+
+    		}
+
+    		
+
+    	}
+
+    	,"attachment": {
+
+                        "properties": {
+
+                            "content": {
+
+                                "type": "text",
+
+                                "analyzer": "my_analyzer",
+
+                                "fields": {
+
+                                    "keyword": {
+
+                                        "type": "keyword",
+
+                                        "ignore_above": 256
+
+                                    }
+
+                                }
+
+                            }
+
+                        }
+
+                    }
+
+      }
+
+    }
+
+  }
+
+}
