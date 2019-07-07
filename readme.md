@@ -30,8 +30,9 @@ DB_PASSWORD=
 DATABASE_URL=
 
 
-#Configuração do docker
+# Configuração do docker
 Para subir o ambiente utilizando docker deve-se seguir os seguintes passos:
+
 1. Instalar docker => https://docs.docker.com/install/linux/docker-ce/ubuntu/
 2. Instalar docker-compose => https://docs.docker.com/compose/install/
 3. Copiar o arquivo .env.example para .env e setar as propriedades de acordo (obs.:se a variável SEED_DATABASES for setada para 1 então o banco será apagado e recriado)
