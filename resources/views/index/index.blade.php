@@ -8,7 +8,7 @@
             <div class="col-lg-8 offset-lg-2 text-right p-0 ">
                 @if (Route::has('login'))
                     @auth
-                        <a href="{{ route('home') }}">Home</a>
+                        <a href="{{ route('home') }}" class="btn btn-outline-secondary btn-pill btn-login m-1 mt-2">Home <i class="fa fa-user badge-info"></i></a>
                     @else
                         <a href="{{ route('login') }}" class="btn btn-outline-secondary btn-pill btn-login m-1 mt-2">Entrar <i class="fa fa-user badge-info"></i></a>
                         <!--
@@ -257,6 +257,7 @@
             @endforeach
             <!-- end results-->
 
+
             <!-- pagination-->
             <div class="row">
                 <div class="col-lg-10 offset-lg-1">
@@ -268,6 +269,11 @@
                                     class="page-link" tabindex="-1">Anterior</a>
                             </li>
                             @endif
+
+                            @for ($i = 0; $i < $total_pages; $i++)
+                                @php ($anchorPage = $i+1)
+                            <li class="page-item"><a class="page-link {{$anchorPage == $page ? 'active' :'' }}" href="?query={{ urlencode($query) }}&page={{ ($anchorPage) }}&esfera={{ $esfera }}&fonte={{ $fonte }}&ano={{$ano}}">{{$anchorPage}}</a></li>
+                            @endfor
 
                             @if ($page < $total_pages)
                                 <li class="page-item">

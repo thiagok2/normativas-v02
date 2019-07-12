@@ -31,7 +31,7 @@ elixir(function(mix) {
 
         //.images(null, null, { webp: false })
         .browserSync({
-            proxy: "dev.normativas-v02:8888",
+            proxy: "127.0.0.1:5000",
             files: ["public/**/*.css", "resources/**/*"]
         });
 });

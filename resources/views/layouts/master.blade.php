@@ -11,7 +11,7 @@
         gtag('config', 'UA-130860561-1');
         </script>
 
-    
+
         <title>Normativas v0.2.1</title>
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
 
@@ -34,11 +34,11 @@
             </ul>
         </div>
         @yield('content')
-        
+
         <!-- app  scripts -->
         <script src="/js/jquery.min.js" type="text/javascript"></script>
         <script src="/js/jquery-migrate.min.js" type="text/javascript"></script>
-        <script src="/js/bootstrap.min.js"></script>        
+        <script src="/js/bootstrap.min.js"></script>
         <script src="/js/star-rating.min.js" type="text/javascript"></script>
         <script src="/js/theme.min.js"></script>
         <script src="/js/normativas-search.js" type="text/javascript"></script>
@@ -55,6 +55,16 @@
         </script>
         <script defer="defer" src="//barra.brasil.gov.br/barra.js" type="text/javascript"></script>
         <!-- fim app  scripts -->
-        
+
+        <footer>
+            <div class="container">
+                <div class="col-lg-12">
+                <img src="/img/logo-nees-branca.png" srcset="/img/logo-nees-branca@2x.png 2x" alt="NEES" />
+                    <img src="/img/logo-gov.png" srcset="/img/logo-gov@2x.png 2x" alt="Governo Federal" />
+                </div>
+            </div>
+        </footer>
+
+
     </body>
 </html>

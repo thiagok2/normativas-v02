@@ -3127,6 +3127,16 @@ body .pagination .page-item .page-link:hover, body .pagination .page-item .page-
   border-color: #073848;
 }
 
+body footer {
+  padding: 20px 0;
+  background: #87aab0;
+  text-align: right;
+}
+
+body footer img:last-child {
+  margin: 0 30px;
+}
+
 /* Large desktops and laptops */
 /* Landscape tablets and medium desktops */
 /* Portrait tablets and small desktops */

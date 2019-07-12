@@ -8,7 +8,7 @@
             <div class="col-lg-8 offset-lg-2 text-right p-0 ">
                 @if (Route::has('login'))
                     @auth
-                        <a href="{{ route('home') }}">Home</a>
+                        <a href="{{ route('home') }}" class="btn btn-outline-secondary btn-pill btn-login m-1 mt-2">Home <i class="fa fa-user badge-info"></i></a>
                     @else
                         <a href="{{ route('login') }}" class="btn btn-outline-secondary btn-pill btn-login m-1 mt-2">Entrar <i class="fa fa-user badge-info"></i></a>
                         <!--
