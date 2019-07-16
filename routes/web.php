@@ -118,10 +118,11 @@ Route::prefix('admin')->middleware('auth')->namespace('Admin')->group(function()
     Route::post('usuarios/pesquisar', 'UsuarioController@search')->name('usuario-search');
     Route::get('usuarios/delete/{id}', 'UsuarioController@destroy')->name('usuario-delete');
 
-    Route::get('etl/comandos', 'ETLController@index')->name('etl-comandos');
+    Route::get('etl/comandos', 'ETLController@index')->name('etl-comandos');    
     Route::get('etl/log/download/{logFile}', 'ETLController@downloadLog')->name('download-log');
     Route::get('etl/executar/{script}', 'ETLController@executarEtl')->name('etl-executar');
 
+    Route::get('status/index', 'StatusController@index')->name('server-status');
 
 });
 

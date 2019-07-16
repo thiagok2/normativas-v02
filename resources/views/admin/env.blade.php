@@ -20,8 +20,9 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <a class="btn btn-lg btn-info" href="{{route('etl-comandos')}}">ETL</a><br/><br/>
-            </div>
+                <a class="btn btn-lg btn-info" href="{{route('etl-comandos')}}">Logs ETL</a>
+                <a class="btn btn-lg btn-primary" href="{{route('server-status')}}">Status do ElasticSearch</a><br/><br/>
+            </div>            
         </div>
         
         <div class="row">
