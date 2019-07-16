@@ -158,51 +158,55 @@
 
                             <div id="indices" class="tab-pane fade">                                
                                 <div class="row">
-                                    <div class="col-sm-12">                                                 
-                                        <table class="table table-striped table-hover">
-                                            <tbody>                                                                                    
-                                                <tr>                                    
-                                                    <td>HEALTH</td>
-                                                    <td>{{$indices[0]["health"]}}</td>
-                                                </tr>                                
-                                                <tr>                                    
-                                                    <td>STATUS</td>
-                                                    <td>{{$indices[0]["status"]}}</td>
-                                                </tr>                             
-                                                <tr>                                    
-                                                    <td>INDEX</td>
-                                                    <td>{{$indices[0]["index"]}}</td>
-                                                </tr>                                
-                                                <tr>                                    
-                                                    <td>UUID</td>
-                                                    <td>{{$indices[0]["uuid"]}}</td>
-                                                </tr>   
-                                                <tr>                                    
-                                                    <td>PRI</td>
-                                                    <td>{{$indices[0]["pri"]}}</td>
-                                                </tr>                                
-                                                <tr>                                    
-                                                    <td>REP</td>
-                                                    <td>{{$indices[0]["rep"]}}</td>
-                                                </tr>                             
-                                                <tr>                                    
-                                                    <td>DOCS COUNT</td>
-                                                    <td>{{$indices[0]["docs.count"]}}</td>
-                                                </tr>                                
-                                                <tr>                                    
-                                                    <td>DOCS DELETED</td>
-                                                    <td>{{$indices[0]["docs.deleted"]}}</td>
-                                                </tr>           
-                                                <tr>                                    
-                                                    <td>STORE SIZE</td>
-                                                    <td>{{$indices[0]["store.size"]}}</td>
-                                                </tr>                                
-                                                <tr>                                    
-                                                    <td>PRI STORE SIZE</td>
-                                                    <td>{{$indices[0]["pri.store.size"]}}</td>
-                                                </tr>                                                                                                                                   
-                                            </tbody>
-                                        </table>
+                                    <div class="col-sm-12"> 
+                                        @foreach ($indices as $indice)
+                                            @if ($indice['index']=='normativas')
+                                            <table class="table table-striped table-hover">
+                                                    <tbody>                                                                                    
+                                                        <tr>                                    
+                                                            <td>HEALTH</td>
+                                                            <td>{{$indices[0]["health"]}}</td>
+                                                        </tr>                                
+                                                        <tr>                                    
+                                                            <td>STATUS</td>
+                                                            <td>{{$indices[0]["status"]}}</td>
+                                                        </tr>                             
+                                                        <tr>                                    
+                                                            <td>INDEX</td>
+                                                            <td>{{$indices[0]["index"]}}</td>
+                                                        </tr>                                
+                                                        <tr>                                    
+                                                            <td>UUID</td>
+                                                            <td>{{$indices[0]["uuid"]}}</td>
+                                                        </tr>   
+                                                        <tr>                                    
+                                                            <td>PRI</td>
+                                                            <td>{{$indices[0]["pri"]}}</td>
+                                                        </tr>                                
+                                                        <tr>                                    
+                                                            <td>REP</td>
+                                                            <td>{{$indices[0]["rep"]}}</td>
+                                                        </tr>                             
+                                                        <tr>                                    
+                                                            <td>DOCS COUNT</td>
+                                                            <td>{{$indices[0]["docs.count"]}}</td>
+                                                        </tr>                                
+                                                        <tr>                                    
+                                                            <td>DOCS DELETED</td>
+                                                            <td>{{$indices[0]["docs.deleted"]}}</td>
+                                                        </tr>           
+                                                        <tr>                                    
+                                                            <td>STORE SIZE</td>
+                                                            <td>{{$indices[0]["store.size"]}}</td>
+                                                        </tr>                                
+                                                        <tr>                                    
+                                                            <td>PRI STORE SIZE</td>
+                                                            <td>{{$indices[0]["pri.store.size"]}}</td>
+                                                        </tr>                                                                                                                                   
+                                                    </tbody>
+                                                </table>
+                                            @endif
+                                        @endforeach                                                                                        
                                     </div>                                        
                                 </div><!--end row -->                                                                                                                           
                             </div><!--end tab-pane -->
