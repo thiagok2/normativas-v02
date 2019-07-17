@@ -270,10 +270,18 @@
                             </li>
                             @endif
 
-                            @for ($i = 0; $i < $total_pages; $i++)
-                                @php ($anchorPage = $i+1)
-                            <li class="page-item"><a class="page-link {{$anchorPage == $page ? 'active' :'' }}" href="?query={{ urlencode($query) }}&page={{ ($anchorPage) }}&esfera={{ $esfera }}&fonte={{ $fonte }}&ano={{$ano}}">{{$anchorPage}}</a></li>
-                            @endfor
+                            @if($total_pages > 0 && $page <= $total_pages)
+
+                                @php($limit = 3)
+
+                                @for ($i = $page; $i <= min($page + $limit, $total_pages); $i++)
+                                     <li class="page-item"><a class="page-link {{$i == $page ? 'active' :'' }}" href="?query={{ urlencode($query) }}&page={{ ($i) }}&esfera={{ $esfera }}&fonte={{ $fonte }}&ano={{$ano}}">{{$i}}</a></li>
+
+                                @endfor
+
+                            @endif
+
+
 
                             @if ($page < $total_pages)
                                 <li class="page-item">
