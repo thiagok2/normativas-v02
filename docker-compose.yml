@@ -33,6 +33,8 @@ services:
       - webnet
     volumes:
       - ./:/app
+      - ${UPLOAD_FOLDER}:/app/storage/app/public/uploads
+      - ${LOG_FOLDER}:/app/storage/logs
 
   normativaselasticsearch:
     build: ./elasticsearch
@@ -70,6 +72,8 @@ services:
     #    image: php:7.2-fpm
     volumes:
       - ./:/app
+      - ${UPLOAD_FOLDER}:/app/storage/app/public/uploads
+      - ${LOG_FOLDER}:/app/storage/logs
     networks:
       - webnet
 
