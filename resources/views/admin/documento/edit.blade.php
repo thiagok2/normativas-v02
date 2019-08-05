@@ -215,12 +215,12 @@
                             
                     <div class="row">
                         <div class="col-md-2">
-                            @if ($documento->completed)
+                            @if ($documento->completed && $documento->isIndexado())
                                 <a target="_blank"  href="{{route('pdfNormativa',$documento->arquivo)}}">
                                     <i class="fa fa-download fa-5x"></i><br/>
                                     {{$documento->nome_original ? $documento->nome_original : $documento->arquivo}}
                                 </a>
-                            @else 
+                            @elseif ($documento->isBaixado()) 
                                 <a href='{{ Storage::url("uploads/$documento->arquivo")}}' target="_blank">
                                     <i class="fa fa-download fa-5x"></i><br/>
                                     {{$documento->nome_original}}

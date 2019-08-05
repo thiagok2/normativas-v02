@@ -235,7 +235,7 @@
                             <br/>
                             {{$documento->nomeOriginal()}}
                         </a>
-                    @else
+                    @elseif ($documento->isBaixado()) 
                         <a href='{{ Storage::url("uploads/$documento->arquivo")}}' target="_blank">
                             <i class="fa fa-download fa-3x"></i>
                             <br/>

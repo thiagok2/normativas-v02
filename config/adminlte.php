@@ -128,8 +128,19 @@ return [
         [
             'text'        => 'Documentos Pendentes',
             'url'         => 'admin/documentos/pendentes',
-            'icon'        => 'exclamation-triangle
-            '
+            'icon'        => 'exclamation-triangle',
+            'submenu' => [
+                [
+                    'text' => 'Pendências de Lote',
+                    'url'  => 'admin/documentos/pendentes',
+                    'icon' => 'th-large',
+                ],
+                [
+                    'text' => 'Pesquisar Pendências',
+                    'url'  => 'admin/documentos/pesquisar/status',
+                    'icon' => 'search',
+                ],
+            ]
         ],
         [
             'text'        => 'Últimos Documentos',

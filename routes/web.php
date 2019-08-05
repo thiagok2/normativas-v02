@@ -86,8 +86,10 @@ Route::prefix('admin')->middleware('auth')->namespace('Admin')->group(function()
 
     
     
-    Route::get('documentos', 'DocumentoController@search')->name('documentos');
-    Route::get('documentos/pesquisar', 'DocumentoController@search')->name('documentos-pesquisar');
+    Route::get('documentos', 'SearchDocument@search')->name('documentos');
+    Route::get('documentos/pesquisar', 'SearchDocument@search')->name('documentos-pesquisar');
+
+    Route::get('documentos/pesquisar/status', 'SearchDocument@searchStatus')->name('documentos-pesquisar-status');
     
     Route::get('documentos/publicar', 'DocumentoController@create')->name('publicar');
     Route::post('documentos/publicar', 'DocumentoController@store')->name('enviar');

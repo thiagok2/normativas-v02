@@ -315,12 +315,12 @@
                     <thead>
                         <tr>
                             <th style="width: 2%">#</th>
-                            <th style="width: 10%">Número</th>
-                            <th style="width: 35%">Título</th>
-                            <th>Envio</th>
-                            <th>Palavras-chave</th>
+                            <th style="width: 8%">Número</th>
+                            <th style="width: 30%">Título</th>
+                            <th style="width: 10%">Envio</th>
+                            <th style="width: 10%">Palavras-chave</th>
                             <th>Fonte</th>
-                            <th>Tipo</th>
+                            <th></th>
                             <th>#</th>
                         </tr>
                     </thead>
@@ -343,7 +343,10 @@
                                 </td>
                                 <td>
                                     <span class="badge bg-info">
-                                        {{$doc->tipoDocumento->nome}}
+                                        {{$doc->tipo_entrada}}
+                                    </span>
+                                    <span class="badge bg-info">
+                                        {{$doc->status_extrator}}
                                     </span>
                                 </td>
                                 <td>

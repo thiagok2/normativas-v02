@@ -18,6 +18,16 @@ class Documento extends Model
     public const STATUS_EXTRATOR_INDEXADO = 'INDEXADO';
     public const STATUS_EXTRATOR_FALHA_ELASTIC = 'FALHA_ELASTIC';
 
+    public static function listTiposEntrada(){
+        return [ENTRADA_INDIVIDUAL, ENTRADA_LOTE, ENTRADA_EXTRATOR];
+    }
+
+    public static function listStatus(){
+        return [STATUS_EXTRATOR_CADASTRADO, STATUS_EXTRATOR_BAIXADO,
+        STATUS_EXTRATOR_FALHA_DOWNLOAD, STATUS_EXTRATOR_INDEXADO,
+        STATUS_EXTRATOR_FALHA_ELASTIC];
+    }
+
     protected $fillable = [
         'ano', 'titulo','numero','ementa','url','data_publicacao','tipo_documento_id',
         'assunto_id','unidade_id' , 'nome_original', 
@@ -25,11 +35,25 @@ class Documento extends Model
 
 
     public function isCompleto(){
-        return $this->ano && $this->titulo && $this->ementa && $this->data_publicacao && !is_null($this->tipo_documento_id) && !is_null($this->assunto_id);
+        return 
+                $this->ano && $this->titulo && $this->ementa 
+                && $this->data_publicacao && !is_null($this->tipo_documento_id) && !is_null($this->assunto_id);
     }
 
     public function isIndexado(){
         return $this->status_extrator == Documento::STATUS_EXTRATOR_INDEXADO;
+    }
+
+    public function isBaixado(){
+        return $this->status_extrator == Documento::STATUS_EXTRATOR_BAIXADO;
+    }
+
+    public function status(){
+        if ($this->tipo_entrada == Documento::ENTRADA_EXTRATOR)
+            return $this->status_extrator;
+        else
+            return 'OK';
+
     }
 
     public function palavrasChaves(){
