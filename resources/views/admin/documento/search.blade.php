@@ -26,9 +26,18 @@
         <li> <a href="#" class="active"><a href="#">Documentos</a></li>
     </ol>
 
-    <div class="row">
-        <div class="col-sm-12 mb-2 hidden">
-            <a href="{{route('publicar')}}" class="btn btn-primary btn-lg">Publicar Novo</a>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="alert bg-yellow alert-dismissible fade in">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <p>
+                        Complete aqueles documentos que não se encontram indexados, ou seja, possuem status: 
+                        <strong>CADASTRADO, BAIXADO OU EM FALHA.</strong> <br/>
+                        Esses documentos se encontraram em destaque(vermelho).
+                    </p>
+                </div>
+            </div>    
         </div>
     </div>
 
@@ -176,7 +185,7 @@
                         <tbody>
 
                                 @forelse ($documentos as $key=>$doc)
-                                <tr @if ($doc->completed) class='bg-success' @else class='bg-warning' @endif>
+                                <tr @if ($doc->isIndexado()) class='bg-success' @else class='bg-danger' @endif>
                                     <td>
                                         {{ ($documentos->currentpage()-1) * $documentos->perpage() + $key + 1 }}
                                     </td>
