@@ -95,7 +95,39 @@ class QueryBuilder implements IQueryBuilder
         return $this;
     }
 
-    public function addBoolFilter($q, $field){
+    public function addBoolFilterTerm($q, $campo){
+        $this->queryArray['bool']['filter'][] = [
+            "term" => [
+                $this->field($campo) => $q
+            ]
+        ];
+
+        return $this;
+    }
+
+    public function addBoolFilterGte($q, $campo){
+        $this->queryArray['bool']['filter'][] = [
+            "range" => [
+                $this->field($campo) => [
+                    "gte" => $q
+                ]
+            ]
+        ];
+
+        return $this;
+
+    }
+
+    public function addBoolFilterLte($q, $campo){
+        $this->queryArray['bool']['filter'][] = [
+            "range" => [
+                $this->field($campo) => [
+                    "lte" => $q
+                ]
+            ]
+        ];
+
+        return $this;
 
     }
 
@@ -136,5 +168,8 @@ class QueryBuilder implements IQueryBuilder
 
     }
 
+    public function toString(){
+        return $this->queryArray;
+    }
     
 }

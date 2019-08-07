@@ -65,7 +65,6 @@ class IndexController extends Controller
                 $searchCommand = new SearchCommandA1('normativas','ato');
                 $result =  $searchCommand->search($query, $queryFilters, $from, self::RESULTS_PER_PAGE);
 
-
                 $total = $result->totalResults;
                 $max_score = $result->maxScore;
 

@@ -48,6 +48,18 @@ class Documento extends Model
         return $this->status_extrator == Documento::STATUS_EXTRATOR_BAIXADO;
     }
 
+    public function isCadastrado(){
+        return $this->status_extrator == Documento::STATUS_EXTRATOR_CADASTRADO;
+    }
+
+    public function isFalhaDownload(){
+        return $this->status_extrator == Documento::STATUS_EXTRATOR_FALHA_DOWNLOAD;
+    }
+
+    public function isFalhaElastic(){
+        return $this->status_extrator == Documento::STATUS_EXTRATOR_FALHA_ELASTIC;
+    }
+
     public function status(){
         if ($this->tipo_entrada == Documento::ENTRADA_EXTRATOR)
             return $this->status_extrator;

@@ -116,6 +116,14 @@
                         <a href="/normativa/pdf/{{ $id }}" class="btn btn-primary" target="_blank">
                             Baixar
                         </a>
+
+                        @if (Route::has('login') && isset($normativa['ato']['id_persisted']))
+                            @auth
+                                <a href="{{ route("documento-edit", $normativa['ato']['id_persisted']) }}" title="Editar" class="btn btn-primary pull-right">
+                                    <i class="fa fa-edit" ></i>
+                                </a>
+                            @endauth
+                        @endif
                         
                         
                         @auth

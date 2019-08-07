@@ -23,23 +23,8 @@
 
     <ol class="breadcrumb">
         <li><a href="{{route('home')}}">Painel</a></li>
-        <li> <a href="#" class="active"><a href="#">Documentos</a></li>
+        <li> <a href="#" class="active"><a href="#">Pesquisar Pendências</a></li>
     </ol>
-
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="alert bg-yellow alert-dismissible fade in">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <p>
-                        Complete aqueles documentos que não se encontram indexados, ou seja, possuem status: 
-                        <strong>CADASTRADO, BAIXADO OU EM FALHA.</strong> <br/>
-                        Esses documentos se encontraram em destaque(vermelho).
-                    </p>
-                </div>
-            </div>    
-        </div>
-    </div>
 
     <div class="row">
         <div class="col-lg-6">
@@ -161,6 +146,19 @@
     </div>
 
     @include('admin.includes.alerts')
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="alert bg-yellow alert-dismissible fade in">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <p>
+                    <h4>Complete aqueles documentos que não se encontram indexados, ou seja, possuem status: 
+                    <strong>CADASTRADO, BAIXADO OU EM FALHA.</strong> <br/>
+                    Esses documentos se encontraram em destaque(vermelho).
+                    </h4>
+                </p>
+            </div>
+        </div>    
+    </div>
 
     <div class="row">
         <div class="col-sm-12">

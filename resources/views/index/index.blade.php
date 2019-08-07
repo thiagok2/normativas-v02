@@ -185,6 +185,7 @@
                                     <i class="fa fa-external-link"></i>  {{ $doc['titulo'] }}
                                 </a>
 
+                                
                                 <div id="max_score" class="float-lg-right float-xs-left">
                                     <input value="{{ ($doc['score'])  }}" type="text" class="kv-fa rating-loading"
                                         data-min=0
@@ -234,6 +235,14 @@
                                 <a href="/normativa/pdf/{{ $doc['id'] }}" class="btn btn-primary" target="_blank">
                                     Baixar
                                 </a>
+
+                                @if (Route::has('login') && isset($doc['id_persisted']))
+                                    @auth
+                                        <a href="{{ route("documento-edit", $doc['id_persisted']) }}" title="Editar" class="btn btn-primary pull-right">
+                                            <i class="fa fa-edit" ></i>
+                                        </a>
+                                    @endauth
+                                @endif
                                 <br/>
 
                                 <div id="trechos-{{$loop->index}}" class="collapse">

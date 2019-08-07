@@ -239,8 +239,19 @@ class DocumentoController extends Controller
         $tags = str_replace('"', '', $tags);
         $tags = str_replace('[', '', $tags);
         $tags = str_replace(']', '', $tags);
+        $alerta = null;
+        if(!$documento->isIndexado()){
+            $alerta = "AVISO: ";
+            $alerta .= $documento->isCadastrado() ? 'Selecione um arquivo para envio e clique no botão atualizar.': '';
+            $alerta .= $documento->isBaixado() ? 'Clique em atualizar para publicar esse ato tornado-o disponível a busca.': '';
+            $alerta .= $documento->isFalhaDownload() ? 'Selecione um arquivo para concluir a indexação do documento. Durante a extração '. 
+                       'não foi possível obter o arquivo no endereço especificado.': '';
+            $alerta .= $documento->isFalhaElastic() ? 'O nosso sistema não conseguiu utilizar esse documento para busca na última tentativa. '. 
+                        'Caso o problema persista ao atualizar novamente. Veja se o documento é um pdf ou um doc(x) válido. Ou envio outro documento.': '';
+
+        }
     
-        return view('admin.documento.edit', compact('tags','documento','unidade','tiposDocumento',  'assuntos'));
+        return view('admin.documento.edit', compact('tags','documento','unidade','tiposDocumento',  'assuntos'))->with('alerta',$alerta);
     }
 
     public function update(Request $request, $documentoId){

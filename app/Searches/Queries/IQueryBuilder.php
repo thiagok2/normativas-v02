@@ -14,7 +14,7 @@ interface IQueryBuilder
 
     public function addBoolShouldMatchFuzzinessAttach($q, $boost=1, $fuzziness="1", $prefix_length=3);
 
-    public function addBoolFilter($q, $field);
+    public function addBoolFilterTerm($q, $field);
 
     public function addBoolMustTerm($q, $field);
 

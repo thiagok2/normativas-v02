@@ -32,15 +32,16 @@ class PDFController extends Controller
 
         $base64 =  $result['_source']['data'];
         
-       
         $data = base64_decode($base64);
 
-        if($documento->formato === 'pdf')
-            header('Content-Type: application/pdf');
-        elseif($documento->formato === 'doc')
-            header('Content-Type: application/msword');
-        elseif($documento->formato === 'docx')
-            header('Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document');    
+        if($documento){
+            if($documento->formato === 'pdf')
+                header('Content-Type: application/pdf');
+            elseif($documento->formato === 'doc')
+                header('Content-Type: application/msword');
+            elseif($documento->formato === 'docx')
+                header('Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document');  
+        }
         
         echo $data;
     }

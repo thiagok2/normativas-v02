@@ -114,16 +114,87 @@
     <!-- ./col -->
 </div><!-- ./row-->
 
-<div class="alert bg-yellow fade in">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <h2>
-            Idicadores temporariamente indisponíveis
-        </h2>
-    </div>
-
 <div class="row">
     <div class="col-lg-12">
         <div class="box box-danger">
+            <div class="box-header">
+                <h3 class="box-title">Documentos pendentes({{$documentosPendentesExtrator->total()}}) - Edite e resolva as pendências para publicá-los</h3>
+            </div>
+                <!-- /.box-header -->
+            <div class="box-body no-padding">
+                <table class="table table-condensed table-hover">
+                    <thead>
+                        <tr>
+                            <th style="width: 2%">#</th>
+                            <th style="width: 10%">Número</th>
+                            <th style="width: 25%">Título</th>
+                            <th>Envio</th>
+                            <th></th>
+                            <th>Fonte</th>
+                            <th>Tipo</th>
+                            <th>#</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($documentosPendentesExtrator as $doc)
+                            <tr @if ($doc->isBaixado()) class='bg-warning' @else class='bg-danger' @endif>
+                                <td>
+                                    {{$loop->index+1}}
+                                </td>
+                                <td>{{$doc->numero}}</td>
+                                <td>{{$doc->titulo}}</td>
+                                <td>{{date('d-m-Y', strtotime($doc->data_envio))}}</td>
+                                <td>
+                                    <span class="badge bg-secondary">{{$doc->formato}}</span>
+                                    <span class="badge bg-secondary">{{$doc->tipo_entrada}}</span>
+                                    <span class="badge bg-secondary">{{$doc->status()}}</span>
+                                </td>
+                                <td>
+                                    {{$doc->unidade->nome}}
+                                </td>
+                                <td>
+                                    <span class="badge bg-info">
+                                        {{$doc->tipoDocumento->nome}}
+                                    </span>
+                                </td>
+                                <td>
+                                    <a href="{{ route("documento-edit",$doc->id) }}" title="Editar">
+                                        <i class="fa fa-edit fa-3x" ></i>
+                                    </a>
+                                    @if ($doc->isIndexado())
+                                        <a href="/normativa/view/{{ $doc['arquivo'] }}" target="_blank" title="Abrir no portal Normativas">
+                                            <i class="fa fa-external-link"></i>
+                                        </a>
+                                
+                                        <a  target="_blank"  href="{{route('pdfNormativa',$doc->arquivo)}}" title="Download">
+                                            <i class="fa fa-cloud-download"></i>
+                                        </a>
+                                    @elseif ($doc->isBaixado())
+                                        <a href='{{ Storage::url("uploads/$doc->arquivo")}}' target="_blank" title="Download(local)">
+                                            <i class="fa fa-download"></i>
+                                        </a>
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
+
+
+                    </tbody>
+                </table>
+            </div><!-- /.box-body -->
+            <div class="box-footer">
+                <span class="text-muted">
+                    <a href="{{route("documentos-pesquisar-status")}}">Clique aqui acesse a busca por pendências</a>
+                </span>
+            </div>
+
+        </div>
+    </div>
+</div><!-- end row docs pendentes-->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="box box-info">
             <div class="box-header">
                 <h3 class="box-title">Documentos recentes(10)</h3>
             </div>
@@ -134,9 +205,9 @@
                         <tr>
                             <th style="width: 2%">#</th>
                             <th style="width: 10%">Número</th>
-                            <th style="width: 35%">Título</th>
+                            <th style="width: 25%">Título</th>
                             <th>Envio</th>
-                            <th>Palavras-chave</th>
+                            <th></th>
                             <th>Fonte</th>
                             <th>Tipo</th>
                             <th>#</th>
@@ -152,9 +223,8 @@
                                 <td>{{$doc->titulo}}</td>
                                 <td>{{date('d-m-Y', strtotime($doc->data_envio))}}</td>
                                 <td>
-                                    @foreach ($doc->palavrasChaves as $p)
-                                        <span class="badge bg-secondary">{{$p->tag}}</span>
-                                    @endforeach
+                                    <span class="badge bg-secondary">{{$doc->formato}}</span>
+                                    <span class="badge bg-secondary">{{$doc->tipo_entrada}}</span>
                                 </td>
                                 <td>
                                     {{$doc->unidade->nome}}
@@ -166,19 +236,24 @@
                                 </td>
                                 <td>
                                     @if ($doc->isIndexado())
-                                        <a  target="_blank"  href="{{route('pdfNormativa',$doc->arquivo)}}">
-                                            <i class="fa fa-download"></i>
+                                        <a href="/normativa/view/{{ $doc['arquivo'] }}" target="_blank" title="Abrir no portal Normativas">
+                                            <i class="fa fa-external-link"></i>
                                         </a>
-                                    @else
-                                        <a href='{{ Storage::url("uploads/$doc->arquivo")}}' target="_blank">
+                                
+                                        <a  target="_blank"  href="{{route('pdfNormativa',$doc->arquivo)}}" title="Download">
+                                            <i class="fa fa-cloud-download"></i>
+                                        </a>
+                                    @elseif ($doc->isBaixado())
+                                        <a href='{{ Storage::url("uploads/$doc->arquivo")}}' target="_blank" title="Download(local)">
                                             <i class="fa fa-download"></i>
                                         </a>
                                     @endif
-                                    <a href="{{ route("documento",$doc->id) }}">
-                                        <i class="fa fa-eye fa-2x"></i>
+
+                                    <a href="{{ route("documento",$doc->id) }}" title="Visualizar">
+                                        <i class="fa fa-eye fa-2x" ></i>
                                     </a>
-                                    <a href="{{ route("documento-edit",$doc->id) }}">
-                                        <i class="fa fa-edit fa-2x"></i>
+                                    <a href="{{ route("documento-edit",$doc->id) }}" title="Editar">
+                                        <i class="fa fa-edit fa-2x" ></i>
                                     </a>
                                 </td>
                             </tr>
@@ -196,7 +271,7 @@
 
         </div>
     </div>
-</div>
+</div><!-- end row docs enviados-->
 </div>
 
 
