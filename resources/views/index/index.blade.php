@@ -133,7 +133,7 @@
                 <div class="row">
                     <div class="col-lg-10 offset-lg-1">
                         <p class="mb-3 mt-3">
-                            <i class="fa fa-filter"></i> <strong> Filtrar resultados</strong> <em>({{ $total }}</em> resultados encontrados. Exibindo de <em>{{($page-1) * $size_page}} até {{($page) * $size_page}})</em>
+                            <i class="fa fa-filter"></i> <strong> Filtrar resultados</strong> <em>({{ $total }}</em> resultados encontrados. Exibindo de <em>{{(($page-1) * $size_page) +1}} até {{($page) * $size_page}})</em>
                             <br/>
                             <!--Score máximo ({{ $max_score }}).-->
                         </p>
@@ -300,6 +300,13 @@
                                 <li class="page-item">
                                 <a href="?query={{ urlencode($query) }}&page={{ ($page + 1) }}&esfera={{ $esfera }}&fonte={{ $fonte }}&ano={{$ano}}&periodo={{$periodo}}"
                                     class="page-link">Próximo</a>
+                                </li>
+                            @endif
+
+                            @if ($total_pages > 1)
+                                <li class="page-item">
+                                <a href="?query={{ urlencode($query) }}&page={{ ($total_pages) }}&esfera={{ $esfera }}&fonte={{ $fonte }}&ano={{$ano}}&periodo={{$periodo}}"
+                                    class="page-link">Última</a>
                                 </li>
                             @endif
                         </ul>
