@@ -290,6 +290,13 @@
                 justify-content: center;
     }
 
+
+    .alert-danger-blue{
+        color: #005762;
+        background-color: #ccedf2;
+        border-color: #b6e7ec;
+    }
+
     .font-sans {
         font-family: Nunito, sans-serif;
     }
@@ -458,15 +465,23 @@
         <div class="w-full md:w-1/2 bg-white flex items-center justify-center">
             <div class="max-w-sm m-8">
                 <div class="text-black text-2xl md:text-10xl font-black">
+                    @if($message)
+                        {{$message}}
+                    @else
                     Desculpa, mas você está no endereço certo?
                     :)
+                    @endif
                 </div>
 
                 <div class="w-16 h-1 bg-blue-dark my-3 md:my-6"></div>
 
                 <p class="text-grey-darker text-2xl md:text-3xl font-light mb-8 leading-normal">
                     Página não encontrada
+
+                    
                 </p>
+
+                
 
                 <a href="{{getenv('APP_URL')}}">
                     <button class="bg-transparent text-grey-darkest font-bold uppercase tracking-wide py-3 px-6 border-2 border-grey-light hover:border-grey rounded-lg">

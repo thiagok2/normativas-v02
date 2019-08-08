@@ -239,7 +239,7 @@
                                     Baixar
                                 </a>
 
-                                @if (Route::has('login') && isset($doc['id_persisted']))
+                                @if (Route::has('login') && (auth()->user()->isAdmin() || auth()->user()->unidade()->sigla === $doc['fonte']['sigla']) && isset($doc['id_persisted']))
                                     @auth
                                         <a href="{{ route("documento-edit", $doc['id_persisted']) }}" title="Editar" class="btn btn-primary pull-right">
                                             <i class="fa fa-edit" ></i>

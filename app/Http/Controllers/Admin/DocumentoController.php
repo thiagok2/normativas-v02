@@ -227,31 +227,45 @@ class DocumentoController extends Controller
     }
 
     public function edit(Request $request, $documentoId){
-        $documento = Documento::find($documentoId);
 
-        $unidade = auth()->user()->unidade;
+        try{
+            $documento = Documento::find($documentoId);
 
-        $tiposDocumento = TipoDocumento::all();
+            if(!$documento){
+                Log::error("404: documentoId:".$documentoId);
 
-        $assuntos = Assunto::all(); 
-        
-        $tags = ( $documento->palavrasChaves ) ? $documento->palavrasChaves->pluck('tag') : [];
-        $tags = str_replace('"', '', $tags);
-        $tags = str_replace('[', '', $tags);
-        $tags = str_replace(']', '', $tags);
-        $alerta = null;
-        if(!$documento->isIndexado()){
-            $alerta = "AVISO: ";
-            $alerta .= $documento->isCadastrado() ? 'Selecione um arquivo para envio e clique no botão atualizar.': '';
-            $alerta .= $documento->isBaixado() ? 'Clique em atualizar para publicar esse ato tornado-o disponível a busca.': '';
-            $alerta .= $documento->isFalhaDownload() ? 'Selecione um arquivo para concluir a indexação do documento. Durante a extração '. 
-                       'não foi possível obter o arquivo no endereço especificado.': '';
-            $alerta .= $documento->isFalhaElastic() ? 'O nosso sistema não conseguiu utilizar esse documento para busca na última tentativa. '. 
-                        'Caso o problema persista ao atualizar novamente. Veja se o documento é um pdf ou um doc(x) válido. Ou envio outro documento.': '';
+                $message = 'Desculpa, tivemos problemas com esse documento.';
+                return view('errors.404',  compact('message'));
+            }
+                
 
+            $unidade = auth()->user()->unidade;
+
+            $tiposDocumento = TipoDocumento::all();
+
+            $assuntos = Assunto::all(); 
+            
+            $tags = ($documento->palavrasChaves ) ? $documento->palavrasChaves->pluck('tag') : [];
+            $tags = str_replace('"', '', $tags);
+            $tags = str_replace('[', '', $tags);
+            $tags = str_replace(']', '', $tags);
+            $alerta = null;
+            if(!$documento->isIndexado()){
+                $alerta = "AVISO: ";
+                $alerta .= $documento->isCadastrado() ? 'Selecione um arquivo para envio e clique no botão atualizar.': '';
+                $alerta .= $documento->isBaixado() ? 'Clique em atualizar para publicar esse ato tornado-o disponível a busca.': '';
+                $alerta .= $documento->isFalhaDownload() ? 'Selecione um arquivo para concluir a indexação do documento. Durante a extração '. 
+                            'não foi possível obter o arquivo no endereço especificado.': '';
+                $alerta .= $documento->isFalhaElastic() ? 'O nosso sistema não conseguiu utilizar esse documento para busca na última tentativa. '. 
+                            'Caso o problema persista ao atualizar novamente. Veja se o documento é um pdf ou um doc(x) válido. Ou envio outro documento.': '';
+
+            }
+
+            return view('admin.documento.edit', compact('tags','documento','unidade','tiposDocumento',  'assuntos'))->with('alerta',$alerta);
+        }catch(\Exception $e){
+            throw new Exception($e);
         }
-    
-        return view('admin.documento.edit', compact('tags','documento','unidade','tiposDocumento',  'assuntos'))->with('alerta',$alerta);
+        
     }
 
     public function update(Request $request, $documentoId){
