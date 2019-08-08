@@ -76,18 +76,21 @@
                     </div>
                     <div id="filters-menu" class="collapse <?php if($filters){ echo 'show'; }?>">
                         <div class="row">
+                            <!--
                             <div class="col col-12 col-lg-4 mb-1">
                                 <select class="form-control" name="tipo_doc">
                                     <option value="all" <?php if($tipo_doc == "all"){ echo ' selected'; }?>>Todos os Tipos</option>
 
-                                    @foreach ($tiposDocumento as $tipo)
+                                    {{-- @foreach ($tiposDocumento as $tipo)
                                         <option value="{{$tipo->nome}}"
                                             @if ($tipo_doc == $tipo->nome) selected @endif>Apenas {{$tipo->nome}}</option>
                                     @endforeach
+                                    --}}
 
                                 </select>
                             </div>
-                            <div class="col col-12 col-lg-4 mb-1">
+                            -->
+                            <div class="col col-12 col-lg-4 offset-lg-2 mb-1">
                                 <select class="form-control" name="esfera" >
                                     <option value="all" <?php if($esfera == "all"){ echo ' selected'; }?>>Todas as Esfera</option>
                                     <option value="Federal" <?php if($esfera == "Federal"){ echo ' selected'; }?>>Federal</option>
