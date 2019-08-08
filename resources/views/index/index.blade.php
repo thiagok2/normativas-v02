@@ -278,7 +278,7 @@
                         <ul class="pagination justify-content-end">
                             @if ($page > 1)
                             <li class="page-item">
-                                <a href="?query={{ urlencode($query) }}&page={{ ($page - 1) }}&esfera={{ $esfera }}&fonte={{ $fonte }}&ano={{$ano}}"
+                                <a href="?query={{ urlencode($query) }}&page={{ ($page - 1) }}&esfera={{ $esfera }}&fonte={{ $fonte }}&ano={{$ano}}&periodo={{$periodo}}"
                                     class="page-link" tabindex="-1">Anterior</a>
                             </li>
                             @endif
@@ -288,7 +288,7 @@
                                 @php($limit = 3)
 
                                 @for ($i = $page; $i <= min($page + $limit, $total_pages); $i++)
-                                     <li class="page-item"><a class="page-link {{$i == $page ? 'active' :'' }}" href="?query={{ urlencode($query) }}&page={{ ($i) }}&esfera={{ $esfera }}&fonte={{ $fonte }}&ano={{$ano}}">{{$i}}</a></li>
+                                     <li class="page-item"><a class="page-link {{$i == $page ? 'active' :'' }}" href="?query={{ urlencode($query) }}&page={{ ($i) }}&esfera={{ $esfera }}&fonte={{ $fonte }}&ano={{$ano}}&periodo={{$periodo}}">{{$i}}</a></li>
 
                                 @endfor
 
@@ -298,7 +298,7 @@
 
                             @if ($page < $total_pages)
                                 <li class="page-item">
-                                <a href="?query={{ urlencode($query) }}&page={{ ($page + 1) }}&esfera={{ $esfera }}&fonte={{ $fonte }}&ano={{$ano}}"
+                                <a href="?query={{ urlencode($query) }}&page={{ ($page + 1) }}&esfera={{ $esfera }}&fonte={{ $fonte }}&ano={{$ano}}&periodo={{$periodo}}"
                                     class="page-link">Próximo</a>
                                 </li>
                             @endif
