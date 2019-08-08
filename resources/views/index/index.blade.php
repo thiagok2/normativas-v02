@@ -271,6 +271,7 @@
 
 
             <!-- pagination-->
+            <!-- param page_size(default=10)-->
             <div class="row">
                 <div class="col-lg-10 offset-lg-1">
                     <nav>

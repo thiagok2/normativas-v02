@@ -16,7 +16,7 @@ use App\Searches\Commands\SearchCommandA1;
 
 class IndexController extends Controller
 {
-    const RESULTS_PER_PAGE = 5;
+    const RESULTS_PER_PAGE = 10;
 
     /**
      * @var \Elasticsearch\Client
@@ -37,6 +37,9 @@ class IndexController extends Controller
 
     public function index(Request $request)
     {       
+
+        $size_page = $request->has('page_size') ? $request->query("page_size"): self::RESULTS_PER_PAGE;
+
         $tipo_doc = $request->query("tipo_doc");
         $esfera = $request->query("esfera");
         $periodo = $request->query("periodo");
@@ -60,15 +63,15 @@ class IndexController extends Controller
                 SearchComponent::logging($query);
 
                 $page = $request->query('page', 1);
-                $from = (($page - 1) * self::RESULTS_PER_PAGE);
+                $from = (($page - 1) * $size_page);
  
                 $searchCommand = new SearchCommandA1('normativas','ato');
-                $result =  $searchCommand->search($query, $queryFilters, $from, self::RESULTS_PER_PAGE);
+                $result =  $searchCommand->search($query, $queryFilters, $from, $size_page);
 
                 $total = $result->totalResults;
                 $max_score = $result->maxScore;
 
-                $size_page = self::RESULTS_PER_PAGE;
+                
                 $total_pages = $result->totalPages;
 
                 $documentos =  $result->documentsResult;
