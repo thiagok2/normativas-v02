@@ -71,7 +71,7 @@
                                     <div class="form-group">
                                         <label for="status">Status:</label>
                                         <select class="form-control select2" id="status" name="status">
-                                            <option value="">Todos</option>
+                                            <option value="PENDENTE" @if ($queryParams['status'] == "PENDENTE") selected @endif>PENDENTES</option>
                                             @foreach ($listStatus as $status)
                                                 <option value="{{$status->status_extrator}}" @if ($queryParams['status'] == $status->status_extrator) selected @endif>{{$status->status_extrator}}</option>
                                             @endforeach 
@@ -101,11 +101,11 @@
                                     </li>
                                     <li class="list-group-item">
                                         Cadastrado:
-                                        <span class="small text-muted"> Metadados extraídos;</span>
+                                        <span class="small text-muted"> Metadados extraídos mas sem documento;</span>
                                     </li>
                                     <li class="list-group-item">
                                         Baixado: 
-                                        <span class="small text-muted">Upload realizado;</span>
+                                        <span class="small text-muted">Documento captura porém não publicado;</span>
                                     </li>
                                     <li class="list-group-item">
                                         Falha Download: <span class="small text-muted">Problemas ao baixar arquivo. Documento não enviado;</span>
@@ -129,7 +129,7 @@
                                     </li>
                                     <li class="list-group-item">
                                         Lote: 
-                                        <span class="small text-muted">Inserção em lote;</span>
+                                        <span class="small text-muted">Inserção de multiplos arquivos;</span>
                                     </li>
                                     <li class="list-group-item">
                                         Extrator: 

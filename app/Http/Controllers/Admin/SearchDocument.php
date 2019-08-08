@@ -129,8 +129,10 @@ class SearchDocument extends Controller
             $list->where('tipo_entrada', $this->queryParams['tipo_entrada']);  
         }
 
-        if(isset($this->queryParams['status'])){
+        if(isset($this->queryParams['status']) && $this->queryParams['status'] != "PENDENTE"){
             $list->where('status_extrator', $this->queryParams['status']);  
+        }else{
+            $list->where('status_extrator', '<>' , Documento::STATUS_EXTRATOR_INDEXADO);
         }
 
         if(isset($this->queryParams['formato'])){
