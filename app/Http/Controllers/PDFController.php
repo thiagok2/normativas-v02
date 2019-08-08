@@ -41,6 +41,8 @@ class PDFController extends Controller
                 header('Content-Type: application/msword');
             elseif($documento->formato === 'docx')
                 header('Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document');  
+            else
+                header('Content-Type: application/pdf');
         }
         
         echo $data;

@@ -38,17 +38,20 @@ class UnidadeController extends Controller
                 $clausulas[] = ['estado_id', $estado];
             }
 
-            $unidades = Unidade::where($clausulas)->with('estado','responsavel')->withCount('documentos')->paginate(25); 
+            $unidades = Unidade::where($clausulas)->with('estado','responsavel')->withCount('documentos')->paginate(25);
+            $documentos = Documento::paginate(25); 
             $estados = Estado::all();
 
-            return view('admin.unidade.index', compact('estados','unidades','esfera','estado','nome'));
+            return view('admin.unidade.index', compact('estados','unidades','esfera','estado','nome','documentos'));
 
         }else{
             $unidade = auth()->user()->unidade;
             $users = User::where("unidade_id", $unidade->id)->paginate(25);
-
-            return view('admin.unidade.edit', compact('unidade','users'));
+            $documentos = Documento::where('unidade_id',$unidade->id)->paginate(25);
+            return view('admin.unidade.edit', compact('unidade','users','documentos'));
         } 
+
+
         
     }
 
@@ -65,7 +68,11 @@ class UnidadeController extends Controller
             ['unidade_id', $unidade->id]
         ])->count();
 
-        return view('admin.unidade.show', compact('unidade', 'statusExtrator','documentosCount','documentosPendentesCount'));
+        $documentos = $documentosPendentesCount = Documento::where([
+            ['unidade_id', $unidade->id]
+        ])->count();
+
+        return view('admin.unidade.show', compact('unidade', 'statusExtrator','documentos','documentosCount','documentosPendentesCount'));
 
     }
 

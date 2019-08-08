@@ -79,7 +79,7 @@
                             </tr>                           
                                     
 
-                                </table>
+                        </table>
                                 {{-- <p>
                                     <strong>Ementa</strong><br />{{ $normativa['ato']['ementa'] }}
                                 </p>
@@ -100,40 +100,42 @@
                                 @foreach ($normativa['ato']['tags'] as $tag)
                                     <span class="badge badge-primary tags">{{ $tag }}</span>
                                 @endforeach --}}
-                                <hr class="split-sm">
-                            </div>
+                        <hr class="split-sm">
+            </div>
 
-                            <div class="col-sm-12">
-                                <iframe src="/normativa/pdf/{{ $id }}" width="100%" height="600px">
-                                </iframe>                                                 
+            <div class="col-sm-12">
+                    @if ($normativa['ato']['tipo_doc'] != 'doc' && $normativa['ato']['tipo_doc'] != 'docx')
+                        <iframe src="/normativa/pdf/{{ $id }}" width="100%" height="600px">
+                        </iframe> 
+                    @endif                                                
                                                 
-                        <a href="javascript:history.back();" class="btn btn-primary"><i class="fa fa-long-arrow-left" aria-hidden="true"></i> Voltar</a>
+                    <a href="javascript:history.back();" class="btn btn-primary"><i class="fa fa-long-arrow-left" aria-hidden="true"></i> Voltar</a>
 
-                        <a href="/" class="btn btn-primary">
-                            <span class="glyphicon glyphicon-chevron-left"></span> Nova Busca
-                        </a>
+                    <a href="/" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-chevron-left"></span> Nova Busca
+                    </a>
 
-                        <a href="/normativa/pdf/{{ $id }}" class="btn btn-primary" target="_blank">
-                            Baixar
-                        </a>
+                    <a href="/normativa/pdf/{{ $id }}" class="btn btn-primary" target="_blank">
+                        Baixar
+                    </a>
 
-                        @if (Route::has('login') && isset($normativa['ato']['id_persisted']))
-                            @auth
-                                <a href="{{ route("documento-edit", $normativa['ato']['id_persisted']) }}" title="Editar" class="btn btn-primary pull-right">
-                                    <i class="fa fa-edit" ></i>
-                                </a>
-                            @endauth
-                        @endif
-                        
-                        
+                    @if (Route::has('login') && isset($normativa['ato']['id_persisted']))
                         @auth
-                            @if (auth()->user()->isAdmin() && !$persisted)                                 
-                                <a href="{{route('delete-elastic',$arquivoId)}}" class="btn btn-danger btn-lg pull-right" >Excluir</a>                                                            
-                            @endif
-                        @endauth                                                                          
+                            <a href="{{ route("documento-edit", $normativa['ato']['id_persisted']) }}" title="Editar" class="btn btn-primary pull-right">
+                                <i class="fa fa-edit" ></i>
+                            </a>
+                        @endauth
+                    @endif
                         
-                    </form>
-                </div>
+                        
+                    @auth
+                        @if (auth()->user()->isAdmin() && !$persisted)                                 
+                            <a href="{{route('delete-elastic',$arquivoId)}}" class="btn btn-danger btn-lg pull-right" >Excluir</a>                                                            
+                        @endif
+                    @endauth                                                                          
+                        
+                </form>
+            </div>
             </div>
             <hr class="split-sm">
         </div>        
