@@ -242,9 +242,15 @@
                                 @auth
                                     @if ((auth()->user()->isAdmin() || auth()->user()->unidade->sigla === $doc['fonte']['sigla']) 
                                     && isset($doc['id_persisted']) && isset($doc['persisted']))
-                                    <a href="{{ route("documento-edit", $doc['id_persisted']) }}" title="Editar" class="btn btn-primary pull-right">
-                                        <i class="fa fa-edit" ></i>
-                                    </a>
+                                        <a href="{{ route("documento-edit", $doc['id_persisted']) }}" title="Editar" class="btn btn-primary pull-right m-1">
+                                            <i class="fa fa-edit" ></i>
+                                        </a>
+
+                                        @if (auth()->user()->isAdmin() && !$doc['persisted'])                                 
+                                            <a href="{{route('delete-elastic',$doc['id'])}}" class="btn btn-danger pull-right m-1" >
+                                                <i class="fa fa-trash" ></i>
+                                            </a>                                                            
+                                        @endif
                                     @endif
                                     
                                     
