@@ -54,18 +54,18 @@
                                     </div>
                                 </div>
 
-                                <div class="col-lg-3">
+                                <div class="col-lg-2">
                                     <div class="form-group">
-                                        <label for="dataInicioPublicacao">Data de Publicação (Início):</label>
+                                        <label for="dataInicioPublicacao">Publicação (Início):</label>
                                         <input class="form-control" type="date" id="dataInicioPublicacao" name="dataInicioPublicacao" value="{{$queryParams['dataInicioPublicacao']}}">
                                         <br/>
-                                        <label for="dataFimPublicacao">Data de Publicação (Fim):</label>
+                                        <label for="dataFimPublicacao">Publicação (Fim):</label>
                                         <input class="form-control" type="date" id="dataFimPublicacao" name="dataFimPublicacao" value="{{$queryParams['dataFimPublicacao']}}">
                                         <small class="form-text text-muted">Data início e fim do publicação</small>
                                     </div>
                                 </div>
 
-                                <div class="col-lg-3">
+                                <div class="col-lg-2">
                                     <div class="form-group">
                                         <label for="numero">Número:</label>
                                         <input class="form-control" id="numero" name="numero" value="{{$queryParams['numero']}}" placeholder="CEE-AL 2/2019">               
@@ -89,6 +89,17 @@
                                             <option value="">Todos</option>
                                             <option value="indexado" @if ($queryParams['status'] == 'indexado') selected @endif>Indexado</option>
                                             <option value="pendente" @if ($queryParams['status'] == 'pendente') selected @endif>Pendente</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <div class="form-group">
+                                        <label for="formato">Formato:</label>
+                                        <select class="form-control select2" id="formato" name="formato">
+                                            <option value="">Todos</option>
+                                            @foreach ($listFormatos as $f)
+                                                <option value="{{$f->formato}}" @if ($queryParams['formato'] == $f->formato) selected @endif>{{$f->formato}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>

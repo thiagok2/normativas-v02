@@ -27,6 +27,8 @@ class SearchDocument extends Controller
         $this->queryParams['tipo_entrada'] = $request['tipo_entrada'];
         $this->queryParams['status'] = $request['status'];
 
+        $this->queryParams['formato'] = $request['formato'];
+
         $list = Documento::query();
         
         if(isset($this->queryParams['unidadeQuery'])){
@@ -75,11 +77,15 @@ class SearchDocument extends Controller
             }
         }
 
-        if(isset($this->queryParams['status'])){
-           
+        if(isset($this->queryParams['status'])){  
             $list->where('completed', $this->queryParams['status'] == 'indexado');
-            
         }
+
+        if(isset($this->queryParams['formato'])){
+            $list->where('formato', $this->queryParams['formato']);
+        }
+
+        $listFormatos = Documento::select('formato')->distinct()->groupBy('formato')->get();
 
 
         $unidadeUser = auth()->user()->unidade;
@@ -91,7 +97,7 @@ class SearchDocument extends Controller
 
         $queryParams = $this->queryParams;
 
-        return view('admin.documento.index', compact('documentos','queryParams'));
+        return view('admin.documento.index', compact('documentos','queryParams','listFormatos'));
     }
 
     public function searchStatus(Request $request){
