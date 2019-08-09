@@ -76,9 +76,7 @@
                                         <span class="badge badge-primary tags">{{ $tag }}</span>
                                     @endforeach
                                 </td>                                        
-                            </tr>                           
-                                    
-
+                            </tr>                          
                         </table>
                                 {{-- <p>
                                     <strong>Ementa</strong><br />{{ $normativa['ato']['ementa'] }}
@@ -119,13 +117,16 @@
                         Baixar
                     </a>
 
-                    @if (Route::has('login') && isset($normativa['ato']['id_persisted']))
-                        @auth
+                   
+                    @auth
+                        @if ((auth()->user()->isAdmin() || auth()->user()->unidade->sigla === $doc['fonte']['sigla']) &&
+                            isset($normativa['ato']['id_persisted']))
                             <a href="{{ route("documento-edit", $normativa['ato']['id_persisted']) }}" title="Editar" class="btn btn-primary">
                                 <i class="fa fa-edit" ></i>
                             </a>
-                        @endauth
-                    @endif
+                        @endif
+                    @endauth
+                   
                         
                         
                     @auth
