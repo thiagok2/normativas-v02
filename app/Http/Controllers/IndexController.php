@@ -71,7 +71,6 @@ class IndexController extends Controller
                 $total = $result->totalResults;
                 $max_score = $result->maxScore;
 
-                
                 $total_pages = $result->totalPages;
 
                 $documentos =  $result->documentsResult;

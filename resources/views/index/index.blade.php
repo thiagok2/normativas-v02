@@ -246,6 +246,14 @@
                                         <i class="fa fa-edit" ></i>
                                     </a>
                                     @endif
+                                    
+                                    
+                                    @if(!$doc['persisted'] && auth()->user()->isAdmin())
+                                        <div class="alert alert-danger">
+                                            <strong>Atenção:</strong> este documento não está sendo gerenciado pela área de administração.
+                                        </div>
+                                    @endif
+                                         
                                 @endauth
                                
                                 <br/>

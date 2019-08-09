@@ -2,6 +2,8 @@
 
 namespace App\Searches\Models;
 
+use App\Models\Documento;
+
 class SearchResult
 {
     public $documentsResult;
@@ -50,6 +52,10 @@ class SearchResult
             }else{
                 $doc['trechos_destaque'] = null;
             }
+
+            $documento = Documento::where('arquivo', $doc['id'])->first();
+
+            $doc['persisted'] = isset($documento);
 
             $this->documentsResult[] = $doc;
         }
