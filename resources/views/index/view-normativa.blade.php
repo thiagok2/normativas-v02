@@ -121,7 +121,7 @@
 
                     @if (Route::has('login') && isset($normativa['ato']['id_persisted']))
                         @auth
-                            <a href="{{ route("documento-edit", $normativa['ato']['id_persisted']) }}" title="Editar" class="btn btn-primary pull-right">
+                            <a href="{{ route("documento-edit", $normativa['ato']['id_persisted']) }}" title="Editar" class="btn btn-primary">
                                 <i class="fa fa-edit" ></i>
                             </a>
                         @endauth
@@ -135,6 +135,13 @@
                     @endauth                                                                          
                         
                 </form>
+            </div>
+            <div class="col-sm-12">
+                @if (auth()->user()->isAdmin() && !$persisted)                                 
+                    <div class="alert alert-danger">
+                        <strong>Atenção:</strong> este documento não está sendo gerenciado pela área de administração.
+                    </div>                                                            
+                @endif
             </div>
             </div>
             <hr class="split-sm">
