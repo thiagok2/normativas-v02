@@ -138,11 +138,13 @@
                 </form>
             </div>
             <div class="col-sm-12">
-                @if (auth()->user()->isAdmin() && !$persisted)                                 
-                    <div class="alert alert-danger">
-                        <strong>Atenção:</strong> este documento não está sendo gerenciado pela área de administração.
-                    </div>                                                            
-                @endif
+                @auth
+                    @if (auth()->user()->isAdmin() && !$persisted)                                 
+                        <div class="alert alert-danger">
+                            <strong>Atenção:</strong> este documento não está sendo gerenciado pela área de administração.
+                        </div>                                                            
+                    @endif
+                @endauth
             </div>
             </div>
             <hr class="split-sm">
