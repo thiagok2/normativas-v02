@@ -241,7 +241,7 @@
                                 
                                 @auth
                                     @if ((auth()->user()->isAdmin() || auth()->user()->unidade->sigla === $doc['fonte']['sigla']) 
-                                    && isset($doc['id_persisted']))
+                                    && isset($doc['id_persisted']) && isset($doc['persisted']))
                                     <a href="{{ route("documento-edit", $doc['id_persisted']) }}" title="Editar" class="btn btn-primary pull-right">
                                         <i class="fa fa-edit" ></i>
                                     </a>

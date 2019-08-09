@@ -43,6 +43,15 @@ class PDFController extends Controller
                 header('Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document');  
             else
                 header('Content-Type: application/pdf');
+        }else{
+            if(substr($normativaId,-3) === 'pdf')
+                header('Content-Type: application/pdf');
+            elseif(substr($normativaId,-3) === 'doc')
+                header('Content-Type: application/msword');
+            elseif(substr($normativaId,-4) === 'docx')
+                header('Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document');  
+            else
+                header('Content-Type: application/pdf');
         }
         
         echo $data;
