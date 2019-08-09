@@ -104,7 +104,7 @@
             </div>
 
             <div class="col-sm-12">
-                    @if ($normativa['ato']['tipo_doc'] != 'doc' && $normativa['ato']['tipo_doc'] != 'docx')
+                    @if ($normativa['ato']['tipo_doc'] != 'doc' && $normativa['ato']['tipo_doc'] != 'docx' && substr($id, -3) != "doc" && substr($id, -4) != "docx")
                         <iframe src="/normativa/pdf/{{ $id }}" width="100%" height="600px">
                         </iframe> 
                     @endif                                                
