@@ -154,40 +154,5 @@
 
 <hr class="split-sm">
 
-<section style="display:none">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-10 offset-lg-1">
-                <h4>Documentos relacionados</h4>
-            </div>
-        </div>
-        @foreach ($documentsLikes["docs"] as $doc)
-            <div class="row">
-                <div class="col-lg-10 offset-lg-1 mb-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="card-title">
-                                <a href="/normativa/view/{{ $doc['_id'] }}">
-                                    <i class="fa fa-external-link"></i> {{ $doc["_source"]["ato"]["titulo"] }}
-                                </a>
-                                <br/>
-                                <span class="badge badge-dark">{{ $doc["_source"]["ato"]["tipo_doc"] }}</span>
-
-                            </div>
-                            <p class="card-text text-muted">
-                                <small>{{ $doc["_source"]["ato"]["ementa"] }}</small>
-                            </p>
-                            
-                            @foreach ($doc["_source"]['ato']['tags'] as $tag)
-                                <span class="badge badge-info">{{ $tag }}</span>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endforeach  
-    </div>
-</section> 
-
 <hr class="split">
 @endsection

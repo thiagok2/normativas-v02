@@ -110,18 +110,11 @@ class IndexController extends Controller
             'id' => $normativaId
         ]);
 
-        $resultsLikes = $this->likeDocuments($result);
-        
-        if (isset($resultsLikes["hits"]["hits"])) {
-            $documentsLikes["docs"] = $resultsLikes["hits"]["hits"];
-        }
-
-
         $documento = Documento::where('arquivo', $normativaId)->first();
 
         $persisted = isset($documento);
         
-        return view('index.view-normativa', [ 'normativa' => $result['_source'], 'id' => $result['_id'], 'arquivoId' => $result['_id'],'documentsLikes' => $documentsLikes, 'persisted' => $persisted ] );
+        return view('index.view-normativa', [ 'normativa' => $result['_source'], 'id' => $result['_id'], 'arquivoId' => $result['_id'], 'persisted' => $persisted ] );
     }
 
     private function hasFilters($queryParams){
