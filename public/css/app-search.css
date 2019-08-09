@@ -3103,6 +3103,17 @@ body .btn.btn-pill {
   border-radius: 20px;
 }
 
+body .form-control-sm {
+  height: calc(1.8rem + 2px);
+  font-size: 14px;
+}
+
+body #mini-search {
+  background-color: #ffffff;
+  padding: 20px 0;
+  margin: 10px 0;
+}
+
 body #search {
   padding: 60px 0;
   background-color: #ffffff;
@@ -3125,6 +3136,10 @@ body .pagination .page-item .page-link {
 body .pagination .page-item .page-link:hover, body .pagination .page-item .page-link:focus, body .pagination .page-item .page-link.active {
   background-color: #073848;
   border-color: #073848;
+}
+
+body div#content {
+  min-height: calc(100vh - 104px);
 }
 
 body footer {

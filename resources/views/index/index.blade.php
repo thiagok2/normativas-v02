@@ -1,11 +1,95 @@
 @extends('layouts.master')
 
 @section('content')
+<!-- mini-header -->
+@if (!empty($query) && (!empty($documentos)))
+<section id="mini-header">
+    <div class="container-fluid">
+        <div class="row mt-4">
+            <div class="col-lg-2 offset-lg-1">
+                <h1><img class="img-fluid" src="/img/normativos-logo.png" srcset="/img/normativos-logo@2x.png 2x" alt="Normativas" /></h1>
+            </div>
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4 text-right">
+                <a class="btn btn-mobile btn-info btn-pill m-1 mt-2 btn-sm" href="{{route('unidades-search')}}" target="_blank"><i class="fa fa-cogs"></i> Pesquisar Conselhos</a>
+                @if (Route::has('login'))
+                    @auth
+                        <a href="{{ route('home') }}" class="btn btn-outline-secondary btn-pill btn-login m-1 mt-2">Home <i class="fa fa-user badge-info"></i></a>
+                    @else
+                        <a href="{{ route('login') }}" class="btn btn-outline-secondary btn-pill btn-login m-1 mt-2">Entrar <i class="fa fa-user badge-info"></i></a>
+                        <!--
+                        <a href="{{ route('register') }}">Registrar</a>
+                        -->
+                    @endauth
+                @endif
+            </div>
+        </div>
+    </div>
+</section>
+<section id="mini-search">
+    <div class="row">
+        <div class="col-lg-10 offset-lg-1 mt-3">
+            <form action="/" method="GET" class="">
+                <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                <div class="input-group">
+                    <input type="text" name="query" class="form-control form-control-sm" placeholder="Digite os termos da consulta" value="{{ $query }}" />
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-mobile btn-primary btn-sm"><i class="fa fa-search"></i> Pesquisar</button>
+                            <button type="button" class="btn btn-mobile btn-info btn-sm" data-toggle="collapse" data-target="#filters-menu" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-cogs"></i> Configurações da busca</button>
+                    </div>
+                </div>
+                </div>
+                </div>
+                <div id="filters-menu" class="collapse <?php if($filters){ echo 'show'; }?>">
+                    <div class="row">
+                        <!--
+                        <div class="col col-12 col-lg-4 mb-1">
+                            <select class="form-control" name="tipo_doc">
+                                <option value="all" <?php if($tipo_doc == "all"){ echo ' selected'; }?>>Todos os Tipos</option>
+
+                                {{-- @foreach ($tiposDocumento as $tipo)
+                                    <option value="{{$tipo->nome}}"
+                                        @if ($tipo_doc == $tipo->nome) selected @endif>Apenas {{$tipo->nome}}</option>
+                                @endforeach
+                                --}}
+
+                            </select>
+                        </div>
+                        -->
+                        <div class="col col-12 col-lg-4 offset-lg-2 mb-1">
+                            <select class="form-control form-control-sm" name="esfera" >
+                                <option value="all" <?php if($esfera == "all"){ echo ' selected'; }?>>Todas as Esferas</option>
+                                <option value="Federal" <?php if($esfera == "Federal"){ echo ' selected'; }?>>Federal</option>
+                                <option value="Estadual" <?php if($esfera == "Estadual"){ echo ' selected'; }?>>Estadual</option>
+                                <option value="Municipal" <?php if($esfera == "Municipal"){ echo ' selected'; }?>>Municipal</option>
+                            </select>
+                        </div>
+                        <div class="col col-12 col-lg-4 mb-1">
+                            <select class="form-control form-control-sm" name="periodo">
+                                <option value="all">Todos os Tempos</option>
+                                <option value="<?php echo date("Y"); ?>" <?php if($periodo == date("Y")){ echo ' selected'; }?>>Deste Ano</option>
+                                <option value="<?php echo (date("Y")-2); ?>" <?php if($periodo == date("Y")-2){ echo ' selected'; }?>>Últimos 2 anos</option>
+                                <option value="<?php echo (date("Y")-5); ?>" <?php if($periodo == date("Y")-5){ echo ' selected'; }?>>Últimos 5 anos</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+@else
+<!-- fim mini-header -->
+
 <!-- header -->
 <section id="header">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-8 offset-lg-2 text-right p-0 ">
+                <a class="btn btn-mobile btn-info btn-pill m-1 mt-2 btn-sm" href="{{route('unidades-search')}}" target="_blank">
+                    <i class="fa fa-cogs"></i> Pesquisar Conselhos
+                </a>
                 @if (Route::has('login'))
                     @auth
                         <a href="{{ route('home') }}" class="btn btn-outline-secondary btn-pill btn-login m-1 mt-2">Home <i class="fa fa-user badge-info"></i></a>
@@ -27,6 +111,7 @@
         </div>
     </div>
 </section>
+
 <!-- end header -->
 
 <!-- search form -->
@@ -69,9 +154,6 @@
                         <div class="col text-center mt-3 mb-3">
                             <button type="submit" class="btn btn-mobile btn-primary mr-1"><i class="fa fa-search"></i> Pesquisar normativas</button>
                             <button type="button" class="btn btn-mobile btn-info ml-1" data-toggle="collapse" data-target="#filters-menu" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-cogs"></i> Configurações da busca</button>
-                            <a class="btn btn-mobile btn-info ml-1" href="{{route('unidades-search')}}" target="_blank">
-                                <i class="fa fa-cogs"></i> Pesquisar Conselhos
-                            </a>
                         </div>
                     </div>
                     <div id="filters-menu" class="collapse <?php if($filters){ echo 'show'; }?>">
@@ -92,7 +174,7 @@
                             -->
                             <div class="col col-12 col-lg-4 offset-lg-2 mb-1">
                                 <select class="form-control" name="esfera" >
-                                    <option value="all" <?php if($esfera == "all"){ echo ' selected'; }?>>Todas as Esfera</option>
+                                    <option value="all" <?php if($esfera == "all"){ echo ' selected'; }?>>Todas as Esferas</option>
                                     <option value="Federal" <?php if($esfera == "Federal"){ echo ' selected'; }?>>Federal</option>
                                     <option value="Estadual" <?php if($esfera == "Estadual"){ echo ' selected'; }?>>Estadual</option>
                                     <option value="Municipal" <?php if($esfera == "Municipal"){ echo ' selected'; }?>>Municipal</option>
@@ -114,6 +196,7 @@
     </div>
 </section>
 <!-- end search form -->
+@endif
 
 <!-- results -->
 <section id="results">
@@ -188,7 +271,7 @@
                                     <i class="fa fa-external-link"></i>  {{ $doc['titulo'] }}
                                 </a>
 
-                                
+
                                 <div id="max_score" class="float-lg-right float-xs-left">
                                     <input value="{{ ($doc['score'])  }}" type="text" class="kv-fa rating-loading"
                                         data-min=0
@@ -238,30 +321,30 @@
                                 <a href="/normativa/pdf/{{ $doc['id'] }}" class="btn btn-primary" target="_blank">
                                     Baixar
                                 </a>
-                                
+
                                 @auth
-                                    @if ((auth()->user()->isAdmin() || auth()->user()->unidade->sigla === $doc['fonte']['sigla']) 
+                                    @if ((auth()->user()->isAdmin() || auth()->user()->unidade->sigla === $doc['fonte']['sigla'])
                                     && isset($doc['id_persisted']) && isset($doc['persisted']))
                                         <a href="{{ route("documento-edit", $doc['id_persisted']) }}" title="Editar" class="btn btn-primary pull-right m-1">
                                             <i class="fa fa-edit" ></i>
                                         </a>
 
-                                        @if (auth()->user()->isAdmin() && !$doc['persisted'])                                 
+                                        @if (auth()->user()->isAdmin() && !$doc['persisted'])
                                             <a href="{{route('delete-elastic',$doc['id'])}}" class="btn btn-danger pull-right m-1" >
                                                 <i class="fa fa-trash" ></i>
-                                            </a>                                                            
+                                            </a>
                                         @endif
                                     @endif
-                                    
-                                    
+
+
                                     @if(!$doc['persisted'] && auth()->user()->isAdmin())
                                         <div class="alert alert-danger">
                                             <strong>Atenção:</strong> este documento não está sendo gerenciado pela área de administração.
                                         </div>
                                     @endif
-                                         
+
                                 @endauth
-                               
+
                                 <br/>
 
                                 <div id="trechos-{{$loop->index}}" class="collapse">
