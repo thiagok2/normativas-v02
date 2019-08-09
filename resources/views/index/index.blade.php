@@ -238,14 +238,16 @@
                                 <a href="/normativa/pdf/{{ $doc['id'] }}" class="btn btn-primary" target="_blank">
                                     Baixar
                                 </a>
-
-                                @if (Route::has('login') && (auth()->user()->isAdmin() || auth()->user()->unidade()->sigla === $doc['fonte']['sigla']) && isset($doc['id_persisted']))
-                                    @auth
-                                        <a href="{{ route("documento-edit", $doc['id_persisted']) }}" title="Editar" class="btn btn-primary pull-right">
-                                            <i class="fa fa-edit" ></i>
-                                        </a>
-                                    @endauth
-                                @endif
+                                
+                                @auth
+                                    @if ((auth()->user()->isAdmin() || auth()->user()->unidade->sigla === $doc['fonte']['sigla']) 
+                                    && isset($doc['id_persisted']))
+                                    <a href="{{ route("documento-edit", $doc['id_persisted']) }}" title="Editar" class="btn btn-primary pull-right">
+                                        <i class="fa fa-edit" ></i>
+                                    </a>
+                                    @endif
+                                @endauth
+                               
                                 <br/>
 
                                 <div id="trechos-{{$loop->index}}" class="collapse">
