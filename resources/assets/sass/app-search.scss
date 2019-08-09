@@ -83,6 +83,19 @@ body {
         }
     }
 
+    .form-control-sm{
+        height: calc(1.8rem + 2px);
+        font-size:14px;
+    }
+
+    #mini-header{
+
+    }
+    #mini-search{
+        background-color: #ffffff;
+        padding:20px 0;
+        margin:10px 0;
+    }
     #search {
         padding: 60px 0;
         background-color: #ffffff;
@@ -117,7 +130,12 @@ body {
         }
     }
 
+
+    div#content{
+        min-height: calc(100vh - 104px);
+    }
     footer{
+
         padding:20px 0;
         background: #87aab0;
         text-align: right;

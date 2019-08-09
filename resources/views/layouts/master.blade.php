@@ -33,7 +33,9 @@
                 </li>
             </ul>
         </div>
-        @yield('content')
+        <div id="content">
+            @yield('content')
+        </div>
 
         <!-- app  scripts -->
         <script src="/js/jquery.min.js" type="text/javascript"></script>
