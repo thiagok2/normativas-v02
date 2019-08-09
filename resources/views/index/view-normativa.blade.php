@@ -105,6 +105,9 @@
                     @if ($normativa['ato']['tipo_doc'] != 'doc' && $normativa['ato']['tipo_doc'] != 'docx' && substr($id, -3) != "doc" && substr($id, -4) != "docx")
                         <iframe src="/normativa/pdf/{{ $id }}" width="100%" height="600px">
                         </iframe> 
+                    @else
+                        <iframe src="https://docs.google.com/gview?url={{str_replace("view","pdf",Request::url())}}&embedded=true" width="100%" height="600px">
+                        </iframe>
                     @endif                                                
                                                 
                     <a href="javascript:history.back();" class="btn btn-primary"><i class="fa fa-long-arrow-left" aria-hidden="true"></i> Voltar</a>
