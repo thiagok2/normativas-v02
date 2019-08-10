@@ -4,27 +4,22 @@ version: '3'
 services:
   normativasdb:
     image: postgres:10.1-alpine
-    container_name: normativasdb
     networks:
       - webnet
+    volumes:
+      - dbdata:/var/lib/postgresql/data
     ports:
       - 5432:5432
     env_file:
       - ./.env
   normativasapp:
     build: .
-    container_name: normativas_app
     command:
       - ./wait-for-postgres.sh
-      - normativasdb
-      - ${POSTGRES_USER}
-      - ${POSTGRES_PASSWORD}
       - ./wait-for-elasticsearch.sh
-      - normativaselasticsearch
-      - "9200"
       - ./app-entrypoint.sh
-      - ${SEED_DATABASES}
-      - ${POSTGRES_DB}
+    env_file:
+      - ./.env
     depends_on:
       - normativasdb
       - normativaselasticsearch
@@ -32,20 +27,20 @@ services:
     networks:
       - webnet
     volumes:
+      - backupdata:/backup
       - ./:/app
-      - ${UPLOAD_FOLDER}:/app/storage/app/public/uploads
-      - ${LOG_FOLDER}:/app/storage/logs
+      - uploaddata:/app/storage/app/public/uploads
+      - logappdata:/app/storage/logs
 
   normativaselasticsearch:
     build: ./elasticsearch
-    container_name: normativaselasticsearch
     #restart: always
     environment:
       - discovery.type=single-node
       - "cluster.name=normativas"
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      - "discovery.zen.ping.unicast.hosts=normativaselasticsearch"
+      - "discovery.zen.ping.unicast.hosts=normativaselasticsearch"    
     ports:
       - 9200:9200
     ulimits:
@@ -54,11 +49,13 @@ services:
         hard: -1
     networks:
       - webnet
+    volumes:
+      - esdata1:/usr/share/elasticsearch/data
+      - backupdata:/backup
   normativasweb:
     image: nginx:latest
-    container_name: normativasweb
     ports:
-      - "5000:80"
+      - ${PORT_TO_EXPOSE}:80
     volumes:
       - ./:/app
       - ./site.conf:/etc/nginx/conf.d/site.conf
@@ -67,16 +64,43 @@ services:
     networks:
       - webnet
   normativasphp:
-    container_name: normativasphp
     build: ./php
     #    image: php:7.2-fpm
     volumes:
       - ./:/app
-      - ${UPLOAD_FOLDER}:/app/storage/app/public/uploads
-      - ${LOG_FOLDER}:/app/storage/logs
+      - uploaddata:/app/storage/app/public/uploads
+      - logappdata:/app/storage/logs
     networks:
       - webnet
 
 networks:
   webnet:
+
+volumes:
+  esdata1:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${ELASTIC_DATA_FOLDER}
+  dbdata:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${DB_DATA_FOLDER}
+  uploaddata:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${UPLOAD_FOLDER}
+  logappdata:
+    driver: local
+  backupdata:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${DUMP_OUTPUT_FOLDER}
 

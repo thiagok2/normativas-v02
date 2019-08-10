@@ -35,5 +35,6 @@ Para subir o ambiente utilizando docker deve-se seguir os seguintes passos:
 
 1. Instalar docker => https://docs.docker.com/install/linux/docker-ce/ubuntu/
 2. Instalar docker-compose => https://docs.docker.com/compose/install/
-3. Copiar o arquivo .env.example para .env e setar as propriedades de acordo (obs.:se a variável SEED_DATABASES for setada para 1 então o banco será apagado e recriado)
-4. Executar docker-compose up
+3. Copiar o arquivo .env.example para .env e setar as propriedades de acordo (obs.:se a variável SEED_DATABASES for setada para 1 OU 2 então o banco será apagado e recriado). Caso a variável seja setada com o valor 2 então será realizado o download de um dump da base. 
+4. Executar o comando './start-application.sh'. Caso queira que a aplicação seja executada em segundo plano basta passar a opção -d
+5. Executar docker-compose up

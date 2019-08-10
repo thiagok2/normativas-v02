@@ -1,0 +1,7 @@
+{
+	"type": "fs",
+	"settings": {
+		"location": "/backup/elastic"
+	}
+}
+
