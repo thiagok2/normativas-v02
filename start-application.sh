@@ -4,6 +4,12 @@ set -e
 
 OLD_PWD=`pwd`
 echo "=> Iniciando aplicacao normativas"
+
+if [ ! -f .env ]; then
+	echo "Arquivo .env não existe. Copiando de env.example"
+	cp -v env.example .env
+fi
+
 echo "=> Carregando configuracoes .env"
 source .env
 
@@ -29,15 +35,15 @@ fi
 
 cd $OLD_PWD
 echo "=> Criando diretórios de mapeamento de volumes"
-if [ ! -f $ELASTIC_DATA_FOLDER ]; then
+if [ ! -d $ELASTIC_DATA_FOLDER ]; then
 	mkdir -p $ELASTIC_DATA_FOLDER
 fi
 
-if [ ! -f $DB_DATA_FOLDER ]; then
+if [ ! -d $DB_DATA_FOLDER ]; then
 	mkdir -p $DB_DATA_FOLDER
 fi
 
-if [ ! -f $UPLOAD_FOLDER ]; then
+if [ ! -d $UPLOAD_FOLDER ]; then
 	mkdir -p $UPLOAD_FOLDER
 fi
 
