@@ -7,7 +7,10 @@
     <div class="container-fluid">
         <div class="row mt-4">
             <div class="col-lg-2 offset-lg-1">
-                <h1><img class="img-fluid" src="/img/normativos-logo.png" srcset="/img/normativos-logo@2x.png 2x" alt="Normativas" /></h1>
+                <h1>
+                    <a href="{{route('index')}}">
+                        <img class="img-fluid" src="/img/normativos-logo.png" srcset="/img/normativos-logo@2x.png 2x" alt="Normativas" /></h1>
+                    </a>
             </div>
             <div class="col-lg-4"></div>
             <div class="col-lg-4 text-right">
@@ -41,22 +44,8 @@
                 </div>
                 </div>
                 </div>
-                <div id="filters-menu" class="collapse <?php if($filters){ echo 'show'; }?>">
+                <div id="filters-menu" class="collapse <?php if($filters){ echo 'show'; } else {echo 'hidden';}?>">
                     <div class="row">
-                        <!--
-                        <div class="col col-12 col-lg-4 mb-1">
-                            <select class="form-control" name="tipo_doc">
-                                <option value="all" <?php if($tipo_doc == "all"){ echo ' selected'; }?>>Todos os Tipos</option>
-
-                                {{-- @foreach ($tiposDocumento as $tipo)
-                                    <option value="{{$tipo->nome}}"
-                                        @if ($tipo_doc == $tipo->nome) selected @endif>Apenas {{$tipo->nome}}</option>
-                                @endforeach
-                                --}}
-
-                            </select>
-                        </div>
-                        -->
                         <div class="col col-12 col-lg-4 offset-lg-2 mb-1">
                             <select class="form-control form-control-sm" name="esfera" >
                                 <option value="all" <?php if($esfera == "all"){ echo ' selected'; }?>>Todas as Esferas</option>
@@ -105,7 +94,11 @@
         <div class="row">
             <div class="col-lg-12 text-center">
                 <hr class="split">
-                <h1><img src="/img/normativos-logo.png" srcset="/img/normativos-logo@2x.png 2x" alt="Normativas" /></h1>
+                <h1>
+                    <a href="{{route('index')}}">
+                        <img src="/img/normativos-logo.png" srcset="/img/normativos-logo@2x.png 2x" alt="Normativas" />
+                    </a>
+                </h1>
                 <hr class="split">
             </div>
         </div>
@@ -156,22 +149,8 @@
                             <button type="button" class="btn btn-mobile btn-info ml-1" data-toggle="collapse" data-target="#filters-menu" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-cogs"></i> Configurações da busca</button>
                         </div>
                     </div>
-                    <div id="filters-menu" class="collapse <?php if($filters){ echo 'show'; }?>">
+                    <div id="filters-menu" class="collapse <?php if($filters){ echo 'show'; }  else {echo 'hidden';}?>">
                         <div class="row">
-                            <!--
-                            <div class="col col-12 col-lg-4 mb-1">
-                                <select class="form-control" name="tipo_doc">
-                                    <option value="all" <?php if($tipo_doc == "all"){ echo ' selected'; }?>>Todos os Tipos</option>
-
-                                    {{-- @foreach ($tiposDocumento as $tipo)
-                                        <option value="{{$tipo->nome}}"
-                                            @if ($tipo_doc == $tipo->nome) selected @endif>Apenas {{$tipo->nome}}</option>
-                                    @endforeach
-                                    --}}
-
-                                </select>
-                            </div>
-                            -->
                             <div class="col col-12 col-lg-4 offset-lg-2 mb-1">
                                 <select class="form-control" name="esfera" >
                                     <option value="all" <?php if($esfera == "all"){ echo ' selected'; }?>>Todas as Esferas</option>
@@ -202,21 +181,18 @@
 <section id="results">
     <div class="container-fluid">
         @if (!empty($documentos))
-            <!--<div class="row" id="results-text">
-                <div class="col-lg-10 offset-lg-1">
-                <p class="mb-3 mt-3">
-                    <em>{{ $total }}</em> resultados encontrados. Exibindo de <em>{{($page-1) * $size_page}} até {{($page) * $size_page}}</em>
-                    <br/>
-                    <!--Score máximo ({{ $max_score }}).
-                </p>
-                </div>
-            </div>-->
             <!-- aggregates -->
             @if (!empty($query) && (!empty($documentos)))
                 <div class="row">
                     <div class="col-lg-10 offset-lg-1">
                         <p class="mb-3 mt-3">
-                            <i class="fa fa-filter"></i> <strong> Filtrar resultados</strong> <em>({{ $total }}</em> resultados encontrados. Exibindo de <em>{{(($page-1) * $size_page) +1}} até {{($page) * $size_page}})</em>
+                            <i class="fa fa-filter"></i> <strong> Filtrar resultados</strong> <em>({{ $total }}</em> resultados encontrados. Exibindo de 
+                            @if ($total >  ($page) * $size_page)
+                                <em>{{(($page-1) * $size_page) +1}} até {{($page) * $size_page}})</em>
+                            @else
+                                <em>{{(($page-1) * $size_page) +1}} até {{$total}})</em>
+                            @endif
+                            
                             <br/>
                             <!--Score máximo ({{ $max_score }}).-->
                         </p>
@@ -283,9 +259,13 @@
                             </div>
 
                             <div class="card-body">
-                                <strong>Ementa:&nbsp;&nbsp;</strong>{{ $doc['ementa'] }}
+                                @if ( isset($doc['ementa']) && strcmp($doc['ementa'], $doc['titulo']) != 0)
+                                    <strong>Ementa:&nbsp;&nbsp;</strong>{{ $doc['ementa'] }}
+                                    <hr/>
+                                @endif
+                                
 
-                                <hr/>
+                              
                                 @if (!empty($doc['numero']))
                                 <strong>Número:</strong> {{ $doc['numero']}}
                                 @endif

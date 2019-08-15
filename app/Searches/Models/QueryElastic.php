@@ -25,6 +25,7 @@ class QueryElastic
             'index' => $this->index,
             'type' => '_doc',
             'body' => [
+                'min_score' => 0.5,
                 'query' =>  $this->queryArray,
                 'size' =>   $this->size,
                 'from' => isset($this->from) ? $this->from : 0,

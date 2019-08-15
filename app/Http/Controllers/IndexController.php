@@ -119,8 +119,10 @@ class IndexController extends Controller
 
     private function hasFilters($queryParams){
         foreach($queryParams as $q => $v){
-            if($q != "query" && isset($v) && $v != "all")
+            if(($q == "esfera" || $q == "periodo") && isset($v) && $v != "all"){
                 return true;
+            }
+                
         }
     }
 
