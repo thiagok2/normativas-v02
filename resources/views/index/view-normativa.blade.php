@@ -7,7 +7,11 @@
         <div class="row">
             <div class="col-lg-12 text-center">
                 <hr class="split">
-                <h1><img src="/img/normativos-logo.png" srcset="/img/normativos-logo@2x.png 2x" alt="Normativas" /></h1>
+                <h1>
+                    <a href="{{route('index')}}">
+                        <img src="/img/normativos-logo.png" srcset="/img/normativos-logo@2x.png 2x" alt="Normativas" />
+                    </a>
+                </h1>
                 <hr class="split">
             </div>
         </div>
