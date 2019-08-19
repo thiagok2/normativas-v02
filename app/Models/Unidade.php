@@ -10,8 +10,7 @@ use Illuminate\Support\Str;
 class Unidade extends Model
 {
     protected $fillable = [
-        'nome', 'tipo', 'esfera','sigla','url','email','contato','telefone','endereco','contato2',
-        'friendly_url'
+        'nome', 'tipo', 'esfera','sigla','url','email','contato','telefone','endereco','contato2','friendly_url'
     ];
 
     public $timestamps = true;
@@ -22,6 +21,7 @@ class Unidade extends Model
         'esfera' => 'required|string|max:20',
         'sigla' => 'required|string|max:10',
         'url' => 'nullable|url',
+        'friendly_url' => 'required',
         'email' => 'required',
         'telefone' => 'required|string|max:100'
     ];

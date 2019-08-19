@@ -41,7 +41,15 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="nome">Nome*</label>
-                                <input type="text" class="form-control" value="{{ $unidade->nome }}" name="nome"
+                                <input type="text" class="form-control" value="{{ $unidade->nome }}" name="nome" id="nome"
+                                    required maxlength="255" minlength="10">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="friendly_url">URL*</label>
+                                <input type="text" class="form-control" value="{{ $unidade->friendly_url }}" name="friendly_url" id="friendly_url"
                                     required maxlength="255" minlength="10">
                             </div>
                         </div>
@@ -255,3 +263,35 @@
         </div>
     </div><!--end container-->
 @stop
+@push('scripts')
+<script>   
+    $(document).ready(function() {
+        
+        $("#nome").keyup(function(){
+          
+            var slug = function(str) {
+            str = str.replace(/^\s+|\s+$/g, ''); // trim
+            str = str.toLowerCase();
+
+            // remove accents, swap ñ for n, etc
+            var from = "ÁÄÂÀÃÅČÇĆĎÉĚËÈÊẼĔȆĞÍÌÎÏİŇÑÓÖÒÔÕØŘŔŠŞŤÚŮÜÙÛÝŸŽáäâàãåčçćďéěëèêẽĕȇğíìîïıňñóöòôõøðřŕšşťúůüùûýÿžþÞĐđßÆa·/_,:;";
+            var to   = "AAAAAACCCDEEEEEEEEGIIIIINNOOOOOORRSSTUUUUUYYZaaaaaacccdeeeeeeeegiiiiinnooooooorrsstuuuuuyyzbBDdBAa------";
+            for (var i=0, l=from.length ; i<l ; i++) {
+                str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
+            }
+
+            str = str.replace(/[^a-z0-9 -]/g, '') // remove invalid chars
+                .replace(/\s+/g, '-') // collapse whitespace and replace by -
+                .replace(/-+/g, '-'); // collapse dashes
+
+            return str;
+            };
+
+           
+            $("#friendly_url").val( slug($('#nome').val()) );    
+        });
+    });
+
+</script>
+    
+@endpush
