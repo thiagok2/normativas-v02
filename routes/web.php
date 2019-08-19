@@ -16,8 +16,8 @@ use Illuminate\Support\Facades\Redirect;
 
 Route::get('/', 'IndexController@index')->name('index');
 
-Route::get('/unidades', 'Admin\UnidadeController@search')->name('unidades-search');
-Route::get('/unidades/public/{id}', 'Admin\UnidadeController@page')->name('unidades-page');
+Route::get('/conselhos', 'Admin\UnidadeController@search')->name('unidades-search');
+Route::get('/conselhos/{url}', 'Admin\UnidadeController@page')->name('unidades-page');
 
 Route::get('/login', 'LoginController@login');
 

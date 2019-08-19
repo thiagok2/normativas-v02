@@ -62,7 +62,7 @@
                 <div class="col-lg-10 offset-lg-1">
                     <div class="card mb-3">
                         <div class="card-header">
-                            <a href="{{route('unidades-page',$federal->id)}}">
+                            <a href="{{route('unidades-page',$federal->friendly_url)}}">
                                 <i class="fa fa-external-link"></i>  {{ $federal->nome }}
                             </a>
                         </div>
@@ -139,7 +139,7 @@
                 <div class="col-lg-10 offset-lg-1">
                     <div class="card mb-3 @if ($u->documentos_count > 0) bs@else bl @endif ">
                         <div class="card-header">
-                            <a href="{{route('unidades-page',$u->id)}}">
+                            <a href="{{route('unidades-page',$u->friendly_url)}}">
                                 <i class="fa fa-external-link"></i>  {{ $u->nome }}
                             </a>
                         </div>

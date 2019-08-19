@@ -163,18 +163,18 @@ class UnidadeController extends Controller
         return view('unidades.index', compact('unidades','federal','q'));
     }
 
-    public function page(Request $request, $unidadeId){
-        $unidade = Unidade::with('estado')->withCount('documentos')->find($unidadeId);
+    public function page(Request $request, $unidadeUrl){
+        $unidade = Unidade::with('estado')->withCount('documentos')->where('friendly_url',$unidadeUrl)->first();
 
         $tiposTotal = DB::select('select t.id, t.nome as tipo, count(*) as total from documentos d
         inner join tipo_documentos t on t.id = d.tipo_documento_id
         where d.unidade_id = ?
-        group by t.id, t.nome', [$unidadeId]);
+        group by t.id, t.nome', [$unidade->id]);
 
         
 
         foreach($tiposTotal as $tipo){
-            $documentos["".$tipo->id.""] = Documento::where([['unidade_id',$unidadeId],['tipo_documento_id',$tipo->id]])->orderBy('ano','desc')->paginate(25);
+            $documentos["".$tipo->id.""] = Documento::where([['unidade_id',$unidade->id],['tipo_documento_id',$tipo->id]])->orderBy('ano','desc')->paginate(25);
         }
         
         return view('unidades.page', compact('unidade','tiposTotal','documentos'));

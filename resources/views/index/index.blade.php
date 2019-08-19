@@ -259,7 +259,8 @@
                             </div>
 
                             <div class="card-body">
-                                @if ( isset($doc['ementa']) && strcmp($doc['ementa'], $doc['titulo']) != 0)
+                                @if ( isset($doc['ementa']) && strcmp($doc['ementa'], $doc['titulo']) != 0 
+                                    && strcmp($doc['ementa'], $doc['tipo_doc']." ".$doc['titulo']) != 0)
                                     <strong>Ementa:&nbsp;&nbsp;</strong>{{ $doc['ementa'] }}
                                     <hr/>
                                 @endif

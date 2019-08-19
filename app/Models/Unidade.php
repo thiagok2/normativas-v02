@@ -5,10 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\User;
 
+use Illuminate\Support\Str;
+
 class Unidade extends Model
 {
     protected $fillable = [
-        'nome', 'tipo', 'esfera','sigla','url','email','contato','telefone','endereco','contato2'
+        'nome', 'tipo', 'esfera','sigla','url','email','contato','telefone','endereco','contato2',
+        'friendly_url'
     ];
 
     public $timestamps = true;
@@ -44,5 +47,10 @@ class Unidade extends Model
 
     public function documentos(){
         return $this->hasMany(Documento::class);
+    }
+
+    public function generateFriendlyUrl(){
+        $friendlyUrl = Str::slug($this->nome, '-');
+        return $friendlyUrl;
     }
 }
