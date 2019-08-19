@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 use App\Models\TipoDocumento;
+use App\Models\Unidade;
 use App\Services\SearchComponent;
 use App\Searches\Commands\SearchCommandA1;
 
@@ -46,6 +47,11 @@ class IndexController extends Controller
 
         $ano = $request->query("ano");
         $fonte = $request->query("fonte");
+
+        $conselho = null;
+        if(isset($fonte)){
+            $conselho = Unidade::where('sigla', $fonte)->first();
+        }
         
         $tiposDocumento = TipoDocumento::has('documentos')->get();;
         $query = $request->query('query');
@@ -77,7 +83,7 @@ class IndexController extends Controller
                 $aggregations = $result->aggResults;
             }
 
-            return view('index.index', compact('query',
+            return view('index.index', compact('query','conselho',
             'tiposDocumento','tipo_doc','esfera','periodo',
             'ano','fonte','filters',
             'page','total','size_page','total_pages',

@@ -120,6 +120,12 @@ class Documento extends Model
         'active_url' => 'A url deve ter um formato válido. Ex.: http://www.seuorgao.com/arquivos/resolucao123'
     ];
 
+    public function hasEmenta(){
+        if(strlen($this->ementa) >= 10 && (strlen($this->titulo)>= 10)) 
+            return substr( $this->ementa , -10) !=  substr($this->titulo, -10);
+        return false;
+    }
+
 
     public function toElasticObject(){
 

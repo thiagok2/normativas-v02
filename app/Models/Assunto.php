@@ -28,5 +28,9 @@ class Assunto extends Model
     public $messages = [
         'required' => 'O campo :attribute é obrigatório'
     ];
+
+    public function isDesconhecido(){
+        return $this->id == 0;
+    }
     
 }

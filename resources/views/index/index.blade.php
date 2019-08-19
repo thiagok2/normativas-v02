@@ -39,7 +39,7 @@
                     <input type="text" name="query" class="form-control form-control-sm" placeholder="Digite os termos da consulta" value="{{ $query }}" />
                     <div class="input-group-append">
                         <button type="submit" class="btn btn-mobile btn-primary btn-sm"><i class="fa fa-search"></i> Pesquisar</button>
-                            <button type="button" class="btn btn-mobile btn-info btn-sm" data-toggle="collapse" data-target="#filters-menu" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-cogs"></i> Configurações da busca</button>
+                        <button type="button" class="btn btn-mobile btn-info btn-sm" data-toggle="collapse" data-target="#filters-menu" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-cogs"></i> Configurações da busca</button>
                     </div>
                 </div>
                 </div>
@@ -180,6 +180,21 @@
 <!-- results -->
 <section id="results">
     <div class="container-fluid">
+        @if (isset($fonte))
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1 mt-3">
+                <div>
+                    <h4 class="rounded">
+                        {{$conselho->nome}}
+                    <a class="pull-right" href="{{route('unidades-page',$conselho->friendly_url)}}" style="color:white;">
+                       <i class="fa fa-external-link"></i>
+                    </a>
+                    </h4>
+                </div>
+            </div>
+        </div>
+        @endif
+
         @if (!empty($documentos))
             <!-- aggregates -->
             @if (!empty($query) && (!empty($documentos)))
@@ -208,7 +223,7 @@
                             @if (isset($aggregations))
                                 @foreach ($aggregations['ano']['labels'] as $bucket)
                                     <a href="?query={{ $query }}&ano={{ urlencode($bucket['nome']) }}&esfera={{ $esfera  }}&fonte={{ $fonte  }}"
-                                        class="btn btn-outline-secondary btn-pill btn-sm mb-2">
+                                        class="btn btn-outline-secondary btn-pill btn-sm mb-2 <?php if(isset($ano)) echo "bg-secondary text-light" ?>">
                                         {{ ucfirst($bucket['nome']) }}
                                         <span class="badge badge-pill badge-info">{{ $bucket['quantidade'] }}</span>
                                     </a>
@@ -216,7 +231,7 @@
 
                                 @foreach ($aggregations['esfera']['labels'] as $bucket)
                                     <a href="?query={{ $query }}&esfera={{ urlencode($bucket['nome']) }}&ano={{ $ano }}&fonte={{ $fonte  }}"
-                                    class="btn btn-outline-secondary btn-pill btn-sm mb-2">
+                                    class="btn btn-outline-secondary btn-pill btn-sm mb-2 <?php if(isset($esfera)) echo "bg-secondary text-light" ?>">
                                         {{ ucfirst($bucket['nome']) }}
                                         <span class="badge badge-pill badge-info">{{ $bucket['quantidade'] }}</span>
                                     </a>
@@ -224,7 +239,7 @@
 
                                 @foreach ($aggregations['fonte']['labels'] as $bucket)
                                     <a href="?query={{ $query }}&fonte={{ urlencode($bucket['nome']) }}&ano={{ $ano  }}&esfera={{ $esfera }}"
-                                    class="btn btn-outline-secondary btn-pill btn-sm mb-2">
+                                    class="btn btn-outline-secondary btn-pill btn-sm mb-2 <?php if(isset($fonte)) echo "bg-secondary text-light" ?>">
                                         {{ ucfirst($bucket['nome']) }}
                                         <span class="badge badge-pill badge-info">{{ $bucket['quantidade'] }}</span>
                                     </a>
@@ -259,8 +274,9 @@
                             </div>
 
                             <div class="card-body">
-                                @if ( isset($doc['ementa']) && strcmp($doc['ementa'], $doc['titulo']) != 0 
-                                    && strcmp($doc['ementa'], $doc['tipo_doc']." ".$doc['titulo']) != 0)
+                                @if ( isset($doc['ementa']) && 
+                                    (substr( $doc['ementa'] , -10) !=  substr($doc['titulo'], -10))
+                                    )
                                     <strong>Ementa:&nbsp;&nbsp;</strong>{{ $doc['ementa'] }}
                                     <hr/>
                                 @endif

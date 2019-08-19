@@ -20,7 +20,9 @@
         </div>
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h1><img src="/img/normativos-logo.png" srcset="/img/normativos-logo@2x.png 3x" alt="Normativas" /></h1>
+                <a href="{{route('index')}}">
+                    <h1><img src="/img/normativos-logo.png" srcset="/img/normativos-logo@2x.png 3x" alt="Normativas" /></h1>
+                </a>
                 <h3><small class="text-muted">Pesquisar conselhos(federal, estaduais e municipais)</small></h3>
             </div>
         </div>
@@ -102,6 +104,23 @@
                 </div><!-- end card -->
             </div><!-- end col-10 -->
         </div>
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3">
+                   
+                <form action="{{route('index')}}" method="GET">
+                    <div class="input-group">
+                        <input type="text" name="query" id="query" class="form-control"
+                            placeholder="Digite os termos da consulta" value="" />
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-mobile btn-primary"><i class="fa fa-search"></i> Pesquisar</button>
+                            </div>
+                    </div>
+
+                    <input type="hidden" name="fonte" id="fonte" value="{{$unidade->sigla}}" />
+                </form>
+                            
+            </div>
+        </div>
 
         <div class="row">
             <div class="col-lg-10 offset-lg-1">
@@ -119,6 +138,13 @@
 
                             <div id="collapse_{{$tipo->id}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                             <div class="card-body">
+                                <div class="alert bg-secondary text-light">
+                                    @if ($tipo->total > 25)
+                                        Listando apenas 25 documentos. <br/>
+                                    @endif
+                                    Para ver mais <a href="{{route('index', ['query' => $tipo->tipo,'fonte' => $unidade->sigla])}}">clique aqui</a>
+                                    
+                                </div>
                                 @foreach ($documentos as $k => $docs)
                                     @if ($k === $tipo->id)
                                         <ul class="list-group">
@@ -126,15 +152,22 @@
                                             <li class="list-group-item">
                                                 Número: {{$d->numero}}
                                                 <div class="pull-right">
-                                                    {{$d->assunto->nome}}
+                                                    @if (!$d->assunto->isDesconhecido())
+                                                        {{$d->assunto->nome}}
+                                                    @endif
                                                 </div>
                                                 <br/>
                                                 {{$d->titulo}}
                                                 <div class="pull-right">{{$d->ano}}</div>
                                                 <br/>
-                                                Ementa: <small class="text-muted">
+                                                @if ( $d->hasEmenta() )
+                                                    Ementa: <small class="text-muted">
                                                         {{$d->ementa}}
                                                 </small>
+                                                <br/>
+                                                Sub::{{substr($d->ementa, -strlen($d->titulo))}} != {{$d->titulo}}
+                                                @endif
+                                              
                                                 <br/>
                                                 <a href="{{ route("pdfNormativa",$d->arquivo) }}">
                                                     <span class="badge badge-secondary">Download</span>
