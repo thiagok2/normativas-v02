@@ -42,4 +42,10 @@ if [ "$SEED_DATABASES" == "2" ]; then
 
 	echo "Restaurando backup elastic"
 	curl -XPOST http://normativaselasticsearch:9200/_snapshot/normativas/dump/_restore
+
+	echo "EXECUTANDO php artisan migrate"
+        php artisan migrate
+
+
+
 fi
