@@ -26,13 +26,16 @@ if [ "$SEED_DATABASES" == "1" ]; then
         php artisan db:seed
 
 	 echo "EXECUTANDO sh elasticseed/elasticseed.sh"
-        sh elasticsearch/seed.sh $6 $7
+        sh elasticsearch/seed.sh
 fi
 
 if [ "$SEED_DATABASES" == "2" ]; then
 	echo "Aplicando dump do postgresql.sql"
 	echo "/backup/$DUMP_POSTGRESQL_FILE"
 	PGPASSWORD=$POSTGRES_PASSWORD psql -h normativasdb -U $POSTGRES_USER -d $POSTGRES_DB -1 -f /backup/$DUMP_POSTGRESQL_FILE
+
+	echo "EXECUTANDO php artisan migrate"
+        php artisan migrate
 
 	echo "Copiando PDFs para diretorio de destino"
 	cp -v /backup/$DUMP_UPLOAD_FOLDER/* /app/storage/app/public/uploads
@@ -42,10 +45,5 @@ if [ "$SEED_DATABASES" == "2" ]; then
 
 	echo "Restaurando backup elastic"
 	curl -XPOST http://normativaselasticsearch:9200/_snapshot/normativas/dump/_restore
-
-	echo "EXECUTANDO php artisan migrate"
-        php artisan migrate
-
-
 
 fi
