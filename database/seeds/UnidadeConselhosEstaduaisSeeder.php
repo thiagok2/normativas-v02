@@ -25,6 +25,7 @@ class UnidadeConselhosEstaduaisSeeder extends Seeder
             'telefone' => '(68) 3224-1744 / 3223-9660',
             'user_id' => '1',
             'estado_id' => '1',
+            'friendly_url' => 'consed-ac',
             'confirmado' => false
         ]);
     
@@ -42,6 +43,7 @@ class UnidadeConselhosEstaduaisSeeder extends Seeder
             'telefone' => '(82) 3315-1401',
             'user_id' => '1',
             'estado_id' => '2',
+            'friendly_url' => 'cee-al',
             'confirmado' => false
         ]);
 
@@ -59,6 +61,7 @@ class UnidadeConselhosEstaduaisSeeder extends Seeder
             'telefone' => '(96) 98126-5242/99204-7133',
             'user_id' => '1',
             'estado_id' => '3',
+            'friendly_url' => 'cee-ap',            
             'confirmado' => false
         ]);
 
@@ -77,6 +80,7 @@ class UnidadeConselhosEstaduaisSeeder extends Seeder
             'telefone' => '(92) 3234-5074',
             'user_id' => '1',
             'estado_id' => '4',
+            'friendly_url' => 'cee-am',
             'confirmado' => false
         ]);
 
@@ -100,6 +104,7 @@ class UnidadeConselhosEstaduaisSeeder extends Seeder
             'telefone' => '(71) 3346-0319/3240-5666/3346-1228/3345-5182/(73) 98805-5913',
             'user_id' => '1',
             'estado_id' => '5',
+            'friendly_url' => 'cee-ba',
             'confirmado' => false
         ]);
     
@@ -119,6 +124,7 @@ class UnidadeConselhosEstaduaisSeeder extends Seeder
             'telefone' => '(85) 3101-2005 / 3101-2011 / 3101-2017',
             'user_id' => '1',
             'estado_id' => '6',
+            'friendly_url' => 'cee-ce',
             'confirmado' => false
         ]);
 
@@ -139,6 +145,7 @@ class UnidadeConselhosEstaduaisSeeder extends Seeder
             'telefone' => '(61) 3901-3151',
             'user_id' => '1',
             'estado_id' => '7',
+            'friendly_url' => 'cee-df',
             'confirmado' => false
         ]);
 
@@ -157,6 +164,7 @@ class UnidadeConselhosEstaduaisSeeder extends Seeder
             'telefone' => '(27) 3636-4850 / 3636-4855 / 3636-4854 / 3636-4853',
             'user_id' => '1',
             'estado_id' => '8',
+            'friendly_url' => 'cee-es',
             'confirmado' => false
         ]);
 
@@ -176,6 +184,7 @@ class UnidadeConselhosEstaduaisSeeder extends Seeder
             'telefone' => '(62) 3201.9811/9812',
             'user_id' => '1',
             'estado_id' => '9',
+            'friendly_url' => 'cee-go',
             'confirmado' => false
         ]);
 
@@ -194,6 +203,7 @@ class UnidadeConselhosEstaduaisSeeder extends Seeder
             'telefone' => '(98)3214-1623(geral)/3214-1624(Presidência)/3232-6256(Assessoria)/3212-3643(Diretora Executiva)',
             'user_id' => '1',
             'estado_id' => '10',
+            'friendly_url' => 'cee-ma',
             'confirmado' => false
         ]);
 
@@ -212,6 +222,7 @@ class UnidadeConselhosEstaduaisSeeder extends Seeder
             'telefone' => '(65) 3318-3208',
             'user_id' => '1',
             'estado_id' => '11',
+            'friendly_url' => 'cee-mt',
             'confirmado' => false
         ]);
 
@@ -231,6 +242,7 @@ class UnidadeConselhosEstaduaisSeeder extends Seeder
             'telefone' => '(67) 3318-7080',
             'user_id' => '1',
             'estado_id' => '12',
+            'friendly_url' => 'cee-ms',
             'confirmado' => false
         ]);
 
@@ -250,6 +262,7 @@ class UnidadeConselhosEstaduaisSeeder extends Seeder
             'telefone' => '(31) 3071-4750',
             'user_id' => '1',
             'estado_id' => '13',
+            'friendly_url' => 'cee-mg',
             'confirmado' => false
         ]);
 
@@ -268,6 +281,7 @@ class UnidadeConselhosEstaduaisSeeder extends Seeder
             'telefone' => '(91) 3210-3200',
             'user_id' => '1',
             'estado_id' => '14',
+            'friendly_url' => 'cee-pa',
             'confirmado' => false
         ]);
 
@@ -286,6 +300,7 @@ class UnidadeConselhosEstaduaisSeeder extends Seeder
             'telefone' => '(83) 3218-4227 / 3218-4229 / 3218-4230',
             'user_id' => '1',
             'estado_id' => '15',
+            'friendly_url' => 'cee-pb',
             'confirmado' => false
         ]);
 
@@ -304,6 +319,7 @@ class UnidadeConselhosEstaduaisSeeder extends Seeder
             'telefone' => '(41) 3212-1150 / 3212-1151 (fax)',
             'user_id' => '1',
             'estado_id' => '16',
+            'friendly_url' => 'cee-pr',
             'confirmado' => false
         ]);
 
@@ -323,6 +339,7 @@ class UnidadeConselhosEstaduaisSeeder extends Seeder
             'telefone' => '(81) 3181-2686',
             'user_id' => '1',
             'estado_id' => '17',
+            'friendly_url' => 'cee-pe',
             'confirmado' => false
         ]);
 
@@ -341,6 +358,7 @@ class UnidadeConselhosEstaduaisSeeder extends Seeder
             'telefone' => '3216-3211(geral); 3216-9090(Presidência); 3216-3286(Técnicos); 3216-9091(Sec. Executiva)',
             'user_id' => '1',
             'estado_id' => '18',
+            'friendly_url' => 'cee-pi',
             'confirmado' => false
         ]);
 
@@ -360,6 +378,7 @@ class UnidadeConselhosEstaduaisSeeder extends Seeder
             'telefone' => '(21) 2332-6965 – 2332-6963',
             'user_id' => '1',
             'estado_id' => '19',
+            'friendly_url' => 'cee-rj',
             'confirmado' => false
         ]);
 
@@ -379,6 +398,7 @@ class UnidadeConselhosEstaduaisSeeder extends Seeder
             'telefone' => '(84) 3232-6618',
             'user_id' => '1',
             'estado_id' => '20',
+            'friendly_url' => 'cee-rn',
             'confirmado' => false
         ]);
 
@@ -398,6 +418,7 @@ class UnidadeConselhosEstaduaisSeeder extends Seeder
             'telefone' => '(51) 3225-6601 / 3225-5313 / 3286-2759',
             'user_id' => '1',
             'estado_id' => '21',
+            'friendly_url' => 'ceed-rs',
             'confirmado' => false
         ]);
 
@@ -417,6 +438,7 @@ class UnidadeConselhosEstaduaisSeeder extends Seeder
             'telefone' => '(69) 3216-5345',
             'user_id' => '1',
             'estado_id' => '22',
+            'friendly_url' => 'cee-ro',
             'confirmado' => false
         ]);
 
@@ -436,6 +458,7 @@ class UnidadeConselhosEstaduaisSeeder extends Seeder
             'telefone' => '(95) 99141-4592',
             'user_id' => '1',
             'estado_id' => '23',
+            'friendly_url' => 'cee-rr',
             'confirmado' => false
         ]);
 
@@ -456,6 +479,7 @@ class UnidadeConselhosEstaduaisSeeder extends Seeder
             'telefone' => '(48) 3224-0104 (das 12 as 19 horas)',
             'user_id' => '1',
             'estado_id' => '24',
+            'friendly_url' => 'cee-sc',
             'confirmado' => false
         ]);
 
@@ -474,6 +498,7 @@ class UnidadeConselhosEstaduaisSeeder extends Seeder
             'telefone' => '(11) 2075-4502 / (11) 2075-4500 (PABX)',
             'user_id' => '1',
             'estado_id' => '25',
+            'friendly_url' => 'cee-sp',
             'confirmado' => false
         ]);
 
@@ -493,6 +518,7 @@ class UnidadeConselhosEstaduaisSeeder extends Seeder
             'telefone' => '(79) 3205-3402',
             'user_id' => '1',
             'estado_id' => '26',
+            'friendly_url' => 'cee-se',
             'confirmado' => false
         ]);
 
@@ -512,6 +538,7 @@ class UnidadeConselhosEstaduaisSeeder extends Seeder
             'telefone' => '(63) 3218-6221',
             'user_id' => '1',
             'estado_id' => '27',
+            'friendly_url' => 'cee-to',
             'confirmado' => false
         ]);
     

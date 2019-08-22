@@ -28,6 +28,7 @@ class UserUnidadeConselhoFederalSeeder extends Seeder
             Brasília – DF', 
             'telefone' => '(61) 2022-7701',
             'user_id' => '1',
+            'friendly_url' => 'cne',
             'confirmado' => false
         ]);
 
