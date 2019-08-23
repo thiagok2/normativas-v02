@@ -20,6 +20,8 @@
         <link href="/css/theme.min.css" media="all" rel="stylesheet" type="text/css"/>
         <link href="/css/app-search.css" media="all" rel="stylesheet" type="text/css"/>
 
+        <link href="/img/favicon.ico" rel="shortcut icon">
+
     </head>
 
      <body>
