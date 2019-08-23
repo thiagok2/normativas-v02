@@ -126,7 +126,7 @@
                                                 <div class="col-lg-6">
                                                     <div class="card no-border">
                                                         <div class="card-header">
-                                                            Sobre o Conselho
+                                                            Contato
                                                         </div>
                                                         <div class="card-body pl-0 pr-0">
                                                             <div class="row pl-3 pr-3">
