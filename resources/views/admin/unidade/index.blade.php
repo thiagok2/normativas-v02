@@ -12,6 +12,16 @@
             <li><a href="{{route('home')}}">Painel</a></li>
             <li> <a href="#" class="active"><a href="#">Unidades</a></li>
         </ol>
+        <div class="row">
+            @if (auth()->user()->isAdmin())
+                
+                <div class="col-lg-2">
+                    <a href="{{route('unidade-create')}}" class="btn btn-primary btn-block btn-lg">Novo Conselho</a>
+                    <p>
+                </div>
+               
+            @endif
+        </div>
 
         <div class="row">
             <div class="col-lg-12">

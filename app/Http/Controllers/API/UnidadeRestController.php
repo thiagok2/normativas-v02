@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Unidade;
 use App\User;
 use App\Http\Resources\Unidade as UnidadeResource;
+use App\Models\Estado;
+use App\Models\Municipio;
 use App\Services\UnidadeQuery;
 
 class UnidadeRestController extends Controller
@@ -35,6 +37,16 @@ class UnidadeRestController extends Controller
         return response()->json(
             $evolucaoUnidadesConfirmadasMes
         );
+    }
+
+    public function municipios(Request $request, $sigla){
+        $estado = Estado::where("sigla", strtoupper($sigla))->first();
+        $municipios = Municipio::where("estado_id", $estado->id)->get();
+
+        return response()->json(
+            $municipios
+        );
+
     }
 
 

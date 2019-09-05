@@ -25,6 +25,7 @@ Route::get('documentos/enviados/6meses', 'API\DocumentoRestController@evolucaoEn
 Route::get('documentos/enviados/periodo', 'API\DocumentoRestController@evolucaoEnviadosPeriodo');
 
 Route::get('unidades/confirmadas/periodo', 'API\UnidadeRestController@evolucaoUnidadesConfirmadasPeriodo');
+Route::get('unidades/{sigla}/municipios', 'API\UnidadeRestController@municipios');
 Route::get('unidades/confirmadas/6meses', 'API\UnidadeRestController@evolucaoUnidadesConfirmadas6Meses');
 //Route::resource('usuarios', 'API\\UserRestController');
 

@@ -76,6 +76,16 @@ class UnidadeController extends Controller
 
     }
 
+    public function create(Request $request){
+
+        $estados = Estado::all();
+        $unidade = new Unidade();
+
+        return view('admin.unidade.create', compact('estados','unidade'));
+    }
+
+
+
     public function edit($id){
         $unidade = Unidade::find($id);
 
