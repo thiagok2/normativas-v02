@@ -5,6 +5,7 @@
  */
 /* FONT PATH
  * -------------------------- */
+@import url("https://fonts.googleapis.com/css?family=Open+Sans&display=swap");
 @font-face {
   font-family: 'FontAwesome';
   src: url("../fonts/fontawesome-webfont.eot?v=4.7.0");
@@ -3028,7 +3029,10 @@ body {
 }
 
 body {
+  font-family: 'Open Sans', sans-serif;
   background: #f0f0f0;
+  /* página de conselhos */
+  /* fim página de conselhos */
 }
 
 body hr.split {
@@ -3108,6 +3112,21 @@ body .form-control-sm {
   font-size: 14px;
 }
 
+body .nav-tabs .nav-item .nav-link.active {
+  background-color: #12586f;
+  color: #ffffff;
+  border-color: #12586f;
+}
+
+body .card.no-border {
+  border: none;
+}
+
+body .card.no-border .card-header {
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  font-weight: bold;
+}
+
 body #mini-search {
   background-color: #ffffff;
   padding: 20px 0;
@@ -3150,6 +3169,41 @@ body footer {
 
 body footer img:last-child {
   margin: 0 30px;
+}
+
+body #unidade .box-head {
+  padding: 20px;
+  background-color: #12586f;
+  color: #ffffff;
+}
+
+body #unidade .box-head h1 {
+  border-bottom: solid 1px #ffffff;
+  display: inline-block;
+  padding-bottom: 4px;
+}
+
+body #unidade .box-head h2 {
+  font-size: 20px;
+}
+
+body #unidade .box-head p.n-atos {
+  text-align: center;
+  background: #ffffff;
+  border-radius: 30px;
+  color: #333333;
+  display: inline-block;
+  padding: 3px 22px;
+  font-size: 14px;
+}
+
+body #unidade .box-head p.n-atos span {
+  font-size: 26px;
+  font-weight: bold;
+}
+
+body #unidade .box-head small {
+  padding-right: 5px;
 }
 
 /* Large desktops and laptops */
