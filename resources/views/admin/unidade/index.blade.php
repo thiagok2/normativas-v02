@@ -58,6 +58,9 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
+                    <div class="panel-heading">
+                            Resultados ({{$unidades->total()}})
+                    </div>
                     <div class="panel-body">
                         <table class="table table-striped table-hover table-condensed">
                             <tbody>
@@ -105,7 +108,7 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-lg-6 no-padding">
-                                    {{ $unidades->links() }}
+                                    {{ $unidades->appends(request()->query())->links() }}
                                 </div>
                                 <div class="col-lg-3 pull-right no-padding  ">
                                     <ul class="list-group">
