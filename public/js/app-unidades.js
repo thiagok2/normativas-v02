@@ -23,13 +23,15 @@ $(document).ready(function() {
         $("#friendly_url").val( slug($('#nome').val()) );    
     });
 
-    $('select[name=estados]').change(function () {
+    $('.phone').mask('(00) 0000-0000');
+
+    $('select[name=estado_id]').change(function () {
         var uf = $(this).val();
         $.get('/api/unidades/' + uf + '/municipios', function (busca) {
-            $('select[id=municipios]').empty();
-                $('select[id=municipios]').append('<option value="selecione"> </option>');
+            $('select[id=municipio_id]').empty();
+                $('select[id=municipio_id]').append('<option value="selecione"> </option>');
             $.each(busca, function (key, value) {
-                $('select[id=municipios]').append('<option value="' + value.id + '">' + value.nome + '</option>');
+                $('select[id=municipio_id]').append('<option value="' + value.id + '">' + value.nome + '</option>');
             });
         });
     });

@@ -98,6 +98,29 @@ class UnidadeController extends Controller
         return view('admin.unidade.edit', compact('unidade','users', 'documentos'));
     }
 
+    public function save(Request $request, Unidade $unidade){
+
+        $validator = Validator::make($request->all(), $unidade->rules, $unidade->messages);
+             
+        if ($validator->fails()) {
+             return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        DB::beginTransaction();
+
+
+        $data = $request->all();
+        $unidade->fill($data);
+        $unidade->user()->associate(auth()->user()->id);
+
+        $unidade->save();
+        DB::commit();
+
+        return redirect()->route('usuario-new-gestor', ['unidade_id' => $unidade->id])
+            ->with('success', 'Unidade cadastrada com sucesso. Agora confirme os dados para criar a conta ao gestor do conselho na plataforma Normativas.');
+
+       
+    }
 
     public function store(Request $request, Unidade $unidade)
     {

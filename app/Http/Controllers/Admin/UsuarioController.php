@@ -31,6 +31,19 @@ class UsuarioController extends Controller
         return view('admin.usuario.index', compact('user','usuarios','documentos'));
     }
 
+    public function newGestor(Request $request){
+        $unidade = Unidade::find($request->unidade_id);
+        $usuario = new User();
+        $usuario->name = $unidade->contato;
+        $usuario->email = (strpos($unidade->email, ';') !== false)  ? trim(explode(',', $unidade->email)[0]) : $unidade->email;
+        $usuario->tipo = User::TIPO_GESTOR;
+        $usuario->unidade()->associate($unidade);
+
+        $message = "Confirme os dados do responsável";
+
+        return view('admin.usuario.create', compact('unidade', 'usuario'));
+    }
+
     public function edit($id){
         $user = User::find($id);
 
@@ -118,9 +131,10 @@ class UsuarioController extends Controller
         }
 
         $unidade = Unidade::find($unidadeId);
+        $usuario = new User();
 
 
-        return view('admin.usuario.create', compact('unidade'));
+        return view('admin.usuario.create', compact('unidade','usuario'));
     } 
 
     public function create(Request $request, User $user){
@@ -140,6 +154,8 @@ class UsuarioController extends Controller
             
             DB::beginTransaction();
 
+            
+
             $user = new User();
             $data = $request->all();
             $user->fill($data);
@@ -151,16 +167,25 @@ class UsuarioController extends Controller
 
             if(auth()->user()->isGestor()){
                 $user->unidade()->associate(auth()->user()->unidade);
-            }else if(auth()->user()->isAdmin()){
+            }else{
                 $user->unidade_id = $request->unidadeId;
             }
-
             
-
             $convite = new Convite();
 
             $convite->enviarNovoUsuario($user, $passwordRandom);
             $user->save();
+
+            if($request->has('unidadeId')){
+                $unidade = Unidade::find($request->unidadeId);
+
+                if (!$unidade->responsavel){
+                    $unidade->responsavel()->associate( $user );
+                    $unidade->save();
+                }
+            }
+
+
             DB::commit();
 
 

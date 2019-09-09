@@ -38,8 +38,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="nome">Nome*</label>
-                                    <input type="text" class="form-control" name="name"
-                                        required maxlength="255" minlength="10">
+                                    <input type="text" class="form-control" name="name" value="{{$usuario->name}}" required maxlength="255" minlength="10">
                                 </div>
                             </div>
                         </div>
@@ -53,7 +52,9 @@
                                             <option value="admin">Administrador</option>
                                         @endif
                                         <option value="gestor">Gestor</option>
-                                        <option value="colaborador">Colaborador</option>
+                                        @if ($unidade->responsavel)
+                                            <option value="colaborador">Colaborador</option>
+                                        @endif
                                     </select>
                                 </div>
                             </div>
@@ -70,7 +71,7 @@
                                             </span>
                                         </span>
                                         <input type='email' class="form-control" id="email" name="email"  maxlength="255"
-                                            required/>
+                                                required value="{{$usuario->email}}"/>
                                     </div>
                                 </div>
                             </div>

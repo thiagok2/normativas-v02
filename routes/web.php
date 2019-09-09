@@ -61,11 +61,13 @@ Route::prefix('admin')->middleware('auth')->namespace('Admin')->group(function()
 
     Route::get('unidades', 'UnidadeController@index')->name('unidades');
     Route::post('unidades', 'UnidadeController@store')->name('unidade-store');
+    Route::post('unidades/salvar', 'UnidadeController@save')->name('unidade-save');
     
     Route::get('unidades/nova', 'UnidadeController@create')->name('unidade-create');
     Route::get('unidades/{id}/edit', 'UnidadeController@edit')->name('unidade-edit');
     Route::get('unidades/{id}/show', 'UnidadeController@show')->name('unidade-show');
-    
+    Route::get('unidades/gestor/new', 'UsuarioController@newGestor')->name('usuario-new-gestor');
+
     Route::get('tiposdocumento', 'TipoDocumentoController@index')->name('tiposdocumento');
     
     
@@ -116,6 +118,7 @@ Route::prefix('admin')->middleware('auth')->namespace('Admin')->group(function()
     Route::get('usuarios/reenviar-convite/{id}', 'UsuarioController@reenviarConvite')->name('usuario-reconvidar');
     
     Route::post('usuarios', 'UsuarioController@store')->name('usuario-store');
+    
     Route::post('usuarios/create', 'UsuarioController@create')->name('usuario-create');
     Route::get('usuarios/pesquisar', 'UsuarioController@search')->name('usuario-search');
     Route::post('usuarios/pesquisar', 'UsuarioController@search')->name('usuario-search');
