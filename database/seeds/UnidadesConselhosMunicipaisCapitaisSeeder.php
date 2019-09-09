@@ -25,7 +25,7 @@ class UnidadesConselhosMunicipaisCapitaisSeeder extends Seeder
                 'nome' => 'CONSELHO MUNICIPAL DE EDUCAÇÃO DE '.strtoupper($capital->nome), 
                 'tipo' => 'Conselho', 
                 'esfera' => 'Municipal',
-                'email' => $nome_slug.'@'.$nome_slug.'.com',
+                'email' => $nome_slug.'@'.strtoupper('cme-'.$nome_slug).'.com.br',
                 'url' => null,
                 'sigla' => 'CME-'.strtoupper($nome_slug),
                 'user_id' => '1',
@@ -42,6 +42,14 @@ class UnidadesConselhosMunicipaisCapitaisSeeder extends Seeder
                 'password' => Hash::make('987654321'),
                 'unidade_id' => $unidadeCapital->id,
                 'tipo' => 'gestor'
+            ]);
+
+            $roboCapital = User::create([
+                'name' => 'Robô Extrator '.$unidadeCapital->sigla,
+                'email' => strtolower($unidadeCapital->sigla).'@extrator.com.br',
+                'password' =>  Hash::make('extrator'),
+                'unidade_id' => $unidadeCapital->id,
+                'tipo' => User::TIPO_EXTRATOR
             ]);
 
             $unidadeCapital->responsavel()->associate($gestorCapital);
