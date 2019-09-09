@@ -174,9 +174,13 @@
                             <br/>
                             {{ $user->tipo }}
                             <br/>
-                            Criação: {{ $user->created_at }}
+                            Criação: {{ $user->created_at->format('d/m/Y') }}
                             <br/>
-                            Confirmação: {{ $user->confirmado_em }}
+                            @if ( $user->confirmado)
+                                Confirmação: {{ $user->confirmado_em }}
+                            @else
+                                <span class="badge">Não confirmado</span>
+                            @endif
 
                         </div>
                         <div class="panel-footer">
@@ -202,6 +206,11 @@
                                     </div><!-- /.modal-dialog -->
                                 </div><!-- /.modal --> 
                             @endif
+                            @if (auth()->user()->isResponsavel() || auth()->user()->isAdmin())
+                                <a href="{{route('usuario-edit',$user->id)}}" class="btn btn-primary btn-lg ">Editar</a>    
+                                <a href="{{route('usuario-reconvidar',$user->id)}}" class="btn btn-primary btn-lg ">Enviar novo convite</a>
+                            @endif
+                            
                         </div>
                     </div>   
                     

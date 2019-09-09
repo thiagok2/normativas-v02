@@ -18,7 +18,12 @@
         <div class="row">
             <div class="col-lg-9">
                 <div class="panel panel-default box box-primary">
-                    <div class="panel-heading">Unidade</div>
+                    <div class="panel-heading">
+                        Unidade
+                        <a class="btn btn-primary" href="{{route("unidade-edit",$unidade->id)}}">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                    </div>
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-sm-9">
@@ -151,7 +156,43 @@
                         </div>
                     </div>
                 @endif
-            </div>
+
+
+              
+                <div class="panel panel-default">
+                    <div class="panel-heading">Colaboradores</div>
+                    <div class="panel-body">
+                        @forelse ($users as $user)
+                            
+                            <div class="panel panel-default">
+                                <div class="panel-heading">{{ $user->name }}</div>
+                                <div class="panel-body">
+                                    Email: {{ $user->email }}
+                                    <br/>
+                                    {{ $user->tipo }}
+                                    <br/>
+                                    Criação: {{ $user->created_at->format('d/m/Y') }}
+                                    <br/>
+                                    @if ( $user->confirmado)
+                                        Confirmação: {{ $user->confirmado_em }}
+                                    @else
+                                        <span class="badge">Não confirmado</span>
+                                    @endif
+                                    
+        
+                                </div>
+                            </div>   
+                            
+                        @empty
+                            <h2>Sem usuários</h2>
+                        @endforelse                      
+                    </div>
+                </div>
+               
+            
+            
+            </div> <!-- end div-col-3 lateral-->
+
         </div><!-- end row main --> 
     </div> <!-- end container --> 
 @stop

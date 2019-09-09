@@ -72,7 +72,14 @@ class UnidadeController extends Controller
             ['unidade_id', $unidade->id]
         ])->count();
 
-        return view('admin.unidade.show', compact('unidade', 'statusExtrator','documentos','documentosCount','documentosPendentesCount'));
+        $users = User::where("unidade_id", $id)->get();
+
+        $alerta = null;
+        if (!$unidade->confirmado){
+            $alerta = "Dados do conselho ainda não foram confirmados pelo seu gestor.";
+        }
+
+        return view('admin.unidade.show', compact('unidade', 'statusExtrator','documentos','documentosCount','documentosPendentesCount','users','alerta'));
 
     }
 
@@ -89,13 +96,18 @@ class UnidadeController extends Controller
     public function edit($id){
         $unidade = Unidade::find($id);
 
+        $alerta = null;
+        if (!$unidade->confirmado){
+            $alerta = "Dados do conselho ainda não foram confirmados pelo seu gestor.";
+        }
+
         $users = User::where("unidade_id", $id)->get();
 
         $documentos = Documento::where('unidade_id', $id)
             ->orderBy('ano', 'desc')
             ->paginate(10);
 
-        return view('admin.unidade.edit', compact('unidade','users', 'documentos'));
+        return view('admin.unidade.edit', compact('unidade','users', 'documentos','alerta'));
     }
 
     public function save(Request $request, Unidade $unidade){

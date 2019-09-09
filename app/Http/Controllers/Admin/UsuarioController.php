@@ -47,7 +47,12 @@ class UsuarioController extends Controller
     public function edit($id){
         $user = User::find($id);
 
-        return view('admin.usuario.edit', compact('user'));
+        $alerta = null;
+        if (!$user->confirmado){
+            $alerta = "Usuário ainda não atualizou seus dados.";
+        }
+
+        return view('admin.usuario.edit', compact('user','alerta'));
     }
 
     public function search(Request $request){

@@ -164,7 +164,7 @@ return [
             ]
             ],
             [
-                'text'    => 'Unidade',
+                'text'    => 'Conselhos',
                 'icon'    => 'university',
                 'url'     => 'admin/unidades' 
             ],
