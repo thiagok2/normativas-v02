@@ -88,3 +88,6 @@
 </div><!-- end container-->
 
 @stop
+@push('scripts')
+    <script src="{{ asset('js/app-usuario.js') }}"></script>
+@endpush

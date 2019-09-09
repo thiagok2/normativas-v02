@@ -136,3 +136,7 @@
 
 
 @stop
+
+@push('scripts')
+<script src="{{ asset('js/app-usuarios.js') }}"></script>
+@endpush
