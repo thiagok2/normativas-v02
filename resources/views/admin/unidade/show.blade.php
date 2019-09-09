@@ -165,7 +165,12 @@
                         @forelse ($users as $user)
                             
                             <div class="panel panel-default">
-                                <div class="panel-heading">{{ $user->name }}</div>
+                                <div class="panel-heading">
+                                    {{ $user->name }}
+                                    <a href="{{route('usuario-edit',$user->id)}}">
+                                        <span class="fa fa-edit"></span>
+                                    </a>    
+                                </div>
                                 <div class="panel-body">
                                     Email: {{ $user->email }}
                                     <br/>
