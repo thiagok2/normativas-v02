@@ -41,7 +41,7 @@ class UnidadeRestController extends Controller
 
     public function municipios(Request $request, $sigla){
         $estado = Estado::where("sigla", strtoupper($sigla))->first();
-        $municipios = Municipio::where("estado_id", $estado->id)->get();
+        $municipios = Municipio::where("estado_id", $estado->id)->orderBy('capital', 'desc')->get();
 
         return response()->json(
             $municipios
