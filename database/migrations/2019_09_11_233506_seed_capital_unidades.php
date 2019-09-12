@@ -30,6 +30,12 @@ class SeedCapitalUnidades extends Migration
      */
     public function down()
     {
-        //
+        /**
+         * 
+         * UPDATE unidades set responsavel_id = null where id >= 108;
+         * DELETE FROM users WHERE id >= 160;
+         * DELETE FROM unidades where id >= 108;
+         * select * from unidades where responsavel_id is null;
+         */
     }
 }
