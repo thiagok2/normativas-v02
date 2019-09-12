@@ -23,6 +23,9 @@ class DatabaseSeeder extends Seeder
         $this->call(UnidadeConselhosEstaduaisSeeder::class);
         $this->call(UserConselhosEstaduaisSeeder::class);
         $this->call(UserUnidadeConselhoFederalSeeder::class);
+        $this->call(AddCapitalMunicipio::class);
+        $this->call(UnidadesConselhosMunicipaisCapitaisSeeder::class);
+        
     
         $this->call(BrasilEstadoTableSeeder::class);
 
