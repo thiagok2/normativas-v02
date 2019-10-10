@@ -63,41 +63,46 @@
                     </div>
                     <div class="panel-body">
                         <table class="table table-striped table-hover table-condensed">
-                            <tbody>
+                            <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Nome</th>
-                                    <th>Estado</th>
-                                    <th>Sigla</th>
-                                    <th>Tipo</th>
-                                    <th>Esfera</th>
-                                    <th>Status</th>
-                                    <th>Ações</th>
+                                    <th class="text-center">Esfera</th>
+                                    <th class="text-center">Município</th>
+                                    <th class="text-center">Estado</th>
+                                    <th class="col-md-1 text-center">Documentos</th>                                                                        
+                                    <th class="col-md-1 text-center">Status</th>
+                                    <th class="col-md-1 text-center">Editar</th>
                                 </tr>
-                                @forelse ($unidades as $key=>$unidade)
+                            </thead>
+                            <tbody style="font-size: 110%">
+                                @forelse ($unidades as $key=>$unidade)                                                                                                                
                                     <tr @if ($unidade->documentos_count > 0 && $unidade->responsavel->confirmado) class='bg-success' @endif>
-                                        <td>{{ ($unidades->currentpage()-1) * $unidades->perpage() + $key + 1 }}</td>
-                                        <td>
-                                            <a href="{{route("unidade-show",$unidade->id)}}">
-                                                {{ $unidade->nome }}
-                                            </a>
-                                            
+                                        <td class="text-bold">{{ ($unidades->currentpage()-1) * $unidades->perpage() + $key + 1 }}</td>
+                                        <td class="text-center">{{ $unidade->esfera }}</td>
+                                        <td class="text-center"><a href="{{route("unidade-show",$unidade->id)}}">{{ $unidade->nome}}</a></td>
+                                        <td class="text-center">{{ $unidade->estado['nome']}}</td>
+                                        <td class="text-center">                                            
+                                            @if($unidade->documentos_count > 0)
+                                                <h4><span class="label label-success">{{$unidade->documentos_count}} <i class="fa fa-file"></i></span></h4>
+                                            @else
+                                                <h4><span class="label label-danger">{{$unidade->documentos_count}} <i class="fa fa-file"></i></span></h4>
+                                            @endif                                                                                        
+                                        </td>                                        
+                                        <td class="text-center">                                            
+                                            @if ($unidade->responsavel->confirmado)                                            
+                                                <h4><span class="label label-success">CONFIRMADO</span></h4>
+                                            @else
+                                                <h4><span class="label label-danger">NÃO CONFIRMADO</span></h4>
+                                            @endif                                                                                                                                    
+                                        </td>                                        
+                                        <td class="text-center">   
+                                            <h4>                                        
+                                                <a href="{{route("unidade-edit",$unidade->id)}}">
+                                                    <span class="label label-primary"><i class="fa fa-edit"></i></span>
+                                                </a>                                                                   
+                                            </h4>                                                                 
                                         </td>
-                                        <td>{{ $unidade->estado['nome']}}</td>
-                                        <td>{{ $unidade->sigla }}</td>
-                                        <td>{{ $unidade->tipo }}</td>
-                                        <td>{{ $unidade->esfera }}</td>
-                                        <td style="float:left;">
-                                            {{ $unidade->documentos_count }}
-                                            <i class="fa fa-file {{$unidade->documentos_count > 0 ? 'icon-success':'icon-danger'}}"></i>
-                                            <i class="fa fa-user {{$unidade->responsavel->confirmado ? 'icon-success':'icon-danger'}}"></i>
-                                        </td>
-                                        <td>
-                                            <a href="{{route("unidade-edit",$unidade->id)}}">
-                                                <i class="fa fa-edit"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
+                                    </tr>                                    
                                 @empty
                                     <tr>
                                         <td colspan="6">Sem resultados</td>
@@ -109,20 +114,7 @@
                             <div class="row">
                                 <div class="col-lg-6 no-padding">
                                     {{ $unidades->appends(request()->query())->links() }}
-                                </div>
-                                <div class="col-lg-3 pull-right no-padding  ">
-                                    <ul class="list-group">
-                                        <li class="list-group-item">
-                                            <i class="glyphicon glyphicon-file"></i>
-                                            Documentos enviados
-
-                                        </li>
-                                        <li class="list-group-item">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            Usuário confirmou acesso
-                                        </li>
-                                    </ul>
-                                </div>
+                                </div>                                
                             </div>
                         </div>
                     </div>
