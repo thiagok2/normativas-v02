@@ -16,7 +16,7 @@
             @if (auth()->user()->isAdmin())
                 
                 <div class="col-lg-2">
-                    <a href="{{route('unidade-create')}}" class="btn btn-primary btn-block btn-lg">Novo Conselho</a>
+                    <a href="{{route('unidade-create')}}" class="btn btn-primary btn-block"><i class="fa fa-plus"></i> Adicionar Conselho</a>
                     <p>
                 </div>
                
@@ -66,9 +66,10 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th class="text-center">Esfera</th>
-                                    <th class="text-center">Município</th>
-                                    <th class="text-center">Estado</th>
+                                    <th>Esfera</th>
+                                    <th>Estado</th>
+                                    <th>Município</th>                                    
+                                    <th>Nome da Unidade</th>
                                     <th class="col-md-1 text-center">Documentos</th>                                                                        
                                     <th class="col-md-1 text-center">Status</th>
                                     <th class="col-md-1 text-center">Editar</th>
@@ -78,9 +79,10 @@
                                 @forelse ($unidades as $key=>$unidade)                                                                                                                
                                     <tr @if ($unidade->documentos_count > 0 && $unidade->responsavel->confirmado) class='bg-success' @endif>
                                         <td class="text-bold">{{ ($unidades->currentpage()-1) * $unidades->perpage() + $key + 1 }}</td>
-                                        <td class="text-center">{{ $unidade->esfera }}</td>
-                                        <td class="text-center"><a href="{{route("unidade-show",$unidade->id)}}">{{ $unidade->nome}}</a></td>
-                                        <td class="text-center">{{ $unidade->estado['nome']}}</td>
+                                        <td>{{ $unidade->esfera }}</td>
+                                        <td>{{ $unidade->estado['nome']}}</td>
+                                        <td>[ Município ]</td>
+                                        <td><a href="{{route("unidade-show",$unidade->id)}}">{{ $unidade->nome}}</a></td>                                        
                                         <td class="text-center">                                            
                                             @if($unidade->documentos_count > 0)
                                                 <h4><span class="label label-success">{{$unidade->documentos_count}} <i class="fa fa-file"></i></span></h4>
