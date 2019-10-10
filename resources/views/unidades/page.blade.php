@@ -35,11 +35,18 @@
             <div class="col-lg-10 offset-lg-1">
                 <div class="box-head">
                     <div class="row">
-                        <div class="col-lg-6">
-                            <h1>{{$unidade->sigla}}</h1>
-                            <h2>{{$unidade->nome}}</h2>
+                        <div class="col-lg-8">
+                            <h1 style="font-size: 180%">{{$unidade->nome}}</h1>
+                            @if($unidade->esfera == "Municipal")
+                                <h2>{{$unidade->estado['nome']}}</h2>
+                            @else
+                                <h2>{{$unidade->sigla}}</h2>
+                            @endif
+                            @if (isset($unidade->confirmado_em))
+                                <small><b>Data de ingresso:</b> {{date('d/m/Y', strtotime($unidade->confirmado_em))}}</small>
+                            @endif
                         </div>
-                        <div class="col-lg-6 text-right">
+                        <div class="col-lg-4 text-right">
                             @if ($unidade->documentos_count > 0)
                                 <p class="n-atos">
                                     <span>{{$unidade->documentos_count}}</span>
@@ -50,10 +57,7 @@
                             @if (isset($unidade->url))
                                 <a class="btn btn-mobile btn-info btn-pill btn-sm" href="{{$unidade->url}}" target="_blank"><i class="fa fa-external-link"></i> Acesse o site</a>
                                 <br />
-                            @endif                                                        
-                            @if (isset($unidade->confirmado_em))
-                                <small><b>Data de ingresso:</b> {{date('d/m/Y', strtotime($unidade->confirmado_em))}}</small>
-                            @endif
+                            @endif                                                                                    
                         </div>
                     </div>
                 </div>
