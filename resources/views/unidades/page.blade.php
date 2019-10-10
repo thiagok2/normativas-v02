@@ -42,13 +42,15 @@
                         <div class="col-lg-6 text-right">
                             @if ($unidade->documentos_count > 0)
                                 <p class="n-atos">
-                                    <span>1200</span>
-                                    <em>atos normativos enviados</em>
+                                    <span>{{$unidade->documentos_count}}</span>
+                                    <em>atos normativos cadastrados</em>
                                 </p>
                                 <br />
                             @endif
-                            <a class="btn btn-mobile btn-info btn-pill btn-sm" href="{{$unidade->url}}" target="_blank"><i class="fa fa-external-link"></i> Acesse o site</a>
-                            <br />
+                            @if (isset($unidade->url))
+                                <a class="btn btn-mobile btn-info btn-pill btn-sm" href="{{$unidade->url}}" target="_blank"><i class="fa fa-external-link"></i> Acesse o site</a>
+                                <br />
+                            @endif                                                        
                             @if (isset($unidade->confirmado_em))
                                 <small><b>Data de ingresso:</b> {{date('d/m/Y', strtotime($unidade->confirmado_em))}}</small>
                             @endif
@@ -114,7 +116,7 @@
                                                              <hr>
                                                             <div class="row pl-3 pr-3">
                                                                 <div class="col-lg-4">
-                                                                    <i class="fa fa-globe"></i> <b><i>Município(UF):</i></b>
+                                                                    <i class="fa fa-globe"></i> <b><i>Localização:</i></b>
                                                                 </div>
                                                                 <div class="col-lg-8">
                                                                     {{$unidade->estado['nome'].' ('.$unidade->estado['sigla'].')'}}
@@ -168,12 +170,12 @@
                                                         <div class="alert" style="background-color: #357a90; color: #ffffff;">
                                                             @if ($tipo->total > 25)
                                                                 Listando apenas 25 atos normativos. <br/>
+                                                                Para ver mais <a class="text-light" href="{{route('index', ['query' => $tipo->tipo,'fonte' => $unidade->sigla])}}">clique aqui</a>
                                                             @elseif ($tipo->total > 1)
                                                                 Listando todos os <strong>{{$tipo->total}}</strong> atos normativos. <br/>
                                                             @else
-                                                                Mostrando <strong>1</strong> ato normativo. <br/>
-                                                            @endif
-                                                            Para ver mais <a class="text-light" href="{{route('index', ['query' => $tipo->tipo,'fonte' => $unidade->sigla])}}">clique aqui</a>
+                                                                Listando <strong>1</strong> ato normativo. <br/>
+                                                            @endif                                                            
                                                         </div>
                                                         @foreach ($documentos as $k => $docs)
                                                             @if ($k === $tipo->id)
