@@ -74,9 +74,11 @@
                                         <input type="text" class="form-control" value="{{ $unidade->sigla }}" name="sigla"
                                             required minlength="3" maxlength="10" placeholder="Ex.: COMED-MACEIO">
                                     </div>
-                                </div>
-        
-                                <div class="col-sm-10">
+                                </div>                                                                        
+                            </div><!-- end row-->
+
+                            <div class="row">
+                                <div class="col-sm-12">
                                     <div class="form-group">
                                         <label for="friendly_url">URL Amigável</label>
                                         <a class="btn btn-sm" id="btn_edit_url_amigavel">
@@ -89,15 +91,15 @@
                                             <input type="text" class="form-control" value="{{ $unidade->friendly_url }}" name="friendly_url" id="friendly_url"
                                                 required maxlength="255" minlength="10" readonly>
                                         </div>
-                                      
-                                        <small id="friendly_url_help" class="form-text text-muted">URL Interna para o endereço normativas</small>
+                                        
+                                        <small id="friendly_url_help" class="form-text text-muted">URL Interna para a plataforma normativas</small>
                                         
                                     </div>
                                 </div>
-                                
-                            </div><!-- end row-->
+                            </div>
+
                             <div class="row">
-                                <div class="col-sm-12">
+                                <div class="col-sm-5">
                                     <div class="form-group">
                                         <label for="telefone">Telefone</label>
                                         <small class=".text-muted">* (DDD) 0000-0000</b></small>
@@ -106,7 +108,7 @@
                                     </div>
                                 </div>
                 
-                                <div class="col-sm-12">
+                                <div class="col-sm-7">
                                     <div class="form-group">
                                         <label for="email">Email*</label>
                                         <small class="text-muted">(Separar emails com <b>;(ponto e virgula))</b></small>
@@ -120,7 +122,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label for="url">Endereço na Web</label>
-                                        <small class="text-muted">(Página oficial - opcional)</small>
+                                        <small class="text-muted">(Site da unidade - opcional)</small>
                                         <div class='input-group'>
                                             <span class="input-group-addon">
                                                 <span class="glyphicon glyphicon-globe">
@@ -152,19 +154,20 @@
                                             value="{{ $unidade->contato }}" maxlength="255"/>
                                     </div>
                                 </div>
-                
+                            </div><!--end row -->
+
+                            <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">
-                                        <label for="endereco">Contato 2</label>
+                                        <label for="endereco">Outros cargos/responsáveis</label>
                                         <small class="text-muted">(opcional)</small>
                                         <textarea class="form-control" id="contato2" name="contato2" maxlength="255">{{ $unidade->contato2 }}</textarea>
                                     </div>
                                 </div>
                             </div><!--end row -->
 
-
-                            <button type="submit" class="btn btn-primary btn-lg" value="Atualizar">Salvar</button>
-                            <a href="{{route('home')}}" class="btn btn-danger btn-lg" value="Fechar">Fechar</a>
+                            <button type="submit" class="btn btn-success" value="Criar unidade">Criar unidade</button>
+                            <a href="{{route('home')}}" class="btn btn-danger" value="Fechar">Fechar</a>
                         </form>
                     </div>
                 </div>
