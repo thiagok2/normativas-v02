@@ -38,7 +38,7 @@ class UnidadeController extends Controller
                 $clausulas[] = ['estado_id', $estado];
             }
 
-            $unidades = Unidade::where($clausulas)->with('estado','responsavel')->withCount('documentos')->paginate(25);
+            $unidades = Unidade::where($clausulas)->with('estado','municipio' ,'responsavel')->withCount('documentos')->paginate(25);
             $documentos = Documento::paginate(25); 
             $estados = Estado::all();
 

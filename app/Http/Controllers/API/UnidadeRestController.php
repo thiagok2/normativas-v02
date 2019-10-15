@@ -49,6 +49,23 @@ class UnidadeRestController extends Controller
 
     }
 
+    public function createConselho(Request $request){
+        
+        $uf = $request->uf;
+        $municipio = $request->municipio;
+        
+        $unidade = new Unidade();
+
+        $unidade->esfera = $request->esfera;
+        $unidade->nome = $request->nome;
+        $unidade->sigla = $request->sigla;
+        $unidade->friendly_url = $request->url;
+        $unidade->contato = $request->contato;
+        $unidade->tipo = Unidade::TIPO_CONSELHO;
+        $unidade->confirmado = false;
+        $unidade->admin = false;
+    }
+
 
     
 }

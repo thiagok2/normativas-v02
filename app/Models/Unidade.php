@@ -9,6 +9,13 @@ use Illuminate\Support\Str;
 
 class Unidade extends Model
 {
+
+    public const TIPO_CONSELHO = 'Conselho';
+
+    public const ESFERA_MUNICIPAL = 'Municipal';
+    public const ESFERA_ESTADUAL = 'Estadual';
+    public const ESFERA_FEDERAL = 'Federal';
+
     protected $fillable = [
         'nome', 'tipo', 'esfera','sigla','url','email','contato','telefone','endereco','contato2','friendly_url'
     ];
@@ -39,6 +46,10 @@ class Unidade extends Model
 
     public function estado(){
         return $this->belongsTo(Estado::class,'estado_id');
+    }
+
+    public function municipio(){
+        return $this->belongsTo(Municipio::class,'municipio_id');
     }
 
     public function user(){

@@ -81,7 +81,7 @@
                                         <td class="text-bold">{{ ($unidades->currentpage()-1) * $unidades->perpage() + $key + 1 }}</td>
                                         <td>{{ $unidade->esfera }}</td>
                                         <td>{{ $unidade->estado['nome']}}</td>
-                                        <td>[ Município ]</td>
+                                        <td>{{ $unidade->municipio['nome']}}</td>
                                         <td><a href="{{route("unidade-show",$unidade->id)}}">{{ $unidade->nome}}</a></td>                                        
                                         <td class="text-center">                                            
                                             @if($unidade->documentos_count > 0)
