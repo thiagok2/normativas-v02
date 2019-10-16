@@ -17,7 +17,7 @@
         @include('admin.includes.alerts')
 
         <div class="row">
-            <div class="col-lg-8">
+            <div class="col-lg-10">
                 <div class="panel panel-default">
                     <div class="panel-heading">Nova Unidade</div>
                     <div class="panel-body">
@@ -66,15 +66,15 @@
                                     <div class="form-group">
                                         <label for="nome">Nome*</label>
                                         <input type="text" class="form-control" value="{{ $unidade->nome }}" name="nome" id="nome"
-                                            required maxlength="255" minlength="10" placeholder="Ex.: CONSELHO MUNICIPAL DE EDUCAÇÃO DE MACEIÓ">
+                                            required maxlength="255" minlength="10" placeholder="Ex.: Conselho Municipal de Educação de Maceió">
                                     </div>
                                 </div>
 
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label for="sigla">Sigla*</label>
-                                        <input type="text" class="form-control" value="{{ $unidade->sigla }}" name="sigla"
-                                            required minlength="3" maxlength="10" placeholder="Ex.: CMED-MACEIO">
+                                        <input type="text" class="form-control" value="{{ $unidade->sigla }}" name="sigla" id="sigla"
+                                            required minlength="3" maxlength="30" placeholder="Ex.: maceio">
                                     </div>
                                 </div>                                                                        
                             </div><!-- end row-->
