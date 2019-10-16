@@ -26,7 +26,7 @@ class Unidade extends Model
         'nome' => 'required|string|max:255',
         'tipo' => 'required|string|max:20',
         'esfera' => 'required|string|max:20',
-        'sigla' => 'required|string|max:10',
+        'sigla' => 'required|string|max:30',
         'url' => 'nullable|url',
         'friendly_url' => 'required',
         'email' => 'required',

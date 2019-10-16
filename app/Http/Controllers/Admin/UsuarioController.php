@@ -158,13 +158,9 @@ class UsuarioController extends Controller
             }
             
             DB::beginTransaction();
-
-            
-
             $user = new User();
             $data = $request->all();
             $user->fill($data);
-
 
             $passwordRandom = '987654321';//bin2hex(openssl_random_pseudo_bytes(4));
             $user->email = trim($request->input('email'));
@@ -187,6 +183,10 @@ class UsuarioController extends Controller
                 if (!$unidade->responsavel){
                     $unidade->responsavel()->associate( $user );
                     $unidade->save();
+                }
+
+                if(!$unidade->convidado_em){
+                    $unidade->convidado_em = date("Y-m-d H:i:s");
                 }
             }
 

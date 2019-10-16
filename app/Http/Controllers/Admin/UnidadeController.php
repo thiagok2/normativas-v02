@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Convite;
 use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Validator;
@@ -12,7 +13,9 @@ use App\Models\Estado;
 use App\User;
 use App\Models\Unidade;
 use App\Models\Documento;
+use App\Models\Municipio;
 use App\Services\UnidadeQuery;
+use Illuminate\Support\Facades\Hash;
 
 class UnidadeController extends Controller
 {
@@ -51,8 +54,6 @@ class UnidadeController extends Controller
             return view('admin.unidade.edit', compact('unidade','users','documentos'));
         } 
 
-
-        
     }
 
     public function show($id){
@@ -124,8 +125,12 @@ class UnidadeController extends Controller
         $data = $request->all();
         $unidade->fill($data);
         $unidade->user()->associate(auth()->user()->id);
-
         $unidade->save();
+
+        $municipio = Municipio::find($request->municipio_id);
+        $municipio->criado = true;
+        $municipio->save();
+
         DB::commit();
 
         return redirect()->route('usuario-new-gestor', ['unidade_id' => $unidade->id])
@@ -139,9 +144,10 @@ class UnidadeController extends Controller
         try{
 
             $validator = Validator::make($request->all(), $unidade->rules, $unidade->messages);
-             
+            
+           
             if ($validator->fails()) {
-                 return redirect()->back()->withErrors($validator)->withInput();
+                return redirect()->back()->withErrors($validator)->withInput();
             }
 
             DB::beginTransaction();
@@ -164,7 +170,7 @@ class UnidadeController extends Controller
     
             $unidade->save();
             DB::commit();
-    
+           
     
             if(auth()->user()->confirmado){
                 return redirect()->route('unidade-edit', ['id' => $unidade->id])
@@ -181,7 +187,8 @@ class UnidadeController extends Controller
             $messageError = getenv('APP_DEBUG') === 'true' ? $e->getMessage():
             "Operação não foi realizada. Verifique se os dados estão corretos. 
             Caso o problema persista, entre em contato com os administradores.";
-        
+            
+           
             return redirect()->back()->withInput()->with('error', $messageError);
         }
        
@@ -223,5 +230,36 @@ class UnidadeController extends Controller
         }
         
         return view('unidades.page', compact('unidade','tiposTotal','documentos'));
+    }
+
+    public function novoAcesso(Request $request){
+
+        //dd($request);
+        $unidade = Unidade::find($request->unidade_id);
+
+        if(User::where("email",$request->gestor_email)->first()){
+            return redirect()->back()->withInput()->with('error', "Já existe um usuário o email: ".$request->gestor_email.". Um novo usuário/email é necessário.");
+        }
+
+        $unidade->nome = $request->conselho_nome;
+        $unidade->sigla = $request->conselho_sigla;
+        $unidade->convidado_em = date("Y-m-d H:i:s");
+        $unidade->save();
+
+        $gestor = $unidade->responsavel;
+        $gestor->name = $request->gestor_nome;
+        $gestor->email = $request->gestor_email;
+
+        $gestor->save();
+
+        $passwordRandom = bin2hex(openssl_random_pseudo_bytes(4));
+        $gestor->password = Hash::make($passwordRandom);
+        $convite = new Convite();
+        $convite->enviarNovoUsuario($gestor, $passwordRandom);
+        $gestor->save();
+
+        return redirect()->route('unidades')
+                ->with(['success'=> "Novo convite enviado para $gestor->name($gestor->email)."]);
+
     }
 }

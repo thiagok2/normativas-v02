@@ -56,6 +56,8 @@
                                             <option>Selecione</option>
                                             
                                         </select>
+
+                                        <span class="help-text small text-muted">* Apenas municípios sem conselho criado.</span>
                                     </div>
                                 </div>
                             </div><!-- end estados/municipios-->
@@ -72,7 +74,7 @@
                                     <div class="form-group">
                                         <label for="sigla">Sigla*</label>
                                         <input type="text" class="form-control" value="{{ $unidade->sigla }}" name="sigla"
-                                            required minlength="3" maxlength="10" placeholder="Ex.: COMED-MACEIO">
+                                            required minlength="3" maxlength="10" placeholder="Ex.: CMED-MACEIO">
                                     </div>
                                 </div>                                                                        
                             </div><!-- end row-->

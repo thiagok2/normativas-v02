@@ -14,6 +14,7 @@
             <li><a href="{{route('tiposdocumento')}}">Tipos de Documento</a></li>
             <li><a href="#">Editar</a></li>
         </ol>
+
         <div class="page-header">
             <a href="{{route('tiposdocumento-create')}}" class="btn btn-primary btn-lg">Novo Tipo de Documento</a>
         </div>

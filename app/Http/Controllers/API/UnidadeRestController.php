@@ -41,7 +41,12 @@ class UnidadeRestController extends Controller
 
     public function municipios(Request $request, $sigla){
         $estado = Estado::where("sigla", strtoupper($sigla))->first();
-        $municipios = Municipio::where("estado_id", $estado->id)->orderBy('capital', 'desc')->get();
+        $municipios = Municipio::where(
+            [
+                ["estado_id", $estado->id],
+                ["criado", false],
+            ]
+            )->orderBy('capital', 'desc')->get();
 
         return response()->json(
             $municipios
@@ -49,21 +54,16 @@ class UnidadeRestController extends Controller
 
     }
 
-    public function createConselho(Request $request){
+    public function unidade(Request $request, $id){
         
-        $uf = $request->uf;
-        $municipio = $request->municipio;
-        
-        $unidade = new Unidade();
-
-        $unidade->esfera = $request->esfera;
-        $unidade->nome = $request->nome;
-        $unidade->sigla = $request->sigla;
-        $unidade->friendly_url = $request->url;
-        $unidade->contato = $request->contato;
-        $unidade->tipo = Unidade::TIPO_CONSELHO;
-        $unidade->confirmado = false;
-        $unidade->admin = false;
+        $unidade = Unidade::find($id);
+        $gestor = $unidade->responsavel;
+        return response()->json(
+            array(
+                "unidade" => $unidade,
+                "gestor" => $gestor
+            )
+        );
     }
 
 

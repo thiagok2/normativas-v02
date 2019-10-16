@@ -62,6 +62,8 @@ Route::prefix('admin')->middleware('auth')->namespace('Admin')->group(function()
     Route::get('unidades', 'UnidadeController@index')->name('unidades');
     Route::post('unidades', 'UnidadeController@store')->name('unidade-store');
     Route::post('unidades/salvar', 'UnidadeController@save')->name('unidade-save');
+    Route::post('unidades/novo-acesso', 'UnidadeController@novoAcesso')->name('unidade-novo-acesso');
+    
     
     Route::get('unidades/nova', 'UnidadeController@create')->name('unidade-create');
     Route::get('unidades/{id}/edit', 'UnidadeController@edit')->name('unidade-edit');

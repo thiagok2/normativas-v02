@@ -33,6 +33,36 @@ $(document).ready(function() {
             $.each(busca, function (key, value) {
                 $('select[id=municipio_id]').append('<option value="' + value.id + '">' + value.nome + '</option>');
             });
+            
         });
+    });
+
+    $("#tbl-conselhos").on("click", ".modal-unidade", function () {
+        
+        var unidadeId = $(this).attr("data-conselho-id");
+
+        $.ajax({
+            type: 'GET',
+            url: '/api/unidades/'+unidadeId
+        }).done(function (result) {
+
+            $("#unidade_id").val(result.unidade.id);
+            $("#conselho_titulo").text(result.unidade.nome);
+            $("#conselho_nome").val(result.unidade.nome);
+            $("#conselho_sigla").val(result.unidade.sigla);
+
+            $("#gestor_nome").val(result.gestor.name);
+            $("#gestor_email").val(result.gestor.email);
+
+            //console.log(result);
+        }).fail(function (msg) {
+            console.log(JSON.stringify(msg));
+            
+        }).always(function (msg) {
+
+        });
+
+
+        $('#modalAtualizarConvidar').modal('show');
     });
 });

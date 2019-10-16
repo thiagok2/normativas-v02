@@ -21,6 +21,11 @@
                 </div>
                
             @endif
+
+        </div>
+
+        <div class="row">
+            @include('admin.includes.alerts')
         </div>
 
         <div class="row">
@@ -62,7 +67,7 @@
                             Resultados ({{$unidades->total()}})
                     </div>
                     <div class="panel-body">
-                        <table class="table table-striped table-hover table-condensed">
+                        <table id="tbl-conselhos" class="table table-striped table-hover table-condensed">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -72,7 +77,7 @@
                                     <th>Nome da Unidade</th>
                                     <th class="col-md-1 text-center">Documentos</th>                                                                        
                                     <th class="col-md-1 text-center">Status</th>
-                                    <th class="col-md-1 text-center">Editar</th>
+                                    <th class="col-md-1 text-center">Ações</th>
                                 </tr>
                             </thead>
                             <tbody style="font-size: 110%">
@@ -82,7 +87,8 @@
                                         <td>{{ $unidade->esfera }}</td>
                                         <td>{{ $unidade->estado['nome']}}</td>
                                         <td>{{ $unidade->municipio['nome']}}</td>
-                                        <td><a href="{{route("unidade-show",$unidade->id)}}">{{ $unidade->nome}}</a></td>                                        
+                                        <td>
+                                            <a style="cursor: pointer;" @if (!$unidade->confirmado) class="modal-unidade" @else href="{{route("unidade-show",$unidade->id)}}" @endif data-conselho-id="{{ $unidade->id }}">{{ $unidade->nome}}</a></td>                                        
                                         <td class="text-center">                                            
                                             @if($unidade->documentos_count > 0)
                                                 <h4><span class="label label-success">{{$unidade->documentos_count}} <i class="fa fa-file"></i></span></h4>
@@ -99,9 +105,14 @@
                                         </td>                                        
                                         <td class="text-center">   
                                             <h4>                                        
-                                                <a href="{{route("unidade-edit",$unidade->id)}}">
+                                                <a href="{{route("unidade-edit",$unidade->id)}}" title="Editar">
                                                     <span class="label label-primary"><i class="fa fa-edit"></i></span>
-                                                </a>                                                                   
+                                                </a>    
+                                                
+                                                <a href="#" 
+                                                    title="Enviar convite" class="modal-unidade" data-conselho-id="{{ $unidade->id }}">
+                                                    <span class="label label-primary"><i class="glyphicon glyphicon-send"></i></span>
+                                                </a>
                                             </h4>                                                                 
                                         </td>
                                     </tr>                                    
@@ -127,4 +138,72 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="modalAtualizarConvidar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="width: 80%;">
+        <div class="modal-dialog modal-lg" role="document">
+            <form action="{{route("unidade-novo-acesso")}}" method="POST" id="form-novo-acesso">
+                {!! csrf_field() !!}
+                <input type="hidden" name="unidade_id" id="unidade_id">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="conselho_titulo"></h4>
+                        <span class="help-text text-muted">Edite as informações do gestor e envio um convite para liberar o acesso.</span>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-sm-9">
+                                    <div class="form-group">
+                                        <label for="conselho_nome">Conselho *</label>
+                                        <input type="text" class="form-control" name="conselho_nome" id="conselho_nome"
+                                        required maxlength="255" minlength="10">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label for="conselho_sigla">Sigla*</label>
+                                        <input type="text" class="form-control" name="conselho_sigla" id="conselho_sigla" required minlength="3" maxlength="10">
+                                    </div>
+                                </div>                                                       
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="gestor_nome">Responsável</label>
+                                    
+                                        <input type="text" class="form-control" name="gestor_nome" id="gestor_nome" required maxlength="255" minlength="10">
+                                    
+                                        <small id="gestor_nome_help" class="help-text form-text text-muted">Nome do gestor na plataforma Normativas.</small>                                
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="gestor_email">Email</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="basic-addon1">
+                                                <span class="glyphicon glyphicon-globe"></span>
+                                            </span>
+                                            <input type="email" class="form-control" name="gestor_email" id="gestor_email" required maxlength="255" minlength="10">
+                                        </div>
+                                        
+                                        <small id="gestor_email_help" class="help-text form-text text-muted">Este email receberá uma nova senha de acesso caso seja enviado um novo convite.</small>                                
+                                    </div>
+                                </div> 
+                            </div>
+                        </div> <!-- end container-fluid-->
+                    </div> <!-- end modal-body -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default btn-lg" data-dismiss="modal">Fechar</button>
+                        <button type="submit" class="btn btn-primary btn-lg">Atualizar e Enviar Convite</button>
+                    </div>
+                
+                </div> <!-- end modal-content -->
+            </form>
+        </div>
+    </div>
 @stop
+@push('scripts')
+    <script src="{{ asset('js/app-unidades.js') }}"></script>
+@endpush

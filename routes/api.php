@@ -30,5 +30,6 @@ Route::get('unidades/confirmadas/6meses', 'API\UnidadeRestController@evolucaoUni
 //Route::resource('usuarios', 'API\\UserRestController');
 
 Route::get('unidades', 'API\UnidadeRestController@get');
+Route::get('unidades/{id}', 'API\UnidadeRestController@unidade');
 
 Route::get('documentos/{documentoId}/indexar', 'API\ElasticDocumentoController@indexar');

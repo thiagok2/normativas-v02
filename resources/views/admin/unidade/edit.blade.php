@@ -12,9 +12,11 @@
             <li><a href="{{route('home')}}">Painel</a></li>
             <li> <a href="{{route('unidades')}}" >Unidades</a></li>
             <li> <a href="#" ><a href="#">Atualizar dados da Unidade</a></li>
-        </ol>                    
-
+        </ol>
+        
         <div class="row">
+            @include('admin.includes.alerts')
+
             <div class="col-lg-8">
             <div class="panel panel-default">
             <div class="panel-heading">
@@ -286,5 +288,4 @@
 @stop
 @push('scripts')
     <script src="{{ asset('js/app-unidades.js') }}"></script>
-    
 @endpush
