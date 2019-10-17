@@ -38,7 +38,7 @@ $(document).ready(function() {
             return str;
         };
 
-       
+        alert("aahahah");
         $("#friendly_url").val( slug($('#nome').val()) );    
     });
 
@@ -57,9 +57,13 @@ $(document).ready(function() {
     });
 
     $('select[name=municipio_id]').change(function () {
+
         var municipio = $( "#municipio_id option:selected" ).text();
         $("#nome").val("Conselho Municipal de Educação de "+municipio);
-        $("#sigla").val(slug(municipio));
+        $("#sigla").val("CME-"+slug(municipio).toUpperCase());
+
+        $("#friendly_url").val( slug(municipio) );
+
     });
 
     $("#tbl-conselhos").on("click", ".modal-unidade", function () {

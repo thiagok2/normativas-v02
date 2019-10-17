@@ -101,6 +101,16 @@
                                                 <h4><span class="label label-success">CONFIRMADO</span></h4>
                                             @else
                                                 <h4><span class="label label-danger">NÃO CONFIRMADO</span></h4>
+                                                @if ($unidade->convidado_em)
+                                                    <h4>
+                                                        <span class="label label-warning">
+                                                            CONVIDADO
+                                                            <small style="color:white;">({{$unidade->convidado_em}})</small>
+                                                        </span>
+                                                    </h4>
+                                                    
+                                                    
+                                                @endif
                                             @endif                                                                                                                                    
                                         </td>                                        
                                         <td class="text-center">   

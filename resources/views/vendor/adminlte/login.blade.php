@@ -9,6 +9,9 @@
 @section('body_class', 'login-page')
 
 @section('body')
+
+    @include('admin.includes.alerts')
+
     <div class="login-box">
         <div class="login-logo">
             <a href="{{ url(config('adminlte.dashboard_url', 'admin/home')) }}">{!! config('adminlte.logo', '<b>Admin</b>LTE') !!}</a>
@@ -57,10 +60,16 @@
             </form>
             
             <div class="auth-links">
-                <a href="{{ url(config('adminlte.password_reset_url', 'password/reset')) }}"
-                   class="text-center"
-                >{{ trans('adminlte::adminlte.i_forgot_my_password') }}</a>
+                <a href="{{ url(config('adminlte.password_reset_url', 'password/reset')) }}" 
+                    class="text-center">
+                    {{ trans('adminlte::adminlte.i_forgot_my_password') }}
+                </a>
                 <br>
+                <br>
+                <a href="{{ route('primeiro-acesso') }}" 
+                    class="text-center">
+                    Primeiro acesso?
+                </a>
                 <br>
                 <p class="text-muted">
                 Caso tenha problemas de acesso, envie email para normativas@nees.com.br

@@ -90,8 +90,7 @@
                                             <span class="input-group-addon" id="basic-addon1">
                                                 <span class="glyphicon glyphicon-globe"></span>
                                             </span>
-                                            <input type="text" class="form-control" value="{{ $unidade->friendly_url }}" name="friendly_url" id="friendly_url"
-                                                required maxlength="255" minlength="10" readonly>
+                                            <input type="text" class="form-control aaa" name="friendly_url" id="friendly_url">
                                         </div>
                                         
                                         <small id="friendly_url_help" class="form-text text-muted">URL Interna para a plataforma normativas</small>

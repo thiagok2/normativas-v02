@@ -48,6 +48,9 @@ Route::get('errors/404', function () {
     return view('errors/404');
 });
 
+Route::get('/primeiro-acesso', 'Auth\PrimeiroAcessoController@first')->name('primeiro-acesso');
+Route::post('/solicitar-acesso', 'Auth\PrimeiroAcessoController@request')->name('solicitar-acesso');
+
 Route::prefix('admin')->middleware('auth')->namespace('Admin')->group(function(){
 
     Route::get('getenv', 'EnvController@getenv')->name('getenv');
