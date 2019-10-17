@@ -65,11 +65,12 @@
                     {{ trans('adminlte::adminlte.i_forgot_my_password') }}
                 </a>
                 <br>
-                <br>
                 <a href="{{ route('primeiro-acesso') }}" 
                     class="text-center">
                     Primeiro acesso?
                 </a>
+                <br>
+                <br>
                 <br>
                 <p class="text-muted">
                 Caso tenha problemas de acesso, envie email para normativas@nees.com.br

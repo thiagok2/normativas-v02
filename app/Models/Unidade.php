@@ -11,6 +11,7 @@ class Unidade extends Model
 {
 
     public const TIPO_CONSELHO = 'Conselho';
+    public const TIPO_ACESSORIA = 'Acessoria';
 
     public const ESFERA_MUNICIPAL = 'Municipal';
     public const ESFERA_ESTADUAL = 'Estadual';

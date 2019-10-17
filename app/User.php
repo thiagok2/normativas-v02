@@ -13,6 +13,7 @@ class User extends Authenticatable
     use Notifiable;
 
     public const TIPO_ADMIN = 'admin';
+    public const TIPO_ACESSOR = 'acessor';
     public const TIPO_GESTOR= 'gestor';
     public const TIPO_COLABORADOR = 'colaborador';
     public const TIPO_EXTRATOR = 'extrator';
@@ -40,6 +41,10 @@ class User extends Authenticatable
 
     public function isColaborador(){
         return $this->tipo == User::TIPO_COLABORADOR;
+    }
+
+    public function isAcessor(){
+        return $this->tipo == User::TIPO_ACESSOR;
     }
 
     public function isResponsavel(){

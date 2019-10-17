@@ -10,8 +10,8 @@
     <div class="container-fluid">
         <ol class="breadcrumb">
             <li><a href="{{route('home')}}">Painel</a></li>
-            <li> <a href="{{route('unidades')}}" >Unidades</a></li>
-            <li> <a href="#" ><a href="#">Nova Unidade</a></li>
+            <li> <a href="{{route('unidades')}}" >Conselho</a></li>
+            <li> <a href="#" ><a href="#">Novo Conselho</a></li>
         </ol>
 
         @include('admin.includes.alerts')
@@ -167,7 +167,7 @@
                                 </div>
                             </div><!--end row -->
 
-                            <button type="submit" class="btn btn-success" value="Criar unidade">Criar unidade</button>
+                            <button type="submit" class="btn btn-success" value="Criar unidade">Criar Conselho</button>
                             <a href="{{route('home')}}" class="btn btn-danger" value="Fechar">Fechar</a>
                         </form>
                     </div>
