@@ -18,7 +18,7 @@ class Unidade extends Model
     public const ESFERA_FEDERAL = 'Federal';
 
     protected $fillable = [
-        'nome', 'tipo', 'esfera','sigla','url','email','contato','telefone','endereco','contato2','friendly_url'
+        'nome', 'tipo', 'esfera','sigla','url','email','contato','telefone','endereco','contato2','friendly_url','estado_id', 'municipio_id'
     ];
 
     public $timestamps = true;

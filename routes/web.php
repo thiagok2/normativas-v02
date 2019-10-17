@@ -73,6 +73,7 @@ Route::prefix('admin')->middleware('auth')->namespace('Admin')->group(function()
     Route::get('unidades/{id}/show', 'UnidadeController@show')->name('unidade-show');
     Route::get('unidades/gestor/new', 'UsuarioController@newGestor')->name('usuario-new-gestor');
 
+    Route::get('unidades/acessorias', 'AcessoriaController@index')->name('acessorias');
     Route::get('unidades/acessoria/nova', 'AcessoriaController@create')->name('acessoria-create');
     Route::post('unidades/acessoria', 'AcessoriaController@store')->name('acessoria-store');
 

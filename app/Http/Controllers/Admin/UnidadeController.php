@@ -29,6 +29,7 @@ class UnidadeController extends Controller
             $nome = $request->query('nome');
 
             $clausulas = [];
+            $clausulas[] = ['tipo',Unidade::TIPO_CONSELHO];
             if($esfera){
                 $clausulas[] = ['esfera', '=', $esfera];  
             }

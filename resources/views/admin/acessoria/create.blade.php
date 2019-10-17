@@ -14,7 +14,7 @@
             <li> <a href="#" ><a href="#">Nova Unidade</a></li>
         </ol>
 
-       
+        @include('admin.includes.alerts')
 
         <div class="row">
             <div class="col-lg-10">
@@ -23,7 +23,7 @@
                         Nova Unidade de Acessoria
                     </div>
                     <div class="panel-body">
-                    <form name="form" id="form" method="post" action="{{route('unidade-save')}}">
+                        <form name="form" id="form" method="post" action="{{route('acessoria-store')}}">
                             {!! csrf_field() !!}
                             <input type="hidden" name="tipo" id="tipo" value="Acessoria"/>
                             <div class="row">
@@ -40,6 +40,18 @@
                                         </select>
                                     </div>
                                 </div><!-- end col estado-->
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="municipio">Município</label>
+        
+                                        <select class="form-control" required id="municipio_id" name="municipio_id" required>
+                                            <option>Selecione</option>
+                                            
+                                        </select>
+
+                                    </div>
+                                </div>
                     
                             </div><!-- end estados/municipios-->
                             <div class="row">
@@ -47,11 +59,17 @@
                                     <div class="form-group">
                                         <label for="nome">Nome*</label>
                                         <input type="text" class="form-control" value="{{ $unidade->nome }}" name="nome" id="nome"
-                                            required maxlength="255" minlength="10" placeholder="Ex.: Acessoria de Educação de Alagoas">
+                                            required maxlength="255" minlength="10" placeholder="Ex.: Acessoria dos Conselhos de Educação de Alagoas">
                                     </div>
-                                </div>
-
-                                                                                                     
+                                </div>      
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="telefone">Telefone</label>
+                                        <small class=".text-muted">* (DDD) 0000-0000</b></small>
+                                        <input type="text" class="form-control phone" value="{{ $unidade->telefone }}" name="telefone"
+                                            required maxlength="100" minlength="12" placeholder="(00) 00000-0000">
+                                    </div>
+                                </div>                                                              
                             </div><!-- end row-->
                 
                             <div class="row">
@@ -78,6 +96,9 @@
                             <a href="{{route('home')}}" class="btn btn-danger" value="Fechar">Fechar</a>
                         </form>
                     </div>
+                    <div class="panel-footer">
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -85,5 +106,5 @@
 @stop
 
 @push('scripts')
-<script src="{{ asset('js/app-unidades.js') }}"></script>
+<script src="{{ asset('js/app-acessoria.js') }}"></script>
 @endpush

@@ -54,6 +54,16 @@ class UnidadeRestController extends Controller
 
     }
 
+    public function municipiosTodos(Request $request, $sigla){
+        $estado = Estado::where("sigla", strtoupper($sigla))->first();
+        $municipios = Municipio::where( "estado_id", $estado->id )->orderBy('capital', 'desc')->get();
+
+        return response()->json(
+            $municipios
+        );
+
+    }
+
     public function unidade(Request $request, $id){
         
         $unidade = Unidade::find($id);

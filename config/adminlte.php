@@ -174,8 +174,8 @@ return [
                         'icon' => 'university',
                     ],
                     [
-                        'text' => 'Acessoria',
-                        'url'  => 'admin/unidades/acessoria/nova',
+                        'text' => 'Pesquisar Acessorias',
+                        'url'  => 'admin/unidades/acessorias',
                         'icon' => 'university',
                     ],
                 ]

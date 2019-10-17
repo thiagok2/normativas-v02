@@ -51,6 +51,7 @@
                                 <label for="tipo">Tipo*</label>
                                 <select class="form-control" required id="tipo" name="tipo">
                                     <option value="Conselho" {{($unidade->tipo == 'Conselho' ? 'selected="selected"':'')}}>Conselho</option>
+                                    <option value="Acessoria" {{($unidade->tipo == 'Acessoria' ? 'selected="selected"':'')}}>Acessoria</option>
                                     <option value="Outros" {{($unidade->tipo == 'Outros' ? 'selected="selected"':'')}}>Outros</option>
                                 </select>
                             </div>
