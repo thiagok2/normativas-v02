@@ -43,6 +43,10 @@ class User extends Authenticatable
         return $this->tipo == User::TIPO_COLABORADOR;
     }
 
+    public function isConselho(){
+        return $this->isGestor() || $this->isColaborador();
+    }
+
     public function isAcessor(){
         return $this->tipo == User::TIPO_ACESSOR;
     }

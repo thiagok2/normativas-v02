@@ -25,6 +25,13 @@
     </div>    
 </div>
 <div class="row">
+    <div class="col-lg-12">
+        <p class="alert bg-warning lead" style="padding: 10px;">
+            Você é um usuário acessor. Vocẽ pode liberar acessos aos conselhos e acomanhar o uso de seus usuário na plataforma.
+        </p>
+    </div>
+</div>
+<div class="row">
     <div class="col-lg-3">
         <!-- small box -->
         <!--<a href="{{route('documentos')}}">-->
@@ -114,7 +121,7 @@
     <!-- ./col -->
 </div><!-- ./row-->
 
-@if (auth()->user()->isAdmin())
+@if (auth()->user()->isAdmin() || auth()->user()->isAcessor())
 <div class="row">
     <div class="col-md-3 col-sm-6 col-xs-12">
         <div class="info-box bg-aqua">
@@ -207,7 +214,7 @@
 </div>
 @endif
 <!-- /.row -->
-@if (auth()->user()->isAdmin())
+@if ( auth()->user()->isAdmin() )
 <div class="row">
     <div class="col-lg-5">
         <div class="box box-danger">
@@ -216,24 +223,6 @@
             </div>
             <div class="box-body no-padding">
                 <canvas id="chartConsConfirmados"></canvas>
-                <!--<table class="table table-condensed table-hover table-striped">
-                    <thead>
-                        <tr>
-                            <th>Mês</th>
-                            <th>Criados</th>
-                            <th>Confirmados</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($evolucaoUnidadesConfirmadasMes as $e)
-                            <tr>
-                                <td>{{$e->mes_ano_abrev}}</td>
-                                <td>{{$e->criados}}</td>
-                                <td>{{$e->confirmados}}</td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>-->
             </div>
             <div class="box-footer">
                 <span class="text-muted pull-right">
@@ -251,9 +240,6 @@
                 <h3 class="box-title">Tipos</h3>
             </div>
             <div class="box-body">
-                <!--<canvas id="chartTipos"></canvas>
-                <br />
-                <br />-->
                 @foreach ($documentosPorTipo as $v)
                     <div class="clearfix">
                     <span class="pull-left">{{$v->nome}} ({{$v->total}})</span>
@@ -274,22 +260,6 @@
             </div>
             <div class="box-body no-padding">
                 <canvas id="chartUploadsMeses"></canvas>
-                <!--<table class="table table-condensed table-hover table-striped">
-                    <thead>
-                        <tr>
-                            <th>Mês</th>
-                            <th>Enviados</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($evolucaoEnviados6Meses as $e)
-                            <tr>
-                                <td>{{$e->mes_ano_abrev}}</td>
-                                <td>{{$e->enviados}}</td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>-->
             </div>
             <div class="box-footer">
                 <span class="text-muted pull-right">
@@ -386,7 +356,7 @@
         </div>
     </div>
 </div>
-@if (auth()->user()->isAdmin())
+@if (auth()->user()->isAdmin() || auth()->user()->isAcessor())
 <div class="row">
     <div class="col-lg-6 ">
         <div class="box box-success">
@@ -462,7 +432,7 @@
             <div class="box-footer">
                 <span class="text-muted pull-left">
 
-                    Até momento, {{$unidades->total()}} conselhos enviaram documentos.
+                    Total de {{$unidades->total()}} conselhos
 
                 </span>
             </div>
@@ -470,6 +440,8 @@
     </div> <!-- end col-6 -->
 </div> <!-- end row-->
 @endif
+
+@if (auth()->user()->isAdmin())
 <div class="row">
     <div class="col-lg-6">
         <div class="box box-success">
@@ -517,6 +489,7 @@
         </div> <!-- end box -->
     </div>
 </div>
+@endif
 </div>
 
 
@@ -524,41 +497,4 @@
 
 @push('scripts')
     <script src="{{ asset('js/app-home.js') }}"></script>
-<script>
-
-        /*var ctxUploadsMeses = document.getElementById('chartUploadsMeses')
-        var labels = [];
-        var enviados = [];
-
-        @foreach ($evolucaoEnviados6Meses as $e)
-            labels.push('{!!$e->mes_ano_abrev!!}');
-            enviados.push('{!!$e->enviados!!}');
-        @endforeach
-
-        var chartUploadsMeses = new Chart(ctxUploadsMeses, {
-            type: 'line',
-            data: {
-                labels: labels,
-                datasets: [
-                    {
-                        label: 'Enviados',
-                        data: enviados,
-                        backgroundColor: 'rgba(36, 123, 160, 0.2)',
-                        borderColor: 'rgba(36, 123, 160, 1)'
-                    }
-                ]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                }
-            }
-        });*/
-
-
-</script>
 @endpush

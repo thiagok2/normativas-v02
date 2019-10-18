@@ -45,11 +45,16 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public $unidadeId;
+    public $estadoId;
+
     public function index(Request $request)
     {
 
         $unidade = Unidade::find(auth()->user()->unidade_id);
-    
+        $this->unidadeId = $unidade->id;
+        $this->estadoId = $unidade->estado_id;
+
         $user = auth()->user();
         $user->ultimo_acesso_em = date("Y-m-d H:i:s");
         $user->save();
@@ -69,7 +74,52 @@ class HomeController extends Controller
             $usersCount = User::count();
             $documentosPendentesCount = Documento::where('completed', false)->count();
             $documentos = Documento::with('unidade','tipoDocumento','palavrasChaves')->orderBy('data_envio', 'desc')->paginate(10);
-        }else{
+            $unidadesNaoConfirmadas = Unidade::where('confirmado',false)->paginate(10);
+            $unidades = Unidade::withCount('documentos')
+                ->orderBy('documentos_count', 'desc')
+                ->paginate(10);
+        }else if($user->isAcessor()){
+            $query = Documento::query();
+            $query->whereHas('unidade', function($query){
+                $query->where( 'estado_id',$this->estadoId);
+            });
+            $documentosCount = $query->count();
+
+            $query = User::query();
+            $query->whereHas('unidade', function($query){
+                $query->where( 'estado_id',$this->estadoId);
+            });
+            $usersCount = $query->count();
+
+            $query = Documento::query();
+            $query = $query->where('completed', false);
+            $query->whereHas('unidade', function($query){
+                $query->where( 'estado_id',$this->estadoId);
+            });
+            $documentosPendentesCount = $query->count();
+
+            $query = Documento::query();
+            $query->whereHas('unidade', function($query){
+                $query->where( 'estado_id',$this->estadoId);
+            });
+            
+            $documentos = $query->with('unidade','tipoDocumento','palavrasChaves')->orderBy('data_envio', 'desc')->paginate(10);
+            
+            
+            $query = Unidade::query();
+            $query->where('confirmado',false);
+            $query->where( 'estado_id',$this->estadoId);
+            $unidadesNaoConfirmadas = $query->paginate(10);
+
+
+            $query = Unidade::query();
+            $query->withCount('documentos');
+            $query->where( 'estado_id',$this->estadoId);
+            $query->orderBy('documentos_count', 'desc');
+            $unidades = $query->paginate(10);
+
+            
+        }else if($user->isConselho()){
             $documentosCount = Documento::where('unidade_id',$unidade->id)->count();
             $usersCount = User::where('unidade_id', $unidade->id)->count();
             $documentosPendentesCount = Documento::where([
@@ -89,7 +139,6 @@ class HomeController extends Controller
             
             return view('home2',compact('documentos','documentosPendentesExtrator',
                 'documentosCount','documentosPendentesCount','usersCount'));
-             
         }
 
         /** Indicadores Gestor */
@@ -120,9 +169,6 @@ class HomeController extends Controller
         $evolucaoEnviados6Meses = Cache::remember('evolucaoEnviados6Meses', 5400, function () {
             return $this->documentoQuery->evolucaoEnviados6Meses();
         });
-
-        $unidadesNaoConfirmadas = Unidade::where('confirmado',false)->paginate(10);
-
 
         $documentosPorTipo = Cache::remember('documentosPorTipo', 5400, function () {
             return $this->documentoQuery->documentosPorTipos();
@@ -160,12 +206,6 @@ class HomeController extends Controller
         });
 
 
-        $unidades = Unidade::withCount('documentos')
-            //>having('documentos_count', '>', 0)
-            ->orderBy('documentos_count', 'desc')
-            ->paginate(10);
-
-
         return view('home',compact('documentos',
             'acessosGestores30Dias',
             'topConsultas',
@@ -176,26 +216,6 @@ class HomeController extends Controller
                         'countUnidadesConfirmadas','porcentagemConfirmadas',
                         'totalUnidades','documentosCount','documentosPendentesCount','usersCount','tagCount','tags','unidades'));
         
-        /*
-        }else{
-            $documentos = Documento::with('unidade','tipoDocumento','palavrasChaves')
-                ->where('unidade_id',$unidade->id)
-                ->orderBy('data_envio', 'desc')->paginate(10);
-            
-            $
-
-            //$documentosCount = Documento::where('unidade_id',$unidade->id)->count();
-            // $documentosPendentesCount = Documento::where([
-            //     ['completed', false],
-            //     ['unidade_id', $unidade->id]
-            // ])->count();
-
-            $usersCount = User::where('unidade_id', $unidade->id)->count();
-
-            return view('home2',compact('documentos',
-                        'documentosCount','documentosPendentesCount','usersCount'));
-        }
-        */
 
     }
 

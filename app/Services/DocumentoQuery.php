@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Services;
+
+use App\Models\Unidade;
 use Illuminate\Support\Facades\DB;
 
 class DocumentoQuery{
@@ -39,11 +41,21 @@ class DocumentoQuery{
     }
 
     public function countEnviados30dias(){
-        $result = DB::select("SELECT
-        COUNT(DISTINCT(d.id)) as enviados
-        FROM tempo t
-        LEFT OUTER JOIN documentos d on TO_CHAR(d.data_envio,'YYYYMM') = t.ano_mes
-        WHERE (CURRENT_DATE - t.data_atual) between 0 and 30");
+        $sql = "SELECT
+            COUNT(DISTINCT(d.id)) as enviados
+            FROM tempo t
+            LEFT OUTER JOIN documentos d on TO_CHAR(d.data_envio,'YYYYMM') = t.ano_mes ";
+    
+        dd($sqlsaas);
+
+        if( auth()->user()->isAcessor()){
+            $unidade = Unidade::find(auth()->user()->unidade_id);
+            $sql = $sql." LEFT OUTER JOIN unidades u ON u.id = d.unidade_id and u.estado_id = ".$unidade->estado_id;
+        }
+        
+        $sql = $sql." WHERE (CURRENT_DATE - t.data_atual) between 0 and 30";
+        
+        $result = DB::select( $sql );
 
         return $result[0]->enviados;
     }

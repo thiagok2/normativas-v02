@@ -32,7 +32,8 @@ class AcessoriaController extends Controller
             return view('admin.acessoria.index', compact('estados','unidades','estado'));
 
         }else{
-            return redirect()->route('home');
+            return redirect()->route('home')
+                ->with('error', 'Apenas os administradores acessam o gerencimemento de acessores.');
         } 
 
     }
@@ -93,7 +94,7 @@ class AcessoriaController extends Controller
         $gestorAcessoria->save();
 
         $passwordRandom = bin2hex(openssl_random_pseudo_bytes(4));
-        $gestorAcessoria->password = Hash::make($passwordRandom);
+        //$gestorAcessoria->password = Hash::make($passwordRandom);
         $convite = new Convite();
         $convite->enviarNovoUsuario($gestorAcessoria, $passwordRandom);
         $gestorAcessoria->save();

@@ -1,39 +1,63 @@
 <?php
 
 namespace App\Services;
+
+use App\Models\Unidade;
 use Illuminate\Support\Facades\DB;
 
 
 class UnidadeQuery{
     
     public function countUnidadeConfirmadas(){
-        $result = DB::select("SELECT count(*) total FROM unidades un
+        $sql = "SELECT count(*) total FROM unidades un
         INNER JOIN users us ON us.id = un.responsavel_id
-        WHERE us.confirmado = true");
+        WHERE us.confirmado = true ";
+
+        if( auth()->user()->isAcessor()){
+            $unidade = Unidade::find(auth()->user()->unidade_id);
+            $sql = $sql." and un.estado_id = ".$unidade->estado_id;
+        }
+
+        $result = DB::select($sql);
 
         return $result[0]->total;
     }
 
     public function countUnidadeNaoConfirmadas(){
-        $result = DB::select("SELECT count(*) as total FROM unidades un
-        INNER JOIN users us ON us.id = un.responsavel_id
-        WHERE us.confirmado = false");
+        $sql = "SELECT count(*) as total FROM unidades un
+            INNER JOIN users us ON us.id = un.responsavel_id
+            WHERE us.confirmado = false ";
+
+        if( auth()->user()->isAcessor()){
+            $unidade = Unidade::find(auth()->user()->unidade_id);
+            $sql = $sql." and un.estado_id = ".$unidade->estado_id;
+        }
+
+        $result = DB::select($sql);
 
         return $result[0]->total;
     }
 
     public function countUnidadeConfirmadasUltimos30dias(){
-        $result = DB::select("SELECT 
+        $sql = "SELECT 
             COUNT(DISTINCT(u.id)) as confirmadas
             FROM tempo t
-            LEFT OUTER JOIN unidades u on TO_CHAR(u.confirmado_em,'YYYYMM') = t.ano_mes
-            WHERE (CURRENT_DATE - t.data_atual) between 0 and 30");
+            LEFT OUTER JOIN unidades u on TO_CHAR(u.confirmado_em,'YYYYMM') = t.ano_mes ";
+            
+        if( auth()->user()->isAcessor()){
+            $unidade = Unidade::find(auth()->user()->unidade_id);
+            $sql = $sql." and u.estado_id = ".$unidade->estado_id;
+        }
+
+        $sql = $sql." WHERE (CURRENT_DATE - t.data_atual) between 0 and 30 ";
+
+        $result = DB::select( $sql );
 
         return $result[0]->confirmadas;
     }
 
     public function evolucaoUnidadesConfirmadas6Meses(){
-        $result = DB::select("SELECT trim(t.ano_mes) as ano_mes, trim(t.mes_ano_abrev) as mes_ano_abrev,
+        $sql = "SELECT trim(t.ano_mes) as ano_mes, trim(t.mes_ano_abrev) as mes_ano_abrev,
             COUNT(DISTINCT(un2.id)) as criados,
             COUNT(DISTINCT(un.id)) as confirmados
             FROM tempo t
@@ -41,7 +65,9 @@ class UnidadeQuery{
             LEFT OUTER JOIN unidades un2 on TO_CHAR(un2.created_at,'YYYYMM') = t.ano_mes
             WHERE (CURRENT_DATE - t.data_atual) between 0 and 180 and t.data_atual >= '20181101'
             GROUP BY t.ano_mes, t.mes_ano_abrev
-            ORDER BY t.ano_mes");
+            ORDER BY t.ano_mes";
+        
+        $result = DB::select($sql);
 
         return $result;
     }

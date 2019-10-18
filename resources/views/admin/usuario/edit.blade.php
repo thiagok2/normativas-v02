@@ -44,9 +44,10 @@
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="tipo">Tipo</label>
-                                    <select class="form-control" disabled id="tipo" name="tipo">
+                                    <select class="form-control" id="tipo" name="tipo" disabled>
                                         <option {{($user->tipo == 'admin' ? 'selected="selected"':'')}}>Administrador</option>
                                         <option {{($user->tipo == 'gestor' ? 'selected="selected"':'')}}>Gestor</option>
+                                        <option {{($user->tipo == 'acessor' ? 'selected="selected"':'')}}>Acessor</option>
                                         <option {{($user->tipo == 'colaborador' ? 'selected="selected"':'')}}>Colaborador</option>
                                     </select>
                                 </div>
