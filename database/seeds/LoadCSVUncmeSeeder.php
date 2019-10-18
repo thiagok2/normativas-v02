@@ -5,6 +5,7 @@ use App\Models\Municipio;
 use App\Models\Unidade;
 use App\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
