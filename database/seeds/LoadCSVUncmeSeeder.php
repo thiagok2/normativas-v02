@@ -18,8 +18,14 @@ class LoadCSVUncmeSeeder extends Seeder
      */
     public function run()
     {
+
+        Artisan::call('db:seed', [
+            '--class' => ClearUnidadeUncme::class
+        ]);
+
         $file_n = Storage::disk('local')->path('uncme.csv');;
         $file = fopen($file_n, "r");
+        stream_set_timeout( $file, 1000000000000);
         $header = true;
         try{
             DB::beginTransaction();
@@ -28,6 +34,7 @@ class LoadCSVUncmeSeeder extends Seeder
                 if($header){
                     $header = false;
                 }else{
+                   
                     if(sizeof($data) == 8){
                         $unidade = new Unidade();
                         $unidade->user_id = 1;
@@ -69,7 +76,7 @@ class LoadCSVUncmeSeeder extends Seeder
                         $municipio->criado = true;
                         $municipio->save();
 
-                        echo $unidade->nome."\n";
+                        //echo $unidade->nome."\n";
                     }
                     
     

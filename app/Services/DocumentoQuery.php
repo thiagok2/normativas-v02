@@ -45,8 +45,6 @@ class DocumentoQuery{
             COUNT(DISTINCT(d.id)) as enviados
             FROM tempo t
             LEFT OUTER JOIN documentos d on TO_CHAR(d.data_envio,'YYYYMM') = t.ano_mes ";
-    
-        dd($sqlsaas);
 
         if( auth()->user()->isAcessor()){
             $unidade = Unidade::find(auth()->user()->unidade_id);
