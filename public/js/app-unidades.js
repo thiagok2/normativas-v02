@@ -12,35 +12,11 @@ $(document).ready(function() {
         }
 
         str = str.replace(/[^a-z0-9 -]/g, '') // remove invalid chars
-            .replace(/\s+/g, '-') // collapse whitespace and replace by -
+            .replace(/\s+/g, '') // collapse whitespace and replace by -
             .replace(/-+/g, '-'); // collapse dashes
 
         return str;
     };
-
-    $("#nome1").keyup(function(){
-          
-        var slug = function(str) {
-            str = str.replace(/^\s+|\s+$/g, ''); // trim
-            str = str.toLowerCase();
-
-            // remove accents, swap ñ for n, etc
-            var from = "ÁÄÂÀÃÅČÇĆĎÉĚËÈÊẼĔȆĞÍÌÎÏİŇÑÓÖÒÔÕØŘŔŠŞŤÚŮÜÙÛÝŸŽáäâàãåčçćďéěëèêẽĕȇğíìîïıňñóöòôõøðřŕšşťúůüùûýÿžþÞĐđßÆa·/_,:;";
-            var to   = "AAAAAACCCDEEEEEEEEGIIIIINNOOOOOORRSSTUUUUUYYZaaaaaacccdeeeeeeeegiiiiinnooooooorrsstuuuuuyyzbBDdBAa------";
-            for (var i=0, l=from.length ; i<l ; i++) {
-                str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
-            }
-
-            str = str.replace(/[^a-z0-9 -]/g, '') // remove invalid chars
-                .replace(/\s+/g, '') // collapse whitespace and replace by -
-                .replace(/-+/g, '-'); // collapse dashes
-
-            return str;
-        };
-
-        alert("aahahah");
-        $("#friendly_url").val( slug($('#nome').val()) );    
-    });
 
     $('.phone').mask('(00) 0000-0000');
 
@@ -59,12 +35,12 @@ $(document).ready(function() {
     $('select[name=municipio_id]').change(function () {
 
         var municipio = $( "#municipio_id option:selected" ).text();
+        var estado = $( "#estado_id option:selected" ).val();
         $("#nome").val("Conselho Municipal de Educação de "+municipio);
-        $("#sigla").val("CME-"+slug(municipio).toUpperCase());
+        $("#sigla").val("CME-"+slug(municipio.replace(/\s+/g, "-")).toUpperCase()+"-"+estado);
 
-        $("#friendly_url").val( slug(municipio) );
-
-    });
+        $("#friendly_url").val( slug(municipio) + "-" + slug(estado) );
+    });    
 
     $("#tbl-conselhos").on("click", ".modal-unidade", function () {
         
@@ -80,15 +56,14 @@ $(document).ready(function() {
             $("#conselho_nome").val(result.unidade.nome);
             $("#conselho_sigla").val(result.unidade.sigla);
 
-            $("#gestor_nome").val(result.gestor.name);
-            $("#gestor_email").val(result.gestor.email);
-
-            //console.log(result);
+            if(result.unidade.contato){
+                $("#gestor_nome").val(result.unidade.contato);                                            
+            }
+            else{
+                $("#gestor_nome").val(result.gestor.name);
+            }
         }).fail(function (msg) {
-            console.log(JSON.stringify(msg));
-            
-        }).always(function (msg) {
-
+            console.log(JSON.stringify(msg));             
         });
 
 

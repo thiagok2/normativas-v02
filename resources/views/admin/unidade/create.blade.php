@@ -36,7 +36,7 @@
                                     </div>
                                 </div>
                             
-                                <div class="col-md-4">
+                                <div class="col-sm-4">
                                     <div class="form-group">
                                         <label for="estado_id">Estado</label>
         
@@ -48,7 +48,7 @@
                                         </select>
                                     </div>
                                 </div><!-- end col estado-->
-                                <div class="col-md-5">
+                                <div class="col-sm-5">
                                     <div class="form-group">
                                         <label for="municipio">Município</label>
         
@@ -82,15 +82,12 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">
-                                        <label for="friendly_url">URL Amigável</label>
-                                        <a class="btn btn-sm" id="btn_edit_url_amigavel">
-                                            <span class="glyphicon glyphicon-edit"></span>
-                                        </a>
+                                        <label for="friendly_url">URL Amigável</label>                                        
                                         <div class="input-group">
                                             <span class="input-group-addon" id="basic-addon1">
                                                 <span class="glyphicon glyphicon-globe"></span>
                                             </span>
-                                            <input type="text" class="form-control aaa" name="friendly_url" id="friendly_url">
+                                            <input type="text" class="form-control" readonly name="friendly_url" id="friendly_url">
                                         </div>
                                         
                                         <small id="friendly_url_help" class="form-text text-muted">URL Interna para a plataforma normativas</small>
