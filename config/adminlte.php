@@ -166,19 +166,12 @@ return [
             [
                 'text'    => 'Conselhos',
                 'icon'    => 'university',
-                'url'     => 'admin/unidades',
-                'submenu' => [
-                    [
-                        'text' => 'Pesquisar Conselhos',
-                        'url'  => 'admin/unidades',
-                        'icon' => 'university',
-                    ],
-                    [
-                        'text' => 'Pesquisar Acessorias',
-                        'url'  => 'admin/unidades/acessorias',
-                        'icon' => 'university',
-                    ],
-                ]
+                'url'     => 'admin/unidades',                
+            ],
+            [
+                'text'    => 'Acessorias',
+                'icon'    => 'shield',
+                'url'     => 'admin/unidades/acessorias',                
             ],
             [
                 'text'    => 'Perfil',
