@@ -48,6 +48,36 @@ class UnidadeController extends Controller
 
             return view('admin.unidade.index', compact('estados','unidades','esfera','estado','nome','documentos'));
 
+        }
+        else if($user->isAcessor()){            
+            if ($user->unidade->esfera == Unidade::ESFERA_FEDERAL){
+                $estado = $request->query('estado');
+                $estados = Estado::all();                            
+            }            
+            else{
+                $estado = $user->unidade->estado_id;
+                $estados = Estado::find([$estado]);
+            }            
+
+            $nome = $request->query('nome');
+
+            $clausulas = [];
+            $clausulas[] = ['tipo',Unidade::TIPO_CONSELHO];            
+            $esfera = "Municipal";
+            $clausulas[] = ['esfera', '=', $esfera];
+
+            if($nome){
+                $clausulas[] = ['nome', 'ilike', '%'.strtoupper($nome).'%'];
+            }
+
+            if($estado){
+                $clausulas[] = ['estado_id', $estado];
+            }            
+
+            $unidades = Unidade::where($clausulas)->with('estado','municipio' ,'responsavel')->withCount('documentos')->paginate(25);
+            $documentos = Documento::paginate(25);             
+
+            return view('admin.unidade.index', compact('estados','unidades','esfera','estado','nome','documentos'));
         }else{
             $unidade = auth()->user()->unidade;
             $users = User::where("unidade_id", $unidade->id)->paginate(25);
@@ -86,8 +116,13 @@ class UnidadeController extends Controller
     }
 
     public function create(Request $request){
-
-        $estados = Estado::all();
+        if(auth()->user()->isAdmin()){
+            $estados = Estado::all();
+        }
+        else{
+            $estado = auth()->user()->unidade->estado_id;
+            $estados = Estado::find([$estado]);
+        }
         $unidade = new Unidade();
 
         return view('admin.unidade.create', compact('estados','unidade'));
@@ -123,8 +158,9 @@ class UnidadeController extends Controller
         DB::beginTransaction();
 
 
-        $data = $request->all();
+        $data = $request->all();                
         $unidade->fill($data);
+        $unidade->estado_id = Estado::where("sigla", $unidade->estado_id)->first()->id;        
         $unidade->user()->associate(auth()->user()->id);
         $unidade->save();
 
@@ -239,7 +275,7 @@ class UnidadeController extends Controller
         $unidade = Unidade::find($request->unidade_id);
 
         if(User::where("email",$request->gestor_email)->first()){
-            return redirect()->back()->withInput()->with('error', "Já existe um usuário o email: ".$request->gestor_email.". Um novo usuário/email é necessário.");
+            return redirect()->back()->withInput()->with('error', "Já existe um usuário com o email: ".$request->gestor_email.". Um novo usuário/email é necessário.");
         }
 
         $unidade->nome = $request->conselho_nome;

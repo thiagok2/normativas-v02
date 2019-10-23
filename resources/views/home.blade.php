@@ -26,8 +26,8 @@
 </div>
 <div class="row">
     <div class="col-lg-12">
-        <p class="alert bg-warning lead" style="padding: 10px;">
-            Você é um usuário acessor. Vocẽ pode liberar acessos aos conselhos e acomanhar o uso de seus usuário na plataforma.
+        <p class="alert alert-success" style="padding: 10px;">
+            Você é um usuário acessor. Você pode conceder aos conselhos municipais de educação acesso à plataforma Normativas.
         </p>
     </div>
 </div>

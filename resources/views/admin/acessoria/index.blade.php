@@ -16,7 +16,7 @@
 
         <div class="row">
             <div class="col-lg-12">
-                <div class="well">As unidades de acessoria tem a função de cadastrar e liberar acesso aos conselhos estaduais do seu estado.</div>
+                <div class="well">As unidades de acessoria têm a função de cadastrar e conceder acesso aos conselhos municipais de educação de seu estado.</div>
             </div>
         </div>
         <div class="row">
@@ -69,8 +69,9 @@
                                     <th>#</th>
                                     <th>Esfera</th>
                                     <th>Estado</th>
-                                    <th>Município</th>                                    
-                                    <th>Nome</th>                                                                     
+                                    <th>Município</th>
+                                    <th>Nome da Unidade</th>                                    
+                                    <th class="col-md-1 text-center">Status</th>
                                     <th class="col-md-1 text-center">Ações</th>
                                 </tr>
                             </thead>

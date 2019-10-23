@@ -13,7 +13,7 @@
             <li> <a href="#" class="active"><a href="#">Unidades</a></li>
         </ol>
         <div class="row">
-            @if (auth()->user()->isAdmin())
+            @if (auth()->user()->isAdmin() || auth()->user()->isAcessor())
                 
                 <div class="col-lg-2">
                     <a href="{{route('unidade-create')}}" class="btn btn-primary btn-block"><i class="fa fa-plus"></i> Adicionar Conselho</a>
@@ -40,9 +40,9 @@
 
                             <select class="form-control" name="esfera" id="esfera">
                                 <option value="0">Todas as Esferas</option>
-                                <option value="Federal"     @if($esfera=="Federal") selected @endif>Federal</option>
-                                <option value="Estadual"    @if($esfera=="Estadual") selected @endif>Estadual</option>
-                                <option value="Municipal"   @if($esfera=="Municipal") selected @endif>Municipal</option>
+                                <option value="Municipal"   @if($esfera=="Municipal") selected @endif>Municipal</option>                                
+                                <option value="Estadual"    @if($esfera=="Estadual") selected @endif @if(auth()->user()->isAcessor()) disabled @endif>Estadual</option>                                
+                                <option value="Federal"     @if($esfera=="Federal") selected @endif @if(auth()->user()->isAcessor()) disabled @endif>Federal</option>
                             </select>
 
                             <select class="form-control" name="estado" id="estado">
@@ -88,7 +88,7 @@
                                         <td>{{ $unidade->estado['nome']}}</td>
                                         <td>{{ $unidade->municipio['nome']}}</td>
                                         <td>
-                                            <a style="cursor: pointer;" @if (!$unidade->confirmado) class="modal-unidade" @else href="{{route("unidade-show",$unidade->id)}}" @endif data-conselho-id="{{ $unidade->id }}">{{ $unidade->nome}}</a></td>                                        
+                                            <a style="cursor: pointer;" href="{{route("unidade-show",$unidade->id)}}" data-conselho-id="{{ $unidade->id }}">{{ $unidade->nome}}</a></td>
                                         <td class="text-center">                                            
                                             @if($unidade->documentos_count > 0)
                                                 <h4><span class="label label-success">{{$unidade->documentos_count}} <i class="fa fa-file"></i></span></h4>
@@ -117,8 +117,7 @@
                                             <h4>                                        
                                                 <a href="{{route("unidade-edit",$unidade->id)}}" title="Editar">
                                                     <span class="label label-primary"><i class="fa fa-edit"></i></span>
-                                                </a>    
-                                                
+                                                </a>                                                    
                                                 <a href="#" 
                                                     title="Enviar convite" class="modal-unidade" data-conselho-id="{{ $unidade->id }}">
                                                     <span class="label label-primary"><i class="glyphicon glyphicon-send"></i></span>
@@ -149,7 +148,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="modalAtualizarConvidar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="width: 80%;">
+    <div class="modal fade" id="modalAtualizarConvidar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog modal-lg" role="document">
             <form action="{{route("unidade-novo-acesso")}}" method="POST" id="form-novo-acesso">
                 {!! csrf_field() !!}
@@ -158,7 +157,7 @@
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title" id="conselho_titulo"></h4>
-                        <span class="help-text text-muted">Edite as informações do gestor e envio um convite para liberar o acesso.</span>
+                        <span class="help-text text-muted">Edite as informações do conselho e envie um convite para liberar o acesso.</span>
                     </div>
                     <div class="modal-body">
                         <div class="container-fluid">
@@ -193,7 +192,7 @@
                                         <label for="gestor_email">Email</label>
                                         <div class="input-group">
                                             <span class="input-group-addon" id="basic-addon1">
-                                                <span class="glyphicon glyphicon-globe"></span>
+                                                <span class="glyphicon glyphicon-envelope"></span>
                                             </span>
                                             <input type="email" class="form-control" name="gestor_email" id="gestor_email" required maxlength="255" minlength="10">
                                         </div>
