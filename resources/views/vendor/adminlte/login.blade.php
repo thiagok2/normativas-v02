@@ -23,7 +23,7 @@
                 {!! csrf_field() !!}
 
                 <div class="form-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}">
-                    <input type="email" name="email" class="form-control" value="{{ old('email') }}"
+                    <input type="email" id="email" name="email" class="form-control" value="{{ old('email') }}"
                            placeholder="{{ trans('adminlte::adminlte.email') }}">
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                     @if ($errors->has('email'))
@@ -33,7 +33,7 @@
                     @endif
                 </div>
                 <div class="form-group has-feedback {{ $errors->has('password') ? 'has-error' : '' }}">
-                    <input type="password" name="password" class="form-control"
+                    <input type="password" id="password" name="password" class="form-control"
                            placeholder="{{ trans('adminlte::adminlte.password') }}">
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                     @if ($errors->has('password'))
@@ -53,7 +53,7 @@
                     <!-- /.col -->
                     <div class="col-xs-4">
                         <button type="submit"
-                                class="btn btn-primary btn-block btn-flat">{{ trans('adminlte::adminlte.sign_in') }}</button>
+                                class="btn btn-primary btn-block btn-flat" id="login">{{ trans('adminlte::adminlte.sign_in') }}</button>
                     </div>
                     <!-- /.col -->
                 </div>
@@ -71,7 +71,19 @@
                 </a>
                 <br>
                 <br>
-                <br>
+                @if(getenv('APP_ENV')=='local')
+                    <div class="alert alert-success">
+                        <strong>Você está no ambiente de desenvolvimento</strong><br/>
+                        <i>Clique para fazer login como:</i><br/><br/>   
+                        <div class="btn-group">                                           
+                            <button class="btn btn-success" onclick="logar('normativas@nees.com.br','123456')">Admin</button>                        
+                            <button class="btn btn-success" onclick="logar('cneagendamento@mec.gov.br','123456')">Gestor</button>
+                            <button class="btn btn-success" onclick="logar('uncmenacional2018@gmail.com','987654321')">Acessor</button>
+                            <button class="btn btn-success" onclick="logar('ceeal@extrator.com.br','extrator')">Extrator</button>
+                        </div>
+                    </div>
+                    <script src="{{ asset('js/app-local-login.js') }}"></script>
+                @endif                
                 <p class="text-muted">
                 Caso tenha problemas de acesso, envie email para normativas@nees.com.br
                 </p>
