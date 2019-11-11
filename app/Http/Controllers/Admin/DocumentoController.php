@@ -59,16 +59,20 @@ class DocumentoController extends Controller
     }
 
     public function create(){
+        $user = auth()->user();
 
-        $unidade = auth()->user()->unidade;
+        if($user->isAcessor()){
+            return redirect()->route('home')
+            ->with('error', 'Como acessor, você não pode gerenciar documentos.');            
+        }else{
+            $unidade = auth()->user()->unidade;
 
-        $tiposDocumento = TipoDocumento::all();
+            $tiposDocumento = TipoDocumento::all();
 
-        $assuntos = Assunto::all(); 
+            $assuntos = Assunto::all();         
 
-        //$message = "Acesse: ".env('ELASTIC_URL');
-
-        return view('admin.documento.create', compact('unidade','tiposDocumento',  'assuntos'));
+            return view('admin.documento.create', compact('unidade','tiposDocumento',  'assuntos'));        
+        }         
     }
 
     public function store(Request $request, Documento $documento){

@@ -29,16 +29,20 @@ class LoteController extends Controller
     }
 
     public function create(){
-        $unidade = auth()->user()->unidade;
+        $user = auth()->user();
 
-        $tiposDocumento = TipoDocumento::all();
+        if($user->isAcessor()){
+            return redirect()->route('home')
+            ->with('error', 'Como acessor, você não pode gerenciar documentos.');            
+        }else{
+            $unidade = auth()->user()->unidade;
 
-        $assuntos = Assunto::all(); 
+            $tiposDocumento = TipoDocumento::all();
 
-        //$message = "Acesse: ".env('ELASTIC_URL');
-       
+            $assuntos = Assunto::all(); 
 
-        return view('admin.documento.lote', compact('unidade','tiposDocumento',  'assuntos'));
+            return view('admin.documento.lote', compact('unidade','tiposDocumento','assuntos'));        
+        }            
     }
 
     public function store(Request $request){
@@ -157,22 +161,27 @@ class LoteController extends Controller
     }
 
     public function documentosPendentes(Request $request){
+        $user = auth()->user();
+
+        if($user->isAcessor()){
+            return redirect()->route('home')
+            ->with('error', 'Como acessor, você não pode gerenciar documentos.');            
+        }else{
+            $unidade = auth()->user()->unidade;
+
+            $documentos = Documento::where([
+                ['unidade_id', $unidade->id],
+                ['completed', false],
+                ['tipo_entrada', Documento::ENTRADA_LOTE]
+            ])->paginate(25);
+
+            $tiposDocumento = TipoDocumento::all();
+            $assuntos = Assunto::all(); 
+
+            $alerta = "Complete os dados dos arquivos enviados, assim terão uma maior possibilidade de retorno nas buscas (Ano, Tipo Documento e Assunto).";
         
-        $unidade = auth()->user()->unidade;
-
-        $documentos = Documento::where([
-            ['unidade_id', $unidade->id],
-            ['completed', false],
-            ['tipo_entrada', Documento::ENTRADA_LOTE]
-        ])->paginate(25);
-
-        $tiposDocumento = TipoDocumento::all();
-        $assuntos = Assunto::all(); 
-
-        $alerta = "Complete os dados dos arquivos enviados, assim terão uma maior possibilidade de retorno nas buscas (Ano, Tipo Documento e Assunto).";
-      
-
-        return view('admin.documento.lote-edit', compact('unidade','tiposDocumento', 'assuntos','documentos','alerta'));
+            return view('admin.documento.lote-edit', compact('unidade','tiposDocumento', 'assuntos','documentos','alerta'));
+        }                  
     }
 
     public function destroy($id){
