@@ -108,7 +108,7 @@ class UsuarioController extends Controller
     
             if($primeiroAcesso){
                 return redirect()->route('home')
-                    ->with(['success'=> 'Cadastro concluído com sucesso. Agora você já pode enviar novos documentos do seu conselho.']);
+                    ->with(['success'=> 'Cadastro concluído com sucesso.']);
             }else{
                 return redirect()->route('home');
             }
@@ -162,7 +162,7 @@ class UsuarioController extends Controller
             $data = $request->all();
             $user->fill($data);
 
-            $passwordRandom = '987654321';//bin2hex(openssl_random_pseudo_bytes(4));
+            $passwordRandom = bin2hex(openssl_random_pseudo_bytes(4));
             $user->email = trim($request->input('email'));
             $user->password = Hash::make($passwordRandom);
 

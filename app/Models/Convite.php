@@ -30,9 +30,9 @@ class Convite extends Model
 
     public function enviarNovoUsuario($userNovo,$passwordGerado){
         $to_name = $userNovo->name;
-        //echo getenv('APP_ENV');
+        
         if(getenv('APP_ENV') == 'local'){
-            $to_email = getenv('MAIL_USERNAME');
+            $to_email = getenv('MAIL_USERNAME');            
         }else {
             $to_email = $userNovo->email;
         }
@@ -44,6 +44,8 @@ class Convite extends Model
             $tipoLabel  = "gestor(a)";
         }else if($userNovo->isColaborador()){
             $tipoLabel  = "colaborador(a)";
+        }else if($userNovo->isAcessor()){
+            $tipoLabel  = "acessor(a)";
         }
 
         $data = array(

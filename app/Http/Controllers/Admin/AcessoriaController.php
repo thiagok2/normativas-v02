@@ -39,7 +39,7 @@ class AcessoriaController extends Controller
     }
 
     public function create(Request $request){
-        $estados = Estado::all();
+        $estados = Estado::where("possui_acessoria", false)->get();
         $unidade = new Unidade();
 
         return view('admin.acessoria.create', compact('estados','unidade'));
@@ -69,8 +69,11 @@ class AcessoriaController extends Controller
         $unidade->user()->associate(auth()->user());
 
         $estado = Estado::where('sigla',$request->estado_id)->first();
+        $estado->possui_acessoria = true;
+        $estado->save();
         $unidade->estado()->associate($estado);
         $sigla = "acessoria-".strtolower($estado->sigla);
+                
 
         $countAcessoria = Unidade::orWhere([ 
             ["sigla",$sigla],
@@ -81,10 +84,11 @@ class AcessoriaController extends Controller
         $unidade->sigla = $sigla;
         $unidade->friendly_url = $sigla;
 
+        $passwordRandom = bin2hex(openssl_random_pseudo_bytes(4));
         $gestorAcessoria = User::create([
             'name' => $request->contato,
             'email' => $request->email,
-            'password' => Hash::make('987654321'),
+            'password' => Hash::make($passwordRandom),
             'tipo' => User::TIPO_ACESSOR
         ]);
 
@@ -92,9 +96,7 @@ class AcessoriaController extends Controller
         $unidade->save();
         $gestorAcessoria->unidade()->associate($unidade);
         $gestorAcessoria->save();
-
-        $passwordRandom = bin2hex(openssl_random_pseudo_bytes(4));
-        //$gestorAcessoria->password = Hash::make($passwordRandom);
+                
         $convite = new Convite();
         $convite->enviarNovoUsuario($gestorAcessoria, $passwordRandom);
         $gestorAcessoria->save();
