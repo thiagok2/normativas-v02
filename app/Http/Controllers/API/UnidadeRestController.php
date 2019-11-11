@@ -46,7 +46,7 @@ class UnidadeRestController extends Controller
                 ["estado_id", $estado->id],
                 ["criado", false],
             ]
-            )->orderBy('capital', 'desc')->get();
+            )->orderBy('nome', 'asc')->get();
 
         return response()->json(
             $municipios
@@ -56,7 +56,7 @@ class UnidadeRestController extends Controller
 
     public function municipiosTodos(Request $request, $sigla){
         $estado = Estado::where("sigla", strtoupper($sigla))->first();
-        $municipios = Municipio::where( "estado_id", $estado->id )->orderBy('capital', 'desc')->get();
+        $municipios = Municipio::where( "estado_id", $estado->id )->orderBy('nome','asc')->get();
 
         return response()->json(
             $municipios
