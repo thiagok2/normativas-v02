@@ -139,6 +139,8 @@ class HomeController extends Controller
             
             return view('home2',compact('documentos','documentosPendentesExtrator',
                 'documentosCount','documentosPendentesCount','usersCount'));
+        }else{
+            return redirect()->route('usuarios');            
         }
 
         /** Indicadores Gestor */
