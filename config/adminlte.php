@@ -112,72 +112,7 @@ return [
             'text'        => 'Painel',
             'url'         => 'admin/home',
             'icon'        => 'home'
-        ]
-        ,
-        'Atos Normativos',
-        [
-            'text'        => 'Publicar',
-            'url'         => 'admin/documentos/publicar',
-            'icon'        => 'upload'
-        ],
-        [
-            'text'        => 'Publicar em Lote',
-            'url'         => 'admin/documentos/publicar-lote',
-            'icon'        => 'cloud-upload'
-        ],
-        [
-            'text'        => 'Documentos Pendentes',
-            'url'         => 'admin/documentos/pendentes',
-            'icon'        => 'exclamation-triangle',
-            'submenu' => [
-                [
-                    'text' => 'Pendências de Lote',
-                    'url'  => 'admin/documentos/pendentes',
-                    'icon' => 'th-large',
-                ],
-                [
-                    'text' => 'Pesquisar Pendências',
-                    'url'  => 'admin/documentos/pesquisar/status',
-                    'icon' => 'search',
-                ],
-            ]
-        ],
-        [
-            'text'        => 'Últimos Documentos',
-            'url'         => 'admin/documentos',
-            'icon'        => 'search'
-        ],
-        [
-            'text'    => 'Glossário',
-            'icon'    => 'bars',
-            'submenu' => [
-                [
-                    'text' => 'Tipos de Documentos',
-                    'url'  => 'admin/tiposdocumento',
-                    'icon' => 'th-large',
-                ],
-                [
-                    'text' => 'Assuntos',
-                    'url'  => 'admin/assuntos',
-                    'icon' => 'th-list',
-                ],
-            ]
-            ],
-            [
-                'text'    => 'Conselhos',
-                'icon'    => 'university',
-                'url'     => 'admin/unidades',                
-            ],
-            [
-                'text'    => 'Acessorias',
-                'icon'    => 'shield',
-                'url'     => 'admin/unidades/acessorias',                
-            ],
-            [
-                'text'    => 'Perfil',
-                'icon'    => 'users',
-                'url'     => 'admin/usuarios' 
-            ]
+        ]                
     ],
 
     /*
