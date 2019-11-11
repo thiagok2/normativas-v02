@@ -112,7 +112,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                                @if (auth()->user()->id == $user->id)
+                                @if (auth()->user()->id == $user->id || auth()->user()->isAdmin())
                                     <a href="{{route('usuario-edit',$user->id)}}" class="btn btn-primary btn-lg ">Editar</a>    
                                 @endif
                                 @if (auth()->user()->id != $user->id && (auth()->user()->isGestor() || auth()->user()->isAdmin()))
@@ -120,7 +120,7 @@
                                 @endif
 
                                 @if (auth()->user()->id != $user->id  &&
-                                        (auth()->user()->isResponsavel() || auth()->user()->isAdmin()))                                    
+                                        (auth()->user()->isGestor() || auth()->user()->isAdmin()))                                    
                                     <a href="#modalConfirm" class="btn btn-primary btn-lg" data-toggle="modal">Excluir</button></a>                                                                        
                                 @endif
                                 

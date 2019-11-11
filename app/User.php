@@ -51,6 +51,10 @@ class User extends Authenticatable
         return $this->tipo == User::TIPO_ACESSOR;
     }
 
+    public function isExtrator(){
+        return $this->tipo == User::TIPO_EXTRATOR;
+    }
+
     public function isResponsavel(){
         return $this->id == $this->unidade->responsavel_id;
     }
