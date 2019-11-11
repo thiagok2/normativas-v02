@@ -10,8 +10,9 @@
     <div class="container-fluid">
         <ol class="breadcrumb">
             <li><a href="{{route('home')}}">Painel</a></li>
-            <li> <a href="{{route('unidades')}}" >Acessoria</a></li>
-            <li> <a href="#" ><a href="#">Nova Unidade</a></li>
+            <li> <a href="{{route('unidades')}}" ><a href="#">Unidades</a></li>            
+            <li> <a href="{{route('acessorias')}}" >Acessorias</a></li>
+            <li> <a href="#" class="active"><a href="#">Nova Acessoria</a></li>            
         </ol>
 
         @include('admin.includes.alerts')

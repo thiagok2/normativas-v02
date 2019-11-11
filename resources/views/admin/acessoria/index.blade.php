@@ -18,6 +18,9 @@
             <div class="col-lg-12">
                 <div class="well">As unidades de acessoria têm a função de cadastrar e conceder acesso aos conselhos municipais de educação de seu estado.</div>
             </div>
+            <div class="col-lg-12">
+                @include('admin.includes.alerts')
+            </div>
         </div>
         <div class="row">
             @if (auth()->user()->isAdmin())
@@ -28,11 +31,7 @@
                 </div>
                
             @endif
-        </div>
-
-        <div class="row">
-            @include('admin.includes.alerts')
-        </div>
+        </div>        
 
         <div class="row">
             <div class="col-lg-12">
