@@ -74,10 +74,11 @@ class HomeController extends Controller
             $usersCount = User::count();
             $documentosPendentesCount = Documento::where('completed', false)->count();
             $documentos = Documento::with('unidade','tipoDocumento','palavrasChaves')->orderBy('data_envio', 'desc')->paginate(10);
-            $unidadesNaoConfirmadas = Unidade::where('confirmado',false)->paginate(10);
-            $unidades = Unidade::withCount('documentos')
+            $unidadesNaoConfirmadas = Unidade::where('confirmado',false)->paginate(10);            
+            $unidades = Unidade::has('documentos')                            
+                ->withCount('documentos')               
                 ->orderBy('documentos_count', 'desc')
-                ->paginate(10);
+                ->paginate(10);                                    
         }else if($user->isAcessor()){
             $query = Documento::query();
             $query->whereHas('unidade', function($query){

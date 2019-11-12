@@ -432,7 +432,7 @@
             <div class="box-footer">
                 <span class="text-muted pull-left">
 
-                    Total de {{$unidades->total()}} conselhos
+                    Total de {{$unidades->total()}} conselhos com documentos publicados
 
                 </span>
             </div>
