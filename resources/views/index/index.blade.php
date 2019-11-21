@@ -371,8 +371,12 @@
             <div class="row">
                 <div class="col-lg-10 offset-lg-1">
                     <nav>
-                        <ul class="pagination justify-content-end">
+                        <ul class="pagination justify-content-center">
                             @if ($page > 1)
+                            <li class="page-item">
+                                <a href="?query={{ urlencode($query) }}&page={{ 1 }}&esfera={{ $esfera }}&fonte={{ $fonte }}&ano={{$ano}}&periodo={{$periodo}}"
+                                    class="page-link" tabindex="-1">Primeira</a>
+                            </li>
                             <li class="page-item">
                                 <a href="?query={{ urlencode($query) }}&page={{ ($page - 1) }}&esfera={{ $esfera }}&fonte={{ $fonte }}&ano={{$ano}}&periodo={{$periodo}}"
                                     class="page-link" tabindex="-1">Anterior</a>
@@ -381,25 +385,21 @@
 
                             @if($total_pages > 0 && $page <= $total_pages)
 
-                                @php($limit = 3)
-
-                                @for ($i = $page; $i <= min($page + $limit, $total_pages); $i++)
+                                @php($auxb = $page+5>$total_pages ? 9-($total_pages-$page)  : 5 )                                
+                                @php($begin = $page-$auxb>0 ? $page-$auxb : 1)                                                            
+                                @php($auxe = $page-6>0 ? 5 : 10-$page)
+                                @php($end = $page+$auxe>$total_pages ? $total_pages : $page+$auxe) 
+                                @for ($i = $begin; $i <= $end; $i++)
                                      <li class="page-item"><a class="page-link {{$i == $page ? 'active' :'' }}" href="?query={{ urlencode($query) }}&page={{ ($i) }}&esfera={{ $esfera }}&fonte={{ $fonte }}&ano={{$ano}}&periodo={{$periodo}}">{{$i}}</a></li>
-
                                 @endfor
 
                             @endif
 
-
-
                             @if ($page < $total_pages)
                                 <li class="page-item">
                                 <a href="?query={{ urlencode($query) }}&page={{ ($page + 1) }}&esfera={{ $esfera }}&fonte={{ $fonte }}&ano={{$ano}}&periodo={{$periodo}}"
-                                    class="page-link">Próximo</a>
+                                    class="page-link">Próxima</a>
                                 </li>
-                            @endif
-
-                            @if ($total_pages > 1)
                                 <li class="page-item">
                                 <a href="?query={{ urlencode($query) }}&page={{ ($total_pages) }}&esfera={{ $esfera }}&fonte={{ $fonte }}&ano={{$ano}}&periodo={{$periodo}}"
                                     class="page-link">Última</a>

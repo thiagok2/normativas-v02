@@ -220,7 +220,7 @@
         @endforelse
 
         <div class="row">
-            <div class="col-lg-10 offset-lg-1 d-flex justify-content-end">
+            <div class="col-lg-10 offset-lg-1 d-flex justify-content-center">
                     {{ $unidades->links() }}
             </div>
         </div>
