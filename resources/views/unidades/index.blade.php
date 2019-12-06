@@ -19,8 +19,12 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-12 text-center">
-                <h1><img src="/img/normativos-logo.png" srcset="/img/normativos-logo@2x.png 3x" alt="Normativas" /></h1>
+            <div class="col-lg-12 text-center">                        
+                <h1>
+                    <a href="{{route('index')}}">
+                        <img src="/img/normativos-logo.png" srcset="/img/normativos-logo@2x.png 3x" alt="Normativas" />
+                    </a>
+                </h1>
                 <h3><small class="text-muted">Pesquisar conselhos(federais, estaduais e municipais)</small></h3>
             </div>
         </div>
@@ -111,7 +115,7 @@
                             </div>
                         </div><!-- end card-body -->
 
-                        @if (isset($federal->confirmado_em) || $federal->documentos_count > 0)
+                        @if (isset($federal->confirmado_em))
                         <div class="card-footer">
 
                             @if (isset($federal->confirmado_em))
@@ -119,14 +123,7 @@
                                 <label class="form-label"><strong>Ingressou na plataforma em:</strong></label>
                                 <span class="form-value">{{date('d/m/Y', strtotime($federal->confirmado_em))}}</span>
                             </div>
-                            @endif
-
-                            @if ($federal->documentos_count > 0)
-                            <div class="col-lg-4">
-                                <label class="form-label"><strong>Atos normativos enviados:</strong></label>
-                                <span class="form-value">{{$federal->documentos_count}}</span>
-                            </div>
-                            @endif
+                            @endif                            
                         </div>
                         @endif
 
@@ -137,7 +134,7 @@
         @forelse ($unidades as $u)
             <div class="row">
                 <div class="col-lg-10 offset-lg-1">
-                    <div class="card mb-3 @if ($u->documentos_count > 0) bs@else bl @endif ">
+                    <div class="card mb-3">
                         <div class="card-header">
                             <a href="{{route('unidades-page',$u->friendly_url)}}">
                                 <i class="fa fa-external-link"></i>  {{ $u->nome }}
@@ -186,7 +183,7 @@
                             </div>
                         </div><!-- end card-body -->
 
-                        @if (isset($federal->confirmado_em) || $federal->documentos_count > 0)
+                        @if (isset($federal->confirmado_em))
                         <div class="card-footer">
 
                             @if (isset($u->confirmado_em))
@@ -194,14 +191,7 @@
                                 <label class="form-label"><strong>Ingressou na plataforma em:</strong></label>
                                 <span class="form-value">{{date('d/m/Y', strtotime($u->confirmado_em))}}</span>
                             </div>
-                            @endif
-
-                            @if ($u->documentos_count > 0)
-                            <div class="col-lg-4">
-                                <label class="form-label"><strong>Atos normativos enviados:</strong></label>
-                                <span class="form-value">{{$u->documentos_count}}</span>
-                            </div>
-                            @endif
+                            @endif                            
                         </div>
                         @endif
 

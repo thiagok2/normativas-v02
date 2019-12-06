@@ -14,7 +14,7 @@
             </div>
             <div class="col-lg-4"></div>
             <div class="col-lg-4 text-right">
-                <a class="btn btn-mobile btn-info btn-pill m-1 mt-2 btn-sm" href="{{route('unidades-search')}}" target="_blank"><i class="fa fa-cogs"></i> Pesquisar Conselhos</a>
+                <a class="btn btn-mobile btn-info btn-pill m-1 mt-2 btn-sm" href="{{route('unidades-search')}}"><i class="fa fa-cogs"></i> Pesquisar Conselhos</a>
                 @if (Route::has('login'))
                     @auth
                         <a href="{{ route('home') }}" class="btn btn-outline-secondary btn-pill btn-login m-1 mt-2">Home <i class="fa fa-user badge-info"></i></a>
@@ -76,7 +76,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-8 offset-lg-2 text-right p-0 ">
-                <a class="btn btn-mobile btn-info btn-pill m-1 mt-2 btn-sm" href="{{route('unidades-search')}}" target="_blank">
+                <a class="btn btn-mobile btn-info btn-pill m-1 mt-2 btn-sm" href="{{route('unidades-search')}}">
                     <i class="fa fa-cogs"></i> Pesquisar Conselhos
                 </a>
                 @if (Route::has('login'))
