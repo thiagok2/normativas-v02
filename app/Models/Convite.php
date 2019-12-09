@@ -32,28 +32,28 @@ class Convite extends Model
         $to_name = $userNovo->name;
         
         if(getenv('APP_ENV') == 'local'){
-            $to_email = getenv('MAIL_USERNAME');            
+            $to_email = getenv('MAIL_USERNAME');
         }else {
             $to_email = $userNovo->email;
         }
 
         $tipoLabel = "";
         if($userNovo->isAdmin()){
-            $tipoLabel = "administrador(a)";
+            $tipoLabel = "ADMINISTRADOR(A)";
         }else if($userNovo->isGestor()){
-            $tipoLabel  = "gestor(a)";
+            $tipoLabel  = "GESTOR(A)";
         }else if($userNovo->isColaborador()){
-            $tipoLabel  = "colaborador(a)";
+            $tipoLabel  = "COLABORADOR(A)";
         }else if($userNovo->isAcessor()){
-            $tipoLabel  = "acessor(a)";
+            $tipoLabel  = "ACESSOR(A)";
         }
 
         $data = array(
-            'name'      =>  $userNovo->name, 
+            "name"      =>  $userNovo->name, 
             "password"  =>  $passwordGerado,
             "unidade"   =>  $userNovo->unidade->nome,
             "tipo"      =>  $tipoLabel,
-            "email"     =>  $userNovo->email
+            "email"     =>  $to_email
         );
     
         Mail::send('emails.acesso', $data, function($message) use ($to_name, $to_email) {
