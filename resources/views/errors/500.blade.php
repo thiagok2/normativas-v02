@@ -492,7 +492,7 @@
                     </a>
                 @endif
 
-                @if (getenv('APP_DEBUG'))
+                @if (getenv('APP_DEBUG') && getenv('APP_DEBUG') == 'true')
                     <p class="text-grey-darker text-xl md:text-xl font-light mb-8 leading-normal">
                         @if (isset($exception))
                         {{ $exception->getMessage() }}
