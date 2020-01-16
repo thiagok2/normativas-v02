@@ -466,10 +466,11 @@
             <div class="max-w-sm m-8">
                 <div class="text-black text-2xl md:text-10xl font-black">
                     @if ( isset($message) )
+
                         {{$message}}
                     @else
-                    Desculpa, mas você está no endereço certo?
-                    :)
+                        Desculpa, mas você está no endereço certo?
+                        :)
                     @endif
                 </div>
 
