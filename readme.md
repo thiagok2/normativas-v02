@@ -7,10 +7,12 @@
 
 
 # Elasticsearch
-1. Instalar Ingest Attachment Plugin
-2. Criar índice e dos documentos no elasticsearch
+1. Instalar Ingest Attachment Plugin(https://www.elastic.co/guide/en/elasticsearch/plugins/6.8/ingest-attachment.html)
+2. Criar índice e dos documentos no elasticsearch(POSTMAN collection)
 
 # App
+0. sudo apt install php libapache2-mod-php php-mbstring php-xmlrpc php-soap php-gd php-xml php-cli php-zip php-bcmath php-tokenizer php-json php-pear
+
 1. Permissões nas pastas /storage/app/public e /storage/logs
 2. Executar o comando 
 php artisan storage:link
