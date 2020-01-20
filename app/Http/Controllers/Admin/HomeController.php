@@ -59,19 +59,25 @@ class HomeController extends Controller
 
             $user = auth()->user();
             $user->ultimo_acesso_em = date("Y-m-d H:i:s");
-            $user->save();
-            
+            $user->save();            
+
             if(!$unidade->confirmado){
+
+                Log::warning('[home::redirect::unidade-edit] :: !$unidade->confirmado');
+
                 return redirect()->route('unidade-edit', ['id' => $unidade->id])
                         ->with('error', 'Confirme os dados da sua unidade.');
             }
 
             if(!auth()->user()->confirmado){
+                Log::warning('[home::redirect::usuario-edit] :: !auth()->user()->confirmado');
+
                 return redirect()->route('usuario-edit', ['id' => auth()->user()->id])
                     ->with('success', 'Confirme seus dados e cadastre uma nova senha.');
             }
 
             if($user->isAdmin()){
+
                 $documentosCount = Documento::count();
                 $usersCount = User::count();
                 $documentosPendentesCount = Documento::where('completed', false)->count();
@@ -80,7 +86,8 @@ class HomeController extends Controller
                 $unidades = Unidade::has('documentos')                            
                     ->withCount('documentos')               
                     ->orderBy('documentos_count', 'desc')
-                    ->paginate(10);                                    
+                    ->paginate(10);     
+
             }else if($user->isAcessor()){
                 $query = Documento::query();
                 $query->whereHas('unidade', function($query){
@@ -140,9 +147,12 @@ class HomeController extends Controller
                     ->where('tipo_entrada', Documento::ENTRADA_EXTRATOR)
                     ->orderBy('data_envio', 'desc')->paginate(10);
                 
+
+                Log::warning('[home::view::home2] :: $user->isConselho()');
                 return view('home2',compact('documentos','documentosPendentesExtrator',
                     'documentosCount','documentosPendentesCount','usersCount'));
             }else{
+                Log::warning('[home::redirect::usuarios]');
                 return redirect()->route('usuarios');            
             }
 
@@ -210,7 +220,7 @@ class HomeController extends Controller
                 return DB::table('palavra_chaves')->distinct('tag')->count('tag');
             });
 
-
+            Log::warning('[home::redirect::home]');
             return view('home',compact('documentos',
                 'acessosGestores30Dias',
                 'topConsultas',
@@ -222,13 +232,15 @@ class HomeController extends Controller
                             'totalUnidades','documentosCount','documentosPendentesCount','usersCount','tagCount','tags','unidades'));
         
         }catch(\Exception $e){
-            $messageError = $e->getMessage();
+            Log::warning('Home::index::Exception');
+            $messageError = $e->getMessage()."::".$e->getLine();
             /*
             $messageError = getenv('APP_DEBUG') === 'true' ? $e->getMessage():
             "Problemas ao realizar o login. Entre em contato com os administradores da plataforma.";
             */
+            Log::error('Home::index::'.$messageError);
+            return redirect()->route('index')->with('error', $messageError);
             
-            return redirect()->back()->withInput()->with('error', $messageError);
         }
     }
 

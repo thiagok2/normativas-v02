@@ -2,6 +2,9 @@
 
 @section('content')
 <!-- mini-header -->
+
+@include('admin.includes.alerts')
+
 @if (!empty($query) && (!empty($documentos)))
 <section id="mini-header">
     <div class="container-fluid">
