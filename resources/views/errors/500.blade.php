@@ -478,6 +478,12 @@
                     <a href="mailto:normativas@nees.com.br?Subject=Notificação de erro" target="_top">normativas@nees.com.br</a>
                 </div>
 
+                <div class="alert alert-danger-blue">
+                    @if (isset($message))
+                        {{ $message }}
+                    @endif
+                </div>
+
                 <a href="{{getenv('APP_URL')}}">
                     <button class="bg-transparent text-grey-darkest font-bold uppercase tracking-wide py-3 px-6 border-2 border-grey-light hover:border-grey rounded-lg">
                         Retornar a página inicial

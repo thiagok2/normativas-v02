@@ -50,7 +50,6 @@ class HomeController extends Controller
 
     public function index(Request $request)
     {
-
         try{
 
             $unidade = Unidade::find(auth()->user()->unidade_id);
@@ -234,12 +233,15 @@ class HomeController extends Controller
         }catch(\Exception $e){
             Log::warning('Home::index::Exception');
             $messageError = $e->getMessage()."::".$e->getLine();
+
+
             /*
             $messageError = getenv('APP_DEBUG') === 'true' ? $e->getMessage():
             "Problemas ao realizar o login. Entre em contato com os administradores da plataforma.";
             */
-            Log::error('Home::index::'.$messageError);
-            return redirect()->route('index')->with('error', $messageError);
+            Log::error('Home::exception::'.$messageError);
+            $message = $messageError;
+            return view('errors/500', compact('message'));
             
         }
     }
