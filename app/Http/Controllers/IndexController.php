@@ -118,9 +118,11 @@ class IndexController extends Controller
 
         $documento = Documento::where('arquivo', $normativaId)->first();
 
+        $keywords = $documento->keywords();
+
         $persisted = isset($documento);
         
-        return view('index.view-normativa', [ 'normativa' => $result['_source'], 'id' => $result['_id'], 'arquivoId' => $result['_id'], 'persisted' => $persisted ] );
+        return view('index.view-normativa', [ 'normativa' => $result['_source'], 'id' => $result['_id'], 'arquivoId' => $result['_id'], 'persisted' => $persisted, 'keywords' => $keywords ] );
     }
 
     private function hasFilters($queryParams){

@@ -1,6 +1,11 @@
 @extends('layouts.master')
 
+@section('title', $normativa['ato']['titulo'] )
+
+@section('keywords', $keywords )
+
 @section('content')
+
 <!-- header -->
 <section id="header">
     <div class="container-fluid">
@@ -9,7 +14,7 @@
                 <hr class="split">
                 <h1>
                     <a href="{{route('index')}}">
-                        <img src="/img/normativos-logo.png" srcset="/img/normativos-logo@2x.png 2x" alt="Normativas" />
+                        <img src="/img/normativos-logo.png" srcset="/img/normativos-logo@2x.png 2x" alt="Portal Normativas" />
                     </a>
                 </h1>
                 <hr class="split">
@@ -19,13 +24,15 @@
 </section>
 <!-- end header -->
 
-<div class="container-fluid">
+<main class="container-fluid">
     <div class="row">
-        <div class="col-lg-10 offset-lg-1">
+        <article class="col-lg-10 offset-lg-1">
             <div class="card">
 
                 <div class="card-header">
+                    <h3>
                     {{ $normativa['ato']['titulo'] }}
+                    </h3>
                 </div>
 
                 <div class="card-body">
@@ -112,17 +119,21 @@
                     @else
                         <iframe src="https://docs.google.com/gview?url={{str_replace("view","pdf",Request::url())}}&embedded=true" width="100%" height="600px">
                         </iframe>
-                    @endif                                                
-                                                
-                    <a href="javascript:history.back();" class="btn btn-primary"><i class="fa fa-long-arrow-left" aria-hidden="true"></i> Voltar</a>
-
-                    <a href="/" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-chevron-left"></span> Nova Busca
-                    </a>
+                    @endif  
 
                     <a href="/normativa/pdf/{{ $id }}" class="btn btn-primary" target="_blank">
                         Baixar
-                    </a>
+                    </a>                                              
+
+                    <nav>                         
+                        <a href="javascript:history.back();" class="btn btn-primary"><i class="fa fa-long-arrow-left" aria-hidden="true"></i> Voltar</a>
+
+                        <a href="/" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-chevron-left"></span> Nova Busca
+                        </a>
+                    </nav>
+
+                   
 
                    
                     @auth
@@ -155,9 +166,9 @@
             </div>
             </div>
             <hr class="split-sm">
-        </div>        
+        </article>        
     </div>        
-</div>
+</main>
 
 <hr class="split-sm">
 

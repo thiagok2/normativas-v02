@@ -40,6 +40,13 @@ class Documento extends Model
                 && $this->data_publicacao && !is_null($this->tipo_documento_id) && !is_null($this->assunto_id);
     }
 
+    public function keywords(){
+        $keywords = array($this->ano, $this->titulo, $this->numero, $this->tipoDocumento->nome, $this->unidade->nome, $this->unidade->sigla);
+       
+
+        return join(",", $keywords);
+    }
+
     public function isIndexado(){
         return $this->status_extrator == Documento::STATUS_EXTRATOR_INDEXADO;
     }

@@ -12,7 +12,14 @@
         </script>
 
 
-        <title>Portal Atos Normativas</title>
+        <title>@yield("title", "Portal Atos Normativas - Uma plataforma de buscas sobre portarias, resoluções e decretos dos conselhos de educação")</title>
+
+        <meta name="description" 
+            content="@yield("description", 'No portal você pode realizar buscas sobre portarias, resoluções, decretos e outros atos produzidos 
+                        pelos dos conselhos de minicipaos, estaduais e federal de educação')" />
+        
+        <meta name="keywords" content="@yield("keywords", "conselhos educação, normas, edital, resolução, ata, ementa2")"  />
+
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
 
         <link href="/css/bootstrap.min.css" rel="stylesheet">

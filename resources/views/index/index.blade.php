@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@if (!empty($query) && (!empty($documentos)))
+    @section('keywords', $query)
+
+@endif
 @section('content')
 <!-- mini-header -->
 
@@ -12,7 +16,7 @@
             <div class="col-lg-2 offset-lg-1">
                 <h1>
                     <a href="{{route('index')}}">
-                        <img class="img-fluid" src="/img/normativos-logo.png" srcset="/img/normativos-logo@2x.png 2x" alt="Normativas" /></h1>
+                        <img class="img-fluid" src="/img/normativos-logo.png" srcset="/img/normativos-logo@2x.png 2x" alt="Portal Normativas" /></h1>
                     </a>
             </div>
             <div class="col-lg-4"></div>
@@ -75,7 +79,7 @@
 <!-- fim mini-header -->
 
 <!-- header -->
-<section id="header">
+<header id="header">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-8 offset-lg-2 text-right p-0 ">
@@ -99,14 +103,14 @@
                 <hr class="split">
                 <h1>
                     <a href="{{route('index')}}">
-                        <img src="/img/normativos-logo.png" srcset="/img/normativos-logo@2x.png 2x" alt="Normativas" />
+                        <img src="/img/normativos-logo.png" srcset="/img/normativos-logo@2x.png 2x" alt="Portal Normativas" />
                     </a>
                 </h1>
                 <hr class="split">
             </div>
         </div>
     </div>
-</section>
+</header>
 
 <!-- end header -->
 
@@ -201,7 +205,7 @@
         @if (!empty($documentos))
             <!-- aggregates -->
             @if (!empty($query) && (!empty($documentos)))
-                <div class="row">
+                <nav class="row">
                     <div class="col-lg-10 offset-lg-1">
                         <p class="mb-3 mt-3">
                             <i class="fa fa-filter"></i> <strong> Filtrar resultados</strong> <em>({{ $total }}</em> resultados encontrados. Exibindo de 
@@ -251,20 +255,24 @@
 
                         </div>
                     </div>
-                </div>
+                </nav>
                 <hr class="split-sm">
             @endif
             <!-- fim aggregates -->
 
             @foreach ($documentos as $doc)
-                <div class="row">
+                <article class="row">
                     <div class="col-lg-10 offset-lg-1">
                         <div class="card mb-3">
                             <div class="card-header">
+                                <h6>
                                 <a href="/normativa/view/{{ $doc['id'] }}?query={{$query}}">
-                                    <i class="fa fa-external-link"></i>  {{ $doc['titulo'] }}
+                                    <i class="fa fa-external-link"></i>  
+                                    
+                                    {{ $doc['titulo'] }}
+                                
                                 </a>
-
+                                
 
                                 <div id="max_score" class="float-lg-right float-xs-left">
                                     <input value="{{ ($doc['score'])  }}" type="text" class="kv-fa rating-loading"
@@ -274,6 +282,8 @@
                                         data-size="xs"
                                         required title="">
                                 </div>
+                                
+                                </h6>
                             </div>
 
                             <div class="card-body">
@@ -364,7 +374,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </article>
             @endforeach
             <!-- end results-->
 

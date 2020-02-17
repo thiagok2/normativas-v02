@@ -1,5 +1,11 @@
 @extends('layouts.master')
 
+@section('title', $unidade->nome )
+
+@section('description', "Página do ".$unidade->nome." que possui seus atos normativos disponiível na plataforma." )
+
+@section('keywords', $unidade->nome.','.$unidade->sigla )
+
 @section('content')
 <!-- mini-header -->
 <section id="mini-header">
