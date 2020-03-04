@@ -2,7 +2,7 @@
 
 @section('title', $unidade->nome )
 
-@section('description', "Página do ".$unidade->nome." que possui seus atos normativos disponiível na plataforma." )
+@section('description', "Página do ".$unidade->nome.". Essa plataforma disponibiliza os atos normativos deste órgão." )
 
 @section('keywords', $unidade->nome.','.$unidade->sigla )
 

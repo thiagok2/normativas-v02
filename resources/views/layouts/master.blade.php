@@ -14,11 +14,13 @@
 
         <title>@yield("title", "Portal Atos Normativas - Uma plataforma de buscas sobre portarias, resoluções e decretos dos conselhos de educação")</title>
 
-        <meta name="description" 
-            content="@yield("description", 'No portal você pode realizar buscas sobre portarias, resoluções, decretos e outros atos produzidos 
-                        pelos dos conselhos de minicipaos, estaduais e federal de educação')" />
+        <meta name="robots" content="index, follow">
         
-        <meta name="keywords" content="@yield("keywords", "conselhos educação, normas, edital, resolução, ata, ementa2")"  />
+        <meta name="description" 
+            content="@yield("description", 'No portal você pode realizar buscas sobre portarias, resoluções, decretos e outros atos normativos produzidos 
+                        pelos dos conselhos de municipais, estaduais e federal de educação')" />
+        
+        <meta name="keywords" content="@yield("keywords", "conselhos educação, normas, edital, resolução, ata, ementa, normativas, normativos")"  />
 
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
 
