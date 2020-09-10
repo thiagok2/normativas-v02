@@ -357,7 +357,7 @@
                                             <tbody>
                                             <tr>
                                                 <td valign="top" class="mcnTextContent" style="padding-top: 0;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;word-break: break-word;color: #202020;font-family: Helvetica;font-size: 16px;line-height: 150%;text-align: left;">
-                                                    <h1 style="text-align: center;display: block;margin: 0;padding: 0;font-family: Helvetica;font-size: 26px;font-style: normal;font-weight: bold;line-height: 125%;letter-spacing: normal;color:#12586f"><br/>Olá, {{$name}}<br>&nbsp</h1>
+                                                    <h1 style="text-align: center;display: block;margin: 0;padding: 0;font-family: Helvetica;font-size: 26px;font-style: normal;font-weight: bold;line-height: 125%;letter-spacing: normal;color:#12586f"><br/>Olá, {{$name}}<br></h1>
                                                     <p style="text-align: center; margin: 10px 0;padding: 0; mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #202020;font-family: Helvetica;font-size: 16px;line-height: 150%;">Seja bem vindo à plataforma<br/> <strong>Normativas - Portal Democrático de Atos Normativos de Educação</strong><br/> Você foi adicionado ao portal Normativas como<br/> <strong>{{$tipo}}</strong><br/> representando a unidade<br/> <strong>{{$unidade}}</strong><br/> Aqui estão seus dados de acesso:<br></p>
                                                 </td>
                                             </tr>
@@ -365,11 +365,12 @@
                                                 <td valign="top" class="mcnTextContent" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;word-break: break-word;color: #202020;font-family: Helvetica;font-size: 16px;line-height: 150%;text-align: left; padding-bottom: 20px">
                                                     <div style="background: #12586f; text-align: center; font-size: 1.2em; padding: 10px 8px 15px 8px">
                                                         <small style="color:white">Usuário (email):</small><br/>
-                                                        <div style="background: #fff; padding: 5px; border-radius: 30px; width: 50%; margin: 0 auto">
+                                                        <div style="background: #fff; padding: 5px 10px; border-radius: 30px; margin: 0 auto; font-size: 16px; display: inline-block">
                                                             <strong>{{$email}}</strong><br/>
                                                         </div>
+                                                        <br/>
                                                         <small style="color:white">Senha provisória:</small><br/>
-                                                        <div style="background: #fff; padding: 5px; border-radius: 30px; width: 50%; margin: 0 auto">
+                                                        <div style="background: #fff; padding: 5px 10px; border-radius: 30px; margin: 0 auto; font-size: 18px; display: inline-block">
                                                             <strong>{{$password}}</strong><br/>
                                                         </div>
                                                     </div>
